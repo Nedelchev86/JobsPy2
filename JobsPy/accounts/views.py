@@ -6,8 +6,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-
 from JobsPy.accounts.serializers import UserSerializer
+from JobsPy.company.serializers import CompanyProfileSerializer
+from JobsPy.jobseekers.serializers import JobSeekerSerializer
 
 userModel = get_user_model()
 
