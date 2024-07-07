@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from rest_framework import generics, permissions, status
 from rest_framework.decorators import api_view
+from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -12,6 +13,23 @@ from JobsPy.jobs.serializers import JobsDetailSerializer, FavoriteJobSerializer,
 
 # Create your views here.
 
+class AllJobsViewApi(ListAPIView):
+    serializer_class = JobSerializer
+    pagination_class = None  # Disable pagination
+    permission_classes = permissions.AllowAny,
+
+    def get_queryset(self):
+        queryset = Job.objects.filter(is_published=True)
+        query = self.request.GET.get('q')
+        seniority_filter = self.request.GET.get('seniority')
+
+        if query:
+            queryset = queryset.filter(title__icontains=query)
+
+        if seniority_filter:
+            queryset = queryset.filter(seniority=seniority_filter)
+
+        return queryset
 
 class JobsDetailsAPIView(generics.RetrieveAPIView):
     queryset = Job.objects.all()

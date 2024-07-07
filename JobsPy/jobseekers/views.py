@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics, status
+from rest_framework import generics, status, viewsets, permissions
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -12,18 +12,6 @@ from JobsPy.jobseekers.serializers import JobSeekerSerializer
 
 
 # Create your views here.
-
-
-class JobSeekerUpdateAPIView(generics.RetrieveUpdateAPIView):
-    queryset = JobSeeker.objects.all()
-    serializer_class = JobSeekerSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_object(self):
-        # Retrieve the JobSeeker instance of the current user
-        return JobSeeker.objects.get(user=self.request.user)
-
-
 
 class JobSeekerUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = JobSeeker.objects.all()
@@ -50,3 +38,17 @@ def check_favorite_status(request, pk):
     is_favorite = FavoriteJob.objects.filter(user=request.user, job_id=pk).exists()
 
     return Response({'is_favorite': is_favorite}, status=status.HTTP_200_OK)
+
+
+class JobSeekerViewSet(viewsets.ModelViewSet):
+    queryset = JobSeeker.objects.filter(activated=True)
+    serializer_class = JobSeekerSerializer
+    permission_classes = permissions.AllowAny,
+    pagination_class = None  # Disable pagination
+
+    def get_queryset(self):
+        queryset = JobSeeker.objects.filter(activated=True)
+        city = self.request.query_params.get('city', None)
+        if city:
+            queryset = queryset.filter(city=city)
+        return queryset
