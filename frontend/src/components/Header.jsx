@@ -4,6 +4,8 @@ import LoginForm from "./LoginForm";
 import {Link, NavLink} from "react-router-dom";
 import {useJobs} from "../contexts/JobContext";
 
+import {ToastContainer, toast} from "react-toastify";
+
 const Header = () => {
     const {user, auth, isAuthenticated, login, logout} = useAuth();
     const [notifications] = useState([]);
@@ -49,6 +51,7 @@ const Header = () => {
 
     return (
         <header className="header style4">
+            <ToastContainer />
             <div className="navbar-area">
                 <div className="container">
                     <div className="row align-items-center">

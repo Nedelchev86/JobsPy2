@@ -16,7 +16,7 @@ class JobSerializer(serializers.ModelSerializer):
     needed_skills = serializers.SlugRelatedField(many=True, slug_field='name', queryset=Skills.objects.all())
     class Meta:
         model = Job
-        fields = '__all__'
+        exclude = ('slug', 'user')
 
 class FavoriteJobSerializer(serializers.ModelSerializer):
     job_details = JobSerializer(source='job', read_only=True)

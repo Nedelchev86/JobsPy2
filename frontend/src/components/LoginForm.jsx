@@ -71,9 +71,11 @@ import {useJobs} from "../contexts/JobContext";
 import React, {useState} from "react";
 import {Modal, Button, Form} from "react-bootstrap";
 import {useAuth} from "../contexts/Contexts";
+import {toast} from "react-toastify";
 
 const LoginModal = ({show, handleClose}) => {
     const {notifications, fetchNotifications, auth} = useJobs();
+
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -91,11 +93,30 @@ const LoginModal = ({show, handleClose}) => {
             await login(formData); // Call login method from AuthContext
             setFormData({email: "", password: ""});
             handleClose(); // Close modal after successful login
+            setError("");
 
             fetchNotifications();
+            toast.success("Login successful!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         } catch (error) {
             console.error("Login failed:", error.message);
             setError("Invalid email or password");
+            toast.error(`Login failed. Invalid email or password`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     };
 

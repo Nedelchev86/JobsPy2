@@ -7,8 +7,10 @@ const AuthContext = createContext();
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [auth, setAuth] = usePersistedState("auth", "");
+
     // const [auth, setAuth] = useState("");
     const [isAuthenticated, setisAuthenticated] = useState(!!auth);
+
 
     const navigate = useNavigate();
 

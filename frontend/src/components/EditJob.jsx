@@ -25,6 +25,7 @@ export default function EditJob() {
         salary: "",
         deadline: "",
         needed_skills: [],
+        is_published: true,
         job_image: null,
     });
 
@@ -109,6 +110,7 @@ export default function EditJob() {
         addFormData("job_type", job.job_type);
         addFormData("salary", job.salary);
         addFormData("deadline", job.deadline);
+        addFormData("is_published", job.is_published);
         job.needed_skills.forEach((skill) => {
             formData.append("needed_skills", skill);
         });
@@ -214,10 +216,10 @@ export default function EditJob() {
                                             </label>
                                             <select name="job_type" className="form-control" required id="id_job_type" value={job.job_type} onChange={handleChange}>
                                                 <option value="">---------</option>
-                                                <option value="fulltime">Full time</option>
-                                                <option value="parttime">Part time</option>
-                                                <option value="remote">Remote</option>
-                                                <option value="internship">Internship</option>
+                                                <option value="Full time">Full time</option>
+                                                <option value="Part time">Part time</option>
+                                                <option value="Remote">Remote</option>
+                                                <option value="Internship">Internship</option>
                                             </select>
                                         </div>
 

@@ -4,7 +4,7 @@ import {useAuth} from "./Contexts";
 const JobContext = createContext();
 
 export const JobProvider = ({children}) => {
-    const [jobs, setJobs] = useState([]);
+    const [jobs, setJobs] = useState(0);
 
     const [applicants, setApplicants] = useState([]);
     const [notifications, setNotifications] = useState([]);
@@ -29,19 +29,37 @@ export const JobProvider = ({children}) => {
         }
     };
 
-    const fetchJobs = () => {
-        console.log("fetch job" + auth);
+    // const fetchJobs = () => {
+    //     console.log("fetch job" + auth);
+    //     if (!auth) {
+    //         return;
+    //     }
+    //     fetch("http://127.0.0.1:8000/api/created-jobs/", {
+    //         method: "GET",
+    //         headers: {
+    //             Authorization: `Bearer ${auth}`,
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => data.length);
+    // };
+
+    const fetchJobs = async () => {
         if (!auth) {
             return;
         }
-        fetch("http://127.0.0.1:8000/api/created-jobs/", {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${auth}`,
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => setJobs(data.length));
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/created-jobs/", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${auth}`,
+                },
+            });
+            const data = await response.json();
+            setJobs(data.length); // Set the jobs state to the length of the fetched data
+        } catch (error) {
+            console.error("Failed to fetch jobs:", error);
+        }
     };
 
     const fetchApplicants = () => {

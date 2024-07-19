@@ -24,6 +24,7 @@ export default function EditJobseeker() {
         marital_status: "",
         skills: [],
         profile_picture: null,
+        user: "",
     });
 
     if (!isAuthenticated) {
@@ -91,6 +92,7 @@ export default function EditJobseeker() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(profile);
 
         const formData = new FormData();
 
@@ -114,6 +116,7 @@ export default function EditJobseeker() {
         addFormData("phone_number", profile.phone_number);
         addFormData("gender", profile.gender);
         addFormData("marital_status", profile.marital_status);
+        addFormData("user", profile.user);
         profile.skills.forEach((skill) => {
             formData.append("skills", skill);
         });
@@ -259,14 +262,16 @@ export default function EditJobseeker() {
                                                 <label htmlFor="id_gender" className="required">
                                                     Gender:
                                                 </label>
-                                                <select name="gender" className="form-control" onChange={handleChange} required id="id_gender">
-                                                    <option value="">---------</option>
+                                                <select name="gender" className="form-control" required id="id_gender" onChange={handleChange} value={profile.gender}>
+                                                    <option value="" selected>
+                                                        ---------
+                                                    </option>
 
-                                                    <option value="M" selected>
+                                                    <option value="Male" selected>
                                                         Male
                                                     </option>
 
-                                                    <option value="F">Female</option>
+                                                    <option value="Female">Female</option>
                                                 </select>
                                             </div>
 

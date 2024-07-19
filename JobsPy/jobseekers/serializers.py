@@ -11,7 +11,7 @@ class JobSeekerSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = JobSeeker
-        fields = '__all__'  # or specify fields explicitly
+        exclude = [ 'activated']
 
 
 

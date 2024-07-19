@@ -6,22 +6,28 @@ import {useJobs} from "../contexts/JobContext";
 
 export default function CompanyMenu() {
     const {user, auth} = useAuth();
+
     const {fetchJobs, fetchApplicants, jobs, applicants, notifications, fetchNotifications} = useJobs();
+    console.log(jobs);
 
     useEffect(() => {
-        console.log(auth);
         fetchApplicants();
-    }, []);
-
-    useEffect(() => {
-        console.log(auth);
-        fetchJobs();
-    }, []);
-
-    useEffect(() => {
-        console.log(auth);
+        fetchJobs(); // Fetch jobs when the component mounts
         fetchNotifications();
     }, []);
+    // useEffect(() => {
+    //     const num = fetchApplicants();
+    //     console.log(num);
+    //     // setJobs = num;
+    // }, []);
+
+    // useEffect(() => {
+    //     fetchJobs();
+    // }, []);
+
+    // useEffect(() => {
+    //     fetchNotifications();
+    // }, []);
 
     // useEffect(() => {
     //     fetch("http://127.0.0.1:8000/NavLinkpi/user/jobseeker/favorites/", {

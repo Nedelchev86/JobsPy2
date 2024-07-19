@@ -23,6 +23,7 @@ export default function CreateJob() {
         salary: "",
         deadline: "",
         needed_skills: [],
+        is_published: true,
         job_image: null,
     });
 
@@ -30,7 +31,6 @@ export default function CreateJob() {
         return <div>Not authenticated...</div>;
     }
 
-    console.log(skills);
     useEffect(() => {
         // Fetch skills from the API
         fetch("http://127.0.0.1:8000/api/skills/")
@@ -107,6 +107,7 @@ export default function CreateJob() {
         addFormData("job_type", job.job_type);
         addFormData("salary", job.salary);
         addFormData("deadline", job.deadline);
+        addFormData("is_published", job.is_published);
         job.needed_skills.forEach((skill) => {
             formData.append("needed_skills", skill);
         });
@@ -212,10 +213,10 @@ export default function CreateJob() {
                                             </label>
                                             <select name="job_type" className="form-control" required id="id_job_type" value={job.job_type} onChange={handleChange}>
                                                 <option value="">---------</option>
-                                                <option value="fulltime">Full time</option>
-                                                <option value="parttime">Part time</option>
-                                                <option value="remote">Remote</option>
-                                                <option value="internship">Internship</option>
+                                                <option value="Full time">Full time</option>
+                                                <option value="Part time">Part time</option>
+                                                <option value="Remote">Remote</option>
+                                                <option value="Internship">Internship</option>
                                             </select>
                                         </div>
 
@@ -256,6 +257,12 @@ export default function CreateJob() {
                                                 ))}
                                             </select> */}
                                         </div>
+
+                                        {/* <div>
+                                            <label htmlFor="id_is_published">Is published:</label>
+
+                                            <input type="checkbox" name="is_published" className="form-check" id="id_is_published" value={job.is_published} onChange={handleChange} />
+                                        </div> */}
 
                                         <div className="col-lg-12">
                                             <div className="button">

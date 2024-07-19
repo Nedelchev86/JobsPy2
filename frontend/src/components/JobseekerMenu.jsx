@@ -1,5 +1,4 @@
-import {Breadcrumb} from "react-bootstrap";
-import {Link, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {useAuth} from "../contexts/Contexts";
 import {useState, useEffect} from "react";
 
@@ -54,7 +53,7 @@ export default function JobSeekerMenu() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink activeclassname="active" className="" to="{% url 'change-password' %}">
+                        <NavLink activeclassname="active" className="" to="change-password">
                             <i className="lni lni-lock"></i> Change Password
                         </NavLink>
                     </li>

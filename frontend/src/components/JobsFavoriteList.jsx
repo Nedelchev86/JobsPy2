@@ -34,7 +34,7 @@ export default function JobsFavoriteList() {
                                 </div>
                                 <h3>
                                     {obj.job.title}
-                                    <span>{obj.job_details.category}</span>
+                                    <span>{obj.job_details.title}</span>
                                 </h3>
                             </div>
                         </div>

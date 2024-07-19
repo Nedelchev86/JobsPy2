@@ -12,6 +12,9 @@ export default function JobDetails() {
     const {auth, isAuthenticated, user} = useAuth();
     const [showModal, setShowModal] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
+    // const [status, setStatus] = useState("");
+
+    console.log(applicants);
 
     const handleOpenModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
@@ -35,8 +38,7 @@ export default function JobDetails() {
         })
             .then((response) => response.json())
             .then((data) => {
-                setApplicants(data);
-                console.log(data);
+                setApplicants(data.find((applicant) => applicant.user === user.user.user));
             })
             .catch((error) => console.error("Error fetching applicant:", error));
     }, [id, auth]);
@@ -87,6 +89,17 @@ export default function JobDetails() {
             console.error("Error toggling favorite status:", error);
         }
     };
+
+    const handleApply = async () => {
+        const response = await fetch(`http://127.0.0.1:8000/api/jobs/${id}/apply/`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${auth}`,
+                "Content-Type": "application/json",
+            },
+        });
+    };
+
     let isJobOwner = false;
     if (user) {
         isJobOwner = isAuthenticated && job.user === user.user.user;
@@ -95,6 +108,7 @@ export default function JobDetails() {
     return (
         <>
             <Breadcrumbs pageTitle="Job Details" pageInfo="Job Details" />
+
             <div className="job-details section">
                 <div className="container">
                     <div className="row mb-n5">
@@ -165,14 +179,14 @@ export default function JobDetails() {
                                                     )}
                                                 </div>
                                                 <div className="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
-                                                    {applicants.id && (
+                                                    {applicants?.id && (
                                                         <Link to="{% url 'login' %}?next={% url 'job_details' object.pk %}" className="d-block btn">
-                                                            <i className="fa fa-heart-o mr-1"></i>Status
+                                                            <i className="fa fa-heart-o mr-1"></i>Status 2
                                                         </Link>
                                                     )}
-                                                    {!applicants.id && (
-                                                        <Link to="{% url 'login' %}?next={% url 'job_details' object.pk %}" className="d-block btn">
-                                                            <i className="fa fa-heart-o mr-1"></i>Apply
+                                                    {!applicants?.id && (
+                                                        <Link onClick={handleApply} className="d-block btn">
+                                                            <i className="fa fa-heart-o mr-1"></i>Apply2
                                                         </Link>
                                                     )}
                                                     {!isAuthenticated && (
@@ -199,7 +213,7 @@ export default function JobDetails() {
                                                     <a href="#" className="d-block btn btn-alt">
                                                         Candidates
                                                         <span className="btn" style={{display: "inline", padding: "5px 10px"}}>
-                                                            {applicants.length}
+                                                            {applicants?.length}
                                                         </span>
                                                     </a>
                                                 </div>
@@ -263,6 +277,7 @@ export default function JobDetails() {
                     </div>
                 </div>
             </div>
+
             <LoginForm show={showModal} handleClose={handleCloseModal} />
         </>
     );

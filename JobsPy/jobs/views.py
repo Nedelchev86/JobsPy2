@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from JobsPy.core.decorators import job_seeker_activated_required
 from JobsPy.core.permissions import IsCompanyUser
 from JobsPy.jobs.models import Job, Applicant, FavoriteJob
 from JobsPy.jobs.serializers import JobsDetailSerializer, FavoriteJobSerializer, JobSerializer, ApplicantSerializer
@@ -41,8 +42,11 @@ class JobsDetailsAPIView(generics.RetrieveAPIView):
 
 
 @api_view(['POST'])
+# @job_seeker_activated_required
 def apply_for_job(request, pk):
+    print("test2")
     if request.user.is_authenticated and request.user.role == 'jobseeker':
+        print("test")
         try:
             job = Job.objects.get(id=pk)
         except Job.DoesNotExist:
@@ -111,6 +115,7 @@ class JobCreateAPIView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 
 
