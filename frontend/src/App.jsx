@@ -26,6 +26,7 @@ import ChangePassword from "./components/ChangePassword";
 import CompanyNotifications from "./components/CompanyNotifications";
 import ApplicantsForJob from "./components/ApplicantsForJob";
 import EditJob from "./components/EditJob";
+import JobsApplyed from "./components/JobseekerApplyedJobs";
 
 function App() {
     return (
@@ -53,6 +54,7 @@ function App() {
                     <Route index element={<Dashboard />} />
                     <Route path="edit" element={<EditProfile />} />
                     <Route path="bookmarked" element={<JobsFavoriteList />} />
+                    <Route path="applyed-jobs" element={<JobsApplyed />} />
                     <Route path="create-job" element={<CreateJob />} />
                     <Route path="edit-job/:id" element={<EditJob />} />
                     <Route path="applicants" element={<ApplicantsList />} />

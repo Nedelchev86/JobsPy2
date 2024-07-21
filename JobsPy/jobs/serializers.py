@@ -48,7 +48,14 @@ class JobsDetailSerializer(serializers.ModelSerializer):
 class ApplicantSerializer(serializers.ModelSerializer):
     job_seeker = JobSeekerSerializer(source='user.jobseeker', read_only=True)
     status_name = serializers.CharField(source='get_status', read_only=True)
+    job = JobSerializer( read_only=True)
 
     class Meta:
         model = Applicant
         fields = ['id', 'user', 'job', 'created_at', 'comment', 'status', 'job_seeker', "status_name"]
+
+
+class ChangeStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Applicant
+        fields = ['status']  # Include any fields you need to update

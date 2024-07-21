@@ -18,7 +18,7 @@ export default function ChangePasswordForm() {
             return;
         }
 
-        const response = await fetch("http://127.0.0.1:8000/api/change-password/", {
+        const response = await fetch("http://127.0.0.1:8000/api/user/change-password/", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

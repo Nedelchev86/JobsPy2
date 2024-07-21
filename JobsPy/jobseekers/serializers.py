@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import JobSeeker
-from ..jobs.models import Skills
+from ..jobs.models import Skills, Applicant
 
 
 class JobSeekerSerializer(serializers.ModelSerializer):
@@ -16,3 +16,7 @@ class JobSeekerSerializer(serializers.ModelSerializer):
 
 
 
+class ApplicantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Applicant
+        fields = '__all__'  # Include all fields or specify the fields you need

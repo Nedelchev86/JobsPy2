@@ -14,8 +14,6 @@ export default function JobDetails() {
     const [isFavorite, setIsFavorite] = useState(false);
     // const [status, setStatus] = useState("");
 
-    console.log(applicants);
-
     const handleOpenModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
 
@@ -38,7 +36,9 @@ export default function JobDetails() {
         })
             .then((response) => response.json())
             .then((data) => {
-                setApplicants(data.find((applicant) => applicant.user === user.user.user));
+                // setApplicants(data.find((applicant) => applicant.user === user.user.user));
+                setApplicants(data);
+                console.log(applicants);
             })
             .catch((error) => console.error("Error fetching applicant:", error));
     }, [id, auth]);
@@ -205,17 +205,17 @@ export default function JobDetails() {
                                         <div className="inner">
                                             <div className="row m-n2 button">
                                                 <div className="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
-                                                    <a href="#" className="d-block btn">
+                                                    <Link to={`/dashboard/edit-job/${id}`} className="d-block btn">
                                                         <i className="fa fa-heart-o mr-1"></i>Edit Job
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                                 <div className="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
-                                                    <a href="#" className="d-block btn btn-alt">
+                                                    <Link to={`/dashboard/applicants/jobs/${id}`} className="d-block btn btn-alt">
                                                         Candidates
                                                         <span className="btn" style={{display: "inline", padding: "5px 10px"}}>
                                                             {applicants?.length}
                                                         </span>
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>

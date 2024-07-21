@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'JobsPy.company',
     'JobsPy.jobs',
     'JobsPy.main',
+    'JobsPy.notifications',
     'rest_framework',
 ]
 

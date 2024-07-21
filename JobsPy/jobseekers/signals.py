@@ -9,3 +9,6 @@ def update_jobseeker_activation(sender, instance, **kwargs):
     if instance.first_name and not instance.activated:
         instance.activated = True
         instance.save()
+
+
+

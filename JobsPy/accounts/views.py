@@ -1,12 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import render
-from rest_framework import permissions, status
+from rest_framework import permissions, status, generics
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from JobsPy.accounts.serializers import UserSerializer
+from JobsPy.accounts.serializers import UserSerializer, ChangePasswordSerializer
 from JobsPy.company.serializers import CompanyProfileSerializer
 from JobsPy.jobseekers.serializers import JobSeekerSerializer
 
@@ -52,3 +52,25 @@ class UserProfileView(APIView):
             return Response({'error': 'User profile not found'}, status=404)
 
         return Response({'user_type': user_type, 'user': profile_serializer.data, 'email': email})
+
+
+
+class ChangePasswordView(generics.UpdateAPIView):
+    serializer_class = ChangePasswordSerializer
+    model = userModel
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def update(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            # Set the new password
+            self.object.set_password(serializer.validated_data['new_password'])
+            self.object.save()
+            return Response({'status': 'password set'}, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

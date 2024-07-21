@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.parsers import MultiPartParser, FormParser
 
 from .models import CompanyProfile
-from ..jobs.models import Skills
+from ..jobs.models import Skills, Job
 
 
 class CompanyProfileSerializer(serializers.ModelSerializer):
@@ -26,3 +26,13 @@ class CompanySerializer(serializers.ModelSerializer):
         def perform_create(self, serializer):
             serializer.save(image=self.request.data.get('image'))
 
+class JobWithApplicantsCountSerializer(serializers.ModelSerializer):
+    num_applicants = serializers.IntegerField()
+    category = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Job
+        fields = ['id', 'title', 'description', 'location', 'created_at', 'num_applicants', "job_type", "job_image", "category"]
+
+    def get_category(self, obj):
+        return obj.category.name if obj.category else None

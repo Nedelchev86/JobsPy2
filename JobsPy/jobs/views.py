@@ -4,12 +4,14 @@ from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.reverse import reverse_lazy
 from rest_framework.views import APIView
 
 from JobsPy.core.decorators import job_seeker_activated_required
 from JobsPy.core.permissions import IsCompanyUser
 from JobsPy.jobs.models import Job, Applicant, FavoriteJob
-from JobsPy.jobs.serializers import JobsDetailSerializer, FavoriteJobSerializer, JobSerializer, ApplicantSerializer
+from JobsPy.jobs.serializers import JobsDetailSerializer, FavoriteJobSerializer, JobSerializer, ApplicantSerializer, \
+    ChangeStatusSerializer
 
 
 # Create your views here.
@@ -141,3 +143,12 @@ class ApplicantListAPIView(generics.ListAPIView):
         print(job_pk)
         job = get_object_or_404(Job, pk=job_pk)
         return job.applicants.all()
+
+
+class ChangeStatusAPIView(generics.UpdateAPIView):
+    queryset = Applicant.objects.all()
+    serializer_class = ChangeStatusSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_success_url(self):
+        return reverse_lazy("applicant_list", kwargs={"pk": self.object.job_id})

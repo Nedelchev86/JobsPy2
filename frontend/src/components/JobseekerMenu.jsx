@@ -4,6 +4,7 @@ import {useState, useEffect} from "react";
 
 export default function JobSeekerMenu() {
     const [favrotites, setFavorites] = useState([]);
+    const [applyed, setApplyed] = useState([]);
     const {user, auth} = useAuth();
 
     useEffect(() => {
@@ -15,6 +16,18 @@ export default function JobSeekerMenu() {
         })
             .then((response) => response.json())
             .then((data) => setFavorites(data))
+            .catch((error) => console.error("Error fetching:", error));
+    }, []);
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/api/job_seekers/apply_jobs/", {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${auth}`,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => setApplyed(data))
             .catch((error) => console.error("Error fetching:", error));
     }, []);
 
@@ -39,8 +52,8 @@ export default function JobSeekerMenu() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink activeclassname="active" className="" to="{% url 'jobs-apply' %}">
-                            <i className="lni lni-alarm"></i>Job Applications <span className="notifi"></span>
+                        <NavLink activeclassname="active" className="" to="applyed-jobs">
+                            <i className="lni lni-alarm"></i>Job Applications <span className="notifi">{applyed.length}</span>
                         </NavLink>
                     </li>
 

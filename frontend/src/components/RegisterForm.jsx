@@ -124,6 +124,8 @@ const RegisterForm = () => {
                                                             message: "invalid email address",
                                                         },
                                                     })}
+                                                    value={formData.email}
+                                                    onChange={handleChange}
                                                 />
 
                                                 {errors?.email?.type === "required" && <div className="alert alert-danger">This field is required</div>}
@@ -132,7 +134,7 @@ const RegisterForm = () => {
                                             <div className="form-group">
                                                 <label htmlFor="id_password">Password:</label>
                                                 {/* <input type="password" name="password" autoComplete="new-password" className="form-control" placeholder="Enter your password" value={formData.password} onChange={handleChange} required aria-describedby="id_password1_helptext" id="id_password" /> */}
-                                                <input type="password" className="form-control" placeholder="Enter your password" {...register("password", {required: true, minLength: 4})} />
+                                                <input type="password" className="form-control" placeholder="Enter your password" {...register("password", {required: true, minLength: 4})} value={formData.password} onChange={handleChange} />
                                                 {/* errors will return when field validation fails  */}
                                                 {errors?.password?.type === "required" && <div className="alert alert-danger">This field is required</div>}
                                                 {errors?.password?.type === "minLength" && <div className="alert alert-danger">Your password is too short. Min length is 4</div>}
@@ -150,6 +152,8 @@ const RegisterForm = () => {
                                                             return value === watch("password") || "Password does not match";
                                                         },
                                                     })}
+                                                    value={formData.password2}
+                                                    onChange={handleChange}
                                                 />
                                                 {errors?.password2?.type === "required" && <div className="alert alert-danger">This field is required</div>}
                                                 {errors?.password2?.type === "minLength" && <div className="alert alert-danger">Your password is too short. Min length is 4</div>}
