@@ -15,11 +15,11 @@ export default function CompanyDetails() {
             .catch((error) => console.error("Error fetching jobseeker:", error));
     }, [id]);
 
-    if (!company) {
-        // Render loading state or redirect to login page
-        console.log("loading");
-        return <div>Loading...</div>;
-    }
+    // if (!company) {
+    //     // Render loading state or redirect to login page
+    //     console.log("loading");
+    //     return <div>Loading...</div>;
+    // }
 
     return (
         <>
@@ -38,24 +38,24 @@ export default function CompanyDetails() {
                                                         <div className="col-lg-5 col-md-5 col-12">
                                                             <div className="name-head">
                                                                 <a className="mb-2" href="#">
-                                                                    <img className="circle-54" src={`https://res.cloudinary.com/drjgddl0y/${company.image}`} alt="" />
+                                                                    <img className="circle-54" src={`https://res.cloudinary.com/drjgddl0y/${company?.image}`} alt="" />
                                                                 </a>
 
                                                                 <h4>
                                                                     <a className="name" href="#">
-                                                                        {company.name}
+                                                                        {company?.name}
                                                                     </a>
                                                                 </h4>
 
                                                                 <ul className="social">
                                                                     <li>
-                                                                        <a href="{{ company.facebook_url }}">
+                                                                        <a href="{{ company?.facebook_url }}">
                                                                             <i className="lni lni-facebook-original"></i>
                                                                         </a>
                                                                     </li>
 
                                                                     <li>
-                                                                        <a target="_blank" href="{{ company.linkedin_url }}">
+                                                                        <a target="_blank" href="{{ company?.linkedin_url }}">
                                                                             <i className="lni lni-linkedin-original"></i>
                                                                         </a>
                                                                     </li>
@@ -67,35 +67,35 @@ export default function CompanyDetails() {
                                                                 <h5 className="title-main">Contact Info</h5>
                                                                 <div className="single-list">
                                                                     <h5 className="title">Location</h5>
-                                                                    <p>{company.location}</p>
+                                                                    <p>{company?.location}</p>
                                                                 </div>
                                                                 <div className="single-list">
                                                                     <h5 className="title">E-mail</h5>
-                                                                    <p>{company.email}</p>
+                                                                    <p>{company?.email}</p>
                                                                 </div>
 
                                                                 <div className="single-list">
                                                                     <h5 className="title">Phone</h5>
-                                                                    <p>{company.phone}</p>
+                                                                    <p>{company?.phone}</p>
                                                                 </div>
 
                                                                 <div className="single-list">
                                                                     <h5 className="title">Address</h5>
-                                                                    <p>{company.address}</p>
+                                                                    <p>{company?.address}</p>
                                                                 </div>
                                                                 <div className="single-list">
                                                                     <h5 className="title">Employees</h5>
-                                                                    <p>{company.employees}</p>
+                                                                    <p>{company?.employees}</p>
                                                                 </div>
                                                                 <div className="single-list">
                                                                     <h5 className="title">Foundation Year</h5>
-                                                                    <p>{company.foundation_year}</p>
+                                                                    <p>{company?.foundation_year}</p>
                                                                 </div>
 
                                                                 <div className="single-list">
                                                                     <h5 className="title">Website Linked</h5>
                                                                     <p>
-                                                                        <a target="_blank" href="{{ company.website_url }}">
+                                                                        <a target="_blank" href="{{ company?.website_url }}">
                                                                             Link
                                                                         </a>
                                                                     </p>
@@ -107,22 +107,22 @@ export default function CompanyDetails() {
 
                                                 <div className="single-section">
                                                     <h4>About</h4>
-                                                    <p className="font-size-4 mb-8">{company.description}</p>
+                                                    <p className="font-size-4 mb-8">{company?.description}</p>
                                                 </div>
 
                                                 <div className="single-section skill">
                                                     <h4>Technologies</h4>
                                                     <ul className="list-unstyled d-flex align-items-center flex-wrap">
                                                         {company &&
-                                                            company.skills &&
-                                                            company.skills.map((tech) => (
+                                                            company?.skills &&
+                                                            company?.skills.map((tech) => (
                                                                 <li key={tech}>
                                                                     <a href="#">{tech}</a>
                                                                 </li>
                                                             ))}
 
-                                                        {/* {{ company.skills_set }}
-                                    {% for tech in company.skills.all %}
+                                                        {/* {{ company?.skills_set }}
+                                    {% for tech in company?.skills.all %}
                                     <li>
                                         <a href="#">{{ tech }}</a>
                                     </li>
@@ -141,7 +141,7 @@ export default function CompanyDetails() {
                                                 {% if job.job_image %}
                                                 <img style="height: 60px; width: 60px;" src="{{ job.job_image.url }}" alt="#">
                                                     {% else %}
-                                                    <img style="height: 60px; width: 60px;" src="{{ company.image.url }}" alt="#">
+                                                    <img style="height: 60px; width: 60px;" src="{{ company?.image.url }}" alt="#">
                                                 {% endif %}
                                             </div>
                                             <h6  style="padding-left: 10px">{{ job.title }}</h6>

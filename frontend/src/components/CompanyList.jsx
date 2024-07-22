@@ -19,9 +19,9 @@ export default function CompanyList() {
                     <div className="row">
                         <div className="col-12">
                             <div className="section-title">
-                                <span className="wow">Companies</span>
-                                <h2 className="wow">Browse by Company</h2>
-                                <p className="wow">List of the largest software companies</p>
+                                <span>Companies</span>
+                                <h2>Browse by Company</h2>
+                                <p>List of the largest software companies</p>
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@ export default function CompanyList() {
                         <div className="row">
                             {companies.map((company) => (
                                 <div key={company.user} className="col-lg-3 col-md-6 col-12">
-                                    <Link to={`/companies/${company.user}`} className="single-cat wow">
+                                    <Link to={`/companies/${company.user}`} className="single-cat">
                                         <div className="top-side">
                                             <img src={`https://res.cloudinary.com/drjgddl0y/${company.image}`} alt={company.name} />
                                         </div>
