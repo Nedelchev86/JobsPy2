@@ -1,7 +1,7 @@
 import {react} from "react";
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
 import Index from "./components/Index";
 import Blog from "./components/Blog";
 import CompanyList from "./components/CompanyList";

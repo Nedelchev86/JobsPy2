@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
-import {useAuth} from "../contexts/Contexts";
-import LoginForm from "./LoginForm";
+import {useAuth} from "../../contexts/Contexts";
+import LoginForm from "../LoginForm";
 import {Link, NavLink} from "react-router-dom";
-import {useJobs} from "../contexts/JobContext";
+import {useJobs} from "../../contexts/JobContext";
 
 import {ToastContainer, toast} from "react-toastify";
 
