@@ -16,7 +16,7 @@ export default function JobSeekerDetails() {
             })
             .catch((error) => console.error("Error fetching jobseeker:", error));
     }, [id]);
-    console.log(jobseeker);
+
 
     return (
         <>
