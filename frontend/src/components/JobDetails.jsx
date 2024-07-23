@@ -12,6 +12,7 @@ export default function JobDetails() {
     const {auth, isAuthenticated, user} = useAuth();
     const [showModal, setShowModal] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
+
     // const [status, setStatus] = useState("");
 
     const handleOpenModal = () => setShowModal(true);
@@ -36,9 +37,7 @@ export default function JobDetails() {
         })
             .then((response) => response.json())
             .then((data) => {
-                // setApplicants(data.find((applicant) => applicant.user === user.user.user));
-                setApplicants(data);
-                console.log(applicants);
+                setApplicants(data.find((applicant) => applicant.user === user.user.user));
             })
             .catch((error) => console.error("Error fetching applicant:", error));
     }, [id, auth]);
@@ -58,7 +57,7 @@ export default function JobDetails() {
             .catch((error) => console.error("Error chech is favorite:", error));
     }, []);
 
-    console.log(applicants);
+    console.log(isAuthenticated);
 
     const handleToggleFavorite = () => {
         try {
@@ -91,7 +90,8 @@ export default function JobDetails() {
     };
 
     const handleApply = async () => {
-        const response = await fetch(`http://127.0.0.1:8000/api/jobs/${id}/apply/`, {
+        // const response = await fetch(`http://127.0.0.1:8000/api/jobs/${id}/apply/`, {
+        await fetch(`http://127.0.0.1:8000/api/jobs/${id}/apply/`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${auth}`,
@@ -180,18 +180,44 @@ export default function JobDetails() {
                                                 </div>
                                                 <div className="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
                                                     {applicants?.id && (
-                                                        <Link to="{% url 'login' %}?next={% url 'job_details' object.pk %}" className="d-block btn">
-                                                            <i className="fa fa-heart-o mr-1"></i>Status 2
+                                                        <Link to="/dashboard/applyed-jobs" className="d-block btn">
+                                                            <i className="fa fa-heart-o mr-1"></i>
+                                                            {applicants.status}
                                                         </Link>
                                                     )}
                                                     {!applicants?.id && (
                                                         <Link onClick={handleApply} className="d-block btn">
-                                                            <i className="fa fa-heart-o mr-1"></i>Apply2
+                                                            <i className="fa fa-heart-o mr-1"></i>Apply
                                                         </Link>
                                                     )}
+
                                                     {!isAuthenticated && (
                                                         <Link onClick={handleOpenModal} className="d-block btn">
-                                                            <i className="fa fa-heart-o mr-1"></i>Apply L
+                                                            <i className="fa fa-heart-o mr-1"></i>Apply Login
+                                                        </Link>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {!user && (
+                                    <div className="sidebar-widget">
+                                        <div className="inner">
+                                            <div className="row m-n2 button">
+                                                <div className="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
+                                                    {!isAuthenticated && (
+                                                        <Link onClick={handleOpenModal} className="d-block btn">
+                                                            <i className="fa fa-heart-o mr-1"></i> Save to Favorite
+                                                        </Link>
+                                                    )}
+                                                </div>
+
+                                                <div className="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
+                                                    {!isAuthenticated && (
+                                                        <Link onClick={handleOpenModal} className="d-block btn">
+                                                            <i className="fa fa-heart-o mr-1"></i>Apply
                                                         </Link>
                                                     )}
                                                 </div>
