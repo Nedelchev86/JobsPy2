@@ -11,7 +11,6 @@ export const AuthProvider = ({children}) => {
     // const [auth, setAuth] = useState("");
     const [isAuthenticated, setisAuthenticated] = useState(!!auth);
 
-
     const navigate = useNavigate();
 
     const login = async (formData) => {
@@ -83,6 +82,7 @@ export const AuthProvider = ({children}) => {
         localStorage.removeItem("refresh_token");
         setAuth("");
         setUser(null);
+
         setisAuthenticated(false);
         navigate("/");
     };
