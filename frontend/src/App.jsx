@@ -27,44 +27,47 @@ import CompanyNotifications from "./components/CompanyNotifications";
 import ApplicantsForJob from "./components/ApplicantsForJob";
 import EditJob from "./components/EditJob";
 import JobsApplyed from "./components/JobseekerApplyedJobs";
+import {JobProvider} from "./contexts/JobContext";
 
 function App() {
     return (
         <AuthProvider>
-            <Header />
-            <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="blog" element={<Blog />} />
-                {/* <Route path="companies" element={<CompanyList />} /> */}
-                <Route path="companies">
-                    <Route index element={<CompanyList />} />
-                    <Route path=":id" element={<CompanyDetails />} />
-                </Route>
-                <Route path="companies/:id" element={<CompanyDetails />} />
-                <Route path="jobseekers" element={<JobseekersList />} />
-                <Route path="jobseekers/:id" element={<JobSeekerDetails />} />
-                <Route path="jobs" element={<JobsList />} />
-                <Route path="signup" element={<RegisterForm />} />
-                <Route path="login" element={<LoginForm />} />
-                {/* <Route path="dashboard" element={<Dashboard />} /> */}
-                {/* <Route path="/bookmarked" element={<JobsFavoriteList />} /> */}
-                {/* <Route path="/profile/edit" element={<EditProfile />} /> */}
-                <Route path="jobs/:id" element={<JobDetails />} />
-                <Route path="dashboard" element={<JobSeekerLayout />}>
-                    <Route index element={<Dashboard />} />
-                    <Route path="edit" element={<EditProfile />} />
-                    <Route path="bookmarked" element={<JobsFavoriteList />} />
-                    <Route path="applyed-jobs" element={<JobsApplyed />} />
-                    <Route path="create-job" element={<CreateJob />} />
-                    <Route path="edit-job/:id" element={<EditJob />} />
-                    <Route path="applicants" element={<ApplicantsList />} />
-                    <Route path="applicants/jobs/:id" element={<ApplicantsForJob />} />
-                    <Route path="created-jobs" element={<CreatedJobs />} />
-                    <Route path="notifications" element={<CompanyNotifications />} />
-                    <Route path="change-password" element={<ChangePassword />} />
-                </Route>
-            </Routes>
-            <Footer />
+            <JobProvider>
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="blog" element={<Blog />} />
+                    {/* <Route path="companies" element={<CompanyList />} /> */}
+                    <Route path="companies">
+                        <Route index element={<CompanyList />} />
+                        <Route path=":id" element={<CompanyDetails />} />
+                    </Route>
+                    <Route path="companies/:id" element={<CompanyDetails />} />
+                    <Route path="jobseekers" element={<JobseekersList />} />
+                    <Route path="jobseekers/:id" element={<JobSeekerDetails />} />
+                    <Route path="jobs" element={<JobsList />} />
+                    <Route path="signup" element={<RegisterForm />} />
+                    <Route path="login" element={<LoginForm />} />
+                    {/* <Route path="dashboard" element={<Dashboard />} /> */}
+                    {/* <Route path="/bookmarked" element={<JobsFavoriteList />} /> */}
+                    {/* <Route path="/profile/edit" element={<EditProfile />} /> */}
+                    <Route path="jobs/:id" element={<JobDetails />} />
+                    <Route path="dashboard" element={<JobSeekerLayout />}>
+                        <Route index element={<Dashboard />} />
+                        <Route path="edit" element={<EditProfile />} />
+                        <Route path="bookmarked" element={<JobsFavoriteList />} />
+                        <Route path="applyed-jobs" element={<JobsApplyed />} />
+                        <Route path="create-job" element={<CreateJob />} />
+                        <Route path="edit-job/:id" element={<EditJob />} />
+                        <Route path="applicants" element={<ApplicantsList />} />
+                        <Route path="applicants/jobs/:id" element={<ApplicantsForJob />} />
+                        <Route path="created-jobs" element={<CreatedJobs />} />
+                        <Route path="notifications" element={<CompanyNotifications />} />
+                        <Route path="change-password" element={<ChangePassword />} />
+                    </Route>
+                </Routes>
+                <Footer />
+            </JobProvider>
         </AuthProvider>
     );
 }

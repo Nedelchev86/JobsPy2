@@ -8,13 +8,16 @@ import {ToastContainer, toast} from "react-toastify";
 
 const Header = () => {
     const {user, auth, isAuthenticated, login, logout} = useAuth();
-    const [notifications] = useState([]);
+    // const [notifications] = useState([]);
+    const {notifications, fetchNotifications} = useJobs();
     // Check if the user is authenticated
 
     const [showModal, setShowModal] = useState(false);
 
     const handleOpenModal = () => setShowModal(true);
-    const handleCloseModal = () => setShowModal(false);
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
 
     // const handleSubmitLogin = async (formData) => {
     //     // Call the login function with form data and open modal callback
@@ -139,7 +142,7 @@ const Header = () => {
                                     <div className="button">
                                         <div className="user-profile-container">
                                             <NavLink to="dashboard">
-                                                <img className="user-profile-small" src={`https://res.cloudinary.com/drjgddl0y/${user.user.profile_picture}`} alt="Logo" /> <span className="notification-badge"> 0 </span>{" "}
+                                                <img className="user-profile-small" src={`https://res.cloudinary.com/drjgddl0y/${user.user.profile_picture}`} alt="Logo" /> <span className="notification-badge"> {notifications.length} </span>
                                             </NavLink>
                                         </div>
                                         <button onClick={logout} className="btn">
