@@ -17,6 +17,11 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
   
   ![singUp](https://github.com/Nedelchev86/jobsPy/assets/122647190/aaf1dafa-867a-422f-85bc-9e32c2270923)
 
+  
+- **Error Handling**: React Form Hook for error handling in forms
+
+- ![error](https://github.com/user-attachments/assets/c43dd157-6813-47c1-9fd7-f50559f0ad8e)
+
 
 
 - ** Notifications system **
