@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from rest_framework import generics, status, viewsets, permissions
 from rest_framework.decorators import api_view
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import PermissionDenied
+from rest_framework.generics import get_object_or_404
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from JobsPy.jobs.models import FavoriteJob, Applicant
 from JobsPy.jobs.serializers import FavoriteJobSerializer, ApplicantSerializer
-from JobsPy.jobseekers.models import JobSeeker
-from JobsPy.jobseekers.serializers import JobSeekerSerializer
+from JobsPy.jobseekers.models import JobSeeker, Education
+from JobsPy.jobseekers.serializers import JobSeekerSerializer, EducationSerializer
 
 
 # Create your views here.
@@ -75,3 +77,60 @@ class ApplyedJobsAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         return Applicant.objects.filter(user_id=self.request.user.pk)
+
+class UserEducationListAPI(generics.ListAPIView):
+    serializer_class = EducationSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        user_id = self.kwargs.get('user_id')
+        job_seeker = get_object_or_404(JobSeeker, user_id=user_id)
+
+        return Education.objects.filter(job_seeker=job_seeker)
+
+class CreateEducationAPI(generics.CreateAPIView):
+    serializer_class = EducationSerializer
+    permission_classes = [IsAuthenticated]  # Ensure only authenticated users can create records
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        # Ensure the user is a job seeker
+        job_seeker = get_object_or_404(JobSeeker, user=user)
+        serializer.save(job_seeker=job_seeker)
+
+# View for editing an existing education record
+class EditEducationAPI(generics.UpdateAPIView):
+    serializer_class = EducationSerializer
+    permission_classes = [IsAuthenticated]  # Ensure only authenticated users can edit records
+
+    def get_queryset(self):
+        return Education.objects.all()
+
+    def perform_update(self, serializer):
+        education = self.get_object()
+        if education.job_seeker.user != self.request.user:
+            raise PermissionDenied("You do not have permission to edit this education record.")
+        serializer.save()
+
+class DeleteEducationAPI(generics.DestroyAPIView):
+    serializer_class = EducationSerializer
+    permission_classes = [IsAuthenticated]  # Ensure only authenticated users can delete records
+
+    def get_queryset(self):
+        return Education.objects.all()
+
+    def perform_destroy(self, instance):
+        # Check if the user trying to delete is the owner of the education record
+        if instance.job_seeker.user != self.request.user:
+            raise PermissionDenied("You do not have permission to delete this education record.")
+        instance.delete()
+
+    def delete(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            self.perform_destroy(instance)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except PermissionDenied as e:
+            return Response({'detail': str(e)}, status=status.HTTP_403_FORBIDDEN)
+        except Exception as e:
+            return Response({'detail': 'Something went wrong.'}, status=status.HTTP_400_BAD_REQUEST)

@@ -15,7 +15,7 @@ class EducationAdmin(admin.ModelAdmin):
     list_display = ('job_seeker', 'institution', 'start_date', 'end_date')
     list_filter = ('institution', 'start_date', 'end_date')
     search_fields = ('job_seeker__user__username', 'institution', 'description')
-    readonly_fields = ['job_seeker']
+    # readonly_fields = ['job_seeker']
 
 
 @admin.register(Experience)
