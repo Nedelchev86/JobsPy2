@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "../contexts/Contexts";
 import {useForm} from "react-hook-form";
+import {ToastContainer, toast} from "react-toastify";
 
 export default function ChangePasswordForm() {
     const [oldPassword, setOldPassword] = useState("");
@@ -18,9 +19,7 @@ export default function ChangePasswordForm() {
         formState: {errors},
     } = useForm({mode: "onBlur"});
 
-    const submitForm = async (e) => {
-        e.preventDefault();
-
+    const submitForm = async () => {
         if (newPassword1 !== newPassword2) {
             setError("New passwords do not match");
             return;
@@ -39,11 +38,29 @@ export default function ChangePasswordForm() {
         });
 
         if (response.ok) {
+            toast.success("Your password has been successfully changed.", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             navigate("/dashboard"); // Redirect to dashboard or any other page
         } else {
             const data = await response.json();
             console.log(Object.values(data));
             setError(Object.values(data)[0] || "Error changing password");
+            toast.error(`Error changing password`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     };
     return (
@@ -62,7 +79,7 @@ export default function ChangePasswordForm() {
                                             <label htmlFor="id_old_password">Old password:</label>
                                             {/* <input type="password" name="old_password" autoComplete="current-password" required id="id_old_password" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
                                              */}
-                                            <input type="password" className="form-control" placeholder="Enter your password" {...register("oldPassword", {required: true, minLength: 4})} value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
+                                            <input type="password" className="form-control" placeholder="Enter your CURRENT password" {...register("oldPassword", {required: true, minLength: 4})} value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
                                             {errors?.oldPassword?.type === "required" && <div className="alert alert-danger">This field is required</div>}
                                             {errors?.oldPassword?.type === "minLength" && <div className="alert alert-danger">Your password is too short. Min length is 4</div>}
                                         </div>
@@ -71,7 +88,7 @@ export default function ChangePasswordForm() {
                                             <label htmlFor="id_new_password1">New password:</label>
 
                                             {/* <input type="password" name="new_password1" autoComplete="new-password" required id="id_new_password1" value={newPassword1} onChange={(e) => setNewPassword1(e.target.value)} /> */}
-                                            <input type="password" className="form-control" placeholder="Enter your password" {...register("new_password1", {required: true, minLength: 4})} value={newPassword1} onChange={(e) => setNewPassword1(e.target.value)} />
+                                            <input type="password" className="form-control" placeholder="Enter your NEW password" {...register("new_password1", {required: true, minLength: 4})} value={newPassword1} onChange={(e) => setNewPassword1(e.target.value)} />
                                             {errors?.new_password1?.type === "required" && <div className="alert alert-danger">This field is required</div>}
                                             {errors?.new_password1?.type === "minLength" && <div className="alert alert-danger">Your password is too short. Min length is 4</div>}
                                         </div>
@@ -82,7 +99,7 @@ export default function ChangePasswordForm() {
                                             <input
                                                 type="password"
                                                 className="form-control"
-                                                placeholder="Repeat your password"
+                                                placeholder="Repeat your NEW password"
                                                 {...register("new_password2", {
                                                     required: true,
                                                     validate: (value) => {
