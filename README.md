@@ -15,6 +15,10 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 ![login](https://github.com/Nedelchev86/jobsPy/assets/122647190/59bc234d-caeb-424f-a287-3ad0d7aae9a8)
 
 
+- **react-toastify"**: React-toastify for messages
+  ![toasty](https://github.com/user-attachments/assets/8a0aebfa-afb3-4243-a96e-33daf564946a)
+
+
 - **User Roles**: Supports two types of users: job seekers and companies.
   
   ![singUp](https://github.com/Nedelchev86/jobsPy/assets/122647190/aaf1dafa-867a-422f-85bc-9e32c2270923)
