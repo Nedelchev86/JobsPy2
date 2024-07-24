@@ -1,4 +1,6 @@
-# JobsPy - LIVE DEMO [JobsPy](https://jobspy.eu)
+# JobsPy - LIVE DEMO Soon
+
+Coming soon: Desription of all endpoits and live demo server 
 
 JobsPy is a job portal designed to connect job seekers with companies. It provides a platform for job seekers to showcase their skills and for companies to advertise job openings and manage applications.
 ![main](https://github.com/Nedelchev86/jobsPy/assets/122647190/d8cf6df9-c9b2-441f-b6fc-7add2de84595)
@@ -72,15 +74,7 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
     ![blog](https://github.com/Nedelchev86/jobsPy/assets/122647190/57eb606f-f9f7-4673-918e-4d05738d6d54)
     ![Blog2](https://github.com/Nedelchev86/jobsPy/assets/122647190/31dedca4-34ce-48cb-85d2-0ea87a50a62c)
 
- 
-API Endpoints
 
-  /api/blog/: List and create blog posts.
-  /api/blog/<pk>/: Retrieve, update, or delete a specific blog post.
-  /api/blog/<pk>/comments/: List and create comments for a specific blog post.
-  /api/blog/<pk>/comment/<pk>/: Retrieve, update, or delete a specific comment.
-
-![rest](https://github.com/Nedelchev86/jobsPy/assets/122647190/0ddf85b6-50c6-4684-9055-d4f3d8ff8abd)
 
 
 ## Newsletter
@@ -97,13 +91,13 @@ API Endpoints
 
 ## Technologies Used
 
-- Django: Backend framework for building the web application.
+- Django: Backend framework for building the web application
 - Python: Programming language used for backend development.
-- HTML/CSS/JavaScript: Frontend technologies for user interface and interactivity.
+- Django Rest Framework to make API enpoints
+- 
+- React/HTML/CSS/JavaScript: Frontend technologies for user interface and interactivity.
 
-## Make .env Files
 
-See envSampe.txt
 
 
 ## Installation
@@ -116,6 +110,8 @@ To run JobsPy locally, follow these steps:
 4. Create a superuser: `python manage.py createsuperuser`
 5. Start the development server: `python manage.py runserver`
 6. Access the application at `http://localhost:8000`
+7. Opent frontend folder
+8. Run with npm run dev
 
    
 
