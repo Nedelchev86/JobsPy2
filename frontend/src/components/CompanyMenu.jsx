@@ -14,7 +14,7 @@ export default function CompanyMenu() {
         fetchApplicants();
         fetchJobs(); // Fetch jobs when the component mounts
         fetchNotifications();
-    }, []);
+    }, [user]);
     // useEffect(() => {
     //     const num = fetchApplicants();
     //     console.log(num);

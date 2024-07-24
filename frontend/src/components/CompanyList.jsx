@@ -1,14 +1,18 @@
 import {useState, useEffect} from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import {Link} from "react-router-dom";
+import useFetch from "../hooks/useFetch";
+import Loading from "./loading/Loading";
 
 export default function CompanyList() {
-    const [companies, setCompanies] = useState([]);
-    useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/companies/")
-            .then((response) => response.json())
-            .then((data) => setCompanies(data));
-    }, []);
+    // const [companies, setCompanies] = useState([]);
+    // useEffect(() => {
+    //     fetch("http://127.0.0.1:8000/api/companies/")
+    //         .then((response) => response.json())
+    //         .then((data) => setCompanies(data));
+    // }, []);
+
+    const {data: companies, loading} = useFetch(`${import.meta.env.VITE_API_URL}companies`, []);
 
     return (
         <>
@@ -26,23 +30,27 @@ export default function CompanyList() {
                         </div>
                     </div>
                     <div className="cat-head">
-                        <div className="row">
-                            {companies.map((company) => (
-                                <div key={company.user} className="col-lg-3 col-md-6 col-12">
-                                    <Link to={`/companies/${company.user}`} className="single-cat">
-                                        <div className="top-side">
-                                            <img src={`https://res.cloudinary.com/drjgddl0y/${company.image}`} alt={company.name} />
-                                        </div>
+                        {loading ? (
+                            <Loading />
+                        ) : (
+                            <div className="row">
+                                {companies.map((company) => (
+                                    <div key={company.user} className="col-lg-3 col-md-6 col-12">
+                                        <Link to={`/companies/${company.user}`} className="single-cat">
+                                            <div className="top-side">
+                                                <img src={`https://res.cloudinary.com/drjgddl0y/${company.image}`} alt={company.name} />
+                                            </div>
 
-                                        <div className="bottom-side">
-                                            <span className="available-job2">Jobs</span>
-                                            {/* <span className="available-job">{company.user.job_set.all | length}</span> */}
-                                            <h3>{company.name}</h3>
-                                        </div>
-                                    </Link>
-                                </div>
-                            ))}
-                        </div>
+                                            <div className="bottom-side">
+                                                <span className="available-job2">Jobs</span>
+                                                {/* <span className="available-job">{company.user.job_set.all | length}</span> */}
+                                                <h3>{company.name}</h3>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
