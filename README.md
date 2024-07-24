@@ -9,7 +9,7 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 ## Features
 
 - **User Authentication**: Utilizes Django's built-in authentication system for secure user registration and login.
-- Login with Google and GitHub
+
 ![login](https://github.com/Nedelchev86/jobsPy/assets/122647190/59bc234d-caeb-424f-a287-3ad0d7aae9a8)
 
 
