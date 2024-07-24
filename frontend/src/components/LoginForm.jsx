@@ -81,7 +81,7 @@ const LoginModal = ({show, handleClose}) => {
         register,
         watch,
         handleSubmit,
-        formState: {errors},
+        formState: {errors, isDirty, isValid},
     } = useForm({mode: "onBlur"});
 
     const [formData, setFormData] = useState({
@@ -95,17 +95,17 @@ const LoginModal = ({show, handleClose}) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     };
 
-    const submitForm = async (e) => {
+    const submitForm = async () => {
         // e.preventDefault();
 
         try {
             await login(formData); // Call login method from AuthContext
-
+            
             handleClose(); // Close modal after successful login
             setError("");
-            setFormData({email: "", password: ""});
 
             fetchNotifications();
+            
             toast.success("Login successful!", {
                 position: "top-right",
                 autoClose: 5000,
@@ -165,7 +165,7 @@ const LoginModal = ({show, handleClose}) => {
                         {errors?.password?.type === "required" && <div className="alert alert-danger">This field is required</div>}
                         {errors?.password?.type === "minLength" && <div className="alert alert-danger">Your password is too short. Min length is 4</div>}
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" disabled={!isDirty && !isValid}>
                         Log in
                     </Button>
                 </Form>
