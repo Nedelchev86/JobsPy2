@@ -1,12 +1,52 @@
 import React from "react";
 import {useAuth} from "../contexts/Contexts";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import JobSeekerMenu from "./JobseekerMenu";
+import useFetch from "../hooks/useFetch";
+import AddEducationModal from "./AddEducation";
+import {Link} from "react-router-dom";
+import DeleteEducationModal from "./changeStatus/DeleteEducationModal";
+import EditEducationModal from "./EditEducationModal";
 const JobSeekerDashboard = () => {
-    const {user, isAuthenticated, fetchUserData} = useAuth();
+    const {user, isAuthenticated, fetchUserData, auth} = useAuth();
     const navigate = useNavigate();
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [educationToDelete, setEducationToDelete] = useState(null);
+    const [educationToEdit, setEducationToEdit] = useState(null);
+
+    const handleOpenModal = () => {
+        setModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
+        refetch();
+    };
+
+    const handleOpenDeleteModal = (education) => {
+        setEducationToDelete(education);
+        setDeleteModalOpen(true);
+    };
+
+    const handleCloseDeleteModal = () => {
+        setDeleteModalOpen(false);
+        setEducationToDelete(null);
+    };
+
+    const [isEditModalOpen, setEditModalOpen] = useState(false);
+
+    const handleOpenEditModal = (education) => {
+        setEducationToEdit(education);
+        setEditModalOpen(true);
+    };
+
+    const handleCloseEditModal = () => {
+        setEditModalOpen(false);
+        refetch();
+    };
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -16,6 +56,30 @@ const JobSeekerDashboard = () => {
             console.log("test");
         }
     }, [isAuthenticated]);
+
+    const handleDelete = async () => {
+        if (!educationToDelete) return;
+
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/educations/delete/${educationToDelete.id}/`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${auth}`,
+                },
+                method: "DELETE",
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to delete education");
+            }
+
+            handleCloseDeleteModal();
+            refetch();
+        } catch (error) {
+            console.error("Error deleting education:", error);
+        }
+    };
+    const {data: educations, error, isLoading, refetch} = useFetch(`http://127.0.0.1:8000/api/educations/user/${user.user.user}/`, []);
 
     if (!isAuthenticated) {
         return <div>Not authenticated...</div>;
@@ -178,37 +242,39 @@ const JobSeekerDashboard = () => {
                                     </div>
 
                                     <div className="single-section education">
-                                        {/* <a style="float: right" className="education-link" href="{% url 'add-education' user.jobseeker.pk %}">
-                                                                Add Education
-                                                            </a> */}
+                                        <Link style={{float: "right"}} onClick={handleOpenModal} className="education-link" href="#">
+                                            Add Education
+                                        </Link>
+                                        <AddEducationModal show={isModalOpen} handleClose={handleCloseModal} />
+                                        <DeleteEducationModal show={isDeleteModalOpen} handleClose={handleCloseDeleteModal} />
+                                        <EditEducationModal show={isEditModalOpen} handleClose={handleCloseEditModal} initialData={educationToEdit} />
                                         <h4>Education</h4>
-
-                                        {/* {%  for education in request.user.jobseeker.educations.all %}
-                                <div className="single-edu mb-30">
-                                    <div className="d-flex align-items-center pr-11 mb-9 flex-wrap flex-sm-nowrap">
-                                        <div className="image" >
-                                            {% if education.image %}
-                                            <img src="{{ education.image}}" alt="#" width="80" height="80">
-                                            {% else %}
-                                            <img src="{% static 'images/resume/education.jpg' %}" alt="#" width="80" height="80">
-                                            {% endif %}
-                                        </div>
-                                        <div className="w-100 mt-n2">
-                                            <h3 className="mb-0">
-                                                <a href="#">{{ education.institution}} </a>
-                                            </h3>
-                                            <p>{{ education.description|safe }}<p>
-                                            <div className="d-flex align-items-center justify-content-md-between flex-wrap">
-                                                <p>{{ education.start_date}}- {{ education.end_date}}</p>
-                                                <div>
-                                                <a  href="{% url 'edit-education' education.pk %}" className="education-edit font-size-3">Edit</a>
-                                                <a  style="color: red; margin-left: 20px" href="{% url 'delete education' education.pk %}" className="education-edit font-size-3">Delete</a>
+                                        {educations.map((education) => (
+                                            <div key={education.id} className="single-edu mb-30">
+                                                <div className="d-flex align-items-center pr-11 mb-9 flex-wrap flex-sm-nowrap">
+                                                    <div className="image">{education.image ? <img src={`https://res.cloudinary.com/drjgddl0y/${education.image}`} alt="#" width="80" height="80" /> : <img src="/images/resume/education.jpg" alt="#" width="80" height="80" />}</div>
+                                                    <div className="w-100 mt-n2">
+                                                        <h3 className="mb-0">
+                                                            <a href="#">{education.institution} </a>
+                                                        </h3>
+                                                        <p>{education.description}</p>
+                                                        <div className="d-flex align-items-center justify-content-md-between flex-wrap">
+                                                            <p>
+                                                                {education.start_date}- {education.end_date}
+                                                            </p>
+                                                            <div>
+                                                                <Link to="#" onClick={() => handleOpenEditModal(education)} className="education-edit font-size-3">
+                                                                    Edit
+                                                                </Link>
+                                                                <Link style={{color: "red", marginLeft: 20}} onClick={() => handleOpenDeleteModal(education)} className="education-edit font-size-3" to="#">
+                                                                    Delete
+                                                                </Link>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %} */}
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>

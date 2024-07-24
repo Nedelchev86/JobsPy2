@@ -1,11 +1,13 @@
 import {NavLink} from "react-router-dom";
 import {useAuth} from "../contexts/Contexts";
 import {useState, useEffect} from "react";
+import {useJobs} from "../contexts/JobContext";
 
 export default function JobSeekerMenu() {
     const [favrotites, setFavorites] = useState([]);
     const [applyed, setApplyed] = useState([]);
     const {user, auth} = useAuth();
+    const {notifications} = useJobs();
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/user/jobseeker/favorites/", {
@@ -61,8 +63,8 @@ export default function JobSeekerMenu() {
                 <li><NavLink className="{% if request.resolver_match.url_name == 'newsletter' %}active{% endif %}" to="{% url 'newsletter' %}"><i className="lni lni-alarm"></i>Send Newsletter </NavLink></li>
                {% endif %} */}
                     <li>
-                        <NavLink activeclassname="active" to="/">
-                            <i className="lni lni-alarm"></i> Notifications <span className="notifi"></span>
+                        <NavLink activeclassname="active" to={"notifications"}>
+                            <i className="lni lni-alarm"></i> Notifications <span className="notifi">{notifications.length}</span>
                         </NavLink>
                     </li>
                     <li>

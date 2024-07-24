@@ -8,9 +8,8 @@ export const JobProvider = ({children}) => {
 
     const [applicants, setApplicants] = useState([]);
     const [notifications, setNotifications] = useState([]);
-    const {isAuthenticated, auth} = useAuth();
+    const {isAuthenticated, auth, user} = useAuth();
     const fetchNotifications = async () => {
-        console.log(isAuthenticated);
         if (!auth) {
             console.log("fetch return");
             return;
@@ -82,16 +81,16 @@ export const JobProvider = ({children}) => {
 
     useEffect(() => {
         fetchApplicants();
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         fetchJobs();
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         fetchNotifications();
         console.log("effect");
-    }, [auth]);
+    }, [user]);
 
     useEffect(() => {
         console.log("JobProvider useEffect triggered by auth change:", auth);
@@ -100,7 +99,7 @@ export const JobProvider = ({children}) => {
             fetchJobs();
             fetchNotifications();
         }
-    }, [auth]);
+    }, [user, auth]);
 
     return <JobContext.Provider value={{jobs, fetchJobs, fetchApplicants, applicants, notifications, fetchNotifications}}>{children}</JobContext.Provider>;
 };
