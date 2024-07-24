@@ -6,13 +6,15 @@ from rest_framework.routers import DefaultRouter
 
 from JobsPy.accounts.views import MyTokenObtainPairView, MyTokenRefreshView, UserRegistrationAPIView, UserProfileView, \
     ChangePasswordView
-from JobsPy.company.views import CompanyUpdateAPIView, CreatedJobsAPIView, CompanyProfileViewSet, CompanyApplicantAPI
+from JobsPy.company.views import CompanyUpdateAPIView, CreatedJobsAPIView, CompanyProfileViewSet, CompanyApplicantAPI, \
+    ChangeStatusAPI
 from JobsPy.jobs.views import JobsDetailsAPIView, apply_for_job, AddToFavoritesAPIView, RemoveFromFavoritesAPIView, \
     DeleteJobView, JobCreateAPIView, JobUpdateAPIView, ApplicantListAPIView, AllJobsViewApi, ChangeStatusAPIView
 from JobsPy.jobseekers.views import JobSeekerUpdateAPIView, FavoriteJobsListAPIView, check_favorite_status, \
-    JobSeekerViewSet, job_applicants, ApplyedJobsAPIView
+    JobSeekerViewSet, job_applicants, ApplyedJobsAPIView, UserEducationListAPI, CreateEducationAPI, EditEducationAPI, \
+    DeleteEducationAPI
 from JobsPy.main.views import SkillsListAPIView
-from JobsPy.notifications.views import NotificationViewSet
+from JobsPy.notifications.views import NotificationViewSet, NotificationJobSeekerViewSet
 
 # urlpatterns = [
 #     path('admin/', admin.site.urls),
@@ -29,6 +31,7 @@ router = DefaultRouter()
 router.register(r'api/companies', CompanyProfileViewSet)
 router.register(r'api/jobseekers', JobSeekerViewSet)
 router.register(r'api/notifications', NotificationViewSet)
+router.register(r'api/notificationjobseekers', NotificationJobSeekerViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -53,6 +56,7 @@ urlpatterns = [
     path('api/jobs/update/<int:pk>', JobUpdateAPIView.as_view(), name='job-create'),
     path('api/jobs/<int:pk>/applicants/', ApplicantListAPIView.as_view(), name='applicant-list-api'),
     path('api/company/applicants/', CompanyApplicantAPI.as_view(), name='company-applicants-api'),
+    path('api/company/change-status/<int:pk>/', ChangeStatusAPI.as_view(), name='change-status'),
     path('api/created-jobs/', CreatedJobsAPIView.as_view(), name='created-jobs-api'),
     path('api/user/change-password/', ChangePasswordView.as_view(), name='change-password-api'),
     # path('', include(router.urls)),
@@ -60,5 +64,9 @@ urlpatterns = [
     path('api/jobs/<int:pk>/applicants/', ApplicantListAPIView.as_view(), name='job_applicant_list'),
     path('applicants/<int:pk>/change_status/', ChangeStatusAPIView.as_view(), name='change_status'),
     path('api/job_seekers/apply_jobs/', ApplyedJobsAPIView.as_view(), name='apply_jobs'),
-
+    path('api/educations/user/<int:user_id>/', UserEducationListAPI.as_view(), name='user-education-list'),
+    path('api/educations/create/', CreateEducationAPI.as_view(), name='create-education'),
+    path('api/educations/edit/<int:pk>/', EditEducationAPI.as_view(), name='edit-education'),
+    path('api/educations/delete/<int:pk>/', DeleteEducationAPI.as_view(), name='delete-education'),
 ]
+

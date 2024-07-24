@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.parsers import MultiPartParser, FormParser
 
 from .models import CompanyProfile
-from ..jobs.models import Skills, Job
+from ..jobs.models import Skills, Job, Applicant
 
 
 class CompanyProfileSerializer(serializers.ModelSerializer):
@@ -36,3 +36,10 @@ class JobWithApplicantsCountSerializer(serializers.ModelSerializer):
 
     def get_category(self, obj):
         return obj.category.name if obj.category else None
+
+
+class ApplicantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Applicant
+        fields = ['id', 'user', 'job', 'created_at', 'comment', 'status']
+        read_only_fields = ['id', 'user', 'job', 'created_at']
