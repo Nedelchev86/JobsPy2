@@ -15,7 +15,7 @@ export const JobProvider = ({children}) => {
             return;
         }
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/notifications/", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}notifications/`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${auth}`,
@@ -48,7 +48,7 @@ export const JobProvider = ({children}) => {
             return;
         }
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/created-jobs/", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}created-jobs/`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${auth}`,
@@ -66,7 +66,7 @@ export const JobProvider = ({children}) => {
             return;
         }
 
-        fetch("http://127.0.0.1:8000/api/company/applicants/", {
+        fetch(`${import.meta.env.VITE_API_URL}company/applicants/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${auth}`,
