@@ -115,6 +115,7 @@ const RegisterForm = () => {
                                                 <label htmlFor="id_email">Email:</label>
                                                 {/* <input type="email" name="email" maxLength="100" autoFocus className="form-control" placeholder="Enter your email" value={formData.email} onChange={handleChange} required id="id_email" /> */}
                                                 <input
+                                                    id="id_email"
                                                     className="form-control"
                                                     placeholder="Enter your email"
                                                     {...register("email", {
@@ -134,7 +135,7 @@ const RegisterForm = () => {
                                             <div className="form-group">
                                                 <label htmlFor="id_password">Password:</label>
                                                 {/* <input type="password" name="password" autoComplete="new-password" className="form-control" placeholder="Enter your password" value={formData.password} onChange={handleChange} required aria-describedby="id_password1_helptext" id="id_password" /> */}
-                                                <input type="password" className="form-control" placeholder="Enter your password" {...register("password", {required: true, minLength: 4})} value={formData.password} onChange={handleChange} />
+                                                <input type="password" id="id_password" className="form-control" placeholder="Enter your password" {...register("password", {required: true, minLength: 4})} value={formData.password} onChange={handleChange} />
                                                 {/* errors will return when field validation fails  */}
                                                 {errors?.password?.type === "required" && <div className="alert alert-danger">This field is required</div>}
                                                 {errors?.password?.type === "minLength" && <div className="alert alert-danger">Your password is too short. Min length is 4</div>}
@@ -143,6 +144,7 @@ const RegisterForm = () => {
                                                 <label htmlFor="id_password2">Password confirmation:</label>
                                                 {/* <input type="password" name="password2" autoComplete="new-password" className="form-control" placeholder="Enter your password" value={formData.password2} onChange={handleChange} required aria-describedby="id_password2_helptext" id="id_password2" /> */}
                                                 <input
+                                                    id="id_password2"
                                                     type="password"
                                                     className="form-control"
                                                     placeholder="Repeat your password"

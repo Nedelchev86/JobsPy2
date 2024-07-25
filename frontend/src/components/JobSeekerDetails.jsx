@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import JobSeekersAside from "./JobseekersAside";
 import {useParams} from "react-router-dom";
+import EducationList from "./changeStatus/EducationList";
 
 export default function JobSeekerDetails() {
     const [jobseeker, setJobseeker] = useState([]);
@@ -16,7 +17,6 @@ export default function JobSeekerDetails() {
             })
             .catch((error) => console.error("Error fetching jobseeker:", error));
     }, [id]);
-
 
     return (
         <>
@@ -39,9 +39,13 @@ export default function JobSeekerDetails() {
                                                     <div className="row">
                                                         <div className="col-lg-5 col-md-5 col-12">
                                                             <div className="name-head">
-                                                                {jobseeker.profile_picture && (
+                                                                {jobseeker.profile_picture ? (
                                                                     <a className="mb-2" href="#">
                                                                         <img className="circle-54" src={`https://res.cloudinary.com/drjgddl0y/${jobseeker.profile_picture}`} alt="" />
+                                                                    </a>
+                                                                ) : (
+                                                                    <a className="mb-2" href="#">
+                                                                        <img className="circle-54" src="/images/clients/default_profile.png" alt="" />
                                                                     </a>
                                                                 )}
 
@@ -93,9 +97,9 @@ export default function JobSeekerDetails() {
                                                                     <h5 className="title">Website</h5>
 
                                                                     <p>
-                                                                        {/* <a target="_blank" href="{{ jobseeker.website }}">
+                                                                        <a target="_blank" href={jobseeker.website}>
                                                                             Link
-                                                                        </a> */}
+                                                                        </a>
                                                                     </p>
                                                                 </div>
 
@@ -163,6 +167,7 @@ export default function JobSeekerDetails() {
                                                 <div className="single-section education">
                                                     <h4>Education</h4>
 
+                                                    <EducationList id={id} />
                                                     {/* {% for education in jobseeker.educations.all %}
                                 <div className="single-edu mb-30">
                                     <div className="d-flex align-items-center pr-11 mb-9 flex-wrap flex-sm-nowrap">
