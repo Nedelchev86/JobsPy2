@@ -7,7 +7,7 @@ import JobSeekerMenu from "./JobseekerMenu";
 import useFetch from "../hooks/useFetch";
 import AddEducationModal from "./AddEducation";
 import {Link} from "react-router-dom";
-import DeleteEducationModal from "./changeStatus/DeleteEducationModal";
+import DeleteEducationModal from "./DeleteEducationModal";
 import EditEducationModal from "./EditEducationModal";
 const JobSeekerDashboard = () => {
     const {user, isAuthenticated, fetchUserData, auth} = useAuth();
@@ -136,25 +136,39 @@ const JobSeekerDashboard = () => {
                                                             <img className="circle-54" src={`https://res.cloudinary.com/drjgddl0y/${user.user.profile_picture}`} alt="" />
                                                         </a>
                                                     )}
-                                                    {/* {% if user.jobseeker.profile_picture %}
-                                            <a className="mb-2" href="#"><img className="circle-54"
-                                                    src="{{ user.jobseeker.profile_picture.url}}" alt=""></a>
-                                            {% endif %}
-                                            <h4><a className="name" href="#">{{ user.jobseeker.first_name}} {{ user.jobseeker.last_name }}</a></h4>
-                                            <p><a className="deg" href="#">{{ user.jobseeker.occupation}}</a></p>
-                                            <ul className="social">
-                                                {% if user.jobseeker.facebook %}
-                                                <li><a target="_blank" href="{{ user.jobseeker.facebook }}"><i className="lni lni-facebook-original"></i></a></li>
-                                                {% endif %}
 
-                                                {% if user.jobseeker.linkedin %}
-                                                <li><a target="_blank" href="{{ user.jobseeker.linkedin }}"><i className="lni lni-linkedin-original"></i></a></li>
-                                                {% endif %}
+                                                    {!user.user.profile_picture && <img className="circle-54" src="/images/clients/default_profile.png" alt="" />}
 
-                                                {% if user.jobseeker.github %}
-                                                <li><a target="_blank" href="{{ user.jobseeker.github }}"><i className="lni lni-github"></i></a></li>
-                                                {% endif %}
-                                            </ul> */}
+                                                    <h4>
+                                                        <a className="name" href="#">
+                                                            {user.user.first_name && user.user.first_name}
+                                                            {user.user.last_name && user.user.last_name}
+                                                        </a>
+                                                    </h4>
+                                                    <p>
+                                                        <a className="deg" href="#">
+                                                            {user.user.occupation && user.user.occupation}
+                                                        </a>
+                                                    </p>
+                                                    <ul className="social">
+                                                        <li>
+                                                            <a target="_blank" href={`${user.user.facebook && user.user.facebook} `}>
+                                                                <i className="lni lni-facebook-original"></i>
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a target="_blank" href={`${user.user.linkedin && user.user.linkedin}`}>
+                                                                <i className="lni lni-linkedin-original"></i>
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a target="_blank" href={`${user.user.github && user.user.github}`}>
+                                                                <i className="lni lni-github"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                             <div className="col-lg-7 col-md-7 col-12">
