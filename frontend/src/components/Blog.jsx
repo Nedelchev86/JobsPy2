@@ -6,7 +6,7 @@ const Blog = () => {
 
     useEffect(() => {
         // Fetch blogs from your API
-        fetch("http://127.0.0.1:8000/api/blog/")
+        fetch(`${import.meta.env.VITE_API_URL}blog/`)
             .then((response) => response.json())
             .then((data) => setBlogs(data.results))
             .catch((error) => console.error("Error fetching blogs:", error));

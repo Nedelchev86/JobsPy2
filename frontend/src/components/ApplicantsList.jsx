@@ -7,7 +7,7 @@ export default function ApplicantsList() {
     const [applicants, setApplicants] = useState([]);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/company/applicants/", {
+        fetch(`${import.meta.env.VITE_API_URL}company/applicants/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${auth}`,

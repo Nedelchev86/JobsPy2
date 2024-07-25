@@ -8,7 +8,7 @@ export default function ApplicantsForJob() {
     const {auth} = useAuth();
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/jobs/${id}/applicants/`, {
+        fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/applicants/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${auth}`,
