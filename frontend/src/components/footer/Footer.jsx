@@ -11,7 +11,7 @@ export default function Footer() {
                                         <img src="/images/logo/logo.svg" alt="Logo" />
                                     </a>
                                 </div>
-                                <p>#1 project in SoftUni Django Advanced - February 2024</p>
+                                <p>#1 project in SoftUni React - August 2024</p>
                                 <ul className="contact-address">
                                     <li>
                                         <span>Address:</span> 8000 Burgas , Bulgaria{" "}
@@ -115,7 +115,7 @@ export default function Footer() {
                             <div className="col-lg-6 col-md-6 col-12">
                                 <div className="left">
                                     <p>
-                                        Django Project by
+                                        React Project by
                                         <a href="#" rel="nofollow">
                                             Tihomir Nedelchev
                                         </a>

@@ -74,7 +74,6 @@ export const JobProvider = ({children}) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setApplicants(data);
             });
     };
@@ -89,11 +88,9 @@ export const JobProvider = ({children}) => {
 
     useEffect(() => {
         fetchNotifications();
-        console.log("effect");
     }, [user]);
 
     useEffect(() => {
-        console.log("JobProvider useEffect triggered by auth change:", auth);
         if (auth) {
             fetchApplicants();
             fetchJobs();

@@ -125,7 +125,21 @@ export default function EditJobseeker() {
             method: "PUT",
             body: formData,
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    return response.json().then((errorData) => {
+                        // Handle validation errors
+                        if (errorData.errors) {
+                            Object.entries(errorData.errors).forEach(([field, messages]) => {
+                                setError(field, {type: "manual", message: messages[0]});
+                            });
+                        }
+                        throw new Error("Validation error");
+                    });
+                }
+                return response.json();
+            })
+
             .then((data) => {
                 console.log("Profile updated successfully:", data);
                 navigate("/dashboard");
