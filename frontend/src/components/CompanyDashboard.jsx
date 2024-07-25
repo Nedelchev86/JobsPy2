@@ -13,7 +13,6 @@ const CompanyDashboard = () => {
             navigate("/login");
         } else {
             fetchUserData();
-            console.log("test");
         }
     }, [isAuthenticated]);
 
