@@ -84,7 +84,7 @@ export default function EditCompany() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(company.skills);
+ 
 
         const formData = new FormData();
 
@@ -231,14 +231,14 @@ export default function EditCompany() {
                                                 </div>
 
                                                 <div className="form-group">
-                                                    <label htmlFor="id_skills" className="required">
-                                                        Technologies:
-                                                    </label>
+                                                    <label className="required">Technologies:</label>
                                                     <div className="form-check">
                                                         {skills.map((skill) => (
                                                             <div key={skill.id}>
-                                                                <input type="checkbox" name="skills" value={skill.name} className="form-check" checked={company.skills.includes(skill.name)} onChange={handleSkillChange} />
-                                                                <label className="form-check-label">{skill.name}</label>
+                                                                <label htmlFor={skill.name} className="form-check-label">
+                                                                    {skill.name}
+                                                                </label>
+                                                                <input id={skill.name} type="checkbox" name="skills" value={skill.name} className="form-check" checked={company.skills.includes(skill.name)} onChange={handleSkillChange} />
                                                             </div>
                                                         ))}
                                                     </div>

@@ -8,7 +8,6 @@ export default function CompanyMenu() {
     const {user, auth} = useAuth();
 
     const {fetchJobs, fetchApplicants, jobs, applicants, notifications, fetchNotifications} = useJobs();
-    console.log(jobs);
 
     useEffect(() => {
         fetchApplicants();
