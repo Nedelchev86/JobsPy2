@@ -29,14 +29,14 @@ export default function EditCompany() {
 
     useEffect(() => {
         // Fetch skills from the API
-        fetch("http://127.0.0.1:8000/api/skills/")
+        fetch(`${import.meta.env.VITE_API_URL}skills/`)
             .then((response) => response.json())
             .then((data) => setSkills(data))
             .catch((error) => console.error("Error fetching skills:", error));
     }, []);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/user/company/update/", {
+        fetch(`${import.meta.env.VITE_API_URL}user/company/update/`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -84,7 +84,6 @@ export default function EditCompany() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
- 
 
         const formData = new FormData();
 
@@ -110,7 +109,7 @@ export default function EditCompany() {
             formData.append("skills", skill);
         });
 
-        fetch("http://127.0.0.1:8000/api/user/company/update/", {
+        fetch(`${import.meta.env.VITE_API_URL}user/company/update/`, {
             headers: {
                 Authorization: `Bearer ${auth}`,
             },

@@ -37,14 +37,14 @@ export default function EditJob() {
 
     useEffect(() => {
         // Fetch skills from the API
-        fetch("http://127.0.0.1:8000/api/skills/")
+        fetch(`${import.meta.env.VITE_API_URL}skills/`)
             .then((response) => response.json())
             .then((data) => setSkills(data))
             .catch((error) => console.error("Error fetching skills:", error));
     }, []);
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/jobs/update/${id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}jobs/update/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -136,7 +136,7 @@ export default function EditJob() {
             formData.append("needed_skills", skill);
         });
 
-        fetch(`http://127.0.0.1:8000/api/jobs/update/${id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}jobs/update/${id}`, {
             headers: {
                 Authorization: `Bearer ${auth}`,
             },

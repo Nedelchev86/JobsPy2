@@ -9,7 +9,7 @@ export default function JobsFavoriteList() {
     const {user, auth} = useAuth();
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/user/jobseeker/favorites/", {
+        fetch(`${import.meta.env.VITE_API_URL}user/jobseeker/favorites/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${auth}`,

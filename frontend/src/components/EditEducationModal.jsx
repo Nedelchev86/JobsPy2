@@ -44,7 +44,7 @@ const EditEducationModal = ({show, handleClose, educationId, initialData}) => {
             }
 
             // Make a PUT request to your API endpoint
-            const response = await fetch(`http://127.0.0.1:8000/api/educations/edit/${initialData.id}/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}educations/edit/${initialData.id}/`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${auth}`, // Add authorization header

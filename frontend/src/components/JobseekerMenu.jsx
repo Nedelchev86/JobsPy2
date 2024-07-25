@@ -10,7 +10,7 @@ export default function JobSeekerMenu() {
     const {notifications} = useJobs();
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/user/jobseeker/favorites/", {
+        fetch(`${import.meta.env.VITE_API_URL}user/jobseeker/favorites/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${auth}`,
@@ -22,7 +22,7 @@ export default function JobSeekerMenu() {
     }, []);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/job_seekers/apply_jobs/", {
+        fetch(`${import.meta.env.VITE_API_URL}job_seekers/apply_jobs/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${auth}`,

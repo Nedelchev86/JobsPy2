@@ -10,7 +10,7 @@ const NotificationComponent = ({notification}) => {
 
     const toggleReadStatus = async (id) => {
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/notifications/${id}/toggle_read/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}notifications/${id}/toggle_read/`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${auth}`,

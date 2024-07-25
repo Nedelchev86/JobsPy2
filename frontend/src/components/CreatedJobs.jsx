@@ -12,7 +12,7 @@ export default function CreatedJobs() {
     const {fetchJobs} = useJobs();
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/created-jobs/", {
+        fetch(`${import.meta.env.VITE_API_URL}created-jobs/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${auth}`,
@@ -34,7 +34,7 @@ export default function CreatedJobs() {
 
     const handleDeleteJob = () => {
         if (jobToDelete) {
-            fetch(`http://127.0.0.1:8000/api/jobs/${jobToDelete}/delete/`, {
+            fetch(`${import.meta.env.VITE_API_URL}jobs/${jobToDelete}/delete/`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${auth}`,

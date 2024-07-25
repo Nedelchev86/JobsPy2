@@ -33,7 +33,7 @@ export default function CreateJob() {
 
     useEffect(() => {
         // Fetch skills from the API
-        fetch("http://127.0.0.1:8000/api/skills/")
+        fetch(`${import.meta.env.VITE_API_URL}skills/`)
             .then((response) => response.json())
             .then((data) => setSkills(data))
             .catch((error) => console.error("Error fetching skills:", error));

@@ -61,7 +61,7 @@ const JobSeekerDashboard = () => {
         if (!educationToDelete) return;
 
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/educations/delete/${educationToDelete.id}/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}educations/delete/${educationToDelete.id}/`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${auth}`,
@@ -79,7 +79,7 @@ const JobSeekerDashboard = () => {
             console.error("Error deleting education:", error);
         }
     };
-    const {data: educations, error, isLoading, refetch} = useFetch(`http://127.0.0.1:8000/api/educations/user/${user.user.user}/`, []);
+    const {data: educations, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}educations/user/${user.user.user}/`, []);
 
     if (!isAuthenticated) {
         return <div>Not authenticated...</div>;
