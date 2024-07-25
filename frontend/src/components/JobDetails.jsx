@@ -21,7 +21,7 @@ export default function JobDetails() {
     const handleCloseModal = () => setShowModal(false);
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/jobs/${id}/`, {})
+        fetch(`${import.meta.env.VITE_API_URL}${id}/`, {})
             .then((response) => response.json())
             .then((data) => {
                 setJob(data);
@@ -34,7 +34,7 @@ export default function JobDetails() {
         if (!isAuthenticated) {
             return;
         }
-        fetch(`http://127.0.0.1:8000/api/jobs/${id}/applicants/`, {
+        fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/applicants/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${auth}`,
@@ -51,7 +51,7 @@ export default function JobDetails() {
         if (!isAuthenticated) {
             return;
         }
-        fetch(`http://127.0.0.1:8000/api/jobs/${id}/favorite/check/`, {
+        fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/favorite/check/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${auth}`,
@@ -65,7 +65,7 @@ export default function JobDetails() {
     const handleToggleFavorite = () => {
         try {
             if (isFavorite.is_favorite) {
-                fetch(`http://127.0.0.1:8000/api/jobs/${id}/favorite/remove/`, {
+                fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/favorite/remove/`, {
                     method: "POST",
                     headers: {
                         Authorization: `Bearer ${auth}`,
@@ -76,7 +76,7 @@ export default function JobDetails() {
 
                 setIsFavorite({is_favorite: false});
             } else {
-                fetch(`http://127.0.0.1:8000/api/jobs/${id}/favorite/add/`, {
+                fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/favorite/add/`, {
                     method: "POST",
                     headers: {
                         Authorization: `Bearer ${auth}`,
@@ -94,7 +94,7 @@ export default function JobDetails() {
 
     const handleApply = async () => {
         // const response = await fetch(`http://127.0.0.1:8000/api/jobs/${id}/apply/`, {
-        await fetch(`http://127.0.0.1:8000/api/jobs/${id}/apply/`, {
+        await fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/apply/`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${auth}`,
