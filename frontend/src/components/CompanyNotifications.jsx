@@ -12,7 +12,7 @@ export default function CompanyNotifications() {
 
     const fetchNotifications = async () => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}notifications/`, {
+            const response = await fetch("http://127.0.0.1:8000/api/notifications/", {
                 headers: {
                     Authorization: `Bearer ${auth}`,
                 },

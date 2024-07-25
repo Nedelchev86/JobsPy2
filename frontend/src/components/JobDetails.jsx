@@ -21,7 +21,7 @@ export default function JobDetails() {
     const handleCloseModal = () => setShowModal(false);
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}${id}/`, {})
+        fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/`, {})
             .then((response) => response.json())
             .then((data) => {
                 setJob(data);

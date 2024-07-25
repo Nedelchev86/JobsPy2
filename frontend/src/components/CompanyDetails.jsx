@@ -7,7 +7,7 @@ export default function CompanyDetails() {
     const {id} = useParams();
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}${id}/`)
+        fetch(`${import.meta.env.VITE_API_URL}companies/${id}/`)
             .then((response) => response.json())
             .then((data) => {
                 setCompany(data);

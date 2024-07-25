@@ -10,7 +10,7 @@ export default function JobSeekerDetails() {
 
     useEffect(() => {
         console.log("Start useEffect with ID:", id);
-        fetch(`http://127.0.0.1:8000/api/jobseekers/${id}/`)
+        fetch(`${import.meta.env.VITE_API_URL}jobseekers/${id}/`)
             .then((response) => response.json())
             .then((data) => {
                 setJobseeker(data);

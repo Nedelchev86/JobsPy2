@@ -1,6 +1,6 @@
 import useFetch from "../../hooks/useFetch";
 export default function EducationList({id}) {
-    const {data: educations, error, isLoading, refetch} = useFetch(`http://127.0.0.1:8000/api/educations/user/${id}/`, []);
+    const {data: educations, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}educations/user/${id}/`, []);
 
     return (
         <>
