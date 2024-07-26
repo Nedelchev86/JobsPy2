@@ -23,11 +23,11 @@ class AllJobsViewApi(ListAPIView):
 
     def get_queryset(self):
         queryset = Job.objects.filter(is_published=True)
-        query = self.request.GET.get('q')
+        title = self.request.GET.get('title')
         seniority_filter = self.request.GET.get('seniority')
 
-        if query:
-            queryset = queryset.filter(title__icontains=query)
+        if title:
+            queryset = queryset.filter(title__icontains=title)
 
         if seniority_filter:
             queryset = queryset.filter(seniority=seniority_filter)

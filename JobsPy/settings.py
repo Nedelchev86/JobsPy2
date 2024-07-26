@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'JobsPy.jobs',
     'JobsPy.main',
     'JobsPy.notifications',
+    'JobsPy.blog',
     'rest_framework',
 ]
 

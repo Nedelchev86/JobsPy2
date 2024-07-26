@@ -6,6 +6,9 @@ from rest_framework.routers import DefaultRouter
 
 from JobsPy.accounts.views import MyTokenObtainPairView, MyTokenRefreshView, UserRegistrationAPIView, UserProfileView, \
     ChangePasswordView
+from JobsPy.blog.views import BlogPostListView, BlogPostDetailView, BlogPostCreateView, BlogPostUpdateView, \
+    CommentViewSet, CommentListView
+
 from JobsPy.company.views import CompanyUpdateAPIView, CreatedJobsAPIView, CompanyProfileViewSet, CompanyApplicantAPI, \
     ChangeStatusAPI
 from JobsPy.jobs.views import JobsDetailsAPIView, apply_for_job, AddToFavoritesAPIView, RemoveFromFavoritesAPIView, \
@@ -32,6 +35,8 @@ router.register(r'api/companies', CompanyProfileViewSet)
 router.register(r'api/jobseekers', JobSeekerViewSet)
 router.register(r'api/notifications', NotificationViewSet)
 router.register(r'api/notificationjobseekers', NotificationJobSeekerViewSet)
+router.register(r'api/blogs/comments', CommentViewSet)
+# router.register(r'blogposts', BlogPostViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -68,5 +73,11 @@ urlpatterns = [
     path('api/educations/create/', CreateEducationAPI.as_view(), name='create-education'),
     path('api/educations/edit/<int:pk>/', EditEducationAPI.as_view(), name='edit-education'),
     path('api/educations/delete/<int:pk>/', DeleteEducationAPI.as_view(), name='delete-education'),
+    path('api/blogs/', BlogPostListView.as_view(), name='blogpost-list'),
+    path('api/blogs/<int:pk>/', BlogPostDetailView.as_view(), name='blogpost-detail'),
+    path('api/blogs/create/', BlogPostCreateView.as_view(), name='blogpost-create'),
+    path('api/blogs/<int:pk>/edit/', BlogPostUpdateView.as_view(), name='blogpost-edit'),
+    path('api/blogs/<int:post_id>/comments/', CommentListView.as_view(), name='comment-list'),
+
 ]
 
