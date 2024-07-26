@@ -48,11 +48,15 @@ class JobSeekerViewSet(viewsets.ModelViewSet):
     permission_classes = permissions.AllowAny,
     pagination_class = None  # Disable pagination
 
-    def get_queryset(self):
+    def get_queryset(self, location__icontains=None):
         queryset = JobSeeker.objects.filter(activated=True)
-        city = self.request.query_params.get('city', None)
+        city = self.request.GET.get('city', None)
+        seniority_filter = self.request.GET.get('seniority')
+        print(city)
         if city:
-            queryset = queryset.filter(city=city)
+            queryset = queryset.filter(city__icontains=city)
+        if seniority_filter:
+            queryset = queryset.filter(seniority=seniority_filter)
         return queryset
 
 

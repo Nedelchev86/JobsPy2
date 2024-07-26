@@ -7,7 +7,7 @@ from rest_framework.routers import DefaultRouter
 from JobsPy.accounts.views import MyTokenObtainPairView, MyTokenRefreshView, UserRegistrationAPIView, UserProfileView, \
     ChangePasswordView
 from JobsPy.blog.views import BlogPostListView, BlogPostDetailView, BlogPostCreateView, BlogPostUpdateView, \
-    CommentViewSet, CommentListView
+    CommentViewSet, CommentListView, LatestBlogPostsView
 
 from JobsPy.company.views import CompanyUpdateAPIView, CreatedJobsAPIView, CompanyProfileViewSet, CompanyApplicantAPI, \
     ChangeStatusAPI
@@ -78,6 +78,7 @@ urlpatterns = [
     path('api/blogs/create/', BlogPostCreateView.as_view(), name='blogpost-create'),
     path('api/blogs/<int:pk>/edit/', BlogPostUpdateView.as_view(), name='blogpost-edit'),
     path('api/blogs/<int:post_id>/comments/', CommentListView.as_view(), name='comment-list'),
+    path('api/blogs/latest-blog-posts/', LatestBlogPostsView.as_view(), name='latest-blog-posts'),
 
 ]
 
