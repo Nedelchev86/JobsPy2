@@ -16,7 +16,6 @@ const EditEducationModal = ({show, handleClose, educationId, initialData}) => {
         setValue, // use setValue to pre-fill form data
     } = useForm();
 
-    // Use useEffect to populate the form with existing data when the modal is opened
     useEffect(() => {
         if (initialData) {
             setValue("institution", initialData.institution);
@@ -26,24 +25,19 @@ const EditEducationModal = ({show, handleClose, educationId, initialData}) => {
         }
     }, [initialData, setValue, show]);
 
-    // Function to handle form submission
     const onSubmit = async (data) => {
         try {
-            // Create a FormData object for file upload
             const formDataToSend = new FormData();
 
-            // Append each field to FormData
             formDataToSend.append("institution", data.institution);
             formDataToSend.append("description", data.description);
             formDataToSend.append("start_date", data.start_date);
             formDataToSend.append("end_date", data.end_date);
 
-            // Append image if selected
             if (data.image && data.image[0]) {
                 formDataToSend.append("image", data.image[0]);
             }
 
-            // Make a PUT request to your API endpoint
             const response = await fetch(`${import.meta.env.VITE_API_URL}educations/edit/${initialData.id}/`, {
                 method: "PUT",
                 headers: {
@@ -56,10 +50,8 @@ const EditEducationModal = ({show, handleClose, educationId, initialData}) => {
                 const responseData = await response.json();
                 console.log("Education updated successfully:", responseData);
 
-                // Reset form data after successful submission
                 reset();
 
-                // Close the modal
                 handleClose();
             } else {
                 const errorData = await response.json();
