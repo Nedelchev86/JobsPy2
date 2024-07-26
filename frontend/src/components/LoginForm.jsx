@@ -80,32 +80,43 @@ const LoginModal = ({show, handleClose}) => {
     const {
         register,
         watch,
+        reset,
         handleSubmit,
         formState: {errors, isDirty, isValid},
-    } = useForm({mode: "onBlur"});
+    } = useForm({mode: "onChange", delayError: 1000});
 
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-    });
+    // const [formData, setFormData] = useState({
+    //     email: "",
+    //     password: "",
+    // });
+
+    // const resetForm = () => {
+    //     setFormData({
+    //         email: "",
+    //         password: "",
+    //     });
+    // };
+
     const [error, setError] = useState("");
     const {login} = useAuth();
 
-    const handleChange = (e) => {
-        setFormData({...formData, [e.target.name]: e.target.value});
-    };
+    // const handleChange = (e) => {
+    //     setFormData({...formData, [e.target.name]: e.target.value});
+    // };
 
-    const submitForm = async () => {
+    const submitForm = async (data) => {
         // e.preventDefault();
 
         try {
-            await login(formData); // Call login method from AuthContext
-            
+            await login(data); // Call login method from AuthContext
+
             handleClose(); // Close modal after successful login
             setError("");
+            // resetForm();
+            reset();
 
             fetchNotifications();
-            
+
             toast.success("Login successful!", {
                 position: "top-right",
                 autoClose: 5000,
@@ -131,41 +142,54 @@ const LoginModal = ({show, handleClose}) => {
     };
 
     return (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>
-                <Modal.Title>Login</Modal.Title>
+                <Modal.Title>Login to Your Account</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit(submitForm)}>
                     {error && <div className="alert alert-danger">{error}</div>}
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
+                    <Form.Group controlId="formBasicEmail" className="mb-3">
+                        <Form.Label>Email Address</Form.Label>
                         <Form.Control
                             type="email"
                             placeholder="Enter email"
                             name="email"
+                            className={`form-control ${errors.email ? "is-invalid" : ""}`}
                             {...register("email", {
-                                required: true,
+                                required: "Email is required",
                                 pattern: {
                                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                    message: "invalid email address",
+                                    message: "Invalid email address",
                                 },
                             })}
-                            value={formData.email}
-                            onChange={handleChange}
+                            // value={formData.email}
+                            // onChange={handleChange}
                         />
-
-                        {errors?.email?.type === "required" && <div className="alert alert-danger">This field is required</div>}
-                        {errors?.email?.type === "pattern" && <div className="alert alert-danger">{errors.email.message}</div>}
+                        {errors.email && <div className="invalid-feedback">{errors.email.message}</div>}
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group controlId="formBasicPassword" className="mb-3">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" className="form-control" placeholder="Enter your password" {...register("password", {required: true, minLength: 4})} value={formData.password} onChange={handleChange} />
-                        {errors?.password?.type === "required" && <div className="alert alert-danger">This field is required</div>}
-                        {errors?.password?.type === "minLength" && <div className="alert alert-danger">Your password is too short. Min length is 4</div>}
+                        <Form.Control
+                            type="password"
+                            placeholder="Enter your password"
+                            name="password"
+                            className={`form-control ${errors.password ? "is-invalid" : ""}`}
+                            {...register("password", {
+                                required: "Password is required",
+                                minLength: {
+                                    value: 4,
+                                    message: "Password must be at least 4 characters long",
+                                },
+                            })}
+                            // value={formData.password}
+                            // onChange={handleChange}
+                        />
+                        {errors.password && <div className="invalid-feedback">{errors.password.message}</div>}
                     </Form.Group>
-                    <Button variant="primary" type="submit" disabled={!isDirty && !isValid}>
+
+                    <Button variant="primary" type="submit" className="w-100" disabled={!isValid}>
                         Log in
                     </Button>
                 </Form>
