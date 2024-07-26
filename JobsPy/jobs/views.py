@@ -12,6 +12,7 @@ from JobsPy.core.permissions import IsCompanyUser
 from JobsPy.jobs.models import Job, Applicant, FavoriteJob
 from JobsPy.jobs.serializers import JobsDetailSerializer, FavoriteJobSerializer, JobSerializer, ApplicantSerializer, \
     ChangeStatusSerializer
+from JobsPy.main.models import Skills
 
 
 # Create your views here.
@@ -25,12 +26,33 @@ class AllJobsViewApi(ListAPIView):
         queryset = Job.objects.filter(is_published=True)
         title = self.request.GET.get('title')
         seniority_filter = self.request.GET.get('seniority')
+        location_filter = self.request.GET.get('location')
+        job_type_filter = self.request.GET.get('job_type')
+        job_category = self.request.GET.get('category')
+        needed_skills_filter = self.request.GET.getlist('needed_skills')
 
         if title:
             queryset = queryset.filter(title__icontains=title)
 
         if seniority_filter:
             queryset = queryset.filter(seniority=seniority_filter)
+
+        if location_filter:
+            queryset = queryset.filter(location__icontains=location_filter)
+
+        if job_type_filter:
+            queryset = queryset.filter(job_type=job_type_filter)
+
+        if job_category:
+            queryset = queryset.filter(category_id=job_category)
+
+        if needed_skills_filter:
+            # Convert skill names to skill IDs
+            skill_ids = Skills.objects.filter(name__in=needed_skills_filter).values_list('id', flat=True)
+            print(skill_ids)
+
+            # Filter jobs that have all the specified skills
+            queryset = queryset.filter(needed_skills__id__in=skill_ids).distinct()
 
         return queryset
 

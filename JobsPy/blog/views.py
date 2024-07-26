@@ -1,6 +1,7 @@
 # views.py
 
 from rest_framework import generics, permissions, viewsets
+from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
@@ -112,3 +113,7 @@ class CommentListView(generics.ListAPIView):
         return Comment.objects.filter(post_id=post_id)
 
 
+class LatestBlogPostsView(ListAPIView):
+    serializer_class = BlogPostSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = BlogPost.objects.all().order_by('-created_at')[:5]
