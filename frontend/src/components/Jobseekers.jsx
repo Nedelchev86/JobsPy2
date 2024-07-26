@@ -7,7 +7,40 @@ import Loading from "./loading/Loading";
 
 export default function JobseekersList() {
     // const [jobseekers, setJobseekers] = useState([]);
+    const [seniority, setSeniority] = useState(""); // For seniority filter
     const [city, setCity] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [jobseekers, setJobseeker] = useState([]);
+
+    useEffect(() => {
+        setLoading(true);
+        fetch(
+            `${import.meta.env.VITE_API_URL}jobseekers/?${new URLSearchParams({
+                seniority,
+                city,
+            }).toString()}`
+        )
+            .then((response) => response.json())
+            .then((data) => setJobseeker(data));
+        setLoading(false);
+    }, [seniority, city]);
+
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+
+        if (name === "seniority") {
+            setSeniority(value);
+        } else if (name === "city") {
+            setCity(value);
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        setSeniority("");
+        setCity("");
+    };
 
     // useEffect(() => {
     //     const params = new URLSearchParams(window.location.search);
@@ -23,7 +56,7 @@ export default function JobseekersList() {
     //         .then((data) => setJobseekers(data));
     // }, [city]);
 
-    const {data: jobseekers, loading} = useFetch(`${import.meta.env.VITE_API_URL}jobseekers/?city=${city}`, []);
+    // const {data: jobseekers, loading} = useFetch(`${import.meta.env.VITE_API_URL}jobseekers/?city=${city}`, []);
 
     console.log(jobseekers);
 
@@ -78,7 +111,7 @@ export default function JobseekersList() {
                                         ))}
                                     </div>
                                 </div>
-                                <JobSeekersAside />
+                                <JobSeekersAside seniority={seniority} city={city} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
                             </div>
                         </div>
                     </div>

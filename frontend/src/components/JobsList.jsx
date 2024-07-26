@@ -3,30 +3,54 @@ import Breadcrumbs from "./Breadcrumbs";
 import {useEffect, useState, useCallback} from "react";
 import {Slide} from "react-awesome-reveal";
 import Loading from "./loading/Loading";
-import useFetch from "../hooks/useFetch";
-import JobDescriptionAside from "./JobDetailsAside";
+import JobDetailsnAside from "./JobDetailsAside";
 
 export default function JobsList() {
-    // const [jobs, setJobs] = useState([]);
     const apiUrl = import.meta.env.VITE_API_URL;
-    const [url, setUrl] = useState(`${apiUrl}jobs/`);
+    const [title, setTitle] = useState(""); // For job title search
+    const [seniority, setSeniority] = useState(""); // For seniority filter
+    const [location, setLocation] = useState("");
+    const [category, setCategory] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [jobs, setJobs] = useState([]);
 
-    // const handleChangeUtl = (newUrl) => {
-    //     setUrl(newUrl);
-    // };
-    const handleChangeUrl = useCallback((newUrl) => {
-        setUrl(newUrl);
-    }, []);
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+        console.log(name);
+        console.log(value);
+        if (name === "title") {
+            setTitle(value);
+        } else if (name === "seniority") {
+            setSeniority(value);
+        } else if (name === "location") {
+            setLocation(value);
+        } else if (name === "category") {
+            setCategory(value);
+        }
+    };
 
-    const {data: jobs, loading, error, refetch} = useFetch(url, []);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setTitle("");
+        setSeniority("");
+        setLocation("");
+        setCategory("");
+    };
 
-    // useEffect(() => {
-    //     // fetch("http://127.0.0.1:8000/jobs/api/")
-    //     fetch(`${apiUrl}jobs/?title=${city}&seniority=${seniority}`)
-    //         .then((response) => response.json())
-    //         .then((data) => setJobs(data));
-    //     setLoading(false);
-    // }, []);
+    useEffect(() => {
+        setLoading(true);
+        fetch(
+            `${apiUrl}jobs/?${new URLSearchParams({
+                title,
+                seniority,
+                location,
+                category,
+            }).toString()}`
+        )
+            .then((response) => response.json())
+            .then((data) => setJobs(data));
+        setLoading(false);
+    }, [title, seniority, location, category]);
 
     return (
         <>
@@ -85,7 +109,8 @@ export default function JobsList() {
                                 </Slide>
                             </div>
 
-                            <JobDescriptionAside handleChangeUrl={handleChangeUrl} />
+                            {/* <JobDescriptionAside handleChangeUrl={handleChangeUrl} /> */}
+                            <JobDetailsnAside title={title} seniority={seniority} category={category} location={location} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
                         </div>
                     </div>
                 </section>
