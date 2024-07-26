@@ -33,7 +33,7 @@ const Blog = () => {
                                             </div>
                                             <div className="content-body">
                                                 <h4 className="title">
-                                                    <a href="/blog/${blog.id}/">{blog.title}</a>
+                                                    <Link to={`/blog/${blog.id}/`}>{blog.title}</Link>
                                                 </h4>
                                                 <div className="meta-details">
                                                     <ul>
