@@ -1,62 +1,75 @@
 import {Slide} from "react-awesome-reveal";
 import {useState} from "react";
+import {Form, Button, InputGroup, FormControl, Card} from "react-bootstrap";
+import useFetch from "../hooks/useFetch";
+import LastFiveBlogs from "./LastFiveBlogs";
 
-export default function JobDescriptionAside({handleChangeUrl}) {
-    const [title, setTitle] = useState(""); // For job title search
-    const [seniority, setSeniority] = useState(""); // For seniority filter
-    const apiUrl = import.meta.env.VITE_API_URL;
-    const handleInputChange = (e) => {
-        console.log("title");
-        const {name, value} = e.target;
-        if (name === "title") {
-            setTitle(value);
-        } else if (name === "seniority") {
-            setSeniority(value);
-        }
-    };
-
-    // Function to handle form submission
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        handleChangeUrl(`${apiUrl}jobs/?title=${title}&seniority=${seniority}`);
-    };
-
+export default function JobDetailsnAside({title, seniority, location, category, handleInputChange, handleSubmit}) {
     return (
         <aside className="col-lg-4 col-md-12 col-12">
             <Slide direction="right" duration="1000" triggerOnce="true">
                 <div className="sidebar">
-                    <div className="widget search-widget">
-                        <form onSubmit={handleSubmit}>
-                            <input type="text" name="title" placeholder="Search by job title" value={title} onChange={handleInputChange} />
-                            <button type="submit">
-                                <i className="lni lni-search-alt"></i>
-                            </button>
-                        </form>
-                    </div>
+                    {/* <div className="widget search-widget"> */}
+                    <Card className="p-3 shadow-sm">
+                        <Card.Body>
+                            <Form onSubmit={handleSubmit}>
+                                <Form.Group controlId="formTitle" className="mb-3">
+                                    <Form.Label>Search by Title</Form.Label>
+                                    <InputGroup>
+                                        <FormControl type="text" name="title" placeholder="Search by job title" value={title} onChange={handleInputChange} className="form-control" aria-label="Job Title" />
+                                    </InputGroup>
+                                </Form.Group>
 
-                    <div className="widget search-widget">
-                        <form method="GET">
-                            <select style={{maxWidth: "70%"}} className="form-select form-select-sm" name="seniority">
-                                <option value="">All</option>
+                                <Form.Group controlId="formSeniority" className="mb-3">
+                                    <Form.Label>Filter by Seniority</Form.Label>
+                                    <InputGroup>
+                                        <Form.Select name="seniority" value={seniority} onChange={handleInputChange} className="form-control">
+                                            <option value="">All</option>
+                                            <option value="1">Junior</option>
+                                            <option value="2">Mid</option>
+                                            <option value="3">Senior</option>
+                                            <option value="4">Lead</option>
+                                        </Form.Select>
+                                    </InputGroup>
+                                </Form.Group>
+                                <Form.Group controlId="formLocation" className="mb-3">
+                                    <Form.Label>Filter by City</Form.Label>
+                                    <InputGroup>
+                                        <FormControl type="text" name="location" placeholder="Enter city" value={location} onChange={handleInputChange} className="form-control" aria-label="Location" />
+                                    </InputGroup>
+                                </Form.Group>
 
-                                {/* {% for seniority in seniorities %}
-        <option value="{{ seniority.name }}">{{ seniority.name }}</option>
-    {% endfor %} */}
-                            </select>
-                            <div>
-                                <button type="submit">Filter</button>
-                            </div>
-                        </form>
-                    </div>
-                    {/* 
-{% include "jobs/category_slide.html" %} */}
+                                <Form.Group controlId="formJobCategory" className="mb-3">
+                                    <Form.Label>Filter by Job Category</Form.Label>
+                                    <InputGroup>
+                                        <Form.Select name="category" value={category} onChange={handleInputChange} className="form-control">
+                                            <option value="">All Categories</option>
+                                            <option value="1">Software</option>
+                                            <option value="2">Design</option>
+                                            <option value="3">Marketing</option>
+                                            <option value="4">Finance</option>
+                                            {/* Add more categories as needed */}
+                                        </Form.Select>
+                                    </InputGroup>
+                                </Form.Group>
 
-                    <div className="widget popular-feeds">
-                        <h5 className="widget-title">
-                            <span>Latest Blog Posts with DRF</span>
-                        </h5>
-                        <div className="popular-feed-loop"></div>
-                    </div>
+                                {/* <Form.Group controlId="formSkills" className="mb-3">
+                                <Form.Label>Filter by Skills</Form.Label>
+                                <div>
+                                    {skills.map((skill) => (
+                                        <Form.Check key={skill.id} type="checkbox" label={skill.name} value={skill.name} checked={selectedSkills.includes(skill.id)} onChange={handleSkillChange} />
+                                    ))}
+                                </div>
+                            </Form.Group> */}
+                                <Button variant="primary" type="button" onClick={handleSubmit}>
+                                    Clear
+                                </Button>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                    {/* </div> */}
+
+                    <LastFiveBlogs />
 
                     <div className="widget popular-tag-widget">
                         <h5 className="widget-title">
