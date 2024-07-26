@@ -1,14 +1,18 @@
 import React, {useState, useEffect} from "react";
 import Breadcrumbs from "./Breadcrumbs";
+import {Link} from "react-router-dom";
 
 const Blog = () => {
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
         // Fetch blogs from your API
-        fetch(`${import.meta.env.VITE_API_URL}blog/`)
+        fetch(`${import.meta.env.VITE_API_URL}blogs/`)
             .then((response) => response.json())
-            .then((data) => setBlogs(data.results))
+            .then((data) => {
+                setBlogs(data);
+                console.log(data);
+            })
             .catch((error) => console.error("Error fetching blogs:", error));
     }, []);
 
@@ -55,9 +59,9 @@ const Blog = () => {
                                                     <p>{blog.description}</p>
                                                 </div>
                                                 <div className="button">
-                                                    <a href="/blog/${blog.id}/" className="btn">
+                                                    <Link to={`/blogs/${blog.id}/`} className="btn">
                                                         Read More
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>
