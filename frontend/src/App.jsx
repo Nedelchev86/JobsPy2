@@ -28,6 +28,7 @@ import ApplicantsForJob from "./components/ApplicantsForJob";
 import EditJob from "./components/EditJob";
 import JobsApplyed from "./components/JobseekerApplyedJobs";
 import {JobProvider} from "./contexts/JobContext";
+import BlogDetails from "./components/BlogDetails";
 
 function App() {
     return (
@@ -36,7 +37,8 @@ function App() {
                 <Header />
                 <Routes>
                     <Route path="/" element={<Index />} />
-                    <Route path="blog" element={<Blog />} />
+                    <Route path="blogs" element={<Blog />} />
+                    <Route path="blogs/:id" element={<BlogDetails />} />
                     {/* <Route path="companies" element={<CompanyList />} /> */}
                     <Route path="companies">
                         <Route index element={<CompanyList />} />
