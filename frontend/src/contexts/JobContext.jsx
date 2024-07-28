@@ -9,22 +9,46 @@ export const JobProvider = ({children}) => {
     const [applicants, setApplicants] = useState([]);
     const [notifications, setNotifications] = useState([]);
     const {isAuthenticated, auth, user} = useAuth();
+
+    console.log(user);
+    console.log(isAuthenticated);
     const fetchNotifications = async () => {
         if (!auth) {
             console.log("fetch return");
             return;
         }
-        try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}notifications/`, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${auth}`,
-                },
-            });
-            const data = await response.json();
-            setNotifications(data.filter((notification) => notification.is_read === false));
-        } catch (error) {
-            console.error("Failed to fetch notifications:", error);
+
+        if (!user) {
+            console.log("fetch return");
+            return;
+        }
+        if (user.user_type === "company") {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}notifications/`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${auth}`,
+                    },
+                });
+                const data = await response.json();
+                setNotifications(data.filter((notification) => notification.is_read === false));
+            } catch (error) {
+                console.error("Failed to fetch notifications:", error);
+            }
+        }
+        if (user.user_type === "jobseeker") {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}notificationjobseekers/`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${auth}`,
+                    },
+                });
+                const data = await response.json();
+                setNotifications(data.filter((notification) => notification.is_read === false));
+            } catch (error) {
+                console.error("Failed to fetch notifications:", error);
+            }
         }
     };
 
@@ -78,17 +102,17 @@ export const JobProvider = ({children}) => {
             });
     };
 
-    useEffect(() => {
-        fetchApplicants();
-    }, [user]);
+    // useEffect(() => {
+    //     fetchApplicants();
+    // }, [user]);
 
-    useEffect(() => {
-        fetchJobs();
-    }, [user]);
+    // useEffect(() => {
+    //     fetchJobs();
+    // }, [user]);
 
-    useEffect(() => {
-        fetchNotifications();
-    }, [user]);
+    // useEffect(() => {
+    //     fetchNotifications();
+    // }, [user]);
 
     useEffect(() => {
         if (auth) {
