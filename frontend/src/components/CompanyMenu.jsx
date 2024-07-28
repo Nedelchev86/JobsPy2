@@ -5,7 +5,7 @@ import {useState, useEffect} from "react";
 import {useJobs} from "../contexts/JobContext";
 
 export default function CompanyMenu() {
-    const {user, auth} = useAuth();
+    const {user, auth, logout} = useAuth();
 
     const {fetchJobs, fetchApplicants, jobs, applicants, notifications, fetchNotifications} = useJobs();
 
@@ -88,7 +88,7 @@ export default function CompanyMenu() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink activeclassname="active" to={"logout"}>
+                        <NavLink to={"/"} activeclassname="active" onClick={logout}>
                             <i className="lni lni-upload"></i> Sign Out
                         </NavLink>
                     </li>
