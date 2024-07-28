@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from rest_framework import generics, permissions, status
 from rest_framework.decorators import api_view
+from rest_framework.exceptions import NotFound
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -9,9 +10,9 @@ from rest_framework.views import APIView
 
 from JobsPy.core.decorators import job_seeker_activated_required
 from JobsPy.core.permissions import IsCompanyUser
-from JobsPy.jobs.models import Job, Applicant, FavoriteJob
+from JobsPy.jobs.models import Job, Applicant, FavoriteJob, Category
 from JobsPy.jobs.serializers import JobsDetailSerializer, FavoriteJobSerializer, JobSerializer, ApplicantSerializer, \
-    ChangeStatusSerializer
+    ChangeStatusSerializer, CategorySerializer, CategorySerializerWithJobs
 from JobsPy.main.models import Skills
 
 
@@ -174,3 +175,29 @@ class ChangeStatusAPIView(generics.UpdateAPIView):
 
     def get_success_url(self):
         return reverse_lazy("applicant_list", kwargs={"pk": self.object.job_id})
+
+
+class JobsByCategoryView(ListAPIView):
+    serializer_class = CategorySerializerWithJobs
+    permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        category_id = self.kwargs.get('id')
+
+        if not category_id:
+            raise NotFound(detail="Category ID not provided")
+
+        queryset = Job.objects.filter(
+            category_id=category_id,
+            is_published=True
+        )
+
+        if not queryset.exists():
+            raise NotFound(detail="No jobs found for this category")
+
+        return queryset
+
+class CategoryListView(ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.AllowAny]

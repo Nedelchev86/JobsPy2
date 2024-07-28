@@ -1,6 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404
 from django.shortcuts import render
 from rest_framework import generics, viewsets, permissions, status
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -89,3 +91,25 @@ class ChangeStatusAPI( RetrieveUpdateAPIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ChangeApplicantStatus(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self, pk):
+        try:
+            return Applicant.objects.get(pk=pk)
+        except Applicant.DoesNotExist:
+            raise Http404
+
+    def put(self, request, pk, format=None):
+        applicant = self.get_object(pk)
+
+        # Check if the requesting user is a company user and is the owner of the job
+        if request.user.role != 'company' or request.user.pk != applicant.job.user.pk:
+            raise PermissionDenied("You do not have permission to change the status of this applicant.")
+
+        serializer = ApplicantSerializer(applicant, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)

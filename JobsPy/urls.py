@@ -10,13 +10,14 @@ from JobsPy.blog.views import BlogPostListView, BlogPostDetailView, BlogPostCrea
     CommentViewSet, CommentListView, LatestBlogPostsView
 
 from JobsPy.company.views import CompanyUpdateAPIView, CreatedJobsAPIView, CompanyProfileViewSet, CompanyApplicantAPI, \
-    ChangeStatusAPI
+    ChangeStatusAPI, ChangeApplicantStatus
 from JobsPy.jobs.views import JobsDetailsAPIView, apply_for_job, AddToFavoritesAPIView, RemoveFromFavoritesAPIView, \
-    DeleteJobView, JobCreateAPIView, JobUpdateAPIView, ApplicantListAPIView, AllJobsViewApi, ChangeStatusAPIView
+    DeleteJobView, JobCreateAPIView, JobUpdateAPIView, ApplicantListAPIView, AllJobsViewApi, ChangeStatusAPIView, \
+    JobsByCategoryView, CategoryListView
 from JobsPy.jobseekers.views import JobSeekerUpdateAPIView, FavoriteJobsListAPIView, check_favorite_status, \
     JobSeekerViewSet, job_applicants, ApplyedJobsAPIView, UserEducationListAPI, CreateEducationAPI, EditEducationAPI, \
     DeleteEducationAPI
-from JobsPy.main.views import SkillsListAPIView
+from JobsPy.main.views import SkillsListAPIView, SeniorityListView
 from JobsPy.notifications.views import NotificationViewSet, NotificationJobSeekerViewSet
 
 # urlpatterns = [
@@ -55,12 +56,16 @@ urlpatterns = [
     path('api/jobs/<int:pk>/favorite/remove/', RemoveFromFavoritesAPIView.as_view(), name='remove_from_favorites'),
     path('api/jobs/<int:pk>/favorite/check/', check_favorite_status, name='check_favorite_status'),
     path('api/jobs/<int:pk>/delete/', DeleteJobView.as_view(), name='delete-job'),
+    path('api/jobs/category/<int:id>/', JobsByCategoryView.as_view(), name='jobs-by-category'),
+    path('api/jobs/categories/', CategoryListView.as_view(), name='category-list'),
     path('api/skills/', SkillsListAPIView.as_view(), name='skills-list'),
+    path('api/seniorities/', SeniorityListView.as_view(), name='seniority-list'),
     path('api/user/company/update/', CompanyUpdateAPIView.as_view(), name='company-update'),
     path('api/jobs/create/', JobCreateAPIView.as_view(), name='job-create'),
     path('api/jobs/update/<int:pk>', JobUpdateAPIView.as_view(), name='job-create'),
     path('api/jobs/<int:pk>/applicants/', ApplicantListAPIView.as_view(), name='applicant-list-api'),
     path('api/company/applicants/', CompanyApplicantAPI.as_view(), name='company-applicants-api'),
+    path('api/company/applicants/<int:pk>/change-status/', ChangeApplicantStatus.as_view(), name='change_applicant_status'),
     path('api/company/change-status/<int:pk>/', ChangeStatusAPI.as_view(), name='change-status'),
     path('api/created-jobs/', CreatedJobsAPIView.as_view(), name='created-jobs-api'),
     path('api/user/change-password/', ChangePasswordView.as_view(), name='change-password-api'),
