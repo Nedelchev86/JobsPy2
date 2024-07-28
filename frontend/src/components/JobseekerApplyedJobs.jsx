@@ -8,6 +8,12 @@ export default function JobsApplyed() {
     const [applyedJobs, setapplyedJobs] = useState([]);
     const {user, auth} = useAuth();
 
+    const statusClass = {
+        Pending: "pending",
+        Accepted: "apply",
+        Rejected: "rejected",
+    };
+
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_URL}job_seekers/apply_jobs/`, {
             method: "GET",
@@ -40,9 +46,7 @@ export default function JobsApplyed() {
                         </div>
                         <div className="col-lg-2 col-md-2 col-12">
                             <p>
-                                <span className="time">
-                                    <i className="lni lni-coin"></i> {obj.status}
-                                </span>
+                                <span className={`time ${statusClass[obj.status]}`}>{obj.status}</span>
                             </p>
                         </div>
                         <div className="col-lg-3 col-md-3 col-12">
