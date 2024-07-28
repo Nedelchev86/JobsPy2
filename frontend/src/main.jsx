@@ -5,6 +5,7 @@ import {AuthProvider} from "./contexts/Contexts.jsx";
 import {JobProvider} from "./contexts/JobContext";
 import App from "./App.jsx";
 
+
 ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
         <AuthProvider>

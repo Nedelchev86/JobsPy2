@@ -98,31 +98,59 @@ export const AuthProvider = ({children}) => {
     //     }
     // }, [auth]);
 
+    // const fetchUserData = async () => {
+    //     if (auth) {
+    //         try {
+    //             const response = await fetch(`${import.meta.env.VITE_API_URL}user/`, {
+    //                 headers: {
+    //                     Authorization: `Bearer ${auth}`,
+    //                 },
+    //             });
+
+    //             if (!response.ok) {
+    //                 localStorage.removeItem("access_token");
+    //                 localStorage.removeItem("refresh_token");
+    //                 setAuth("");
+    //                 throw new Error("Failed to fetch user data");
+    //             }
+    //             const data = await response.json();
+
+    //             setUser(data);
+    //         } catch (error) {
+    //             localStorage.removeItem("access_token");
+    //             localStorage.removeItem("refresh_token");
+    //             setAuth("");
+    //             setisAuthenticated(false);
+    //             console.error("Failed to fetch user data:", error.message);
+    //         }
+    //     }
+    // };
+
     const fetchUserData = async () => {
-        if (auth) {
-            try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL}user/`, {
-                    headers: {
-                        Authorization: `Bearer ${auth}`,
-                    },
-                });
+        if (!auth) return;
 
-                if (!response.ok) {
-                    localStorage.removeItem("access_token");
-                    localStorage.removeItem("refresh_token");
-                    setAuth("");
-                    throw new Error("Failed to fetch user data");
-                }
-                const data = await response.json();
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}user/`, {
+                headers: {
+                    Authorization: `Bearer ${auth}`,
+                },
+            });
 
-                setUser(data);
-            } catch (error) {
+            if (!response.ok) {
                 localStorage.removeItem("access_token");
                 localStorage.removeItem("refresh_token");
                 setAuth("");
-                setisAuthenticated(false);
-                console.error("Failed to fetch user data:", error.message);
+                throw new Error("Failed to fetch user data");
             }
+
+            const data = await response.json();
+            setUser(data);
+        } catch (error) {
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("refresh_token");
+            setAuth("");
+            setisAuthenticated(false);
+            console.error("Failed to fetch user data:", error.message);
         }
     };
 
