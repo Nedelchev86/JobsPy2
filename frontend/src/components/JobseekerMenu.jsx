@@ -9,6 +9,8 @@ export default function JobSeekerMenu() {
     const {user, auth} = useAuth();
     const {notifications} = useJobs();
 
+    const {logout} = useAuth();
+
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_URL}user/jobseeker/favorites/`, {
             method: "GET",
@@ -78,7 +80,7 @@ export default function JobSeekerMenu() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink activeclassname="active" to="/">
+                        <NavLink activeclassname="active" to="/" onClick={logout}>
                             <i className="lni lni-upload"></i> Sign Out
                         </NavLink>
                     </li>
