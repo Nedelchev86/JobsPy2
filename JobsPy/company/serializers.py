@@ -39,7 +39,9 @@ class JobWithApplicantsCountSerializer(serializers.ModelSerializer):
 
 
 class ApplicantSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Applicant
-        fields = ['id', 'user', 'job', 'created_at', 'comment', 'status']
+        fields = ['id', 'user', 'job', 'created_at', 'comment', 'status', ]
         read_only_fields = ['id', 'user', 'job', 'created_at']
+

@@ -5,7 +5,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.validators import UniqueValidator
 
 from JobsPy.company.models import CompanyProfile
-from JobsPy.jobs.models import FavoriteJob, Job, Applicant
+from JobsPy.jobs.models import FavoriteJob, Job, Applicant, Category
 from JobsPy.jobseekers.serializers import JobSeekerSerializer
 from JobsPy.main.models import Skills
 
@@ -59,3 +59,16 @@ class ChangeStatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Applicant
         fields = ['status']  # Include any fields you need to update
+
+
+class CategorySerializerWithJobs(serializers.ModelSerializer):
+    jobs = JobSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Category
+        fields = ['id',  'jobs']
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'description', 'slug',]

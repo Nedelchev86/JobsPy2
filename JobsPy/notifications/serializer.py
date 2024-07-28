@@ -13,7 +13,7 @@ class NotificationSerializerJob(serializers.ModelSerializer):
 
     class Meta:
         model = Job
-        fields = ['title', "pk"]
+        fields = ['title', "pk", "job_image"]
 
 
 class NotificationSerializerJobSeeker(serializers.ModelSerializer):
