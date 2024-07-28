@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import {Link} from "react-router-dom";
+import {formatDate} from "../utils/formatDate";
 
 const Blog = () => {
     const [blogs, setBlogs] = useState([]);
@@ -44,7 +45,7 @@ const Blog = () => {
                                                         </li>
                                                         <li>
                                                             <a href="#">
-                                                                <i className="lni lni-calendar"></i> {blog.created_at.split("T")[0]}
+                                                                <i className="lni lni-calendar"></i> {formatDate(blog.created_at)}
                                                             </a>
                                                         </li>
                                                         <li>
