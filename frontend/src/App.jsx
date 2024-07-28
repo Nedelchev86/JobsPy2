@@ -29,6 +29,9 @@ import EditJob from "./components/EditJob";
 import JobsApplyed from "./components/JobseekerApplyedJobs";
 import {JobProvider} from "./contexts/JobContext";
 import BlogDetails from "./components/BlogDetails";
+import PageNotFound from "./components/PageNotFound";
+import Notifications from "./components/Notifications";
+import ScrollToTop from "./components/ScrolToTop"; // Import ScrollToTop
 
 function App() {
     return (
@@ -48,6 +51,7 @@ function App() {
                     <Route path="jobseekers" element={<JobseekersList />} />
                     <Route path="jobseekers/:id" element={<JobSeekerDetails />} />
                     <Route path="jobs" element={<JobsList />} />
+                    {/* <Route path="jobs/category/:id" element={<JobsByCategory />} /> */}
                     <Route path="signup" element={<RegisterForm />} />
                     <Route path="login" element={<LoginForm />} />
                     {/* <Route path="dashboard" element={<Dashboard />} /> */}
@@ -64,12 +68,14 @@ function App() {
                         <Route path="applicants" element={<ApplicantsList />} />
                         <Route path="applicants/jobs/:id" element={<ApplicantsForJob />} />
                         <Route path="created-jobs" element={<CreatedJobs />} />
-                        <Route path="notifications" element={<CompanyNotifications />} />
+                        <Route path="notifications" element={<Notifications />} />
                         <Route path="change-password" element={<ChangePassword />} />
                     </Route>
+                    <Route path="*" element={<PageNotFound />} />
                 </Routes>
                 <Footer />
             </JobProvider>
+            <ScrollToTop />
         </AuthProvider>
     );
 }
