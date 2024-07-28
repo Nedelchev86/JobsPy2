@@ -1,4 +1,4 @@
-import {Link, Outlet} from "react-router-dom";
+import {Link, useSearchParams} from "react-router-dom";
 import Breadcrumbs from "./Breadcrumbs";
 import {useEffect, useState, useCallback} from "react";
 import {Slide} from "react-awesome-reveal";
@@ -13,6 +13,7 @@ export default function JobsList() {
     const [category, setCategory] = useState("");
     const [loading, setLoading] = useState(true);
     const [jobs, setJobs] = useState([]);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -35,22 +36,24 @@ export default function JobsList() {
         setSeniority("");
         setLocation("");
         setCategory("");
+        searchParams.delete("category");
     };
 
     useEffect(() => {
         setLoading(true);
+        const categoryParam = searchParams.get("category");
         fetch(
             `${apiUrl}jobs/?${new URLSearchParams({
                 title,
                 seniority,
                 location,
-                category,
+                category: categoryParam || category,
             }).toString()}`
         )
             .then((response) => response.json())
             .then((data) => setJobs(data));
         setLoading(false);
-    }, [title, seniority, location, category]);
+    }, [title, seniority, location, category, searchParams]);
 
     return (
         <>
