@@ -3,8 +3,11 @@ import {useState} from "react";
 import {Form, Button, InputGroup, FormControl, Card} from "react-bootstrap";
 import useFetch from "../hooks/useFetch";
 import LastFiveBlogs from "./LastFiveBlogs";
+import JobsCategory from "./JobsCategory";
 
 export default function JobDetailsnAside({title, seniority, location, category, handleInputChange, handleSubmit}) {
+    const {data: seniorityList, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}seniorities/`, []);
+
     return (
         <aside className="col-lg-4 col-md-12 col-12">
             <Slide direction="right" duration="1000" triggerOnce="true">
@@ -25,10 +28,11 @@ export default function JobDetailsnAside({title, seniority, location, category, 
                                     <InputGroup>
                                         <Form.Select name="seniority" value={seniority} onChange={handleInputChange} className="form-control">
                                             <option value="">All</option>
-                                            <option value="1">Junior</option>
-                                            <option value="2">Mid</option>
-                                            <option value="3">Senior</option>
-                                            <option value="4">Lead</option>
+                                            {seniorityList.map((s) => (
+                                                <option key={s.id} value={s.id}>
+                                                    {s.name}
+                                                </option>
+                                            ))}
                                         </Form.Select>
                                     </InputGroup>
                                 </Form.Group>
@@ -39,7 +43,7 @@ export default function JobDetailsnAside({title, seniority, location, category, 
                                     </InputGroup>
                                 </Form.Group>
 
-                                <Form.Group controlId="formJobCategory" className="mb-3">
+                                {/* <Form.Group controlId="formJobCategory" className="mb-3">
                                     <Form.Label>Filter by Job Category</Form.Label>
                                     <InputGroup>
                                         <Form.Select name="category" value={category} onChange={handleInputChange} className="form-control">
@@ -48,19 +52,18 @@ export default function JobDetailsnAside({title, seniority, location, category, 
                                             <option value="2">Design</option>
                                             <option value="3">Marketing</option>
                                             <option value="4">Finance</option>
-                                            {/* Add more categories as needed */}
                                         </Form.Select>
                                     </InputGroup>
-                                </Form.Group>
+                                </Form.Group> */}
 
                                 {/* <Form.Group controlId="formSkills" className="mb-3">
-                                <Form.Label>Filter by Skills</Form.Label>
-                                <div>
-                                    {skills.map((skill) => (
-                                        <Form.Check key={skill.id} type="checkbox" label={skill.name} value={skill.name} checked={selectedSkills.includes(skill.id)} onChange={handleSkillChange} />
-                                    ))}
-                                </div>
-                            </Form.Group> */}
+                                    <Form.Label>Filter by Skills</Form.Label>
+                                    <div>
+                                        {skills.map((skill) => (
+                                            <Form.Check key={skill.id} type="checkbox" label={skill.name} value={skill.name} checked={selectedSkills.includes(skill.id)} onChange={handleSkillChange} />
+                                        ))}
+                                    </div>
+                                </Form.Group> */}
                                 <Button variant="primary" type="button" onClick={handleSubmit}>
                                     Clear
                                 </Button>
@@ -68,7 +71,7 @@ export default function JobDetailsnAside({title, seniority, location, category, 
                         </Card.Body>
                     </Card>
                     {/* </div> */}
-
+                    <JobsCategory category={category} handleInputChange={handleInputChange} />
                     <LastFiveBlogs />
 
                     <div className="widget popular-tag-widget">

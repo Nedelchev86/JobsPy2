@@ -5,6 +5,7 @@ import {useAuth} from "../contexts/Contexts";
 import LoginForm from "./LoginForm";
 import styles from "./JobDetails.module.css";
 import Loading from "./loading/Loading";
+import {formatDate} from "../utils/formatDate";
 
 export default function JobDetails() {
     const [job, setJob] = useState({});
@@ -259,7 +260,7 @@ export default function JobDetails() {
                                             <h6 className="title">Job Overview</h6>
                                             <ul className="job-overview list-unstyled">
                                                 <li>
-                                                    <strong>Published on:</strong> {job.created_at}
+                                                    <strong>Published on:</strong> {formatDate(job.created_at)}
                                                 </li>
 
                                                 <li>
