@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useAuth} from "../contexts/Contexts";
 import {useJobs} from "../contexts/JobContext";
 import {Link} from "react-router-dom";
+import {formatDate} from "../utils/formatDate";
 
 const NotificationComponent = ({notification}) => {
     const {fetchNotifications} = useJobs();
@@ -35,9 +36,7 @@ const NotificationComponent = ({notification}) => {
             <div className="row align-items-center justify-content-center">
                 <div className="col-lg-2 col-md-2 col-12">
                     <div className="title-img">
-                        <div className="can-img">
-                            <img src={`https://res.cloudinary.com/drjgddl0y/${notification.job_seeker.profile_picture}`} alt="#" />
-                        </div>
+                        <div className="can-img">{notification.job_seeker.profile_picture ? <img src={`https://res.cloudinary.com/drjgddl0y/${notification.job_seeker.profile_picture}`} alt="#" /> : <img src="/images/clients/default_profile.png" alt="#" />}</div>
                     </div>
                 </div>
                 <div className="col-lg-7 col-md-7 ">
@@ -48,11 +47,7 @@ const NotificationComponent = ({notification}) => {
                 </div>
                 <div className="col-lg-2 col-md-3">
                     <div className="time">
-                        <p style={{textAlign: "center"}}>
-                            <i className="lni lni-timer"></i> {notification.created_at.split("T")[0]}
-                            <br />
-                            {notification.created_at.split("T")[1].split(".")[0]}
-                        </p>
+                        <p style={{textAlign: "center"}}>{formatDate(notification.created_at)}</p>
                     </div>
                 </div>
                 <div className="col-lg-1 col-md-2">
