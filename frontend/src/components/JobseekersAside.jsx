@@ -1,10 +1,12 @@
 import {Slide} from "react-awesome-reveal";
 import {useState} from "react";
 import {Form, Button, InputGroup, FormControl, Card} from "react-bootstrap";
+import useFetch from "../hooks/useFetch";
 
 import LastFiveBlogs from "./LastFiveBlogs";
 
 export default function JobDetailsnAside({seniority, city, handleInputChange, handleSubmit}) {
+    const {data: seniorityList, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}seniorities/`, []);
     return (
         <aside className="col-lg-4 col-md-12 col-12">
             <Slide direction="right" duration="1000" triggerOnce="true">
@@ -25,10 +27,11 @@ export default function JobDetailsnAside({seniority, city, handleInputChange, ha
                                     <InputGroup>
                                         <Form.Select name="seniority" value={seniority} onChange={handleInputChange} className="form-control">
                                             <option value="">All</option>
-                                            <option value="1">Junior</option>
-                                            <option value="2">Mid</option>
-                                            <option value="3">Senior</option>
-                                            <option value="4">Lead</option>
+                                            {seniorityList.map((s) => (
+                                                <option key={s.id} value={s.id}>
+                                                    {s.name}
+                                                </option>
+                                            ))}
                                         </Form.Select>
                                     </InputGroup>
                                 </Form.Group>
