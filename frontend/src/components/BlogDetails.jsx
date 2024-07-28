@@ -4,6 +4,7 @@ import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import AddCommentForm from "./PostComment";
 import CommentList from "./CommentList";
+import {formatDate} from "../utils/formatDate";
 
 export default function BlogDetails() {
     const [blog, setBlog] = useState({});
@@ -41,7 +42,7 @@ export default function BlogDetails() {
                                             <li>
                                                 <a href="#">
                                                     <i className="lni lni-calendar"></i>
-                                                    {blog.created_at}
+                                                    {formatDate(blog.created_at)}
                                                 </a>
                                             </li>
                                             <li>
