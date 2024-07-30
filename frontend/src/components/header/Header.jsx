@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useAuth} from "../../contexts/Contexts";
-import LoginForm from "../LoginForm";
+import LoginModal from "../loginModal/LoginModal";
 import {Link, NavLink} from "react-router-dom";
 import {useJobs} from "../../contexts/JobContext";
 
@@ -98,9 +98,9 @@ const Header = () => {
                                             </NavLink>
                                         </li>
                                         <li className="nav-item">
-                                            <a href="#" className="">
+                                            <NavLink to="contact-us" activeclassname="active" className="nav-Navlink">
                                                 Contact
-                                            </a>
+                                            </NavLink>
                                         </li>
                                         {isAuthenticated && (
                                             <li className="nav-item">
@@ -190,7 +190,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            <LoginForm show={showModal} handleClose={handleCloseModal} />
+            <LoginModal show={showModal} handleClose={handleCloseModal} />
         </header>
     );
 };

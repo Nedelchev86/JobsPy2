@@ -43,7 +43,7 @@ export default function CompanyList() {
 
                                             <div className="bottom-side">
                                                 <span className="available-job2">Jobs</span>
-                                                {/* <span className="available-job">{company.user.job_set.all | length}</span> */}
+                                                <span className="available-job">{company.job_count}</span>
                                                 <h3>{company.name}</h3>
                                             </div>
                                         </Link>
