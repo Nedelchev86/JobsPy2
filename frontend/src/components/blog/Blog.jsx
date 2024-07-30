@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import Breadcrumbs from "./Breadcrumbs";
+import Breadcrumbs from "../Breadcrumbs";
 import {Link} from "react-router-dom";
-import {formatDate} from "../utils/formatDate";
+import {formatDate} from "../../utils/formatDate";
 
 const Blog = () => {
     const [blogs, setBlogs] = useState([]);
