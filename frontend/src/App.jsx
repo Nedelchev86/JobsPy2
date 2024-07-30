@@ -3,14 +3,14 @@ import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Index from "./components/Index";
-import Blog from "./components/Blog";
+import Blog from "./components/blog/Blog";
 import CompanyList from "./components/CompanyList";
 import JobseekersList from "./components/Jobseekers";
 import JobSeekerDetails from "./components/JobSeekerDetails";
 import JobsList from "./components/JobsList";
 import CompanyDetails from "./components/CompanyDetails";
-import RegisterForm from "./components/RegisterForm";
-import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/register/RegisterForm";
+import LoginModal from "./components/loginModal/LoginModal";
 import {AuthProvider} from "./contexts/Contexts"; // Import AuthProvider
 import Dashboard from "./components/Dashboard";
 import JobDetails from "./components/JobDetails";
@@ -31,6 +31,7 @@ import {JobProvider} from "./contexts/JobContext";
 import BlogDetails from "./components/BlogDetails";
 import PageNotFound from "./components/PageNotFound";
 import Notifications from "./components/Notifications";
+import ContactUs from "./components/contacsUs/ContactUs";
 import ScrollToTop from "./components/ScrolToTop"; // Import ScrollToTop
 
 function App() {
@@ -42,18 +43,14 @@ function App() {
                     <Route path="/" element={<Index />} />
                     <Route path="blogs" element={<Blog />} />
                     <Route path="blogs/:id" element={<BlogDetails />} />
-                    {/* <Route path="companies" element={<CompanyList />} /> */}
-                    <Route path="companies">
-                        <Route index element={<CompanyList />} />
-                        <Route path=":id" element={<CompanyDetails />} />
-                    </Route>
+                    <Route path="companies" element={<CompanyList />} />
                     <Route path="companies/:id" element={<CompanyDetails />} />
                     <Route path="jobseekers" element={<JobseekersList />} />
                     <Route path="jobseekers/:id" element={<JobSeekerDetails />} />
                     <Route path="jobs" element={<JobsList />} />
                     {/* <Route path="jobs/category/:id" element={<JobsByCategory />} /> */}
                     <Route path="signup" element={<RegisterForm />} />
-                    <Route path="login" element={<LoginForm />} />
+                    <Route path="login" element={<LoginModal />} />
                     {/* <Route path="dashboard" element={<Dashboard />} /> */}
                     {/* <Route path="/bookmarked" element={<JobsFavoriteList />} /> */}
                     {/* <Route path="/profile/edit" element={<EditProfile />} /> */}
@@ -71,6 +68,7 @@ function App() {
                         <Route path="notifications" element={<Notifications />} />
                         <Route path="change-password" element={<ChangePassword />} />
                     </Route>
+                    <Route path="contact-us" element={<ContactUs />} />
                     <Route path="*" element={<PageNotFound />} />
                 </Routes>
                 <Footer />
