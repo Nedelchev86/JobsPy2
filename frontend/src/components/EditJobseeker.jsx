@@ -26,7 +26,7 @@ export default function EditJobseeker() {
         seniority: "",
         marital_status: "",
         skills: [],
-        profile_picture: null,
+        profile_picture: "",
         user: "",
     });
     console.log(profile);
@@ -93,9 +93,9 @@ export default function EditJobseeker() {
         const formData = new FormData();
 
         const addFormData = (key, value) => {
-            // if (value !== "" && value !== null && value !== undefined) {
-            formData.append(key, value);
-            // }
+            if (value !== null && value !== undefined) {
+                formData.append(key, value);
+            }
         };
 
         addFormData("profile_picture", profile.profile_picture);
@@ -202,37 +202,37 @@ export default function EditJobseeker() {
 
                                                 <div className="form-group">
                                                     <label htmlFor="id_seniority">Seniority:</label>
-                                                    <select name="seniority" className="form-control" id="id_seniority" value={profile.seniority} maxLength="50" onChange={handleChange}>
+                                                    <select name="seniority" className="form-control" id="id_seniority" value={profile.seniority || ""} maxLength="50" onChange={handleChange}>
                                                         <option value="">---------</option>
 
-                                                        <option value="1">Junior / Intern</option>
+                                                        <option value="Junior / Intern">Junior / Intern</option>
 
-                                                        <option value="2">1-2 year&#x27;s experience</option>
+                                                        <option value="1-2 year&#x27;s experience">1-2 year&#x27;s experience</option>
 
-                                                        <option value="3">2-5 year&#x27;s experience</option>
+                                                        <option value="2-5 year&#x27;s experience">2-5 year&#x27;s experience</option>
 
-                                                        <option value="4">5+ year&#x27;s experience</option>
+                                                        <option value="5+ year&#x27;s experience">5+ year&#x27;s experience</option>
                                                     </select>
                                                 </div>
 
                                                 <div className="form-group">
                                                     <label htmlFor="id_website">Website:</label>
-                                                    <input type="url" name="website" value={profile.website} onChange={handleChange} maxLength="70" className="form-control" id="id_website" />
+                                                    <input type="url" name="website" value={profile.website || ""} onChange={handleChange} maxLength="70" className="form-control" id="id_website" />
                                                 </div>
 
                                                 <div className="form-group">
                                                     <label htmlFor="id_linkedin">Linkedin:</label>
-                                                    <input type="url" value={profile.linkedin} onChange={handleChange} name="linkedin" maxLength="50" className="form-control" id="id_linkedin" />
+                                                    <input type="url" value={profile.linkedin || ""} onChange={handleChange} name="linkedin" maxLength="50" className="form-control" id="id_linkedin" />
                                                 </div>
 
                                                 <div className="form-group">
                                                     <label htmlFor="id_facebook">Facebook:</label>
-                                                    <input type="url" name="facebook" maxLength="50" value={profile.facebook} onChange={handleChange} className="form-control" id="id_facebook" />
+                                                    <input type="url" name="facebook" maxLength="50" value={profile.facebook || ""} onChange={handleChange} className="form-control" id="id_facebook" />
                                                 </div>
 
                                                 <div className="form-group">
                                                     <label htmlFor="id_github">Github:</label>
-                                                    <input type="url" name="github" maxLength="50" value={profile.github} onChange={handleChange} className="form-control" id="id_github" />
+                                                    <input type="url" name="github" maxLength="50" value={profile.github || ""} onChange={handleChange} className="form-control" id="id_github" />
                                                 </div>
 
                                                 <div className="form-group">
@@ -262,7 +262,7 @@ export default function EditJobseeker() {
 
                                                 <div className="form-group">
                                                     <label htmlFor="id_phone_number">Phone number:</label>
-                                                    <input type="text" name="phone_number" maxLength="50" className="form-control" id="id_phone_number" value={profile.phone_number} onChange={handleChange} />
+                                                    <input type="text" name="phone_number" maxLength="50" className="form-control" id="id_phone_number" value={profile.phone_number || ""} onChange={handleChange} />
                                                 </div>
 
                                                 <div className="form-group">

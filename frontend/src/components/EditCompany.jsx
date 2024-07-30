@@ -24,7 +24,7 @@ export default function EditCompany() {
         employees: 0,
         foundation_year: 0,
         skills: [],
-        image: null,
+        image: "",
     });
 
     useEffect(() => {
@@ -88,9 +88,9 @@ export default function EditCompany() {
         const formData = new FormData();
 
         const addFormData = (key, value) => {
-            // if (value !== "" && value !== null && value !== undefined) {
-            formData.append(key, value);
-            // }
+            if (value !== null && value !== undefined) {
+                formData.append(key, value);
+            }
         };
 
         addFormData("image", company.image);
@@ -119,6 +119,8 @@ export default function EditCompany() {
             .then((response) => response.json().then((data) => ({status: response.status, body: data})))
             .then(({status, body}) => {
                 if (status === 400) {
+                    console.log("errors" + errors);
+                    console.log(body);
                     setErrors(body);
                 } else {
                     console.log("Profile updated successfully:", body);
@@ -174,11 +176,13 @@ export default function EditCompany() {
                                                         Location:
                                                     </label>
                                                     <input type="text" name="location" maxLength="40" className="form-control" required id="id_location" value={company.location} onChange={handleChange} />
+                                                    {errors.location && <div className="error">{errors.location.join(", ")}</div>}
                                                 </div>
 
                                                 <div className="form-group">
                                                     <label htmlFor="id_phone">Phone:</label>
-                                                    <input type="text" name="phone" maxLength="20" className="form-control" id="id_phone" value={company.phone} onChange={handleChange} />
+                                                    <input type="text" name="phone" maxLength="20" className="form-control" id="id_phone" value={company.phone || ""} onChange={handleChange} />
+                                                    {errors.phone && <div className="error">{errors.phone.join(", ")}</div>}
                                                 </div>
 
                                                 <div className="form-group">
@@ -186,6 +190,7 @@ export default function EditCompany() {
                                                         Address:
                                                     </label>
                                                     <input type="text" name="address" maxLength="200" className="form-control" required id="id_address" value={company.address} onChange={handleChange} />
+                                                    {errors.address && <div className="error">{errors.address.join(", ")}</div>}
                                                 </div>
 
                                                 <div className="form-group">
@@ -193,26 +198,30 @@ export default function EditCompany() {
                                                         Email:
                                                     </label>
                                                     <input type="email" name="email" maxLength="254" className="form-control" required id="id_email" value={company.email} onChange={handleChange} />
+                                                    {errors.email && <div className="error">{errors.email.join(", ")}</div>}
                                                 </div>
 
                                                 <div className="form-group">
                                                     <label htmlFor="id_image">Image:</label>
                                                     <input type="file" name="image" className="form-control" id="id_image" onChange={handleImageUpload} />
+                                                    {errors.image && <div className="error">{errors.image.join(", ")}</div>}
                                                 </div>
 
                                                 <div className="form-group">
                                                     <label htmlFor="id_website_url">Website URL:</label>
-                                                    <input type="url" name="website_url" maxLength="200" className="form-control" id="id_website_url" value={company.website_url} onChange={handleChange} />
+                                                    <input type="url" name="website_url" maxLength="200" className="form-control" id="id_website_url" value={company.website_url || ""} onChange={handleChange} />
+                                                    {errors.website_url && <div className="error">{errors.website_url.join(", ")}</div>}
                                                 </div>
 
                                                 <div className="form-group">
                                                     <label htmlFor="id_linkedin_url">LinkedIn URL:</label>
-                                                    <input type="url" name="linkedin_url" maxLength="200" className="form-control" id="id_linkedin_url" value={company.linkedin_url} onChange={handleChange} />
+                                                    <input type="url" name="linkedin_url" maxLength="200" className="form-control" id="id_linkedin_url" value={company.linkedin_url || ""} onChange={handleChange} />
                                                 </div>
 
                                                 <div className="form-group">
                                                     <label htmlFor="id_facebook_url">Facebook URL:</label>
-                                                    <input type="url" name="facebook_url" maxLength="200" className="form-control" id="id_facebook_url" value={company.facebook_url} onChange={handleChange} />
+                                                    <input type="url" name="facebook_url" maxLength="200" className="form-control" id="id_facebook_url" value={company.facebook_url || ""} onChange={handleChange} />
+                                                    {errors.facebook_url && <div className="error">{errors.facebook_url.join(", ")}</div>}
                                                 </div>
 
                                                 <div className="form-group">
@@ -220,6 +229,7 @@ export default function EditCompany() {
                                                         Employees:
                                                     </label>
                                                     <input type="number" name="employees" min="0" className="form-control" required id="id_employees" value={company.employees} onChange={handleChange} />
+                                                    {errors.employees && <div className="error">{errors.employees.join(", ")}</div>}
                                                 </div>
 
                                                 <div className="form-group">
@@ -227,6 +237,7 @@ export default function EditCompany() {
                                                         Foundation Year:
                                                     </label>
                                                     <input type="number" name="foundation_year" min="0" className="form-control" required id="id_foundation_year" value={company.foundation_year} onChange={handleChange} />
+                                                    {errors.foundation_year && <div className="error">{errors.foundation_year.join(", ")}</div>}
                                                 </div>
 
                                                 <div className="form-group">
@@ -240,6 +251,7 @@ export default function EditCompany() {
                                                                 <input id={skill.name} type="checkbox" name="skills" value={skill.name} className="form-check" checked={company.skills.includes(skill.name)} onChange={handleSkillChange} />
                                                             </div>
                                                         ))}
+                                                        {errors.skills && <div className="error">{errors.skills.join(", ")}</div>}
                                                     </div>
                                                 </div>
 
