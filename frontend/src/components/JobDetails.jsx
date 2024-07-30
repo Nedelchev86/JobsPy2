@@ -2,10 +2,12 @@ import {useState, useEffect} from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import {useParams, Link} from "react-router-dom";
 import {useAuth} from "../contexts/Contexts";
-import LoginForm from "./LoginForm";
 import styles from "./JobDetails.module.css";
 import Loading from "./loading/Loading";
 import {formatDate} from "../utils/formatDate";
+import LoginModal from "./loginModal/LoginModal";
+import {toast} from "react-toastify";
+import {Button} from "react-bootstrap";
 
 export default function JobDetails() {
     const [job, setJob] = useState({});
@@ -15,6 +17,13 @@ export default function JobDetails() {
     const [showModal, setShowModal] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [isApplied, setIsApplied] = useState(false);
+
+    const statusClass = {
+        Pending: "pending",
+        Accepted: "apply",
+        Rejected: "rejected",
+    };
 
     // const [status, setStatus] = useState("");
 
@@ -35,6 +44,10 @@ export default function JobDetails() {
         if (!isAuthenticated) {
             return;
         }
+
+        if (!user) {
+            return;
+        }
         fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/applicants/`, {
             method: "GET",
             headers: {
@@ -46,7 +59,7 @@ export default function JobDetails() {
                 setApplicants(data.find((applicant) => applicant.user === user.user.user));
             })
             .catch((error) => console.error("Error fetching applicant:", error));
-    }, [id, auth]);
+    }, [id, auth, user, isApplied]);
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -95,20 +108,56 @@ export default function JobDetails() {
 
     const handleApply = async () => {
         // const response = await fetch(`http://127.0.0.1:8000/api/jobs/${id}/apply/`, {
-        await fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/apply/`, {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${auth}`,
-                "Content-Type": "application/json",
-            },
-        });
+
+        if (!user.user.activated) {
+            toast.error(`Please fill your profile information (Click to Dashboard)`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+
+            return;
+        }
+        try {
+            await fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/apply/`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${auth}`,
+                    "Content-Type": "application/json",
+                },
+            });
+            setIsApplied(true);
+            toast.success("Your job application has been sent successfullyl", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } catch (error) {
+            toast.error(`Login failed. Invalid email or password`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
     };
 
     let isJobOwner = false;
     if (user) {
         isJobOwner = isAuthenticated && job.user === user.user.user;
     }
-
+    console.log(user);
     return (
         <>
             <Breadcrumbs pageTitle="Job Details" pageInfo="Job Details" />
@@ -135,7 +184,7 @@ export default function JobDetails() {
                                             <ul className="meta">
                                                 <li>
                                                     <strong className="text-primary">
-                                                        <a href="#">{job.company}</a>
+                                                        <Link to={`/companies/${job.user}`}>{job.company} </Link>
                                                     </strong>
                                                 </li>
                                                 <li>
@@ -187,20 +236,20 @@ export default function JobDetails() {
                                                     </div>
                                                     <div className="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
                                                         {applicants?.id && (
-                                                            <Link to="/dashboard/applyed-jobs" className="d-block btn">
+                                                            <Link to="/dashboard/applyed-jobs" className={`d-block btn ${statusClass[applicants?.status]}`}>
                                                                 <i className="fa fa-heart-o mr-1"></i>
                                                                 {applicants.status}
                                                             </Link>
                                                         )}
                                                         {!applicants?.id && (
-                                                            <Link onClick={handleApply} className="d-block btn">
+                                                            <Button onClick={handleApply} className="d-block btn">
                                                                 <i className="fa fa-heart-o mr-1"></i>Apply
-                                                            </Link>
+                                                            </Button>
                                                         )}
 
                                                         {!isAuthenticated && (
                                                             <Link onClick={handleOpenModal} className="d-block btn">
-                                                                <i className="fa fa-heart-o mr-1"></i>Apply Login
+                                                                <i className="fa fa-heart-o mr-1"></i>Apply
                                                             </Link>
                                                         )}
                                                     </div>
@@ -312,7 +361,7 @@ export default function JobDetails() {
                 </div>
             </div>
 
-            <LoginForm show={showModal} handleClose={handleCloseModal} />
+            <LoginModal show={showModal} handleClose={handleCloseModal} />
         </>
     );
 }

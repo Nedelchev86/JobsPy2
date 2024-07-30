@@ -21,7 +21,7 @@ export default function JobsCategory({category, handleInputChange}) {
                     <li key={category.id}>
                         <NavLink to={`/jobs/?category=${category.id}`}>
                             {category.name}
-                            <span>8</span>
+                            <span>{category.job_count}</span>
                         </NavLink>
                     </li>
                 ))}

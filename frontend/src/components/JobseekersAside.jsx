@@ -4,8 +4,9 @@ import {Form, Button, InputGroup, FormControl, Card} from "react-bootstrap";
 import useFetch from "../hooks/useFetch";
 
 import LastFiveBlogs from "./LastFiveBlogs";
+import JobSeekersPopularTags from "./JobSeekersPopularTag";
 
-export default function JobDetailsnAside({seniority, city, handleInputChange, handleSubmit}) {
+export default function JobSeekersAside({seniority, city, skill, handleInputChange, handleSubmit}) {
     const {data: seniorityList, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}seniorities/`, []);
     return (
         <aside className="col-lg-4 col-md-12 col-12">
@@ -71,17 +72,9 @@ export default function JobDetailsnAside({seniority, city, handleInputChange, ha
                         </Card.Body>
                     </Card>
                     {/* </div> */}
+                    <JobSeekersPopularTags />
 
                     <LastFiveBlogs />
-
-                    <div className="widget popular-tag-widget">
-                        <h5 className="widget-title">
-                            <span>Popular Tags</span>
-                        </h5>
-                        <div className="tags">
-                            <a href="#">ToDo</a>
-                        </div>
-                    </div>
                 </div>
             </Slide>
         </aside>

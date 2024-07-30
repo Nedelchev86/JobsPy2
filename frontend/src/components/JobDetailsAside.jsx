@@ -4,15 +4,15 @@ import {Form, Button, InputGroup, FormControl, Card} from "react-bootstrap";
 import useFetch from "../hooks/useFetch";
 import LastFiveBlogs from "./LastFiveBlogs";
 import JobsCategory from "./JobsCategory";
+import PopularTags from "./PopularTag";
 
-export default function JobDetailsnAside({title, seniority, location, category, handleInputChange, handleSubmit}) {
+export default function JobDetailsnAside({title, seniority, location, category, skill, handleInputChange, handleSubmit}) {
     const {data: seniorityList, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}seniorities/`, []);
 
     return (
         <aside className="col-lg-4 col-md-12 col-12">
             <Slide direction="right" duration="1000" triggerOnce="true">
                 <div className="sidebar">
-                    {/* <div className="widget search-widget"> */}
                     <Card className="p-3 shadow-sm">
                         <Card.Body>
                             <Form onSubmit={handleSubmit}>
@@ -43,45 +43,16 @@ export default function JobDetailsnAside({title, seniority, location, category, 
                                     </InputGroup>
                                 </Form.Group>
 
-                                {/* <Form.Group controlId="formJobCategory" className="mb-3">
-                                    <Form.Label>Filter by Job Category</Form.Label>
-                                    <InputGroup>
-                                        <Form.Select name="category" value={category} onChange={handleInputChange} className="form-control">
-                                            <option value="">All Categories</option>
-                                            <option value="1">Software</option>
-                                            <option value="2">Design</option>
-                                            <option value="3">Marketing</option>
-                                            <option value="4">Finance</option>
-                                        </Form.Select>
-                                    </InputGroup>
-                                </Form.Group> */}
-
-                                {/* <Form.Group controlId="formSkills" className="mb-3">
-                                    <Form.Label>Filter by Skills</Form.Label>
-                                    <div>
-                                        {skills.map((skill) => (
-                                            <Form.Check key={skill.id} type="checkbox" label={skill.name} value={skill.name} checked={selectedSkills.includes(skill.id)} onChange={handleSkillChange} />
-                                        ))}
-                                    </div>
-                                </Form.Group> */}
                                 <Button variant="primary" type="button" onClick={handleSubmit}>
                                     Clear
                                 </Button>
                             </Form>
                         </Card.Body>
                     </Card>
-                    {/* </div> */}
-                    <JobsCategory category={category} handleInputChange={handleInputChange} />
-                    <LastFiveBlogs />
 
-                    <div className="widget popular-tag-widget">
-                        <h5 className="widget-title">
-                            <span>Popular Tags</span>
-                        </h5>
-                        <div className="tags">
-                            <a href="#">ToDo</a>
-                        </div>
-                    </div>
+                    <JobsCategory category={category} handleInputChange={handleInputChange} />
+
+                    <LastFiveBlogs />
                 </div>
             </Slide>
         </aside>

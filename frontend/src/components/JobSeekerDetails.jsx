@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import Breadcrumbs from "./Breadcrumbs";
-import JobSeekersAside from "./JobseekersAside";
+import JobSeekerDetailsAside from "./JobSeekersDetailsAside";
 import {useParams} from "react-router-dom";
 import EducationList from "./changeStatus/EducationList";
 
@@ -194,7 +194,7 @@ export default function JobSeekerDetails() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <JobSeekersAside />
+                                        <JobSeekerDetailsAside />
                                     </div>
                                 </div>
                             </div>

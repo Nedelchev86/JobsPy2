@@ -10,8 +10,6 @@ export const JobProvider = ({children}) => {
     const [notifications, setNotifications] = useState([]);
     const {isAuthenticated, auth, user} = useAuth();
 
-    console.log(user);
-    console.log(isAuthenticated);
     const fetchNotifications = async () => {
         if (!auth) {
             console.log("fetch return");

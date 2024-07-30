@@ -23,6 +23,8 @@ export const AuthProvider = ({children}) => {
                 body: JSON.stringify(formData),
             });
 
+            console.log("response" + response);
+
             if (!response.ok) {
                 throw new Error("Invalid email or password");
             }
@@ -33,7 +35,7 @@ export const AuthProvider = ({children}) => {
             localStorage.setItem("refresh_token", data.refresh);
             setAuth(data.access);
 
-            setUser(response.data);
+            // setUser(response.data);
             setisAuthenticated(true);
             // navigate("/dashboard");
         } catch (error) {
@@ -90,7 +92,7 @@ export const AuthProvider = ({children}) => {
     useEffect(() => {
         if (!auth) return;
         fetchUserData();
-    }, [auth]);
+    }, [auth, isAuthenticated]);
 
     // useEffect(() => {
     //     if (auth) {
