@@ -1,4 +1,6 @@
 # JobsPy - LIVE DEMO Soon
+![logo](https://github.com/user-attachments/assets/c0aa2f73-b091-492e-afdf-4c24b450cf16)
+
 
 Coming soon: Desription of all endpoits and live demo server 
 
