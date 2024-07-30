@@ -2,9 +2,10 @@ import React, {useState} from "react";
 import useFetch from "../hooks/useFetch";
 import {useParams} from "react-router-dom";
 import {useAuth} from "../contexts/Contexts";
+import {API_URL} from "../config";
 
 export default function CommentList({blogId, commentsNumber}) {
-    const {data, loading, error, refetch} = useFetch(`http://127.0.0.1:8000/api/blogs/${blogId}/comments/`, []);
+    const {data, loading, error, refetch} = useFetch(`${API_URL}blogs/${blogId}/comments/`, []);
 
     const [formError, setformError] = useState("");
     const [success, setSuccess] = useState("");
@@ -29,7 +30,7 @@ export default function CommentList({blogId, commentsNumber}) {
         setformError("");
         setSuccess("");
 
-        fetch("http://127.0.0.1:8000/api/blogs/comments/", {
+        fetch(`${API_URL}blogs/comments/`, {
             method: "POST",
             body: JSON.stringify(formData),
             headers: {
