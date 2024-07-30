@@ -42,6 +42,7 @@ class UserProfileView(APIView):
         user = request.user
         email = user.email
 
+
         if hasattr(user, 'company'):  # Check if the user has a company profile
             profile_serializer = CompanyProfileSerializer(user.company)
             user_type = 'company'

@@ -9,6 +9,7 @@ from ..jobseekers.serializers import JobSeekerSerializer
 
 class BlogPostSerializer(serializers.ModelSerializer):
     author= JobSeekerSerializer( read_only=True)
+    comments_count = serializers.IntegerField(source='comments.count', read_only=True)
     class Meta:
         model = BlogPost
         fields = '__all__'

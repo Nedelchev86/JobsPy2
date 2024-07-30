@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import JobSeeker, Education
 from ..jobs.models import Skills, Applicant
+from ..main.models import Seniority
 
 
 class JobSeekerSerializer(serializers.ModelSerializer):
@@ -9,9 +10,14 @@ class JobSeekerSerializer(serializers.ModelSerializer):
         many=True,  # Allow multiple skills
         slug_field='name'  # Use the 'name' field of the Skills model
     )
+    seniority = serializers.SlugRelatedField(
+        queryset=Seniority.objects.all(),  # Ensure this queryset is correct
+        slug_field='name'
+    )
     class Meta:
         model = JobSeeker
-        exclude = [ 'activated']
+        # exclude = [ 'activated']
+        fields = '__all__'
 
 
 

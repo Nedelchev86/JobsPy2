@@ -30,7 +30,8 @@ class AllJobsViewApi(ListAPIView):
         location_filter = self.request.GET.get('location')
         job_type_filter = self.request.GET.get('job_type')
         job_category = self.request.GET.get('category')
-        needed_skills_filter = self.request.GET.getlist('needed_skills')
+        # needed_skills_filter = self.request.GET.getlist('needed_skills')
+        skill_name = self.request.GET.get('skill')
 
         if title:
             queryset = queryset.filter(title__icontains=title)
@@ -47,13 +48,11 @@ class AllJobsViewApi(ListAPIView):
         if job_category:
             queryset = queryset.filter(category_id=job_category)
 
-        if needed_skills_filter:
-            # Convert skill names to skill IDs
-            skill_ids = Skills.objects.filter(name__in=needed_skills_filter).values_list('id', flat=True)
-            print(skill_ids)
+        if skill_name:
 
-            # Filter jobs that have all the specified skills
-            queryset = queryset.filter(needed_skills__id__in=skill_ids).distinct()
+            skill = get_object_or_404(Skills, name=skill_name)
+
+            queryset = queryset.filter(needed_skills=skill)
 
         return queryset
 

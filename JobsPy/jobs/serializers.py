@@ -5,18 +5,35 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.validators import UniqueValidator
 
 from JobsPy.company.models import CompanyProfile
+
 from JobsPy.jobs.models import FavoriteJob, Job, Applicant, Category
 from JobsPy.jobseekers.serializers import JobSeekerSerializer
-from JobsPy.main.models import Skills
+from JobsPy.main.models import Skills, Seniority
 
 userModel = get_user_model()
 
 
+class CompanyProfileShortSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CompanyProfile
+        fields = ["name"]  # or specify fields explicitly
+
+
+
 class JobSerializer(serializers.ModelSerializer):
     needed_skills = serializers.SlugRelatedField(many=True, slug_field='name', queryset=Skills.objects.all())
+    seniority = serializers.SlugRelatedField(
+        queryset=Seniority.objects.all(),  # Ensure this queryset is correct
+        slug_field='name'
+    )
+    company = CompanyProfileShortSerializer(source='user.company')
+
+
+
     class Meta:
         model = Job
-        exclude = ('slug', 'user')
+        fields = '__all__'
 
 class FavoriteJobSerializer(serializers.ModelSerializer):
     job_details = JobSerializer(source='job', read_only=True)
@@ -28,6 +45,10 @@ class FavoriteJobSerializer(serializers.ModelSerializer):
 class JobsDetailSerializer(serializers.ModelSerializer):
     company = serializers.SerializerMethodField()
     needed_skills = serializers.SlugRelatedField(many=True, slug_field='name', queryset=Skills.objects.all())
+    seniority = serializers.SlugRelatedField(
+        queryset=Seniority.objects.all(),  # Ensure this queryset is correct
+        slug_field='name'
+    )
 
     class Meta:
         model = Job
@@ -69,6 +90,11 @@ class CategorySerializerWithJobs(serializers.ModelSerializer):
         fields = ['id',  'jobs']
 
 class CategorySerializer(serializers.ModelSerializer):
+    job_count = serializers.SerializerMethodField()
     class Meta:
         model = Category
-        fields = ['id', 'name', 'description', 'slug',]
+        fields = ['id', 'name', 'description', 'slug', 'job_count']
+
+    def get_job_count(self, obj):
+        # Calculate the number of published jobs related to this category
+        return Job.objects.filter(category=obj, is_published=True).count()

@@ -11,6 +11,7 @@ from JobsPy.jobs.models import FavoriteJob, Applicant
 from JobsPy.jobs.serializers import FavoriteJobSerializer, ApplicantSerializer
 from JobsPy.jobseekers.models import JobSeeker, Education
 from JobsPy.jobseekers.serializers import JobSeekerSerializer, EducationSerializer
+from JobsPy.main.models import Skills
 
 
 # Create your views here.
@@ -52,11 +53,17 @@ class JobSeekerViewSet(viewsets.ModelViewSet):
         queryset = JobSeeker.objects.filter(activated=True)
         city = self.request.GET.get('city', None)
         seniority_filter = self.request.GET.get('seniority')
-        print(city)
+        skills_filter = self.request.GET.get('skill')
+
         if city:
             queryset = queryset.filter(city__icontains=city)
         if seniority_filter:
             queryset = queryset.filter(seniority=seniority_filter)
+
+        if skills_filter:
+            skill = get_object_or_404(Skills, name=skills_filter)
+
+            queryset = queryset.filter(skills=skill)
         return queryset
 
 
