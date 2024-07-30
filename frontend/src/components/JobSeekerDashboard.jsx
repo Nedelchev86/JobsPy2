@@ -260,7 +260,7 @@ const JobSeekerDashboard = () => {
                                             Add Education
                                         </Link>
                                         <AddEducationModal show={isModalOpen} handleClose={handleCloseModal} />
-                                        <DeleteEducationModal show={isDeleteModalOpen} handleClose={handleCloseDeleteModal} />
+                                        <DeleteEducationModal show={isDeleteModalOpen} handleClose={handleCloseDeleteModal} handleDelete={handleDelete} />
                                         <EditEducationModal show={isEditModalOpen} handleClose={handleCloseEditModal} initialData={educationToEdit} />
                                         <h4>Education</h4>
                                         {educations.map((education) => (
