@@ -1,6 +1,5 @@
-// RegisterForm.js
 import React, {useState} from "react";
-import Breadcrumbs from "./Breadcrumbs";
+import Breadcrumbs from "../Breadcrumbs";
 import {useNavigate} from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -20,7 +19,7 @@ const RegisterForm = () => {
         email: "",
         password: "",
         password2: "",
-        role: "", // Default role
+        role: "",
     });
     const [error, setError] = useState("");
 
@@ -177,12 +176,6 @@ const RegisterForm = () => {
                                         </div>
                                     </form>
                                 </div>
-                                <a className="google" href="{% provider_login_url 'google' %}">
-                                    Login with Google
-                                </a>
-                                <a className="github" href="{% provider_login_url 'github' %}">
-                                    Login with GitHun
-                                </a>
                             </div>
                         </div>
                     </div>

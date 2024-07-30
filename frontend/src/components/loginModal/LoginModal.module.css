@@ -1,0 +1,8 @@
+.dark-blue {
+    background-color: #2042e3;
+}
+
+.dark-blue:disabled {
+    background-color: #57575a;
+    border: 0px;
+}
