@@ -1,4 +1,5 @@
 import useFetch from "../hooks/useFetch";
+import {Link} from "react-router-dom";
 
 export default function LastFiveBlogs() {
     const {data: blogs, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}blogs/latest-blog-posts/`, []);
@@ -13,7 +14,7 @@ export default function LastFiveBlogs() {
                     <div key={blog.id} className="single-popular-feed">
                         <div className="feed-desc">
                             <h6 className="post-title">
-                                <a href={`/blogs/${blog.id}/`}>{blog.title}</a>
+                                <Link to={`/blogs/${blog.id}/`}>{blog.title}</Link>
                             </h6>
                             <span className="time">
                                 <i className="lni lni-calendar"></i> {blog.created_at}

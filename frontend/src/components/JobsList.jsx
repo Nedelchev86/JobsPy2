@@ -4,6 +4,8 @@ import {useEffect, useState, useCallback} from "react";
 import {Slide} from "react-awesome-reveal";
 import Loading from "./loading/Loading";
 import JobDetailsnAside from "./JobDetailsAside";
+import PopularTags from "./PopularTag";
+import styles from "./JobsList.module.css";
 
 export default function JobsList() {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -12,13 +14,13 @@ export default function JobsList() {
     const [location, setLocation] = useState("");
     const [category, setCategory] = useState("");
     const [loading, setLoading] = useState(true);
+    const [skill, setSkill] = useState("");
     const [jobs, setJobs] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
-        console.log(name);
-        console.log(value);
+
         if (name === "title") {
             setTitle(value);
         } else if (name === "seniority") {
@@ -42,12 +44,14 @@ export default function JobsList() {
     useEffect(() => {
         setLoading(true);
         const categoryParam = searchParams.get("category");
+        const skillPArams = searchParams.get("skill");
         fetch(
             `${apiUrl}jobs/?${new URLSearchParams({
                 title,
                 seniority,
                 location,
                 category: categoryParam || category,
+                skill: skillPArams || skill,
             }).toString()}`
         )
             .then((response) => response.json())
@@ -69,6 +73,9 @@ export default function JobsList() {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8">
+                                <div className={styles["popular-tag"]}>
+                                    <PopularTags skill={skill} handleInputChange={handleInputChange} />
+                                </div>
                                 <Slide direction="left" duration="1000" triggerOnce="true">
                                     {jobs.map((job) => (
                                         <div key={job.id} className="single-job">
@@ -106,14 +113,18 @@ export default function JobsList() {
                                                         ))}
                                                 </ul>
                                             </div>
-                                            <div className="job-button2"></div>
+                                            <div className="job-button2">
+                                                <Link className="company-link" to={`/companies/${job.user}/`}>
+                                                    <span>Company : {job.company?.name}</span>
+                                                </Link>
+                                            </div>
                                         </div>
                                     ))}
                                 </Slide>
                             </div>
 
                             {/* <JobDescriptionAside handleChangeUrl={handleChangeUrl} /> */}
-                            <JobDetailsnAside title={title} seniority={seniority} category={category} location={location} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+                            <JobDetailsnAside title={title} seniority={seniority} category={category} location={location} skill={skill} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
                         </div>
                     </div>
                 </section>
