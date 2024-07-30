@@ -3,12 +3,12 @@ import useFetch from "../hooks/useFetch";
 import {useParams} from "react-router-dom";
 import {useAuth} from "../contexts/Contexts";
 
-export default function CommentList({blogId}) {
+export default function CommentList({blogId, commentsNumber}) {
     const {data, loading, error, refetch} = useFetch(`http://127.0.0.1:8000/api/blogs/${blogId}/comments/`, []);
 
     const [formError, setformError] = useState("");
     const [success, setSuccess] = useState("");
-    const {auth} = useAuth();
+    const {auth, isAuthenticated} = useAuth();
 
     const [formData, setFormData] = useState({
         post: blogId,
@@ -56,7 +56,7 @@ export default function CommentList({blogId}) {
         <>
             <div className="post-comments">
                 <h3 className="comment-title">
-                    <span>3 comments on this post</span>
+                    <span>{commentsNumber} comments on this post</span>
                 </h3>
                 <ul className="comments-list">
                     {data.map((comment) => (
@@ -81,21 +81,28 @@ export default function CommentList({blogId}) {
                     ))}
                 </ul>
             </div>
+
             <form onSubmit={handleSubmit}>
                 <div className="row">
                     <div className="col-12">
                         <div className="form-box form-group">
-                            <input type="title" name="title" className="form-control form-control-custom" placeholder="Your title" value={formData.title} onChange={handleChange} required />
+                            <input disabled={!isAuthenticated} type="title" name="title" className="form-control form-control-custom" placeholder="Your title" value={formData.title} onChange={handleChange} required />
                         </div>
                     </div>
                     <div className="col-12">
                         <div className="form-box form-group">
-                            <textarea name="content" rows="6" className="form-control form-control-custom" placeholder="Your Comments" value={formData.content} onChange={handleChange} required></textarea>
+                            <textarea disabled={!isAuthenticated} name="content" rows="6" className="form-control form-control-custom" placeholder="Your Comments" value={formData.content} onChange={handleChange} required></textarea>
                         </div>
                     </div>
                     <div className="col-12">
+                        {!isAuthenticated && (
+                            <div className="alert alert-danger" role="alert">
+                                Login to post a comment
+                            </div>
+                        )}
+
                         <div className="button">
-                            <button type="submit" className="btn mouse-dir white-bg">
+                            <button type="submit" className="btn mouse-dir white-bg" disabled={!isAuthenticated}>
                                 Post Comment <span className="dir-part"></span>
                             </button>
                         </div>

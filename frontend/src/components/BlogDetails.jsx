@@ -5,6 +5,7 @@ import {useParams} from "react-router-dom";
 import AddCommentForm from "./PostComment";
 import CommentList from "./CommentList";
 import {formatDate} from "../utils/formatDate";
+import { Link } from "react-router-dom";
 
 export default function BlogDetails() {
     const [blog, setBlog] = useState({});
@@ -35,7 +36,7 @@ export default function BlogDetails() {
                                 <div className="post-details">
                                     <div className="detail-inner">
                                         <h2 className="post-title">
-                                            <a href="blog-single.html">{blog.title}</a>
+                                            <Link to="blog-single.html">{blog.title}</Link>
                                         </h2>
 
                                         <ul className="custom-flex post-meta">
@@ -48,7 +49,7 @@ export default function BlogDetails() {
                                             <li>
                                                 <a href="#">
                                                     <i className="lni lni-comments"></i>
-                                                    35 Comments
+                                                    {blog.comments_count} Comments
                                                 </a>
                                             </li>
                                             <li>
@@ -87,14 +88,14 @@ export default function BlogDetails() {
                                         </blockquote>
 
                                         <div className="post-tags-media">
-                                            <div className="post-tags popular-tag-widget mb-xl-40">
+                                            {/* <div className="post-tags popular-tag-widget mb-xl-40">
                                                 <h5 className="tag-title">Related Tags</h5>
                                                 <div className="tags">
                                                     <a href="#">Announcement</a>
                                                     <a href="#">Experiences</a>
                                                     <a href="#">Market News</a>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                             <div className="post-social-media">
                                                 <h5 className="share-title">Social Share</h5>
                                                 <ul className="custom-flex">
@@ -122,7 +123,7 @@ export default function BlogDetails() {
                                         <h3 className="comment-reply-title">
                                             <span>Leave a comment</span>
                                         </h3>
-                                        <CommentList blogId={id} />
+                                        <CommentList blogId={id} commentsNumber={blog.comments_count} />
 
                                         {/* <AddCommentForm blogId={id} /> */}
                                         {/* <form action="#" method="POST">
