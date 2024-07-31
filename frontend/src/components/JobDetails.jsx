@@ -87,6 +87,7 @@ export default function JobDetails() {
                 })
                     .then((response) => response)
                     .then((data) => data);
+                toast.success("Successfully added to favorites");
 
                 setIsFavorite({is_favorite: false});
             } else {
@@ -99,10 +100,12 @@ export default function JobDetails() {
                     .then((response) => response.json())
                     .then((data) => data);
                 console.log("Added");
+                toast.success("Successfully removed to favorites");
                 setIsFavorite({is_favorite: true});
             }
         } catch (error) {
             console.error("Error toggling favorite status:", error);
+            toast.error("Error toggling favorite status");
         }
     };
 
@@ -110,15 +113,7 @@ export default function JobDetails() {
         // const response = await fetch(`http://127.0.0.1:8000/api/jobs/${id}/apply/`, {
 
         if (!user.user.activated) {
-            toast.error(`Please fill your profile information (Click to Dashboard)`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`Please fill your profile information (Click to Dashboard)`);
 
             return;
         }
@@ -131,25 +126,9 @@ export default function JobDetails() {
                 },
             });
             setIsApplied(true);
-            toast.success("Your job application has been sent successfullyl", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.success("Your job application has been sent successfully");
         } catch (error) {
-            toast.error(`Login failed. Invalid email or password`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`Login failed. Invalid email or password`);
         }
     };
 
@@ -207,8 +186,10 @@ export default function JobDetails() {
                                         <ul className="list-unstyled d-flex align-items-center flex-wrap">
                                             {job.needed_skills &&
                                                 job.needed_skills.map((skill) => (
-                                                    <li key={skill} className={styles.skills}>
-                                                        {skill}
+                                                    <li key={skill}>
+                                                        <Link to={`../jobs/?skill=${skill}`} className={styles.skills}>
+                                                            {skill}
+                                                        </Link>
                                                     </li>
                                                 ))}
                                         </ul>

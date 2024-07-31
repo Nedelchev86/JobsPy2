@@ -67,7 +67,7 @@ export default function CompanyDetails() {
                                                         <div className="col-lg-5 col-md-5 col-12">
                                                             <div className="name-head">
                                                                 <a className="mb-2" href="#">
-                                                                    <img className="circle-54" src={`https://res.cloudinary.com/drjgddl0y/${company.image}`} alt="" />
+                                                                    {company.image ? <img className="circle-54" src={`https://res.cloudinary.com/drjgddl0y/${company.image}`} alt="" /> : <img className="circle-54" src="/images/default/company.jpg" alt="" />}
                                                                 </a>
 
                                                                 <h4>
@@ -146,16 +146,9 @@ export default function CompanyDetails() {
                                                             company?.skills &&
                                                             company?.skills.map((tech) => (
                                                                 <li key={tech}>
-                                                                    <a href="#">{tech}</a>
+                                                                    <Link to="#">{tech}</Link>
                                                                 </li>
                                                             ))}
-
-                                                        {/* {{ company?.skills_set }}
-                                    {% for tech in company?.skills.all %}
-                                    <li>
-                                        <a href="#">{{ tech }}</a>
-                                    </li>
-                                {% endfor %} */}
                                                     </ul>
                                                 </div>
                                                 <div className="single-section">

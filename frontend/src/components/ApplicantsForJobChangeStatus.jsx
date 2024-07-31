@@ -76,7 +76,7 @@
 import React, {useState} from "react";
 import {Modal, Button, Form, Spinner, Alert} from "react-bootstrap";
 import {useAuth} from "../contexts/Contexts";
-
+import {toast} from "react-toastify";
 export default function ChangeStatusModal({isOpen, onClose, applicant, onStatusChanged}) {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [status, setStatus] = useState(applicant.status || "Pending");
@@ -101,12 +101,14 @@ export default function ChangeStatusModal({isOpen, onClose, applicant, onStatusC
             });
 
             if (!response.ok) {
+                toast.success("Failed to update applicant status");
                 throw new Error("Failed to update applicant status");
             }
-
+            toast.success("Applicant status updated successfully");
             onStatusChanged(); // Notify parent of status change
             onClose(); // Close the modal after successful update
         } catch (err) {
+            toast.error("Failed to update applicant status");
             setError(err.message);
         } finally {
             setLoading(false);

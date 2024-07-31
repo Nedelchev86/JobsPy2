@@ -5,7 +5,7 @@ import {useParams} from "react-router-dom";
 import AddCommentForm from "./PostComment";
 import CommentList from "./CommentList";
 import {formatDate} from "../utils/formatDate";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export default function BlogDetails() {
     const [blog, setBlog] = useState({});

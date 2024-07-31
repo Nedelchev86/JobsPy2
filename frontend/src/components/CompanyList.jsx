@@ -37,9 +37,7 @@ export default function CompanyList() {
                                 {companies.map((company) => (
                                     <div key={company.user} className="col-lg-3 col-md-6 col-12">
                                         <Link to={`/companies/${company.user}`} className="single-cat">
-                                            <div className="top-side">
-                                                <img src={`https://res.cloudinary.com/drjgddl0y/${company.image}`} alt={company.name} />
-                                            </div>
+                                            <div className="top-side">{company.image ? <img src={`https://res.cloudinary.com/drjgddl0y/${company.image}`} alt={company.name} /> : <img src="images/default/company.jpg" alt={company.name} />}</div>
 
                                             <div className="bottom-side">
                                                 <span className="available-job2">Jobs</span>
