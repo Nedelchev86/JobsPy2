@@ -158,6 +158,7 @@ import React from "react";
 import {useAuth} from "../contexts/Contexts";
 import {Modal, Button, Form, Spinner} from "react-bootstrap";
 import {useForm} from "react-hook-form";
+import {toast} from "react-toastify";
 
 const AddEducationModal = ({show, handleClose}) => {
     const {
@@ -192,11 +193,13 @@ const AddEducationModal = ({show, handleClose}) => {
             .then((response) => response.json())
             .then((data) => {
                 console.log("Education added successfully:", data);
+                toast.success("Education added successfully!");
                 reset();
                 handleClose();
             })
             .catch((error) => {
                 console.error("Error updating profile:", error);
+                toast.success("Error adding education");
             });
     };
 
