@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {useJobs} from "../contexts/JobContext";
 import {useParams} from "react-router-dom";
 import Loading from "./loading/Loading";
+import {toast} from "react-toastify";
 
 export default function EditJob() {
     const [isLoading, setIsLoading] = useState(true);
@@ -146,11 +147,13 @@ export default function EditJob() {
             .then((response) => response.json())
             .then((data) => {
                 console.log("Profile updated successfully:", data);
+                toast.success("Profile updated successfully!");
                 fetchJobs();
                 navigate("/dashboard");
             })
             .catch((error) => {
                 console.error("Error updating profile:", error);
+                toast.error("Error updating profile!");
             });
     };
 

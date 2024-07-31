@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
 import {Modal, Button, Form, Spinner} from "react-bootstrap";
 import {useAuth} from "../contexts/Contexts";
-
+import {toast} from "react-toastify";
 const EditEducationModal = ({show, handleClose, educationId, initialData}) => {
     const {auth} = useAuth();
     console.log("initial data" + initialData);
@@ -49,6 +49,7 @@ const EditEducationModal = ({show, handleClose, educationId, initialData}) => {
             if (response.ok) {
                 const responseData = await response.json();
                 console.log("Education updated successfully:", responseData);
+                toast.success("Education updated successfully");
 
                 reset();
 
@@ -56,8 +57,10 @@ const EditEducationModal = ({show, handleClose, educationId, initialData}) => {
             } else {
                 const errorData = await response.json();
                 console.error("Error updating education:", errorData);
+                toast.error("Failed to update education");
             }
         } catch (error) {
+            toast.error("Failed to update education");
             console.error("Error updating education:", error);
         }
     };
