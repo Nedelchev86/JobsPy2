@@ -4,6 +4,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import {useAuth} from "../contexts/Contexts";
 import {useNavigate} from "react-router-dom";
 import Loading from "./loading/Loading";
+import {toast} from "react-toastify";
 
 export default function EditCompany() {
     const navigate = useNavigate();
@@ -46,6 +47,7 @@ export default function EditCompany() {
             .then((response) => response.json())
             .then((data) => setCompany(data))
             .catch((error) => {
+                toast.error("Failed to edit company profile");
                 console.error("Error fetching profile data:", error);
             });
         setLoading(false);
@@ -122,13 +124,16 @@ export default function EditCompany() {
                     console.log("errors" + errors);
                     console.log(body);
                     setErrors(body);
+                    toast.error("Failed to edit profile");
                 } else {
                     console.log("Profile updated successfully:", body);
+                    toast.success("Profile updated successfully");
                     navigate("/dashboard");
                 }
             })
             .catch((error) => {
                 console.error("Error updating profile:", error);
+                toast.error("Failed to edit profile");
             });
         // .then((response) => response.json())
         // .then((data) => {

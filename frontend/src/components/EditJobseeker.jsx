@@ -4,6 +4,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import {useAuth} from "../contexts/Contexts";
 import {useNavigate} from "react-router-dom";
 import Loading from "./loading/Loading";
+import {toast} from "react-toastify";
 
 export default function EditJobseeker() {
     const navigate = useNavigate();
@@ -134,6 +135,7 @@ export default function EditJobseeker() {
                                 setError(field, {type: "manual", message: messages[0]});
                             });
                         }
+                        toast.error("Failed to edit your profile");
                         throw new Error("Validation error");
                     });
                 }
@@ -141,10 +143,12 @@ export default function EditJobseeker() {
             })
 
             .then((data) => {
+                toast.success("Profile updated successfully");
                 console.log("Profile updated successfully:", data);
                 navigate("/dashboard");
             })
             .catch((error) => {
+                toast.error("Error updating profile");
                 console.error("Error updating profile:", error);
             });
     };
