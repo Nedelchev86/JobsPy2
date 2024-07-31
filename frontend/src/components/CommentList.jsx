@@ -3,6 +3,7 @@ import useFetch from "../hooks/useFetch";
 import {useParams} from "react-router-dom";
 import {useAuth} from "../contexts/Contexts";
 import {API_URL} from "../config";
+import {toast} from "react-toastify";
 
 export default function CommentList({blogId, commentsNumber}) {
     const {data, loading, error, refetch} = useFetch(`${API_URL}blogs/${blogId}/comments/`, []);
@@ -45,11 +46,13 @@ export default function CommentList({blogId, commentsNumber}) {
                     title: "",
                     content: "",
                 });
+                toast.success("Comment added successfully");
                 refetch();
                 console.log("Profile updated successfully:", data);
             })
             .catch((error) => {
                 console.error("Error updating profile:", error);
+                toast.error("Failed to add comment");
             });
     };
 

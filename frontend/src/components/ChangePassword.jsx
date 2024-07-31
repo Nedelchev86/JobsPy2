@@ -38,29 +38,13 @@ export default function ChangePasswordForm() {
         });
 
         if (response.ok) {
-            toast.success("Your password has been successfully changed.", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.success("Your password has been successfully changed.");
             navigate("/dashboard"); // Redirect to dashboard or any other page
         } else {
             const data = await response.json();
             console.log(Object.values(data));
             setError(Object.values(data)[0] || "Error changing password");
-            toast.error(`Error changing password`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`Error changing password`);
         }
     };
     return (
