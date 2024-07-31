@@ -1,4 +1,11 @@
+import Counter from "./Counter";
+import useFetch from "../hooks/useFetch";
+
 export default function Index() {
+    const {data: jobs} = useFetch(`${import.meta.env.VITE_API_URL}jobs/count/`, 0);
+    const {data: company} = useFetch(`${import.meta.env.VITE_API_URL}company/count/`, 0);
+    const {data: jobseekers} = useFetch(`${import.meta.env.VITE_API_URL}jobseekers/count/`, 0);
+
     return (
         <>
             <section className="hero-area style4">
@@ -8,17 +15,6 @@ export default function Index() {
                             <div className="col-lg-10 offset-lg-1 co-12">
                                 <div className="inner-content">
                                     <div className="hero-text">
-                                        {/* {% if messages %}
-                                    {{ message }}
-    <div className="alert alert-danger" role="alert">
-        
-        <ul className="messages">
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %} */}
                                         <h1 className="wow fadeInUp" data-wow-delay=".3s">
                                             Find a job you love,
                                             <br /> and you will never have to work a day in your life.
@@ -50,9 +46,10 @@ export default function Index() {
                                                             <span className="flaticon-worldwide"></span>
                                                         </div>
                                                         <div className="desc text-left">
-                                                            <strong className="numberAnimated" data-number="12">
-                                                                0
-                                                            </strong>
+                                                            <Counter
+                                                                endValue={jobs.job_count}
+                                                                duration={5000} // Duration in milliseconds
+                                                            />
                                                             <span>Job offers</span>
                                                         </div>
                                                     </div>
@@ -65,9 +62,10 @@ export default function Index() {
                                                             <span className="flaticon-visitor"></span>
                                                         </div>
                                                         <div className="desc text-left">
-                                                            <strong className="numberAnimated" data-number="16">
-                                                                0
-                                                            </strong>
+                                                            <Counter
+                                                                endValue={company.company_count}
+                                                                duration={5000} // Duration in milliseconds
+                                                            />
                                                             <span>Companies</span>
                                                         </div>
                                                     </div>
@@ -80,9 +78,10 @@ export default function Index() {
                                                             <span className="flaticon-resume"></span>
                                                         </div>
                                                         <div className="desc text-left">
-                                                            <strong className="numberAnimated" data-number="20">
-                                                                0
-                                                            </strong>
+                                                            <Counter
+                                                                endValue={jobseekers.jobseeker_count}
+                                                                duration={5000} // Duration in milliseconds
+                                                            />
                                                             <span>Active Employees</span>
                                                         </div>
                                                     </div>

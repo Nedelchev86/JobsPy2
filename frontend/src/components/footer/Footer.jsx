@@ -8,7 +8,7 @@ export default function Footer() {
                             <div className="f-about single-footer">
                                 <div className="logo">
                                     <a href="index.html">
-                                        <img src="/images/logo/logo.svg" alt="Logo" />
+                                        <img src="/images/logo/logo.jpg" alt="Logo" />
                                     </a>
                                 </div>
                                 <p>#1 project in SoftUni React - August 2024</p>

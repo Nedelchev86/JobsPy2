@@ -54,14 +54,14 @@ const Header = () => {
 
     return (
         <header className="header style4">
-            <ToastContainer />
+            <ToastContainer position="bottom-left" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" transition:Bounce />
             <div className="navbar-area">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-lg-12">
                             <nav className="navbar navbar-expand-lg">
                                 <a className="navbar-brand logo" href="#">
-                                    <img className="logo1" src="/images/logo/logo.svg" alt="Logo" />
+                                    <img className="logo1" src="/images/logo/logo.jpg" alt="Logo" />
                                 </a>
                                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                     <span className="toggler-icon"></span>
