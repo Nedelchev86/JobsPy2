@@ -1,0 +1,12 @@
+.activeMenu {
+}
+
+.clicked {
+    color: #2042e3 !important;
+}
+
+.clicked span {
+    background: #2042e3 !important;
+    color: #fff !important;
+    border-color: transparent !important;
+}

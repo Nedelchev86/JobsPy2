@@ -49,27 +49,11 @@ const LoginModal = ({show, handleClose}) => {
 
             fetchNotifications();
 
-            toast.success("Login successful!", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.success("Login successful!");
         } catch (error) {
             console.error("Login failed:", error.message);
             setError("Invalid email or password");
-            toast.error(`Login failed. Invalid email or password`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            toast.error(`Login failed. Invalid email or password`);
         }
     };
 
