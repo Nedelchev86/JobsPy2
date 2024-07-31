@@ -200,3 +200,11 @@ class CategoryListView(ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [permissions.AllowAny]
+
+
+
+class JobCountView(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self, request, *args, **kwargs):
+        job_count = Job.objects.count()
+        return Response({"job_count": job_count}, status=status.HTTP_200_OK)

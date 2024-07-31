@@ -10,13 +10,13 @@ from JobsPy.blog.views import BlogPostListView, BlogPostDetailView, BlogPostCrea
     CommentViewSet, CommentListView, LatestBlogPostsView
 
 from JobsPy.company.views import CompanyUpdateAPIView, CreatedJobsAPIView, CompanyProfileViewSet, CompanyApplicantAPI, \
-    ChangeStatusAPI, ChangeApplicantStatus
+    ChangeStatusAPI, ChangeApplicantStatus, CompanyCountView
 from JobsPy.jobs.views import JobsDetailsAPIView, apply_for_job, AddToFavoritesAPIView, RemoveFromFavoritesAPIView, \
     DeleteJobView, JobCreateAPIView, JobUpdateAPIView, ApplicantListAPIView, AllJobsViewApi, ChangeStatusAPIView, \
-    JobsByCategoryView, CategoryListView
+    JobsByCategoryView, CategoryListView, JobCountView
 from JobsPy.jobseekers.views import JobSeekerUpdateAPIView, FavoriteJobsListAPIView, check_favorite_status, \
     JobSeekerViewSet, job_applicants, ApplyedJobsAPIView, UserEducationListAPI, CreateEducationAPI, EditEducationAPI, \
-    DeleteEducationAPI
+    DeleteEducationAPI, JobseekerCountView
 from JobsPy.main.views import SkillsListAPIView, SeniorityListView
 from JobsPy.notifications.views import NotificationViewSet, NotificationJobSeekerViewSet
 
@@ -64,9 +64,12 @@ urlpatterns = [
     path('api/jobs/create/', JobCreateAPIView.as_view(), name='job-create'),
     path('api/jobs/update/<int:pk>', JobUpdateAPIView.as_view(), name='job-create'),
     path('api/jobs/<int:pk>/applicants/', ApplicantListAPIView.as_view(), name='applicant-list-api'),
+    path('api/jobs/count/', JobCountView.as_view(), name='job-count'),
     path('api/company/applicants/', CompanyApplicantAPI.as_view(), name='company-applicants-api'),
     path('api/company/applicants/<int:pk>/change-status/', ChangeApplicantStatus.as_view(), name='change_applicant_status'),
     path('api/company/change-status/<int:pk>/', ChangeStatusAPI.as_view(), name='change-status'),
+    path('api/company/count/', CompanyCountView.as_view(), name='company-count'),
+    path('api/jobseekers/count/', JobseekerCountView.as_view(), name='jobseekers-count'),
     path('api/created-jobs/', CreatedJobsAPIView.as_view(), name='created-jobs-api'),
     path('api/user/change-password/', ChangePasswordView.as_view(), name='change-password-api'),
     # path('', include(router.urls)),

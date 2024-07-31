@@ -113,3 +113,10 @@ class ChangeApplicantStatus(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
+
+
+class CompanyCountView(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self, request, *args, **kwargs):
+        company_count = CompanyProfile.objects.count()
+        return Response({"company_count": company_count}, status=status.HTTP_200_OK)

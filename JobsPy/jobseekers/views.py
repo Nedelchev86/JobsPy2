@@ -145,3 +145,10 @@ class DeleteEducationAPI(generics.DestroyAPIView):
             return Response({'detail': str(e)}, status=status.HTTP_403_FORBIDDEN)
         except Exception as e:
             return Response({'detail': 'Something went wrong.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class JobseekerCountView(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self, request, *args, **kwargs):
+        jobseeker_count = JobSeeker.objects.count()
+        return Response({"jobseeker_count": jobseeker_count}, status=status.HTTP_200_OK)
