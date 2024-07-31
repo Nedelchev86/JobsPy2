@@ -3,6 +3,7 @@ import {useAuth} from "../contexts/Contexts";
 import {useJobs} from "../contexts/JobContext";
 import {Link} from "react-router-dom";
 import {formatDate} from "../utils/formatDate";
+import {toast} from "react-toastify";
 
 const NotificationComponent = ({notification}) => {
     const {fetchNotifications} = useJobs();
@@ -21,9 +22,11 @@ const NotificationComponent = ({notification}) => {
 
             if (response.ok) {
                 const data = await response.json();
+                toast.success("Successfully updated  status");
                 setIsRead(!isRead); // Toggle the read status in the local state
                 fetchNotifications();
             } else {
+                toast.error("Failed to update read status");
                 console.error("Failed to update read status");
             }
         } catch (error) {

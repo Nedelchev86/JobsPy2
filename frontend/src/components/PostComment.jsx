@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useAuth} from "../contexts/Contexts";
 import useFetch from "../hooks/useFetch";
+import {toast} from "react-toastify";
 
 function AddCommentForm({blogId}) {
     const [error, setError] = useState("");
@@ -41,10 +42,12 @@ function AddCommentForm({blogId}) {
                     title: "",
                     content: "",
                 });
-                console.log("Profile updated successfully:", data);
+
+                toast.success("Comment added successfully");
             })
             .catch((error) => {
                 console.error("Error updating profile:", error);
+                toast.error("Failed to add comment");
             });
     };
 
