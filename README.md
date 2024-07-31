@@ -1,5 +1,7 @@
 # JobsPy - LIVE DEMO Soon
-![logo](https://github.com/user-attachments/assets/c0aa2f73-b091-492e-afdf-4c24b450cf16)![JobsPy](https://github.com/user-attachments/assets/21141c9f-f712-47af-953a-0c4d26d00071)
+
+![JobsPy](https://github.com/user-attachments/assets/55392e2d-1fb3-43e6-a1c8-2c772c84a830)
+
 
 
 
