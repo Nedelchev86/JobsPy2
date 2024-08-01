@@ -40,12 +40,10 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 
 
 
-
 - ** Notifications system **
  
-  ![notifications](https://github.com/Nedelchev86/jobsPy/assets/122647190/2388e8d7-f0dc-483a-8028-c46b14313384)
+![notification](https://github.com/user-attachments/assets/c6263d00-2be3-4e62-855d-6e53ce2e2c60)
 
-  ![notifications2](https://github.com/Nedelchev86/jobsPy/assets/122647190/c67d10d8-b2ea-4e3d-8ce5-74962d3ae4f1)
 
 
 
