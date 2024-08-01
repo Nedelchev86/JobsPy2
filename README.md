@@ -62,10 +62,11 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 
 
 
+
+
  - Add/Edit/Delete Educations and Work  Experience with modal
 
-
-
+![Educations](https://github.com/user-attachments/assets/ada039cc-b7fe-46f0-a65d-1e3a77f6519b)
 
 
 
