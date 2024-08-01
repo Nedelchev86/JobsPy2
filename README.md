@@ -95,16 +95,14 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 
 
  
-- - **Blog** with Django REST Framework
-  - Create, read, update, and delete blog posts.
+- - **Blog**
+
   - Add comments to blog posts.
-  - Rich text editing for blog post content using CKEditor.
-  - User authentication and authorization.
-  - Pagination for blog posts and comments.
-  - API endpoints for retrieving and manipulating blog posts and comments.
+
+![blog3](https://github.com/user-attachments/assets/8e47de15-b1a9-49f2-80d2-94fc3a986028)
 
 ![blog4](https://github.com/user-attachments/assets/a090eb53-d6d7-4a25-bd3e-859f9d735477)
-![blog3](https://github.com/user-attachments/assets/8e47de15-b1a9-49f2-80d2-94fc3a986028)
+
 
 
 
@@ -113,7 +111,7 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 
 ## Newsletter
   Subscribe for newsletter ( Celery and Redis for sending mails )
-![newsletter](https://github.com/Nedelchev86/jobsPy/assets/122647190/cb41ec38-b8f2-4ef2-98d1-0092bdae24f4)
+
 
 
 ## Contact From
