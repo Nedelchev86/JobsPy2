@@ -1,0 +1,20 @@
+.blog-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1;
+    position: relative;
+    padding-left: 18px;
+    font-weight: 600;
+    line-height: 28px;
+    text-transform: capitalize;
+}
+
+.blog-title::before {
+    position: absolute;
+    left: 0;
+    top: 1px;
+    height: 100%;
+    width: 3px;
+    background-color: #2042e3;
+    content: "";
+}

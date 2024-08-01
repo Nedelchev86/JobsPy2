@@ -5,10 +5,14 @@ import LastFiveBlogs from "./LastFiveBlogs";
 import useFetch from "../hooks/useFetch";
 import Loading from "./loading/Loading";
 import {Link} from "react-router-dom";
+import GoogleMapComponent from "./GoogleMapComponent";
+import styles from "./CompanyDetails.module.css";
 
 export default function CompanyDetails() {
     // const [company, setCompany] = useState();
     const {id} = useParams();
+    const defaultLocation = "Burgas";
+    const defaultAddress = "Bul. San Stefano";
 
     const {data: company, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}companies/${id}/`, {});
 
@@ -151,42 +155,65 @@ export default function CompanyDetails() {
                                                             ))}
                                                     </ul>
                                                 </div>
-                                                <div className="single-section">
-                                                    <h4>Open positions </h4>
-                                                    <div className="job-items">
-                                                        {company?.jobs?.map((job) => (
-                                                            <p key={job.id}>{job.title}</p>
-                                                        ))}
-                                                        {/* {% for job in jobs_published %}
-                            <div className="manage-content" style="margin-top: 16px">
-                                <div className="row align-items-center justify-content-center">
-                                    <div className="col-lg-6 col-md-6 col-12">
-                                        <div className="title-img" style="display: flex">
-                                            <div className="can-img">
-                                                {% if job.job_image %}
-                                                <img style="height: 60px; width: 60px;" src="{{ job.job_image.url }}" alt="#">
-                                                    {% else %}
-                                                    <img style="height: 60px; width: 60px;" src="{{ company?.image.url }}" alt="#">
-                                                {% endif %}
                                             </div>
-                                            <h6  style="padding-left: 10px">{{ job.title }}</h6>
-                                                <span style="text-align: right">{{ job.category}}</span>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-2 col-md-2 col-12">
-                                        <p><span className="time"><i className="lni lni-coin"></i> {{ job.salary }}</span></p>
-                                    </div>
-                                    <div className="col-lg-2 col-md-2 col-12">
-                                        <p className="location"><i className="lni lni-map-marker"></i>{{job.location}}</p>
-                                    </div>
-                                    <div className="col-lg-2 col-md-2 col-12">
-                                        <div className="button">
-                                            <a href="{% url 'job_details' job.pk %}" className="btn">Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %} */}
+
+                                            <div className="col-lg-12 col-12">
+                                                <div className="manage-jobs">
+                                                    <div className=" job-items">
+                                                        <h4>Open positions </h4>
+                                                        <div className="manage-list">
+                                                            <div className="row">
+                                                                <div className="col-lg-4 col-md-4 col-12">
+                                                                    <p>Title</p>
+                                                                </div>
+                                                                <div className="col-lg-2 col-md-4 col-12">
+                                                                    <p>Location</p>
+                                                                </div>
+                                                                <div className="col-lg-2 col-md-4 col-12">
+                                                                    <p>Salary</p>
+                                                                </div>
+                                                                <div className="col-lg-2 col-md-4 col-12">
+                                                                    <p>Experience</p>
+                                                                </div>
+                                                                <div className="col-lg-2 col-md-4 col-12">
+                                                                    <p>Details</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        {company?.jobs?.map((job) => (
+                                                            <div key={job.id} className="manage-content">
+                                                                <div className="row align-items-center justify-content-center">
+                                                                    <div className="col-lg-4 col-md-4 col-12">
+                                                                        <h3>{job.title}</h3>
+                                                                    </div>
+                                                                    <div className="col-lg-2 col-md-4 col-12">
+                                                                        <p>
+                                                                            <span className="time">{job.location}</span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div className="col-lg-2 col-md-4 col-12">
+                                                                        <div className="col-lg-3 col-md-3 col-12">
+                                                                            <p>
+                                                                                <span className="time">{job.salary}</span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col-lg-2 col-md-4 col-12">
+                                                                        <p>
+                                                                            <span className="time">{job.seniority}</span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div className="col-lg-2 col-md-4 col-12">
+                                                                        <p>
+                                                                            <Link className={styles["details-btn"]} to={`/jobs/${job.id}`}>
+                                                                                Details
+                                                                            </Link>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ))}
                                                     </div>
                                                 </div>
                                             </div>
@@ -206,17 +233,18 @@ export default function CompanyDetails() {
                                                 </div>
                                                 <div className="widget popular-feeds">
                                                     <div className="inner">
-                                                        <h6 className="title">Job Location</h6>
+                                                        <h6 className={styles.title}>Job Location</h6>
                                                         <div className="mapouter">
                                                             <div className="gmap_canvas">
-                                                                <iframe width="100%" height={300} id="gmap_canvas" src={`https://maps.google.com/maps?q=${company?.location}&t=&z=13&ie=UTF8&iwloc=&output=embed`} frameBorder={0} scrolling="no" marginHeight={0} marginWidth={0} />
+                                                                {/* <iframe width="100%" height={300} id="gmap_canvas" src={`https://maps.google.com/maps?q=${company?.location}&t=&z=13&ie=UTF8&iwloc=&output=embed`} frameBorder={0} scrolling="no" marginHeight={0} marginWidth={0} />
 
                                                                 <style
                                                                     dangerouslySetInnerHTML={{
                                                                         __html: ".mapouter{position:relative;text-align:right;height:300px;width:100%;}.gmap_canvas {overflow:hidden;background:none!important;height:300px;width:100%;}",
                                                                     }}
                                                                 />
-                                                                <a href="https://maps-google.github.io/embed-google-map/">embed google map</a>
+                                                                <a href="https://maps-google.github.io/embed-google-map/">embed google map</a> */}
+                                                                <GoogleMapComponent city={company?.location} address={company?.address} />
                                                             </div>
                                                         </div>
                                                     </div>

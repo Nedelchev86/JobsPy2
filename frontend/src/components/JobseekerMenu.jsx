@@ -41,7 +41,7 @@ export default function JobSeekerMenu() {
                 <ul>
                     <li className="heading">Manage Account</li>
                     <li>
-                        <NavLink activeclassname="active" className="" to="/dashboard">
+                        <NavLink to="/dashboard">
                             <i className="lni lni-clipboard"></i> Dashboard
                         </NavLink>
                     </li>

@@ -5,6 +5,7 @@ import {Link, useSearchParams} from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import Loading from "./loading/Loading";
 import {Slide} from "react-awesome-reveal";
+import styles from "./Jobseekers.module.css";
 
 export default function JobseekersList() {
     // const [jobseekers, setJobseekers] = useState([]);
@@ -78,7 +79,7 @@ export default function JobseekersList() {
                                 <div className="col-lg-8 col-12">
                                     {jobseekers.map((jobseeker) => (
                                         <Slide key={jobseeker.user} direction="left" duration="1000" triggerOnce="true">
-                                            <div className="inner-content">
+                                            <div className={`${styles["user-card"]} inner-content`}>
                                                 <div className="resume-item">
                                                     {jobseeker.profile_picture && <img src={`https://res.cloudinary.com/drjgddl0y/${jobseeker.profile_picture}`} alt="Candidate" />}
                                                     {!jobseeker.profile_picture && <img src={"images/clients/default_profile.png"} alt="Candidate" />}
@@ -95,11 +96,13 @@ export default function JobseekersList() {
                                                                 Seniority: <span>{jobseeker.seniority}</span>
                                                             </li>
                                                             <li>
-                                                                GitHub:{" "}
+                                                                GitHub:
                                                                 <span>
-                                                                    <a target="_blank" href="{jobseeker.github}">
-                                                                        Link
-                                                                    </a>
+                                                                    {jobseeker.github && (
+                                                                        <Link target="_blank" to={jobseeker.github}>
+                                                                            Link
+                                                                        </Link>
+                                                                    )}
                                                                 </span>
                                                             </li>
                                                             <li>

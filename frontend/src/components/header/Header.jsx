@@ -3,14 +3,13 @@ import {useAuth} from "../../contexts/Contexts";
 import LoginModal from "../loginModal/LoginModal";
 import {Link, NavLink} from "react-router-dom";
 import {useJobs} from "../../contexts/JobContext";
+import styles from "./Header.module.css";
 
 import {ToastContainer, toast} from "react-toastify";
 
 const Header = () => {
     const {user, auth, isAuthenticated, login, logout} = useAuth();
-    // const [notifications] = useState([]);
     const {notifications, fetchNotifications} = useJobs();
-    // Check if the user is authenticated
 
     const [showModal, setShowModal] = useState(false);
 
@@ -18,39 +17,6 @@ const Header = () => {
     const handleCloseModal = () => {
         setShowModal(false);
     };
-
-    // const handleSubmitLogin = async (formData) => {
-    //     // Call the login function with form data and open modal callback
-    //     await login(formData, handleOpenModal);
-    //     console.log("login");
-    //     fetchNotifications();
-    // };
-
-    // useEffect(() => {
-    //     if (auth) {
-    //         fetchNotifications();
-    //     }
-    // }, [auth, user]);
-
-    // const fetchNotifications = async () => {
-    //     console.log(isAuthenticated);
-    //     if (!auth) {
-    //         console.log("fetch return");
-    //         return;
-    //     }
-    //     try {
-    //         const response = await fetch("http://127.0.0.1:8000/api/notifications/", {
-    //             method: "GET",
-    //             headers: {
-    //                 Authorization: `Bearer ${auth}`,
-    //             },
-    //         });
-    //         const data = await response.json();
-    //         setNotifications(data.filter((notification) => notification.is_read === false));
-    //     } catch (error) {
-    //         console.error("Failed to fetch notifications:", error);
-    //     }
-    // };
 
     return (
         <header className="header style4">
@@ -60,9 +26,9 @@ const Header = () => {
                     <div className="row align-items-center">
                         <div className="col-lg-12">
                             <nav className="navbar navbar-expand-lg">
-                                <a className="navbar-brand logo" href="#">
+                                <Link className="navbar-brand logo" to="/">
                                     <img className="logo1" src="/images/logo/logo.jpg" alt="Logo" />
-                                </a>
+                                </Link>
                                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                     <span className="toggler-icon"></span>
                                     <span className="toggler-icon"></span>
@@ -128,7 +94,7 @@ const Header = () => {
                                     <div className="button">
                                         <div className="user-profile-container">
                                             <NavLink to="dashboard">
-                                                <img className="user-profile-small" src={`https://res.cloudinary.com/drjgddl0y/${user.user.image}`} alt="Logo" /> <span className="notification-badge"> {notifications.length} </span>
+                                                <img className={styles["user-profile-small"]} src={`https://res.cloudinary.com/drjgddl0y/${user.user.image}`} alt="Logo" /> <span className="notification-badge"> {notifications.length} </span>
                                             </NavLink>
                                         </div>
 
@@ -142,24 +108,21 @@ const Header = () => {
                                     <div className="button">
                                         <div className="user-profile-container">
                                             <NavLink to="dashboard">
-                                                <img className="user-profile-small" src={`https://res.cloudinary.com/drjgddl0y/${user.user.profile_picture}`} alt="Logo" /> <span className="notification-badge"> {notifications.length} </span>
+                                                <img className={styles["user-profile-small"]} src={`https://res.cloudinary.com/drjgddl0y/${user.user.profile_picture}`} alt="Logo" /> <span className="notification-badge"> {notifications.length} </span>
                                             </NavLink>
                                         </div>
                                         <button onClick={logout} className="btn">
                                             Logout
                                         </button>
-                                        {/* <a href="{% url 'sing-out' %}" className="login">
-                                            <i className="lni lni-lock-alt"></i> Logout
-                                        </a> */}
                                     </div>
                                 )}
 
                                 {isAuthenticated && user && !user.user.profile_picture && !user.user.image && (
                                     <>
                                         <div
-                                            className="text-center align-center"
+                                            className={`text-center align-center ${styles["no-image"]}`}
                                             style={{
-                                                alignItems: "center !important",
+                                                alignItems: "right !important",
                                                 justifyContent: "center !important",
                                                 backgroundColor: "black",
                                                 width: 50,
@@ -171,7 +134,7 @@ const Header = () => {
                                         >
                                             <div className="user-profile-container">
                                                 {user && (
-                                                    <a href="#" className="user-profile-small" style={{paddingTop: "10%", color: "white", fontSize: 25}}>
+                                                    <a href="#" className={styles["user-profile-small"]} style={{paddingTop: "10%", color: "white", fontSize: 25}}>
                                                         {user.email.split("")[0]}
                                                         <span className="notification-badge">0</span>
                                                     </a>

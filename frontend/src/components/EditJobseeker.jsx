@@ -5,13 +5,17 @@ import {useAuth} from "../contexts/Contexts";
 import {useNavigate} from "react-router-dom";
 import Loading from "./loading/Loading";
 import {toast} from "react-toastify";
+import {useForm, Controller} from "react-hook-form";
+import useFetch from "../hooks/useFetch";
 
 export default function EditJobseeker() {
     const navigate = useNavigate();
     const {auth, isAuthenticated} = useAuth();
-    const [skills, setSkills] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [profile, setProfile] = useState({
+    // const [skills, setSkills] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const profile = {
         first_name: "",
         last_name: "",
         city: "",
@@ -29,15 +33,28 @@ export default function EditJobseeker() {
         skills: [],
         profile_picture: "",
         user: "",
+    };
+
+    const {data: skills, error, refetch} = useFetch(`${import.meta.env.VITE_API_URL}skills/`, []);
+
+    const {
+        register,
+        handleSubmit,
+        control,
+        setValue,
+        formState: {errors},
+    } = useForm({
+        profile,
+        mode: "onBlur",
     });
-    console.log(profile);
-    useEffect(() => {
-        // Fetch skills from the API
-        fetch(`${import.meta.env.VITE_API_URL}skills/`)
-            .then((response) => response.json())
-            .then((data) => setSkills(data))
-            .catch((error) => console.error("Error fetching skills:", error));
-    }, []);
+
+    // useEffect(() => {
+    //     // Fetch skills from the API
+    //     fetch(`${import.meta.env.VITE_API_URL}skills/`)
+    //         .then((response) => response.json())
+    //         .then((data) => setSkills(data))
+    //         .catch((error) => console.error("Error fetching skills:", error));
+    // }, []);
 
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_URL}user/jobseeker/update/`, {
@@ -48,109 +65,102 @@ export default function EditJobseeker() {
             },
         })
             .then((response) => response.json())
-            .then((data) => setProfile(data))
+            .then((data) =>
+                Object.keys(data).forEach((key) => {
+                    setValue(key, data[key]);
+                })
+            )
             .catch((error) => {
                 console.error("Error fetching profile data:", error);
             });
         setLoading(false);
     }, [auth]);
 
-    const handleSkillChange = (e) => {
-        const {value, checked} = e.target;
-        if (checked) {
-            setProfile((prevProfile) => ({
-                ...prevProfile,
-                skills: [...prevProfile.skills, value],
-            }));
-        } else {
-            setProfile((prevProfile) => ({
-                ...prevProfile,
-                skills: prevProfile.skills.filter((skill) => skill !== value),
-            }));
-        }
-    };
+    // const handleSkillChange = (e) => {
+    //     const {value, checked} = e.target;
+    //     if (checked) {
+    //         setProfile((prevProfile) => ({
+    //             ...prevProfile,
+    //             skills: [...prevProfile.skills, value],
+    //         }));
+    //     } else {
+    //         setProfile((prevProfile) => ({
+    //             ...prevProfile,
+    //             skills: prevProfile.skills.filter((skill) => skill !== value),
+    //         }));
+    //     }
+    // };
 
-    const handleImageUpload = (e) => {
-        console.log("test");
-        const file = e.target.files[0];
-        setProfile((prevState) => ({
-            ...prevState,
-            profile_picture: file,
-        }));
-    };
+    // const handleImageUpload = (e) => {
+    //     console.log("test");
+    //     const file = e.target.files[0];
+    //     setProfile((prevState) => ({
+    //         ...prevState,
+    //         profile_picture: file,
+    //     }));
+    // };
 
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setProfile((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-    };
+    // const handleChange = (e) => {
+    //     const {name, value} = e.target;
+    //     setProfile((prevState) => ({
+    //         ...prevState,
+    //         [name]: value,
+    //     }));
+    // };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(profile);
+    const onSubmit = async (formData) => {
+        setIsLoading(true);
+        try {
+            const formDataObj = new FormData();
 
-        const formData = new FormData();
-
-        const addFormData = (key, value) => {
-            if (value !== null && value !== undefined) {
-                formData.append(key, value);
-            }
-        };
-
-        addFormData("profile_picture", profile.profile_picture);
-        addFormData("first_name", profile.first_name);
-        addFormData("last_name", profile.last_name);
-        addFormData("city", profile.city);
-        addFormData("nationality", profile.nationality);
-        addFormData("occupation", profile.occupation);
-        addFormData("website", profile.website);
-        addFormData("linkedin", profile.linkedin);
-        addFormData("facebook", profile.facebook);
-        addFormData("github", profile.github);
-        addFormData("about", profile.about);
-        addFormData("phone_number", profile.phone_number);
-        addFormData("seniority", profile.seniority);
-        addFormData("gender", profile.gender);
-        addFormData("marital_status", profile.marital_status);
-        addFormData("user", profile.user);
-        profile.skills.forEach((skill) => {
-            formData.append("skills", skill);
-        });
-        console.log(formData);
-        fetch(`${import.meta.env.VITE_API_URL}user/jobseeker/update/`, {
-            headers: {
-                Authorization: `Bearer ${auth}`,
-            },
-            method: "PUT",
-            body: formData,
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    return response.json().then((errorData) => {
-                        // Handle validation errors
-                        if (errorData.errors) {
-                            Object.entries(errorData.errors).forEach(([field, messages]) => {
-                                setError(field, {type: "manual", message: messages[0]});
-                            });
-                        }
-                        toast.error("Failed to edit your profile");
-                        throw new Error("Validation error");
-                    });
+            // Append form data to FormData object
+            Object.keys(formData).forEach((key) => {
+                if (formData[key] === null || formData[key] === undefined) {
+                    formDataObj.append(key, "");
+                } else {
+                    if (key === "skills") {
+                        formData[key].forEach((skill) => formDataObj.append("skills", skill));
+                    } else if (key === "profile_picture" && formData.profile_picture[0]) {
+                        formDataObj.append("profile_picture", formData.profile_picture[0]);
+                    } else {
+                        formDataObj.append(key, formData[key]);
+                    }
                 }
-                return response.json();
-            })
-
-            .then((data) => {
-                toast.success("Profile updated successfully");
-                console.log("Profile updated successfully:", data);
-                navigate("/dashboard");
-            })
-            .catch((error) => {
-                toast.error("Error updating profile");
-                console.error("Error updating profile:", error);
             });
+
+            // Make API call to update profile
+            fetch(`${import.meta.env.VITE_API_URL}user/jobseeker/update/`, {
+                headers: {
+                    Authorization: `Bearer ${auth}`,
+                },
+                method: "PUT",
+                body: formDataObj,
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        return response.json().then((errorData) => {
+                            // Handle validation errors
+                            if (errorData.errors) {
+                                Object.entries(errorData.errors).forEach(([field, messages]) => {});
+                            }
+
+                            toast.error("Failed to edit profile");
+                            throw new Error("Validation error");
+                        });
+                    }
+                    return response.json();
+                })
+
+                .then((data) => {
+                    setIsLoading(false);
+                    toast.success("Profile updated successfully");
+                    console.log("Profile updated successfully:", data);
+                    navigate("/dashboard");
+                });
+        } catch (error) {
+            toast.error("Failed to edit profile");
+            console.error("Error updating profile:", error);
+        }
     };
 
     return (
@@ -167,7 +177,7 @@ export default function EditJobseeker() {
                                         <h3>Edit Profile</h3>
                                         <p>Here you can edit your Profile.</p>
 
-                                        <form onSubmit={handleSubmit} encType="multipart/form-data">
+                                        {/* <form onSubmit={handleSubmit} encType="multipart/form-data">
                                             <div className="row">
                                                 <div className="form-group">
                                                     <label htmlFor="id_first_name" className="required">
@@ -318,33 +328,285 @@ export default function EditJobseeker() {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </form> */}
 
-                                        {/* {% if form.errors %}
-                            <div className="alert alert-danger">
-                            {{ form.errors }}
-                            </div>
-                            {% endif %} */}
-
-                                        <form method="post">
+                                        <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
                                             <div className="row">
-                                                {/* {{ form.media }} */}
-                                                {/* {% for field in form %}
-                    <div className="form-group">
-                    {{ field.label_tag }}
-                    {{ field }}
-                     </div>
-                    {% for error in field.errors %}
-                      <p style="color: red">{{ error }}</p>
-                    {% endfor %}
-
-                {% endfor %} */}
-                                                {/* 
-                                            <div className="col-lg-12">
-                                                <div className="button">
-                                                    <button className="btn">Save</button>
+                                                <div className="form-group">
+                                                    <label htmlFor="id_first_name" className="required">
+                                                        First Name:
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        {...register("first_name", {
+                                                            required: "First Name is required",
+                                                            maxLength: {
+                                                                value: 50,
+                                                                message: "First Name cannot exceed 50 characters",
+                                                            },
+                                                            pattern: {
+                                                                value: /^[A-Z][a-z]*$/,
+                                                                message: "First name must start with an uppercase letter",
+                                                            },
+                                                        })}
+                                                        className={`form-control ${errors.first_name ? "is-invalid" : ""}`}
+                                                        id="id_first_name"
+                                                    />
+                                                    {errors.first_name && <div className="invalid-feedback">{errors.first_name.message}</div>}
                                                 </div>
-                                            </div> */}
+
+                                                <div className="form-group">
+                                                    <label htmlFor="id_last_name" className="required">
+                                                        Last Name:
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        {...register("last_name", {
+                                                            required: "Last Name is required",
+                                                            maxLength: {
+                                                                value: 50,
+                                                                message: "Last Name cannot exceed 50 characters",
+                                                            },
+                                                            pattern: {
+                                                                value: /^[A-Z][a-z]*$/,
+                                                                message: "Last name must start with an uppercase letter",
+                                                            },
+                                                        })}
+                                                        className={`form-control ${errors.last_name ? "is-invalid" : ""}`}
+                                                        id="id_last_name"
+                                                    />
+                                                    {errors.last_name && <div className="invalid-feedback">{errors.last_name.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="id_city" className="required">
+                                                        City:
+                                                    </label>
+                                                    <input type="text" {...register("city", {required: "City is required", maxLength: 50})} className={`form-control ${errors.city ? "is-invalid" : ""}`} id="id_city" />
+                                                    {errors.city && <div className="invalid-feedback">{errors.city.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="id_nationality" className="required">
+                                                        Nationality:
+                                                    </label>
+                                                    <input type="text" {...register("nationality", {required: "Nationality is required", maxLength: 50})} className={`form-control ${errors.nationality ? "is-invalid" : ""}`} id="id_nationality" />
+                                                    {errors.nationality && <div className="invalid-feedback">{errors.nationality.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="id_occupation" className="required">
+                                                        Occupation:
+                                                    </label>
+                                                    <input type="text" {...register("occupation", {required: "Occupation is required", maxLength: 50})} className={`form-control ${errors.occupation ? "is-invalid" : ""}`} id="id_occupation" />
+                                                    {errors.occupation && <div className="invalid-feedback">{errors.occupation.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="id_seniority" className="required">
+                                                        Seniority:
+                                                    </label>
+                                                    {/* <Controller
+                                                        name="seniority"
+                                                        control={control}
+                                                        rules={{required: "Seniority is required"}}
+                                                        render={({field}) => (
+                                                            <select {...field} className={`form-control ${errors.seniority ? "is-invalid" : ""}`} id="id_seniority">
+                                                                <option value="">---------</option>
+                                                                <option value="Junior / Intern">Junior / Intern</option>
+                                                                <option value="1-2 year's experience">1-2 year's experience</option>
+                                                                <option value="2-5 year's experience">2-5 year's experience</option>
+                                                                <option value="5+ year's experience">5+ year's experience</option>
+                                                            </select>
+                                                        )}
+                                                    /> */}
+
+                                                    <Controller
+                                                        name="seniority"
+                                                        control={control}
+                                                        rules={{required: "Seniority is required"}}
+                                                        render={({field}) => (
+                                                            <select {...field} className={`form-control ${errors.seniority ? "is-invalid" : ""}`} id="id_seniority" defaultValue={field.value || ""}>
+                                                                <option value="">---------</option>
+                                                                <option value="Junior / Intern">Junior / Intern</option>
+                                                                <option value="1-2 year's experience">1-2 year's experience</option>
+                                                                <option value="2-5 year's experience">2-5 year's experience</option>
+                                                                <option value="5+ year's experience">5+ year's experience</option>
+                                                            </select>
+                                                        )}
+                                                    />
+                                                    {errors.seniority && <div className="invalid-feedback">{errors.seniority.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="id_website">Website:</label>
+                                                    <input
+                                                        type="url"
+                                                        {...register("website", {
+                                                            maxLength: {
+                                                                value: 50,
+                                                                message: "URL cannot exceed 50 characters",
+                                                            },
+                                                            pattern: {
+                                                                value: /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/,
+                                                                message: "Please enter a valid URL",
+                                                            },
+                                                        })}
+                                                        className={`form-control ${errors.website ? "is-invalid" : ""}`}
+                                                        id="id_website"
+                                                    />
+                                                    {errors.website && <div className="invalid-feedback">{errors.website.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="id_linkedin">LinkedIn:</label>
+                                                    <input
+                                                        type="url"
+                                                        {...register("linkedin", {
+                                                            maxLength: {
+                                                                value: 50,
+                                                                message: "URL cannot exceed 50 characters",
+                                                            },
+                                                            pattern: {
+                                                                value: /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/,
+                                                                message: "Please enter a valid URL",
+                                                            },
+                                                        })}
+                                                        className={`form-control ${errors.linkedin ? "is-invalid" : ""}`}
+                                                        id="id_linkedin"
+                                                    />
+                                                    {errors.linkedin && <div className="invalid-feedback">{errors.linkedin.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="id_facebook">Facebook:</label>
+                                                    <input
+                                                        type="url"
+                                                        {...register("facebook", {
+                                                            maxLength: {
+                                                                value: 50,
+                                                                message: "URL cannot exceed 50 characters",
+                                                            },
+                                                            pattern: {
+                                                                value: /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/,
+                                                                message: "Please enter a valid URL",
+                                                            },
+                                                        })}
+                                                        className={`form-control ${errors.facebook ? "is-invalid" : ""}`}
+                                                        id="id_facebook"
+                                                    />
+                                                    {errors.facebook && <div className="invalid-feedback">{errors.facebook.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="id_github">Github:</label>
+                                                    <input
+                                                        type="url"
+                                                        {...register("github", {
+                                                            maxLength: {
+                                                                value: 50,
+                                                                message: "URL cannot exceed 50 characters",
+                                                            },
+                                                            pattern: {
+                                                                value: /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/,
+                                                                message: "Please enter a valid URL",
+                                                            },
+                                                        })}
+                                                        className={`form-control ${errors.github ? "is-invalid" : ""}`}
+                                                        id="id_github"
+                                                    />
+                                                    {errors.github && <div className="invalid-feedback">{errors.github.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="id_about" className="required">
+                                                        About:
+                                                    </label>
+                                                    <textarea {...register("about", {required: "About is required"})} cols="40" rows="10" className={`form-control ${errors.about ? "is-invalid" : ""}`} id="id_about" />
+                                                    {errors.about && <div className="invalid-feedback">{errors.about.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="id_phone_number">Phone Number:</label>
+                                                    <input
+                                                        type="text"
+                                                        {...register("phone_number", {
+                                                            maxLength: {
+                                                                value: 50,
+                                                                message: "Phone number cannot exceed 50 characters",
+                                                            },
+                                                            pattern: {
+                                                                value: /^[0-9]*$/,
+                                                                message: "Phone number can only contain numbers",
+                                                            },
+                                                        })}
+                                                        className={`form-control ${errors.phone_number ? "is-invalid" : ""}`}
+                                                        id="id_phone_number"
+                                                    />
+                                                    {errors.phone_number && <div className="invalid-feedback">{errors.phone_number.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="profile_picture">Profile Picture:</label>
+                                                    <input type="file" {...register("profile_picture")} className={`form-control ${errors.profile_picture ? "is-invalid" : ""}`} id="profile_picture" />
+                                                    {errors.profile_picture && <div className="invalid-feedback">{errors.profile_picture.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="id_gender" className="required">
+                                                        Gender:
+                                                    </label>
+                                                    <Controller
+                                                        name="gender"
+                                                        control={control}
+                                                        rules={{required: "Gender is required"}}
+                                                        render={({field}) => (
+                                                            <select {...field} className={`form-control ${errors.gender ? "is-invalid" : ""}`} id="id_gender">
+                                                                <option value="">---------</option>
+                                                                <option value="Male">Male</option>
+                                                                <option value="Female">Female</option>
+                                                            </select>
+                                                        )}
+                                                    />
+                                                    {errors.gender && <div className="invalid-feedback">{errors.gender.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label htmlFor="id_marital_status">Marital Status:</label>
+                                                    <Controller
+                                                        name="marital_status"
+                                                        control={control}
+                                                        render={({field}) => (
+                                                            <select {...field} className={`form-control ${errors.marital_status ? "is-invalid" : ""}`} id="id_marital_status">
+                                                                <option value="">---------</option>
+                                                                <option value="Married">Married</option>
+                                                                <option value="Unmarried">Unmarried</option>
+                                                                <option value="Divorced">Divorced</option>
+                                                            </select>
+                                                        )}
+                                                    />
+                                                    {errors.marital_status && <div className="invalid-feedback">{errors.marital_status.message}</div>}
+                                                </div>
+
+                                                <div className="form-group">
+                                                    <label>Skills:</label>
+                                                    <div className="form-check">
+                                                        {skills.map((skill) => (
+                                                            <div key={skill.id}>
+                                                                <input type="checkbox" {...register("skills")} value={skill.name} className="form-check" />
+                                                                <label className="form-check-label">{skill.name}</label>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-lg-12">
+                                                    <div className="button">
+                                                        <button type="submit" className="btn" disabled={isLoading}>
+                                                            {isLoading ? "Submitting..." : "Save"}
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>

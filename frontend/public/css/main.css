@@ -7959,7 +7959,7 @@ blockquote .shape {
     width: 100%;
 }
 
-.user-profile-small {
+/* .user-profile-small {
     display: inline-block;
     width: 50px;
     height: 50px;
@@ -7968,7 +7968,7 @@ blockquote .shape {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-}
+} */
 
 .job-image-list img {
     position: absolute;

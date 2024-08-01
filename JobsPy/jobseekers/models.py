@@ -22,7 +22,7 @@ class JobSeeker(models.Model):
     city = models.CharField(max_length=50, blank=False, null=False)
     nationality = models.CharField(max_length=50, blank=False, null=False)
     occupation = models.CharField(max_length=50, blank=False, null=False)
-    seniority = models.ForeignKey(Seniority, on_delete=models.DO_NOTHING, blank=True, null=True)
+    seniority = models.ForeignKey(Seniority, on_delete=models.DO_NOTHING, blank=False, null=False, default=1 )
     website = models.URLField(max_length=70, blank=True, null=True)
     linkedin = models.URLField(blank=True, null=True, max_length=50)
     facebook = models.URLField(blank=True, null=True, max_length=50)

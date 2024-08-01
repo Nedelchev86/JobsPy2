@@ -27,8 +27,6 @@ export default function JobsList() {
             setSeniority(value);
         } else if (name === "location") {
             setLocation(value);
-        } else if (name === "category") {
-            setCategory(value);
         }
     };
 

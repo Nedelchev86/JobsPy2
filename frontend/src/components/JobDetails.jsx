@@ -8,6 +8,7 @@ import {formatDate} from "../utils/formatDate";
 import LoginModal from "./loginModal/LoginModal";
 import {toast} from "react-toastify";
 import {Button} from "react-bootstrap";
+import GoogleMapComponent from "./GoogleMapComponent";
 
 export default function JobDetails() {
     const [job, setJob] = useState({});
@@ -87,7 +88,7 @@ export default function JobDetails() {
                 })
                     .then((response) => response)
                     .then((data) => data);
-                toast.success("Successfully added to favorites");
+                toast.success("Successfully removed from favorites");
 
                 setIsFavorite({is_favorite: false});
             } else {
@@ -100,7 +101,8 @@ export default function JobDetails() {
                     .then((response) => response.json())
                     .then((data) => data);
                 console.log("Added");
-                toast.success("Successfully removed to favorites");
+                toast.success("Successfully added to favorites");
+
                 setIsFavorite({is_favorite: true});
             }
         } catch (error) {
@@ -322,16 +324,8 @@ export default function JobDetails() {
                                         <div className="inner">
                                             <h6 className="title">Job Location</h6>
                                             <div className="mapouter">
-                                                <div className="gmap_canvas">
-                                                    <iframe width="100%" height={300} id="gmap_canvas" src={`https://maps.google.com/maps?q=${job.location}&t=&z=13&ie=UTF8&iwloc=&output=embed`} frameBorder={0} scrolling="no" marginHeight={0} marginWidth={0} />
-                                                    {/* <a href="https://123movies-to.com">123movies old site</a> */}
-                                                    <style
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: ".mapouter{position:relative;text-align:right;height:300px;width:100%;}.gmap_canvas {overflow:hidden;background:none!important;height:300px;width:100%;}",
-                                                        }}
-                                                    />
-                                                    <a href="https://maps-google.github.io/embed-google-map/">embed google map</a>
-                                                </div>
+                                                <div className="gmap_canvas"></div>
+                                                <GoogleMapComponent city={job?.location} />
                                             </div>
                                         </div>
                                     </div>

@@ -1,0 +1,4 @@
+.user-card:hover {
+    filter: brightness(98%);
+    transform: scale(1.01);
+}

@@ -6,7 +6,6 @@ const useFetch = (url, initialData = null) => {
     const [error, setError] = useState(null);
     const [toggleRefetch, setToggleRefetch] = useState(false);
 
-    console.log(url);
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
