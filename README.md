@@ -1,5 +1,8 @@
 # JobsPy - LIVE DEMO Soon
-![logo](https://github.com/user-attachments/assets/c0aa2f73-b091-492e-afdf-4c24b450cf16)
+
+![JobsPy](https://github.com/user-attachments/assets/55392e2d-1fb3-43e6-a1c8-2c772c84a830)
+
+
 
 
 Coming soon: Desription of all endpoits and live demo server 
@@ -7,36 +10,40 @@ Coming soon: Desription of all endpoits and live demo server
 My first project with React 
 
 JobsPy is a job portal designed to connect job seekers with companies. It provides a platform for job seekers to showcase their skills and for companies to advertise job openings and manage applications.
-![main](https://github.com/Nedelchev86/jobsPy/assets/122647190/d8cf6df9-c9b2-441f-b6fc-7add2de84595)
+
+![index](https://github.com/user-attachments/assets/01326894-56c0-44c0-91e1-ffe426d4bc3c)
+
 
 
 ## Features
 
-- **User Authentication**: Utilizes Django's built-in authentication system for secure user registration and login.
+- **User Authentication**: Utilizes Django's  authentication system for secure user registration and login.
 
-![login](https://github.com/Nedelchev86/jobsPy/assets/122647190/59bc234d-caeb-424f-a287-3ad0d7aae9a8)
+![login2](https://github.com/user-attachments/assets/72ea1ae2-191f-49a4-b1b3-53d9223a1591)
 
 
-- **react-toastify"**: React-toastify for messages
-  ![toasty](https://github.com/user-attachments/assets/8a0aebfa-afb3-4243-a96e-33daf564946a)
+
+- **React-toastify"**: React-toastify for messages
+- 
+![toasty](https://github.com/user-attachments/assets/ba87d8f9-fa79-4f2e-817a-e3b03980744e)
+
 
 
 - **User Roles**: Supports two types of users: job seekers and companies.
   
-  ![singUp](https://github.com/Nedelchev86/jobsPy/assets/122647190/aaf1dafa-867a-422f-85bc-9e32c2270923)
+  ![registration](https://github.com/user-attachments/assets/c21e3522-62b4-49d4-88ba-d0b70ad47bb7)
 
   
 - **Error Handling**: React Form Hook for error handling in forms
 
-- ![error](https://github.com/user-attachments/assets/c43dd157-6813-47c1-9fd7-f50559f0ad8e)
+![errors](https://github.com/user-attachments/assets/ad9539a8-454a-4161-a9c5-7a6f0a528d91)
 
 
 
 - ** Notifications system **
  
-  ![notifications](https://github.com/Nedelchev86/jobsPy/assets/122647190/2388e8d7-f0dc-483a-8028-c46b14313384)
+![notification](https://github.com/user-attachments/assets/c6263d00-2be3-4e62-855d-6e53ce2e2c60)
 
-  ![notifications2](https://github.com/Nedelchev86/jobsPy/assets/122647190/c67d10d8-b2ea-4e3d-8ce5-74962d3ae4f1)
 
 
 
@@ -48,14 +55,18 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
   - Education: Allows job seekers to add their educational background.
   - Skills: Job seekers can add their skills to their profile.
 
- ![jobseekers](https://github.com/Nedelchev86/jobsPy/assets/122647190/27c2c7f5-4a0d-43dd-9a79-55c8c12f116e)
- ![jobs1](https://github.com/Nedelchev86/jobsPy/assets/122647190/43a62956-29ee-4106-a9d4-9d36d2e95435)
- ![jobss2](https://github.com/Nedelchev86/jobsPy/assets/122647190/99b8efbe-05dc-486e-9cfc-c64464e303be)
+![jobseekers2](https://github.com/user-attachments/assets/6d6330c0-53bf-48d5-b0cf-49dfafb7f8be)
+
+![jobseekers3](https://github.com/user-attachments/assets/6c5255b7-2380-46d1-8094-ebf7321c77d9)
+
+
+
+
+
 
  - Add/Edit/Delete Educations and Work  Experience with modal
 
- - ![modal](https://github.com/user-attachments/assets/b2cc288b-c079-4323-afc4-a109aaf8e79f)
-
+![Educations](https://github.com/user-attachments/assets/ada039cc-b7fe-46f0-a65d-1e3a77f6519b)
 
 
 
@@ -64,45 +75,54 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 - **Company Profile**:
   - Company Information: Name, description, location, email, website URL, etc.
   - Image: Option to upload a company logo or image.
-    
-![company_dashboard](https://github.com/Nedelchev86/jobsPy/assets/122647190/6eca838b-cc66-425b-b1ba-99c184cf3834)
+    ![cam](https://github.com/user-attachments/assets/f6cf6307-3189-4773-8ae1-610c7eff7afa)
+
 
     
 - **Job Listings**:
   - Companies can publish job listings with details such as job title, description, requirements, etc.
   - Job seekers can search for and apply to job listings.
  
-  ![jobsall](https://github.com/Nedelchev86/jobsPy/assets/122647190/ca6ba2f1-a487-47b2-8cca-a3bf77b9af19)
+![com2](https://github.com/user-attachments/assets/1e321605-cbf0-4173-8601-4e2aabe97b8e)
+
 
 - **Application Tracking**:
   - Companies can track and manage job applications received for their listings.
   - Job seekers can view the status of their applications.
-    ![applicant](https://github.com/Nedelchev86/jobsPy/assets/122647190/bb536aea-c91c-42e9-bc23-4b837a17b8be)
+
+![app](https://github.com/user-attachments/assets/81d25619-b931-4d7a-adca-c52bd0b5618c)
 
 
 
  
-- - **Blog** with Django REST Framework
-  - Create, read, update, and delete blog posts.
+- - **Blog**
+
   - Add comments to blog posts.
-  - Rich text editing for blog post content using CKEditor.
-  - User authentication and authorization.
-  - Pagination for blog posts and comments.
-  - API endpoints for retrieving and manipulating blog posts and comments.
-    ![blog](https://github.com/Nedelchev86/jobsPy/assets/122647190/57eb606f-f9f7-4673-918e-4d05738d6d54)
-    ![Blog2](https://github.com/Nedelchev86/jobsPy/assets/122647190/31dedca4-34ce-48cb-85d2-0ea87a50a62c)
+
+![blog3](https://github.com/user-attachments/assets/8e47de15-b1a9-49f2-80d2-94fc3a986028)
+
+![blog4](https://github.com/user-attachments/assets/a090eb53-d6d7-4a25-bd3e-859f9d735477)
+
+
+
 
 
 
 
 ## Newsletter
   Subscribe for newsletter ( Celery and Redis for sending mails )
-![newsletter](https://github.com/Nedelchev86/jobsPy/assets/122647190/cb41ec38-b8f2-4ef2-98d1-0092bdae24f4)
+
 
 
 ## Contact From
+  Google Api & @react-google-maps/api
   Send mail for confirmation to you and to admin ( Celery and Redis for sending mails )
-![contactUs](https://github.com/Nedelchev86/jobsPy/assets/122647190/9ff11d8d-28b3-40d6-9666-2a1bc259f577)
+![contacts](https://github.com/user-attachments/assets/3828eec5-9786-4793-9369-3ab46d6848d5)
+
+
+@react-google-maps/api for Map in Company and Jobseekers details page
+
+![company2](https://github.com/user-attachments/assets/a9feb2b0-5ea0-4659-8415-41aa36ba4162)
 
   
 
