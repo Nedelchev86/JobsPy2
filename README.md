@@ -75,20 +75,23 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 - **Company Profile**:
   - Company Information: Name, description, location, email, website URL, etc.
   - Image: Option to upload a company logo or image.
-    
-![company_dashboard](https://github.com/Nedelchev86/jobsPy/assets/122647190/6eca838b-cc66-425b-b1ba-99c184cf3834)
+    ![cam](https://github.com/user-attachments/assets/f6cf6307-3189-4773-8ae1-610c7eff7afa)
+
 
     
 - **Job Listings**:
   - Companies can publish job listings with details such as job title, description, requirements, etc.
   - Job seekers can search for and apply to job listings.
  
-  ![jobsall](https://github.com/Nedelchev86/jobsPy/assets/122647190/ca6ba2f1-a487-47b2-8cca-a3bf77b9af19)
+![com2](https://github.com/user-attachments/assets/1e321605-cbf0-4173-8601-4e2aabe97b8e)
+
 
 - **Application Tracking**:
   - Companies can track and manage job applications received for their listings.
   - Job seekers can view the status of their applications.
-    ![applicant](https://github.com/Nedelchev86/jobsPy/assets/122647190/bb536aea-c91c-42e9-bc23-4b837a17b8be)
+
+![app](https://github.com/user-attachments/assets/81d25619-b931-4d7a-adca-c52bd0b5618c)
+
 
 
 
