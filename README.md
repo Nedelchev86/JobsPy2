@@ -94,7 +94,6 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 
 
 
-
  
 - - **Blog** with Django REST Framework
   - Create, read, update, and delete blog posts.
@@ -103,8 +102,11 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
   - User authentication and authorization.
   - Pagination for blog posts and comments.
   - API endpoints for retrieving and manipulating blog posts and comments.
-    ![blog](https://github.com/Nedelchev86/jobsPy/assets/122647190/57eb606f-f9f7-4673-918e-4d05738d6d54)
-    ![Blog2](https://github.com/Nedelchev86/jobsPy/assets/122647190/31dedca4-34ce-48cb-85d2-0ea87a50a62c)
+
+![blog4](https://github.com/user-attachments/assets/a090eb53-d6d7-4a25-bd3e-859f9d735477)
+![blog3](https://github.com/user-attachments/assets/8e47de15-b1a9-49f2-80d2-94fc3a986028)
+
+
 
 
 
@@ -115,8 +117,14 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 
 
 ## Contact From
+  Google Api & @react-google-maps/api
   Send mail for confirmation to you and to admin ( Celery and Redis for sending mails )
-![contactUs](https://github.com/Nedelchev86/jobsPy/assets/122647190/9ff11d8d-28b3-40d6-9666-2a1bc259f577)
+![contacts](https://github.com/user-attachments/assets/3828eec5-9786-4793-9369-3ab46d6848d5)
+
+
+@react-google-maps/api for Map in Company and Jobseekers details page
+
+![company2](https://github.com/user-attachments/assets/a9feb2b0-5ea0-4659-8415-41aa36ba4162)
 
   
 
