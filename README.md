@@ -10,7 +10,9 @@ Coming soon: Desription of all endpoits and live demo server
 My first project with React 
 
 JobsPy is a job portal designed to connect job seekers with companies. It provides a platform for job seekers to showcase their skills and for companies to advertise job openings and manage applications.
-![main](https://github.com/Nedelchev86/jobsPy/assets/122647190/d8cf6df9-c9b2-441f-b6fc-7add2de84595)
+
+![index](https://github.com/user-attachments/assets/01326894-56c0-44c0-91e1-ffe426d4bc3c)
+
 
 
 ## Features
