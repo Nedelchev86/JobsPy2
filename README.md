@@ -24,6 +24,7 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 
 
 - **React-toastify"**: React-toastify for messages
+- 
 ![toasty](https://github.com/user-attachments/assets/ba87d8f9-fa79-4f2e-817a-e3b03980744e)
 
 
@@ -35,7 +36,8 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
   
 - **Error Handling**: React Form Hook for error handling in forms
 
-- ![error](https://github.com/user-attachments/assets/c43dd157-6813-47c1-9fd7-f50559f0ad8e)
+![errors](https://github.com/user-attachments/assets/ad9539a8-454a-4161-a9c5-7a6f0a528d91)
+
 
 
 
