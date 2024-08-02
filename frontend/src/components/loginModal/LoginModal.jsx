@@ -59,7 +59,12 @@ const LoginModal = ({show, handleClose}) => {
 
     return (
         <Modal show={show} onHide={handleClose} centered>
-            <Modal.Header closeButton>
+            <p className="text-center">
+                <strong>
+                    <img className={styles["img-center"]} src="./images/logo/login.jpg" alt="" width="100" height="100" />
+                </strong>
+            </p>
+            <Modal.Header className={styles.red} closeButton>
                 <Modal.Title>Login to Your Account</Modal.Title>
             </Modal.Header>
             <Modal.Body>

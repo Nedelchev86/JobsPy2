@@ -6,3 +6,20 @@
     background-color: #57575a;
     border: 0px;
 }
+
+.red {
+    overflow-x: visible !important;
+
+    overflow-y: visible !important;
+
+    top: 100px;
+}
+
+.img-center {
+    margin-left: 25px;
+    position: relative;
+    top: -100px;
+    border-radius: 50px;
+    margin-bottom: -150px;
+    border: #2042e3 solid 3px;
+}
