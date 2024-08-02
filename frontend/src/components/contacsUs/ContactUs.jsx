@@ -87,7 +87,7 @@ export default function ContactUs() {
                                             </div>
                                             <div className="col-lg-6 col-12">
                                                 <div className="form-group">
-                                                    <label htmlFor="city">Subject</label>
+                                                    <label htmlFor="subject">Subject</label>
                                                     <input
                                                         type="text"
                                                         id="subject"

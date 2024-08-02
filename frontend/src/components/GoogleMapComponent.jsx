@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from "react";
-import {GoogleMap, useJsApiLoader, Marker} from "@react-google-maps/api";
+import {GoogleMap, useJsApiLoader, MarkerF} from "@react-google-maps/api";
 
 const containerStyle = {
     width: "100%",
@@ -7,8 +7,6 @@ const containerStyle = {
 };
 
 function MyComponent({city, address}) {
-    console.log(city);
-    console.log(address);
     const {isLoaded} = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: import.meta.env.VITE_API_GOOGLE,
@@ -20,7 +18,6 @@ function MyComponent({city, address}) {
     useEffect(() => {
         if (isLoaded && city) {
             const locationQuery = `${address}, ${city}`;
-            console.log(locationQuery);
 
             const geocodeCity = async () => {
                 try {
@@ -76,7 +73,7 @@ function MyComponent({city, address}) {
             onUnmount={onUnmount}
         >
             {/* Child components, such as markers, info windows, etc. */}
-            <Marker position={center} />
+            <MarkerF position={center} />
             <></>
         </GoogleMap>
     ) : (
