@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import {useAuth} from "../contexts/Contexts";
-import NotificationComponent from "./NotificationComponent";
+import NotificationComponent from "./NotificationCompanyComponent";
 
 export default function CompanyNotifications() {
     const [notifications, setNotifications] = useState([]);
