@@ -1,8 +1,8 @@
 import {useState, useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
-import {useAuth} from "../../contexts/authContexts";
 import ChangeStatusModal from "./ApplicantsForJobChangeStatus";
 import {getApplicantsForJob} from "../../api/jobsApi";
+import {CLOUDINARY_URL} from "../../config";
 
 export default function ApplicantsForJob() {
     // const [applicants, setApplicants] = useState([]);
@@ -45,7 +45,7 @@ export default function ApplicantsForJob() {
                     <div className="row align-items-center justify-content-center">
                         <div className="col-lg-2 col-md-5 col-12">
                             <div className="title-img">
-                                <div className="can-img">{applicant.job_seeker.profile_picture ? <img src={`https://res.cloudinary.com/drjgddl0y/${applicant.job_seeker.profile_picture}`} alt="#" /> : <img src="/images/clients/default_profile.png" alt="#" />}</div>
+                                <div className="can-img">{applicant.job_seeker.profile_picture ? <img src={`${CLOUDINARY_URL}${applicant.job_seeker.profile_picture}`} alt="#" /> : <img src="/images/clients/default_profile.png" alt="#" />}</div>
                                 {/* <h3>{{ jobs.title }}<span>{{ jobs.category}}</span></h3> */}
                             </div>
                         </div>

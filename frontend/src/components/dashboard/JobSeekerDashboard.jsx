@@ -9,6 +9,7 @@ import AddEducationModal from "../educations/AddEducation";
 import {Link} from "react-router-dom";
 import DeleteEducationModal from "../educations/DeleteEducationModal";
 import EditEducationModal from "../educations/EditEducationModal";
+import {getJobseekersEducations} from "../../api/JobSeekerApi";
 const JobSeekerDashboard = () => {
     const {user, isAuthenticated, fetchUserData, auth} = useAuth();
     const navigate = useNavigate();
@@ -61,7 +62,7 @@ const JobSeekerDashboard = () => {
         if (!educationToDelete) return;
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}educations/delete/${educationToDelete.id}/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}jobseekers/educations/delete/${educationToDelete.id}/`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${auth}`,
@@ -79,7 +80,8 @@ const JobSeekerDashboard = () => {
             console.error("Error deleting education:", error);
         }
     };
-    const {data: educations, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}educations/user/${user.user.user}/`, []);
+    // const {data: educations, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}jobseekers/educations/${user.user.user}/`, []);
+    const {data: educations, error, loading, refetch} = getJobseekersEducations(user.user.user);
 
     if (!isAuthenticated) {
         return <div>Not authenticated...</div>;

@@ -70,7 +70,7 @@ export const JobProvider = ({children}) => {
             return;
         }
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}created-jobs/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}company/created-jobs/`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${auth}`,

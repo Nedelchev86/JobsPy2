@@ -1,12 +1,13 @@
-import {useAuth} from "../contexts/authContexts";
+import {useAuth} from "../../contexts/authContexts";
 // import Breadcrumbs from "./breadcrumbs/Breadcrumbs";
 // import JobSeekerMenu from "./JobseekerMenu";
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
+import {getApplyedJobs} from "../../api/JobSeekerApi";
 
 export default function JobsApplyed() {
-    const [applyedJobs, setapplyedJobs] = useState([]);
-    const {user, auth} = useAuth();
+    // const [applyedJobs, setapplyedJobs] = useState([]);
+    // const {user, auth} = useAuth();
 
     const statusClass = {
         Pending: "pending",
@@ -14,17 +15,19 @@ export default function JobsApplyed() {
         Rejected: "rejected",
     };
 
-    useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}job_seekers/apply_jobs/`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${auth}`,
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => setapplyedJobs(data))
-            .catch((error) => console.error("Error fetching:", error));
-    }, []);
+    const {data: applyedJobs, loading, error} = getApplyedJobs();
+    // useEffect(() => {
+    //     console.log(auth);
+    //     fetch(`${import.meta.env.VITE_API_URL}jobseekers/applyed/jobs/`, {
+    //         method: "GET",
+    //         headers: {
+    //             Authorization: `Bearer ${auth}`,
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => setapplyedJobs(data))
+    //         .catch((error) => console.error("Error fetching:", error));
+    // }, []);
 
     return (
         <div className="job-items">

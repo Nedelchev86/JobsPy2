@@ -14,7 +14,7 @@ const Breadcrumbs = ({pageTitle, pageInfo}) => {
                             </div>
                             <ul className="breadcrumb-nav">
                                 <li>
-                                    <Link href="/">Home</Link>
+                                    <Link to="/">Home</Link>
                                 </li>
                                 <li>Companies</li>
                             </ul>

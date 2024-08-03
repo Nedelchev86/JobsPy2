@@ -9,15 +9,16 @@ import LoginModal from "../loginModal/LoginModal";
 import {toast} from "react-toastify";
 import {Button} from "react-bootstrap";
 import GoogleMapComponent from "../googleMap/GoogleMapComponent";
+import {getJobDetails, getApplicantsForJob} from "../../api/jobsApi";
 
 export default function JobDetails() {
-    const [job, setJob] = useState({});
+    // const [job, setJob] = useState({});
     const {id} = useParams();
     const [applicants, setApplicants] = useState({});
     const {auth, isAuthenticated, user} = useAuth();
     const [showModal, setShowModal] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    // const [isLoading, setIsLoading] = useState(true);
     const [isApplied, setIsApplied] = useState(false);
 
     const statusClass = {
@@ -31,15 +32,18 @@ export default function JobDetails() {
     const handleOpenModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
 
-    useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/`, {})
-            .then((response) => response.json())
-            .then((data) => {
-                setJob(data);
-                setIsLoading(false);
-            })
-            .catch((error) => console.error("Error fetching jobseeker:", error));
-    }, [id]);
+    const {data: job, loading, error, refetch} = getJobDetails(id);
+    // const {data: applicants, loadingApplicant, errorApplicant} = getApplicantsForJob();
+
+    // useEffect(() => {
+    //     fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/`, {})
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             setJob(data);
+    //             setIsLoading(false);
+    //         })
+    //         .catch((error) => console.error("Error fetching jobseeker:", error));
+    // }, [id]);
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -145,7 +149,7 @@ export default function JobDetails() {
 
             <div className="job-details section">
                 <div className="container">
-                    {isLoading ? (
+                    {loading ? (
                         <Loading />
                     ) : (
                         <div className="row mb-n5">

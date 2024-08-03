@@ -38,7 +38,7 @@ const EditEducationModal = ({show, handleClose, educationId, initialData}) => {
                 formDataToSend.append("image", data.image[0]);
             }
 
-            const response = await fetch(`${import.meta.env.VITE_API_URL}educations/edit/${initialData.id}/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}jobseekers/educations/edit/${initialData.id}/`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${auth}`, // Add authorization header

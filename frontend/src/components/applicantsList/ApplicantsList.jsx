@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
-import {useAuth} from "../contexts/authContexts";
+import {useAuth} from "../../contexts/authContexts";
 import {Link} from "react-router-dom";
-import {getApplicantsList} from "../api/companyApi";
+import {getApplicantsList} from "../../api/companyApi";
+import {CLOUDINARY_URL} from "../../config";
 
 export default function ApplicantsList() {
     const {auth} = useAuth();
@@ -29,7 +30,7 @@ export default function ApplicantsList() {
                                 <div className="title-img">
                                     <div className="can-img">
                                         {/* <img src={jobs.job_image} alt="#" /> */}
-                                        <img src={`https://res.cloudinary.com/drjgddl0y/${jobs.job_image}`} alt="#" />
+                                        <img src={`${CLOUDINARY_URL}${jobs.job_image}`} alt="#" />
                                     </div>
                                     <h3>
                                         {jobs.title}

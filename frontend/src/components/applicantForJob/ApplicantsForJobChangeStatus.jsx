@@ -77,8 +77,8 @@ import React, {useState} from "react";
 import {Modal, Button, Form, Spinner, Alert} from "react-bootstrap";
 import {useAuth} from "../../contexts/authContexts";
 import {toast} from "react-toastify";
+import {API_URL} from "../../config";
 export default function ChangeStatusModal({isOpen, onClose, applicant, onStatusChanged}) {
-    const apiUrl = import.meta.env.VITE_API_URL;
     const [status, setStatus] = useState(applicant.status || "Pending");
     const [comment, setComment] = useState(applicant.comment || "");
     const [loading, setLoading] = useState(false);
@@ -91,7 +91,7 @@ export default function ChangeStatusModal({isOpen, onClose, applicant, onStatusC
         setError(null);
 
         try {
-            const response = await fetch(`${apiUrl}company/applicants/${applicant.id}/change-status/`, {
+            const response = await fetch(`${API_URL}company/applicants/${applicant.id}/change-status/`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

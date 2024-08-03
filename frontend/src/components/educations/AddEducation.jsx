@@ -183,7 +183,7 @@ const AddEducationModal = ({show, handleClose}) => {
             formDataToSend.append("image", data.image[0]);
         }
 
-        fetch(`${import.meta.env.VITE_API_URL}educations/create/`, {
+        fetch(`${import.meta.env.VITE_API_URL}jobseekers/educations/create/`, {
             headers: {
                 Authorization: `Bearer ${auth}`,
             },

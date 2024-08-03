@@ -2,20 +2,23 @@ import React, {useState, useEffect} from "react";
 import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import {Link} from "react-router-dom";
 import {formatDate} from "../../utils/formatDate";
+import {getAllBlogs} from "../../api/blogApi.js";
 
 const Blog = () => {
-    const [blogs, setBlogs] = useState([]);
+    // const [blogs, setBlogs] = useState([]);
 
-    useEffect(() => {
-        // Fetch blogs from your API
-        fetch(`${import.meta.env.VITE_API_URL}blogs/`)
-            .then((response) => response.json())
-            .then((data) => {
-                setBlogs(data);
-                console.log(data);
-            })
-            .catch((error) => console.error("Error fetching blogs:", error));
-    }, []);
+    const {data: blogs, loading, error} = getAllBlogs();
+
+    // useEffect(() => {
+    //     // Fetch blogs from your API
+    //     fetch(`${import.meta.env.VITE_API_URL}blogs/`)
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             setBlogs(data);
+    //             console.log(data);
+    //         })
+    //         .catch((error) => console.error("Error fetching blogs:", error));
+    // }, []);
 
     return (
         <>

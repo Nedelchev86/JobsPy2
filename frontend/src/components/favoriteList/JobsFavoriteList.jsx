@@ -1,25 +1,25 @@
-import {useAuth} from "../contexts/authContexts";
-// import Breadcrumbs from "./breadcrumbs/Breadcrumbs";
-// import MenuLayout from "./dashboardMenu/MenuLayout";
+import {useAuth} from "../../contexts/authContexts";
+import {CLOUDINARY_URL} from "../../config";
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
+import {getFavoritesJobs} from "../../api/JobSeekerApi";
 
 export default function JobsFavoriteList() {
-    const [favrotites, setFavorites] = useState([]);
-    const {user, auth} = useAuth();
+    // const [favrotites, setFavorites] = useState([]);
+    // const {user, auth} = useAuth();
 
-    useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}user/jobseeker/favorites/`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${auth}`,
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => setFavorites(data))
-            .catch((error) => console.error("Error fetching:", error));
-    }, []);
-
+    // useEffect(() => {
+    //     fetch(`${import.meta.env.VITE_API_URL}jobseeker/favorites/`, {
+    //         method: "GET",
+    //         headers: {
+    //             Authorization: `Bearer ${auth}`,
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => setFavorites(data))
+    //         .catch((error) => console.error("Error fetching:", error));
+    // }, []);
+    const {data: favrotites, loading, error} = getFavoritesJobs();
     return (
         <div className="job-items">
             {favrotites.map((obj) => (
@@ -28,7 +28,7 @@ export default function JobsFavoriteList() {
                         <div className="col-lg-5 col-md-5 col-12">
                             <div className="title-img">
                                 <div className="can-img">
-                                    <img src={`https://res.cloudinary.com/drjgddl0y/${obj.job_details.job_image}`} alt="#" />
+                                    <img src={`${CLOUDINARY_URL}${obj.job_details.job_image}`} alt="#" />
 
                                     {/* <img src="{% static 'images/default/default.jpg' %}" alt="#"> */}
                                 </div>

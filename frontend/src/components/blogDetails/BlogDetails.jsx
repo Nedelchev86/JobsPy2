@@ -6,20 +6,23 @@ import AddCommentForm from "./PostComment";
 import CommentList from "./CommentList";
 import {formatDate} from "../../utils/formatDate";
 import {Link} from "react-router-dom";
+import {getBlog} from "../../api/blogApi.js";
 
 export default function BlogDetails() {
-    const [blog, setBlog] = useState({});
+    // const [blog, setBlog] = useState({});
     const {id} = useParams();
 
-    useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}blogs/${id}`)
-            .then((response) => response.json())
-            .then((data) => {
-                setBlog(data);
-                console.log(data);
-            })
-            .catch((error) => console.error("Error fetching blogs:", error));
-    }, []);
+    const {data: blog, loading, error} = getBlog(id);
+
+    // useEffect(() => {
+    //     fetch(`${import.meta.env.VITE_API_URL}blogs/${id}`)
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             setBlog(data);
+    //             console.log(data);
+    //         })
+    //         .catch((error) => console.error("Error fetching blogs:", error));
+    // }, []);
 
     return (
         <>
