@@ -32,7 +32,7 @@ from JobsPy.notifications.views import NotificationViewSet, NotificationJobSeeke
 
 
 router = DefaultRouter()
-router.register(r'api/companies', CompanyProfileViewSet)
+router.register(r'api/company', CompanyProfileViewSet)
 router.register(r'api/jobseekers', JobSeekerViewSet)
 router.register(r'api/notifications', NotificationViewSet)
 router.register(r'api/notificationjobseekers', NotificationJobSeekerViewSet)

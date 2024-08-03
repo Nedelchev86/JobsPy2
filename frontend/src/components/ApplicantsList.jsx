@@ -1,21 +1,23 @@
 import {useEffect, useState} from "react";
 import {useAuth} from "../contexts/Contexts";
 import {Link} from "react-router-dom";
+import {getApplicantsList} from "../api/companyApi";
 
 export default function ApplicantsList() {
     const {auth} = useAuth();
-    const [applicants, setApplicants] = useState([]);
+    // const [applicants, setApplicants] = useState([]);
 
-    useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}company/applicants/`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${auth}`,
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => setApplicants(data));
-    }, []);
+    // useEffect(() => {
+    //     fetch(`${import.meta.env.VITE_API_URL}company/applicants/`, {
+    //         method: "GET",
+    //         headers: {
+    //             Authorization: `Bearer ${auth}`,
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => setApplicants(data));
+    // }, []);
+    const {data: applicants, loading, error} = getApplicantsList();
 
     return (
         <>

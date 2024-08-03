@@ -2,11 +2,12 @@ import {useState, useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
 import {useAuth} from "../contexts/Contexts";
 import ChangeStatusModal from "./ApplicantsForJobChangeStatus";
+import {getApplicantsForJob} from "../api/jobsApi";
 
 export default function ApplicantsForJob() {
-    const [applicants, setApplicants] = useState([]);
+    // const [applicants, setApplicants] = useState([]);
     const {id} = useParams();
-    const {auth} = useAuth();
+    // const {auth} = useAuth();
     const [selectedApplicant, setSelectedApplicant] = useState(null);
     const [update, setUpdate] = useState(false);
 
@@ -16,16 +17,22 @@ export default function ApplicantsForJob() {
         Rejected: "rejected",
     };
 
+    const {data: applicants, loading, refetch, error} = getApplicantsForJob(id);
+
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/applicants/`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${auth}`,
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => setApplicants(data));
+        refetch();
     }, [update]);
+
+    // useEffect(() => {
+    //     fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/applicants/`, {
+    //         method: "GET",
+    //         headers: {
+    //             Authorization: `Bearer ${auth}`,
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => setApplicants(data));
+    // }, [update]);
 
     const handleStatusChanged = (updatedApplicant) => {
         setUpdate((oldState) => !oldState);

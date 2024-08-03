@@ -61,7 +61,7 @@ const LoginModal = ({show, handleClose}) => {
         <Modal show={show} onHide={handleClose} centered>
             <p className="text-center">
                 <strong>
-                    <img className={styles["img-center"]} src="./images/logo/login.jpg" alt="" width="100" height="100" />
+                    <img className={styles["img-center"]} src="/images/logo/login.jpg" alt="" width="100" height="100" />
                 </strong>
             </p>
             <Modal.Header className={styles.red} closeButton>

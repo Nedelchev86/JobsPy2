@@ -3,6 +3,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import {Link} from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import Loading from "./loading/Loading";
+import {getAllCompanies} from "../api/companyApi";
 
 export default function CompanyList() {
     // const [companies, setCompanies] = useState([]);
@@ -12,7 +13,7 @@ export default function CompanyList() {
     //         .then((data) => setCompanies(data));
     // }, []);
 
-    const {data: companies, loading} = useFetch(`${import.meta.env.VITE_API_URL}companies`, []);
+    const {data: companies, loading} = getAllCompanies();
 
     return (
         <>
