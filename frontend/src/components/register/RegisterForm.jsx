@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Breadcrumbs from "../Breadcrumbs";
+import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import {useNavigate} from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";

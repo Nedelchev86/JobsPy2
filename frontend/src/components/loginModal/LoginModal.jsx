@@ -1,7 +1,7 @@
 import {useJobs} from "../../contexts/JobContext";
 import React, {useState} from "react";
 import {Modal, Button, Form} from "react-bootstrap";
-import {useAuth} from "../../contexts/Contexts";
+import {useAuth} from "../../contexts/authContexts";
 import {toast} from "react-toastify";
 import {useForm} from "react-hook-form";
 import styles from "./LoginModal.module.css";

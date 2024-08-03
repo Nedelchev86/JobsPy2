@@ -1,6 +1,6 @@
-import {useAuth} from "../contexts/Contexts";
-import Breadcrumbs from "./Breadcrumbs";
-import JobSeekerMenu from "./JobseekerMenu";
+import {useAuth} from "../contexts/authContexts";
+// import Breadcrumbs from "./breadcrumbs/Breadcrumbs";
+// import JobSeekerMenu from "./JobseekerMenu";
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 

@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import {useAuth} from "../contexts/Contexts";
+import {useAuth} from "../contexts/authContexts";
 
 const useFetchWithToken = (url, initialData = null) => {
     const [data, setData] = useState(initialData);

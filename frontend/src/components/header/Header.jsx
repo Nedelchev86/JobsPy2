@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {useAuth} from "../../contexts/Contexts";
+import {useAuth} from "../../contexts/authContexts";
 import LoginModal from "../loginModal/LoginModal";
 import {Link, NavLink} from "react-router-dom";
 import {useJobs} from "../../contexts/JobContext";

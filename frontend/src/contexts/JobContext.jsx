@@ -1,5 +1,5 @@
 import React, {createContext, useState, useContext, useEffect} from "react";
-import {useAuth} from "./Contexts";
+import {useAuth} from "./authContexts";
 
 const JobContext = createContext();
 

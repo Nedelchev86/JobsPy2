@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import Breadcrumbs from "../Breadcrumbs";
+import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import {Link} from "react-router-dom";
 import {formatDate} from "../../utils/formatDate";
 
