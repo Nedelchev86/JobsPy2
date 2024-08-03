@@ -1,8 +1,8 @@
 import {useState, useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
-import {useAuth} from "../contexts/Contexts";
+import {useAuth} from "../../contexts/Contexts";
 import ChangeStatusModal from "./ApplicantsForJobChangeStatus";
-import {getApplicantsForJob} from "../api/jobsApi";
+import {getApplicantsForJob} from "../../api/jobsApi";
 
 export default function ApplicantsForJob() {
     // const [applicants, setApplicants] = useState([]);

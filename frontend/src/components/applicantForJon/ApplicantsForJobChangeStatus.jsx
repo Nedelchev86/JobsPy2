@@ -75,7 +75,7 @@
 
 import React, {useState} from "react";
 import {Modal, Button, Form, Spinner, Alert} from "react-bootstrap";
-import {useAuth} from "../contexts/Contexts";
+import {useAuth} from "../../contexts/Contexts";
 import {toast} from "react-toastify";
 export default function ChangeStatusModal({isOpen, onClose, applicant, onStatusChanged}) {
     const apiUrl = import.meta.env.VITE_API_URL;
