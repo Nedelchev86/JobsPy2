@@ -16,7 +16,7 @@ jobs:
     name: Build and Deploy Job
     env:
       VITE_API_URL: ${{ secrets.REACT_APP_API_URL }} # Example of using a secret for an API URL
-      VITE_API_GOOGL: "some_value" # Example of a non-secret environment variable
+      VITE_API_GOOGLE: "some_value" # Example of a non-secret environment variable
 
     steps:
       - uses: actions/checkout@v3
