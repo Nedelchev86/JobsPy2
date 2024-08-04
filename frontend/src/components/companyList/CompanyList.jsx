@@ -3,8 +3,7 @@ import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import {Link} from "react-router-dom";
 // import useFetch from "../../hooks/useFetch";
 import Loading from "../loading/Loading";
-// import {getAllCompanies} from "../../api/companyApi.js";
-import {getAllCompanies} from "../../api/companyApi";
+import {getAllCompanies} from "../../api/companyApi.js";
 
 export default function CompanyList() {
     // const [companies, setCompanies] = useState([]);
