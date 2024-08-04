@@ -90,9 +90,19 @@ export const AuthProvider = ({children}) => {
     };
 
     useEffect(() => {
-        if (!auth) return;
-        fetchUserData();
-    }, [auth, isAuthenticated]);
+        if (auth) {
+            fetchUserData();
+        } else {
+            setisAuthenticated(false);
+            console.log("null");
+            setUser(null);
+        }
+    }, [auth]);
+
+    // useEffect(() => {
+    //     if (!auth) return;
+    //     fetchUserData();
+    // }, [auth, isAuthenticated]);
 
     // useEffect(() => {
     //     if (auth) {
@@ -132,6 +142,7 @@ export const AuthProvider = ({children}) => {
         if (!auth) return;
 
         try {
+            console.log(auth);
             const response = await fetch(`${import.meta.env.VITE_API_URL}user/`, {
                 headers: {
                     Authorization: `Bearer ${auth}`,
@@ -139,14 +150,20 @@ export const AuthProvider = ({children}) => {
             });
 
             if (!response.ok) {
+                console.log("not ok");
                 localStorage.removeItem("access_token");
                 localStorage.removeItem("refresh_token");
                 setAuth("");
+                setUser(null);
+                setisAuthenticated(false);
                 throw new Error("Failed to fetch user data");
             }
-
+            console.log("ok");
             const data = await response.json();
+            console.log(data);
+
             setUser(data);
+            console.log(user);
         } catch (error) {
             localStorage.removeItem("access_token");
             localStorage.removeItem("refresh_token");

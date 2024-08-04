@@ -21,13 +21,13 @@ export default function Dashboard() {
     //     return <div>Loading...</div>;
     // }
 
-    useEffect(() => {
-        // if (!isAuthenticated) {
-        //     navigate("/login");
-        // } else {
-        //     fetchUserData();
-        // }
-    }, [isAuthenticated, fetchUserData, navigate]);
+    // useEffect(() => {
+    //     // if (!isAuthenticated) {
+    //     //     navigate("/login");
+    //     // } else {
+    //     //     fetchUserData();
+    //     // }
+    // }, [isAuthenticated, fetchUserData, navigate]);
 
     if (!isAuthenticated) {
         return <div>Not authenticated...</div>;

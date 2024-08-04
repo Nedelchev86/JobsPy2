@@ -30,6 +30,12 @@ import Notifications from "./components/notifications/Notifications";
 import ContactUs from "./components/contacsUs/ContactUs";
 import JobsList from "./components/jobList/JobsList";
 import ScrollToTop from "./components/ScrolToTop"; // Import ScrollToTop
+import GuestGuard from "./routeGuards/GuestGuard";
+import AuthGuard from "./routeGuards/AuthGuard";
+import CompanyGuard from "./routeGuards/CompanyGuard";
+import JobseekerGuard from "./routeGuards/JobseekerGuard";
+
+import PageNoAccess from "./components/PageNoAccess";
 
 function App() {
     return (
@@ -46,26 +52,83 @@ function App() {
                     <Route path="jobseekers/:id" element={<JobSeekerDetails />} />
                     <Route path="jobs" element={<JobsList />} />
                     {/* <Route path="jobs/category/:id" element={<JobsByCategory />} /> */}
-                    <Route path="signup" element={<RegisterForm />} />
+                    <Route
+                        path="signup"
+                        element={
+                            <GuestGuard>
+                                <RegisterForm />
+                            </GuestGuard>
+                        }
+                    />
                     <Route path="login" element={<LoginModal />} />
                     {/* <Route path="dashboard" element={<Dashboard />} /> */}
                     {/* <Route path="/bookmarked" element={<JobsFavoriteList />} /> */}
                     {/* <Route path="/profile/edit" element={<EditProfile />} /> */}
                     <Route path="jobs/:id" element={<JobDetails />} />
-                    <Route path="dashboard" element={<MenuLayout />}>
+                    <Route
+                        path="dashboard"
+                        element={
+                            <AuthGuard>
+                                <MenuLayout />
+                            </AuthGuard>
+                        }
+                    >
                         <Route index element={<Dashboard />} />
                         <Route path="edit" element={<EditProfile />} />
-                        <Route path="bookmarked" element={<JobsFavoriteList />} />
-                        <Route path="applyed-jobs" element={<JobsApplyed />} />
-                        <Route path="create-job" element={<CreateJob />} />
-                        <Route path="edit-job/:id" element={<EditJob />} />
+                        <Route
+                            path="bookmarked"
+                            element={
+                                <JobseekerGuard>
+                                    <JobsFavoriteList />
+                                </JobseekerGuard>
+                            }
+                        />
+                        <Route
+                            path="applyed-jobs"
+                            element={
+                                <JobseekerGuard>
+                                    <JobsApplyed />
+                                </JobseekerGuard>
+                            }
+                        />
+                        <Route
+                            path="create-job"
+                            element={
+                                <CompanyGuard>
+                                    <CreateJob />
+                                </CompanyGuard>
+                            }
+                        />
+                        <Route
+                            path="edit-job/:id"
+                            element={
+                                <CompanyGuard>
+                                    <EditJob />
+                                </CompanyGuard>
+                            }
+                        />
                         <Route path="applicants" element={<ApplicantsList />} />
-                        <Route path="applicants/jobs/:id" element={<ApplicantsForJob />} />
-                        <Route path="created-jobs" element={<CreatedJobs />} />
+                        <Route
+                            path="applicants/jobs/:id"
+                            element={
+                                <CompanyGuard>
+                                    <ApplicantsForJob />
+                                </CompanyGuard>
+                            }
+                        />
+                        <Route
+                            path="created-jobs"
+                            element={
+                                <CompanyGuard>
+                                    <CreatedJobs />
+                                </CompanyGuard>
+                            }
+                        />
                         <Route path="notifications" element={<Notifications />} />
                         <Route path="change-password" element={<ChangePassword />} />
                     </Route>
                     <Route path="contact-us" element={<ContactUs />} />
+                    <Route path="403" element={<PageNoAccess />} />
                     <Route path="*" element={<PageNotFound />} />
                 </Routes>
                 <Footer />

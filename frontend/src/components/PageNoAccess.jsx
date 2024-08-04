@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-export default function PageNotFound() {
+export default function PageNoAccess() {
     return (
         <div className="error-area">
             <div className="d-table">
@@ -8,7 +8,7 @@ export default function PageNotFound() {
                         <div className="error-content">
                             <h1>Opps!</h1>
                             <h2>Here Is Some Problem</h2>
-                            <p>The page you are looking for it maybe deleted</p>
+                            <p>You do not have permission to access this page.</p>
                             <div className="button">
                                 <Link to="/" className="btn">
                                     Go To Home
