@@ -16,7 +16,7 @@ from JobsPy.jobs.views import JobsDetailsAPIView, apply_for_job, AddToFavoritesA
     JobsByCategoryView, CategoryListView, JobCountView
 from JobsPy.jobseekers.views import JobSeekerUpdateAPIView, FavoriteJobsListAPIView, check_favorite_status, \
     JobSeekerViewSet, job_applicants, ApplyedJobsAPIView, UserEducationListAPI, CreateEducationAPI, EditEducationAPI, \
-    DeleteEducationAPI, JobseekerCountView
+    DeleteEducationAPI, JobseekerCountView, JobseekerDeleteAPIView
 from JobsPy.main.views import SkillsListAPIView, SeniorityListView, ContactCreateView
 from JobsPy.notifications.views import NotificationViewSet, NotificationJobSeekerViewSet
 
@@ -81,6 +81,7 @@ urlpatterns = [
     path('api/jobseekers/educations/create/', CreateEducationAPI.as_view(), name='create-education'),
     path('api/jobseekers/educations/edit/<int:pk>/', EditEducationAPI.as_view(), name='edit-education'),
     path('api/jobseekers/educations/delete/<int:pk>/', DeleteEducationAPI.as_view(), name='delete-education'),
+    path('api/jobseekers/prifile/delete/', JobseekerDeleteAPIView.as_view(), name='delete-profile'),
     path('api/blogs/', BlogPostListView.as_view(), name='blogpost-list'),
     path('api/blogs/<int:pk>/', BlogPostDetailView.as_view(), name='blogpost-detail'),
     path('api/blogs/create/', BlogPostCreateView.as_view(), name='blogpost-create'),

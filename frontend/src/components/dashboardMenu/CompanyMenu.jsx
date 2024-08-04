@@ -138,7 +138,7 @@ export default function CompanyMenu() {
                     </li>
                 </ul>
             </div>
-            <DeleteConfirmationModal show={showModal} handleClose={handleCloseModal} handleConfirm={handleConfirmDelete} message="Are you sure you want to delete yout company profile?" />
+            <DeleteConfirmationModal show={showModal} handleClose={handleCloseModal} handleConfirm={handleConfirmDelete} message="Are you sure you want to delete your company profile?" />
         </div>
     );
 }

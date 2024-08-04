@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticate
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from JobsPy.core.permissions import IsJobseekerUser
 from JobsPy.jobs.models import FavoriteJob, Applicant
 from JobsPy.jobs.serializers import FavoriteJobSerializer, ApplicantSerializer
 from JobsPy.jobseekers.models import JobSeeker, Education
@@ -152,3 +153,30 @@ class JobseekerCountView(APIView):
     def get(self, request, *args, **kwargs):
         jobseeker_count = JobSeeker.objects.count()
         return Response({"jobseeker_count": jobseeker_count}, status=status.HTTP_200_OK)
+
+
+class JobseekerDeleteAPIView(APIView):
+    """
+    API view to delete a jobseeker user's profile.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, *args, **kwargs):
+        print("Here")
+        user = request.user
+
+        try:
+            print("try")
+            # Perform the deletion
+            user.delete()
+            return Response({"detail": "Profile deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+
+        except Exception as e:
+            # Log the error for debugging purposes (optional)
+            # logger.error(f"Error deleting user {user.id}: {str(e)}")
+
+            # Return a server error response
+            return Response({"detail": "An error occurred while deleting the profile."},
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
