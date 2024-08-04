@@ -159,7 +159,8 @@ import {useAuth} from "../../contexts/authContexts";
 import {Modal, Button, Form, Spinner} from "react-bootstrap";
 import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
-
+import usePost from "../../hooks/usePost";
+import {postEducation} from "../../api/JobSeekerApi";
 const AddEducationModal = ({show, handleClose}) => {
     const {
         register,
@@ -171,6 +172,7 @@ const AddEducationModal = ({show, handleClose}) => {
     }); // Initialize the useForm hook
 
     const {auth} = useAuth();
+    const {data, loading, error, post} = postEducation();
 
     const submitEducation = async (data) => {
         const formDataToSend = new FormData();
@@ -183,24 +185,35 @@ const AddEducationModal = ({show, handleClose}) => {
             formDataToSend.append("image", data.image[0]);
         }
 
-        fetch(`${import.meta.env.VITE_API_URL}jobseekers/educations/create/`, {
-            headers: {
-                Authorization: `Bearer ${auth}`,
-            },
-            method: "POST",
-            body: formDataToSend,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Education added successfully:", data);
-                toast.success("Education added successfully!");
-                reset();
-                handleClose();
-            })
-            .catch((error) => {
-                console.error("Error updating profile:", error);
-                toast.success("Error adding education");
-            });
+        try {
+            await post(formDataToSend, true); // Call post with FormData and set isFormData to true
+            console.log("Education added successfully:", data);
+            toast.success("Education added successfully!");
+            reset();
+            handleClose();
+        } catch (error) {
+            console.error("Error updating profile:", error);
+            toast.error("Error adding education");
+        }
+
+        // fetch(`${import.meta.env.VITE_API_URL}jobseekers/educations/create/`, {
+        //     headers: {
+        //         Authorization: `Bearer ${auth}`,
+        //     },
+        //     method: "POST",
+        //     body: formDataToSend,
+        // })
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         console.log("Education added successfully:", data);
+        //         toast.success("Education added successfully!");
+        //         reset();
+        //         handleClose();
+        //     })
+        //     .catch((error) => {
+        //         console.error("Error updating profile:", error);
+        //         toast.success("Error adding education");
+        //     });
     };
 
     return (

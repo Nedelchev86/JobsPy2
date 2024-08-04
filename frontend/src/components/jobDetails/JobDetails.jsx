@@ -329,7 +329,7 @@ export default function JobDetails() {
                                             <h6 className="title">Job Location</h6>
                                             <div className="mapouter">
                                                 <div className="gmap_canvas"></div>
-                                                <GoogleMapComponent city={job?.location} />
+                                                <GoogleMapComponent city={job?.location} address="" />
                                             </div>
                                         </div>
                                     </div>

@@ -57,9 +57,10 @@ const CompanyDashboard = () => {
                                         <div className="row">
                                             <div className="col-lg-5 col-md-5 col-12">
                                                 <div className="name-head">
-                                                    <a className="mb-2" href="#">
-                                                        <img className="circle-54" src={`https://res.cloudinary.com/drjgddl0y/${user.user.image}`} alt="" />
-                                                    </a>
+                                                    <Link className="mb-2" to="#">
+                                                        {user.user.image == null && <img className="circle-54" src="/images/default/company.jpg" alt="" />}
+                                                        {user.user?.image ? <img className="circle-54" src={`https://res.cloudinary.com/drjgddl0y/${user.user.image}`} alt="" /> : ""}
+                                                    </Link>
 
                                                     <ul className="social">
                                                         <li>

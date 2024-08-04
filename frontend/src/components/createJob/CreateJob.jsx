@@ -4,6 +4,9 @@ import React, {useState, useEffect} from "react";
 import {useAuth} from "../../contexts/authContexts";
 import {useNavigate} from "react-router-dom";
 import {useJobs} from "../../contexts/JobContext";
+import {toast} from "react-toastify";
+import usePost from "../../hooks/usePost";
+import { postJob } from "../../api/jobsApi";
 
 export default function CreateJob() {
     const navigate = useNavigate();
@@ -26,6 +29,8 @@ export default function CreateJob() {
         is_published: true,
         job_image: null,
     });
+
+    const {data, loading, error, post} = postJob();
 
     if (!isAuthenticated) {
         return <div>Not authenticated...</div>;
@@ -62,7 +67,7 @@ export default function CreateJob() {
             ...prevJob,
             needed_skills: checked ? [...prevJob.needed_skills, value] : prevJob.needed_skills.filter((skill) => skill !== value),
         }));
-        console.log(job.needed_skills);
+
     };
 
     const handleImageUpload = (e) => {
@@ -72,8 +77,7 @@ export default function CreateJob() {
             ...prevState,
             job_image: file,
         }));
-        console.log("image");
-        console.log(file);
+
     };
 
     const handleChange = (e) => {
@@ -84,9 +88,8 @@ export default function CreateJob() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(job.category);
         const formData = new FormData();
 
         const addFormData = (key, value) => {
@@ -112,22 +115,33 @@ export default function CreateJob() {
             formData.append("needed_skills", skill);
         });
 
-        fetch("http://127.0.0.1:8000/api/jobs/create/", {
-            headers: {
-                Authorization: `Bearer ${auth}`,
-            },
-            method: "POST",
-            body: formData,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Profile updated successfully:", data);
-                fetchJobs();
-                navigate("/dashboard");
-            })
-            .catch((error) => {
-                console.error("Error updating profile:", error);
-            });
+        try {
+            await post(formData, true); // Pass FormData and isFormData flag
+            console.log("Profile updated successfully:", data);
+            fetchJobs();
+            toast.success("Job added successfully!");
+            navigate("/dashboard");
+        } catch (error) {
+            console.error("Error adding job:", error);
+            toast.error("Failed to add job. Please try again.");
+        }
+
+        // fetch("http://127.0.0.1:8000/api/jobs/create/", {
+        //     headers: {
+        //         Authorization: `Bearer ${auth}`,
+        //     },
+        //     method: "POST",
+        //     body: formData,
+        // })
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         console.log("Profile updated successfully:", data);
+        //         fetchJobs();
+        //         navigate("/dashboard");
+        //     })
+        //     .catch((error) => {
+        //         console.error("Error updating profile:", error);
+        //     });
     };
 
     return (
@@ -169,10 +183,10 @@ export default function CreateJob() {
                                             <label htmlFor="id_seniority">Seniority:</label>
                                             <select name="seniority" className="form-control" id="id_seniority" value={job.seniority} onChange={handleChange}>
                                                 <option value="">---------</option>
-                                                <option value="1">Junior / Intern</option>
-                                                <option value="2">1-2 year's experience</option>
-                                                <option value="3">2-5 year's experience</option>
-                                                <option value="4">5+ year's experience</option>
+                                                <option value="Junior / Intern">Junior / Intern</option>
+                                                <option value="1-2 year's experience">1-2 year's experience</option>
+                                                <option value="2-5 year's experience">2-5 year's experience</option>
+                                                <option value="5+ year's experience">5+ year's experience</option>
                                             </select>
                                         </div>
 

@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import render
 from rest_framework import generics, viewsets, permissions, status
+from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
@@ -11,6 +12,7 @@ from django.db.models import Count
 from JobsPy.company.models import CompanyProfile
 from JobsPy.company.serializers import CompanySerializer, CompanyProfileSerializer, JobWithApplicantsCountSerializer, \
     ApplicantSerializer
+from JobsPy.core.permissions import IsCompanyUser
 
 from JobsPy.jobs.models import Job, Applicant
 from JobsPy.jobs.serializers import JobSerializer
@@ -44,18 +46,39 @@ class CompanyApplicantAPI(APIView):
         return Response(serializer.data)
 
 
+# class CompanyProfileViewSet(viewsets.ModelViewSet):
+#     queryset = CompanyProfile.objects.filter(activated=True)
+#     serializer_class = CompanyProfileSerializer
+#     pagination_class = None  # Disable pagination
+#     permission_classes = permissions.AllowAny,
+#
+#     # New method to retrieve details of a specific company by ID
+#     def retrieve(self, request, *args, **kwargs):
+#         instance = self.get_object()
+#         serializer = self.get_serializer(instance)
+#         return Response(serializer.data)
 class CompanyProfileViewSet(viewsets.ModelViewSet):
+    """
+    A viewset that provides the standard actions for CompanyProfile
+    """
     queryset = CompanyProfile.objects.filter(activated=True)
     serializer_class = CompanyProfileSerializer
-    pagination_class = None  # Disable pagination
-    permission_classes = permissions.AllowAny,
+    pagination_class = None  # Disable pagination for simplicity
+    permission_classes = [permissions.AllowAny]
 
-    # New method to retrieve details of a specific company by ID
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+    @action(detail=True, methods=['delete'], permission_classes=[IsAuthenticated, IsCompanyUser])
+    def delete(self, request, *args, **kwargs):
+        """
+        Custom action to delete the current user's profile
+        """
+        print("test")
+        user = request.user
+        print(request.user)
 
+        # Delete the user's profile
+        user.delete()
+
+        return Response({"detail": "Profile deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
 
 class ChangeStatusAPI( RetrieveUpdateAPIView):
     queryset = Applicant.objects.all()
@@ -120,3 +143,18 @@ class CompanyCountView(APIView):
     def get(self, request, *args, **kwargs):
         company_count = CompanyProfile.objects.count()
         return Response({"company_count": company_count}, status=status.HTTP_200_OK)
+
+
+class CompanyDeleteAPIView(APIView):
+    """
+    API view to delete a company user's profile.
+    """
+    permission_classes = [IsAuthenticated, IsCompanyUser]
+
+    def delete(self, request, *args, **kwargs):
+        user = request.user
+
+        # Perform the deletion
+        user.delete()
+
+        return Response({"detail": "Profile deleted successfully."}, status=status.HTTP_204_NO_CONTENT)

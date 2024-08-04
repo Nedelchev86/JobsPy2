@@ -35,6 +35,17 @@ class JobSerializer(serializers.ModelSerializer):
         model = Job
         fields = '__all__'
 
+class JobCreateSerializer(serializers.ModelSerializer):
+    needed_skills = serializers.SlugRelatedField(many=True, slug_field='name', queryset=Skills.objects.all())
+    seniority = serializers.SlugRelatedField(
+        queryset=Seniority.objects.all(),  # Ensure this queryset is correct
+        slug_field='name'
+    )
+    # company = CompanyProfileShortSerializer(source='user.company')
+    class Meta:
+        model = Job
+        exclude = ['user', 'slug']
+
 class FavoriteJobSerializer(serializers.ModelSerializer):
     job_details = JobSerializer(source='job', read_only=True)
     class Meta:

@@ -12,7 +12,7 @@ from JobsPy.core.decorators import job_seeker_activated_required
 from JobsPy.core.permissions import IsCompanyUser
 from JobsPy.jobs.models import Job, Applicant, FavoriteJob, Category
 from JobsPy.jobs.serializers import JobsDetailSerializer, FavoriteJobSerializer, JobSerializer, ApplicantSerializer, \
-    ChangeStatusSerializer, CategorySerializer, CategorySerializerWithJobs
+    ChangeStatusSerializer, CategorySerializer, CategorySerializerWithJobs, JobCreateSerializer
 from JobsPy.main.models import Skills
 
 
@@ -134,7 +134,7 @@ class DeleteJobView(generics.DestroyAPIView):
 
 class JobCreateAPIView(generics.CreateAPIView):
     queryset = Job.objects.all()
-    serializer_class = JobSerializer
+    serializer_class = JobCreateSerializer
     permission_classes = [permissions.IsAuthenticated, IsCompanyUser]
 
     def perform_create(self, serializer):

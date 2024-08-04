@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from "react";
-import {GoogleMap, useJsApiLoader, MarkerF} from "@react-google-maps/api";
+import {GoogleMap, useJsApiLoader} from "@react-google-maps/api";
 
 const containerStyle = {
     width: "100%",
@@ -73,7 +73,7 @@ function MyComponent({city, address}) {
             onUnmount={onUnmount}
         >
             {/* Child components, such as markers, info windows, etc. */}
-            <MarkerF position={center} />
+            {/* <MarkerF position={center} /> */}
             <></>
         </GoogleMap>
     ) : (

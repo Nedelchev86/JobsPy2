@@ -1,5 +1,6 @@
 import useFetch from "../hooks/useFetch";
 import useFetchWithToken from "../hooks/useFetchWithToken";
+import usePost from "../hooks/usePost";
 
 const API_BASE_URL = `${import.meta.env.VITE_API_URL}jobseekers/`;
 
@@ -24,4 +25,8 @@ export function getJobseekersEducations(id) {
 
 export function getFavoritesJobs() {
     return useFetchWithToken(`${API_BASE_URL}favorites/`, []);
+}
+
+export function postEducation(id, data) {
+    return usePost(`${API_BASE_URL}educations/create/`, data);
 }
