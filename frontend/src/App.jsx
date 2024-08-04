@@ -30,8 +30,9 @@ import Notifications from "./components/notifications/Notifications";
 import ContactUs from "./components/contacsUs/ContactUs";
 import JobsList from "./components/jobList/JobsList";
 import ScrollToTop from "./components/ScrolToTop"; // Import ScrollToTop
-import GuestGuard from "./routeGuards/GuestGuard";
-import AuthGuard from "./routeGuards/AuthGuard";
+// import GuestGuard from "./routeGuards/GuestGuard";
+// import AuthGuard from "./routeGuards/AuthGuard";
+import GuestGuard from "./routeGuards/guestGuard";
 import CompanyGuard from "./routeGuards/CompanyGuard";
 import JobseekerGuard from "./routeGuards/JobseekerGuard";
 
