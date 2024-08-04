@@ -30,10 +30,9 @@ import Notifications from "./components/notifications/Notifications";
 import ContactUs from "./components/contacsUs/ContactUs";
 import JobsList from "./components/jobList/JobsList";
 import ScrollToTop from "./components/ScrolToTop"; // Import ScrollToTop
-import GuestGuard from "./routeGuards/guestGuard";
 import CompanyGuard from "./routeGuards/CompanyGuard";
 import JobseekerGuard from "./routeGuards/JobseekerGuard";
-
+import GuestsGuard from "./routeGuards/GuestsGuard";
 import PageNoAccess from "./components/PageNoAccess";
 
 function App() {
@@ -54,9 +53,9 @@ function App() {
                     <Route
                         path="signup"
                         element={
-                            <GuestGuard>
+                            <GuestsGuard>
                                 <RegisterForm />
-                            </GuestGuard>
+                            </GuestsGuard>
                         }
                     />
                     <Route path="login" element={<LoginModal />} />
