@@ -1,6 +1,6 @@
 import useFetch from "../../hooks/useFetch";
 import {Link, NavLink} from "react-router-dom";
-// import styles from "./PopularTag.module.css";
+import styles from "./PopularTag.module.css";
 import {useLocation} from "react-router-dom";
 
 export default function PopularTags({skill, handleInputChange}) {
