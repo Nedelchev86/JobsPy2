@@ -15,8 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     env:
-      VITE_API_URL: ${{ secrets.REACT_APP_API_URL }} # Example of using a secret for an API URL
-      VITE_API_GOOGLE: "some_value" # Example of a non-secret environment variable
+      VITE_API_URL: ${{ secrets.VITE_API_URL }}
+      VITE_API_GOOGLE: ${{ secrets.VITE_API_GOOGLE }}
 
     steps:
       - uses: actions/checkout@v3
