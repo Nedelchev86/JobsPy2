@@ -34,6 +34,7 @@ import CompanyGuard from "./routeGuards/CompanyGuard";
 import JobseekerGuard from "./routeGuards/JobseekerGuard";
 import GuestsGuard from "./routeGuards/GuestsGuard";
 import PageNoAccess from "./components/PageNoAccess";
+import AuthGuard from "./routeGuards/AuthGuard";
 
 function App() {
     return (
