@@ -7,12 +7,14 @@ const useFetch = (url, initialData = null) => {
     const [toggleRefetch, setToggleRefetch] = useState(false);
 
     useEffect(() => {
+        const controller = new AbortController();
+        const {signal} = controller;
         const fetchData = async () => {
             setLoading(true);
             setError(null);
 
             try {
-                const response = await fetch(url);
+                const response = await fetch(url, {signal});
                 console.log("Response received");
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -22,8 +24,12 @@ const useFetch = (url, initialData = null) => {
                 setData(result);
                 console.log("Data set");
             } catch (err) {
-                setError(err.message);
-                console.error("Fetch error:", err.message);
+                if (err.name === "AbortError") {
+                    console.log("Fetch aborted");
+                } else {
+                    setError(err.message);
+                    console.error("Fetch error:", err.message);
+                }
             } finally {
                 setLoading(false);
                 console.log("Fetch complete");
@@ -31,6 +37,10 @@ const useFetch = (url, initialData = null) => {
         };
 
         fetchData();
+
+        return () => {
+            controller.abort();
+        };
     }, [url, toggleRefetch]);
 
     const refetch = () => {
