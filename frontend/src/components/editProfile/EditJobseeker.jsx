@@ -7,6 +7,8 @@ import Loading from "../loading/Loading";
 import {toast} from "react-toastify";
 import {useForm, Controller} from "react-hook-form";
 import useFetch from "../../hooks/useFetch";
+import useFetchWithToken from "../../hooks/useFetchWithToken";
+import usePut from "../../hooks/usePut";
 
 export default function EditJobseeker() {
     const navigate = useNavigate();
@@ -56,25 +58,39 @@ export default function EditJobseeker() {
     //         .catch((error) => console.error("Error fetching skills:", error));
     // }, []);
 
+    const {data, profileLoading, profileError} = useFetchWithToken(`${import.meta.env.VITE_API_URL}jobseekers/update/`);
+    const {put, putLoading} = usePut(`${import.meta.env.VITE_API_URL}jobseekers/update/`);
+
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}user/jobseeker/update/`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${auth}`,
-            },
-        })
-            .then((response) => response.json())
-            .then((data) =>
-                Object.keys(data).forEach((key) => {
-                    setValue(key, data[key]);
-                })
-            )
-            .catch((error) => {
-                console.error("Error fetching profile data:", error);
+        if (data) {
+            // Update form fields with the fetched data
+            Object.keys(data).forEach((key) => {
+                setValue(key, data[key]);
+                console.log(key);
+                console.log(data[key]);
             });
-        setLoading(false);
-    }, [auth]);
+        }
+    }, [data, setValue]);
+
+    // useEffect(() => {
+    //     fetch(`${import.meta.env.VITE_API_URL}jobseekers/update/`, {
+    //         method: "GET",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             Authorization: `Bearer ${auth}`,
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) =>
+    //             Object.keys(data).forEach((key) => {
+    //                 setValue(key, data[key]);
+    //             })
+    //         )
+    //         .catch((error) => {
+    //             console.error("Error fetching profile data:", error);
+    //         });
+    //     setLoading(false);
+    // }, [auth]);
 
     // const handleSkillChange = (e) => {
     //     const {value, checked} = e.target;
@@ -120,44 +136,58 @@ export default function EditJobseeker() {
                 } else {
                     if (key === "skills") {
                         formData[key].forEach((skill) => formDataObj.append("skills", skill));
-                    } else if (key === "profile_picture" && formData.profile_picture[0]) {
-                        formDataObj.append("profile_picture", formData.profile_picture[0]);
+                    } else if (key === "profile_picture") {
+                        // Check if profile_picture is an object (File) or a string (URL)
+                        if (typeof formData.profile_picture === "string") {
+                            // If it's a string, append it directly
+                            formDataObj.append("profile_picture", formData.profile_picture);
+                        } else if (formData.profile_picture[0]) {
+                            // If it's a File object, append the file
+                            console.log(formData.profile_picture[0]);
+                            formDataObj.append("profile_picture", formData.profile_picture[0]);
+                        }
                     } else {
                         formDataObj.append(key, formData[key]);
                     }
                 }
             });
+            const data = await put(formDataObj);
+
+            toast.success("Profile updated successfully");
+            console.log("Profile updated successfully:", data);
+            navigate("/dashboard");
 
             // Make API call to update profile
-            fetch(`${import.meta.env.VITE_API_URL}user/jobseeker/update/`, {
-                headers: {
-                    Authorization: `Bearer ${auth}`,
-                },
-                method: "PUT",
-                body: formDataObj,
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        return response.json().then((errorData) => {
-                            // Handle validation errors
-                            if (errorData.errors) {
-                                Object.entries(errorData.errors).forEach(([field, messages]) => {});
-                            }
+            // fetch(`${import.meta.env.VITE_API_URL}user/jobseeker/update/`, {
+            //     headers: {
+            //         Authorization: `Bearer ${auth}`,
+            //     },
+            //     method: "PUT",
+            //     body: formDataObj,
+            // })
+            //     .then((response) => {
+            //         if (!response.ok) {
+            //             return response.json().then((errorData) => {
+            //                 // Handle validation errors
+            //                 if (errorData.errors) {
+            //                     Object.entries(errorData.errors).forEach(([field, messages]) => {});
+            //                 }
 
-                            toast.error("Failed to edit profile");
-                            throw new Error("Validation error");
-                        });
-                    }
-                    return response.json();
-                })
+            //                 toast.error("Failed to edit profile");
+            //                 throw new Error("Validation error");
+            //             });
+            //         }
+            //         return response.json();
+            //     })
 
-                .then((data) => {
-                    setIsLoading(false);
-                    toast.success("Profile updated successfully");
-                    console.log("Profile updated successfully:", data);
-                    navigate("/dashboard");
-                });
+            //     .then((data) => {
+            //         setIsLoading(false);
+            //         toast.success("Profile updated successfully");
+            //         console.log("Profile updated successfully:", data);
+            //         navigate("/dashboard");
+            //     });
         } catch (error) {
+            setIsLoading(false);
             toast.error("Failed to edit profile");
             console.error("Error updating profile:", error);
         }

@@ -127,9 +127,9 @@ export default function CompanyMenu() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink activeclassname="active" style={{color: "red"}} onClick={() => handleShowModal(profileId)}>
-                            <i className="lni lni-bookmark"></i> Delete Company{" "}
-                        </NavLink>
+                        <Link style={{color: "red"}} onClick={() => handleShowModal(profileId)}>
+                            <i className="lni lni-bookmark"></i> Delete Company
+                        </Link>
                     </li>
                     <li>
                         <NavLink to={"/"} activeclassname="active" onClick={logout}>
@@ -138,7 +138,7 @@ export default function CompanyMenu() {
                     </li>
                 </ul>
             </div>
-            <DeleteConfirmationModal show={showModal} handleClose={handleCloseModal} handleConfirm={handleConfirmDelete} />
+            <DeleteConfirmationModal show={showModal} handleClose={handleCloseModal} handleConfirm={handleConfirmDelete} message="Are you sure you want to delete yout company profile?" />
         </div>
     );
 }

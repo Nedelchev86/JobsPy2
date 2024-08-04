@@ -1,21 +1,21 @@
 import React from "react";
-import style from "./DeleteConfirmationModal";
+import styles from "./DeleteConfirmationModal.module.css";
 
-export default function DeleteConfirmationModal({show, handleClose, handleConfirm}) {
+export default function DeleteConfirmationModal({show, handleClose, handleConfirm, message}) {
     if (!show) {
         return null;
     }
 
     return (
-        <div className={style.modal}>
-            <div className={style.modalContent}>
+        <div className={styles.modal}>
+            <div className={styles.modalContent}>
                 <h4>Confirm Deletion</h4>
-                <p>Are you sure you want to delete this job?</p>
-                <div className={style.modalActions}>
-                    <button onClick={handleClose} className={style.btn}>
+                <p>{message}</p>
+                <div className={styles.modalActions}>
+                    <button onClick={handleClose} className={styles.btn}>
                         Cancel
                     </button>
-                    <button onClick={handleConfirm} className={`${style.btn} ${style.btnDanger}`}>
+                    <button onClick={handleConfirm} className={`${styles.btn} ${styles.btnDanger}`}>
                         Delete
                     </button>
                 </div>

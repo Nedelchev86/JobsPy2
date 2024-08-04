@@ -3,7 +3,7 @@ import {useAuth} from "../../contexts/authContexts";
 import {Link} from "react-router-dom";
 import DeleteConfirmationModal from "../deleteModal/DeleteConfirmationModal";
 import {useJobs} from "../../contexts/JobContext";
-import { getJobsByCompany } from "../../api/companyApi";
+import {getJobsByCompany} from "../../api/companyApi";
 
 export default function CreatedJobs() {
     // const [jobs, setJobs] = useState([]);
@@ -12,7 +12,7 @@ export default function CreatedJobs() {
     const [jobToDelete, setJobToDelete] = useState(null);
     const {fetchJobs} = useJobs();
 
-    const {data: jobs, loading, error} = getJobsByCompany()
+    const {data: jobs, loading, error} = getJobsByCompany();
 
     // useEffect(() => {
     //     fetch(`${import.meta.env.VITE_API_URL}created-jobs/`, {
@@ -107,7 +107,7 @@ export default function CreatedJobs() {
                     </div>
                 </div>
             ))}
-            <DeleteConfirmationModal show={showModal} handleClose={handleCloseModal} handleConfirm={handleDeleteJob} />
+            <DeleteConfirmationModal show={showModal} handleClose={handleCloseModal} handleConfirm={handleDeleteJob} message={"Are you sure you want to delete this job?"} />
         </div>
     );
 }
