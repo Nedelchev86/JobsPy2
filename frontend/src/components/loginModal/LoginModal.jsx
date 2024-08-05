@@ -5,9 +5,11 @@ import {useAuth} from "../../contexts/authContexts";
 import {toast} from "react-toastify";
 import {useForm} from "react-hook-form";
 import styles from "./LoginModal.module.css";
+import Spinner from "react-bootstrap/Spinner";
 
 const LoginModal = ({show, handleClose}) => {
     const {notifications, fetchNotifications, auth} = useJobs();
+    const [loading, setLoading] = useState(false); // Manage loading state
 
     const {
         register,
@@ -38,6 +40,7 @@ const LoginModal = ({show, handleClose}) => {
 
     const submitForm = async (data) => {
         // e.preventDefault();
+        setLoading(true);
 
         try {
             await login(data); // Call login method from AuthContext
@@ -54,6 +57,8 @@ const LoginModal = ({show, handleClose}) => {
             console.error("Login failed:", error.message);
             setError("Invalid email or password");
             toast.error(`Login failed. Invalid email or password`);
+        } finally {
+            setLoading(false); // Set loading to false after submission completes
         }
     };
 
@@ -111,7 +116,15 @@ const LoginModal = ({show, handleClose}) => {
                     </Form.Group>
 
                     <Button variant="primary" type="submit" className={`w-100 ${styles["dark-blue"]}`} disabled={!isValid}>
-                        Log in
+                        {/* Log in */}
+                        {loading ? (
+                            <>
+                                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                                {" Loading..."}
+                            </>
+                        ) : (
+                            "Log in"
+                        )}
                     </Button>
                 </Form>
             </Modal.Body>
