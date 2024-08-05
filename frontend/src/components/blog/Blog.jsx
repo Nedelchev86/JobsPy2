@@ -3,6 +3,7 @@ import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import {Link} from "react-router-dom";
 import {formatDate} from "../../utils/formatDate";
 import {getAllBlogs} from "../../api/blogApi.js";
+import Loading from "../loading/Loading.jsx";
 
 const Blog = () => {
     // const [blogs, setBlogs] = useState([]);
@@ -27,54 +28,57 @@ const Blog = () => {
             <section className="section latest-news-area blog-list">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-8 col-md-7 col-12">
-                            <div id="blog-list" className="row">
-                                {blogs.map((blog) => (
-                                    <div className="col-lg-6 col-12" key={blog.id}>
-                                        <div className="single-news wow">
-                                            <div className="image">
-                                                <img className="thumb" src={blog.image_url_1} alt="#" />
+                        {loading ? (
+                            <Loading />
+                        ) : (
+                            <div className="col-lg-8 col-md-7 col-12">
+                                <div id="blog-list" className="row">
+                                    {blogs.map((blog) => (
+                                        <div className="col-lg-6 col-12" key={blog.id}>
+                                            <div className="single-news wow">
+                                                <div className="image">
+                                                    <img className="thumb" src={blog.image_url_1} alt="#" />
+                                                </div>
+                                                <div className="content-body">
+                                                    <h4 className="title">
+                                                        <Link to={`/blogs/${blog.id}/`}>{blog.title}</Link>
+                                                    </h4>
+                                                    <div className="meta-details">
+                                                        <ul>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i className="lni lni-tag"></i> {blog.author.first_name} {blog.author.last_name}
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i className="lni lni-calendar"></i> {formatDate(blog.created_at)}
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i className="lni lni-eye"></i>
+                                                                    {blog.views}
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div className="truncate-overflow">
+                                                        <p>{blog.description}</p>
+                                                    </div>
+                                                    <div className="button">
+                                                        <Link to={`/blogs/${blog.id}/`} className="btn">
+                                                            Read More
+                                                        </Link>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="content-body">
-                                                <h4 className="title">
-                                                    <Link to={`/blogs/${blog.id}/`}>{blog.title}</Link>
-                                                </h4>
-                                                <div className="meta-details">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-                                                                <i className="lni lni-tag"></i> {blog.author.first_name} {blog.author.last_name}
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-                                                                <i className="lni lni-calendar"></i> {formatDate(blog.created_at)}
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-                                                                <i className="lni lni-eye"></i>
-                                                                {blog.views}
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div className="truncate-overflow">
-                                                    <p>{blog.description}</p>
-                                                </div>
-                                                <div className="button">
-                                                    <Link to={`/blogs/${blog.id}/`} className="btn">
-                                                        Read More
-                                                    </Link>
-                                                </div>
-                                            </div>
+                                            `;
                                         </div>
-                                        `;
-                                    </div>
-                                ))}
-                            </div>
+                                    ))}
+                                </div>
 
-                            {/* <div className="pagination center">
+                                {/* <div className="pagination center">
                                 <ul className="pagination-list">
                                     <li>
                                         <a href="#">
@@ -100,7 +104,9 @@ const Blog = () => {
                                     </li>
                                 </ul>
                             </div> */}
-                        </div>
+                            </div>
+                        )}
+
                         <aside className="col-lg-4 col-md-5 col-12">
                             <div className="sidebar">
                                 {/*                     

@@ -15,7 +15,7 @@ export default function EditJobseeker() {
     const {auth, isAuthenticated} = useAuth();
     // const [skills, setSkills] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const profile = {
         first_name: "",
@@ -58,7 +58,7 @@ export default function EditJobseeker() {
     //         .catch((error) => console.error("Error fetching skills:", error));
     // }, []);
 
-    const {data, profileLoading, profileError} = useFetchWithToken(`${import.meta.env.VITE_API_URL}jobseekers/update/`);
+    const {data, loading: profileLoading, profileError} = useFetchWithToken(`${import.meta.env.VITE_API_URL}jobseekers/update/`);
     const {put, putLoading} = usePut(`${import.meta.env.VITE_API_URL}jobseekers/update/`);
 
     useEffect(() => {
@@ -195,7 +195,7 @@ export default function EditJobseeker() {
 
     return (
         <>
-            {loading ? (
+            {profileLoading ? (
                 <Loading />
             ) : (
                 <div className="change-password section">

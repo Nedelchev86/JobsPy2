@@ -22,6 +22,7 @@ const RegisterForm = () => {
         role: "",
     });
     const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});
@@ -29,9 +30,9 @@ const RegisterForm = () => {
 
     const submitForm = async (e) => {
         // e.preventDefault();
+        setIsLoading(true);
         console.log(e);
         try {
-            // Check if passwords match
             if (formData.password !== formData.password2) {
                 throw new Error("Passwords do not match");
             }
@@ -58,6 +59,7 @@ const RegisterForm = () => {
             console.log("User registered successfully");
             // Redirect or show success message
         } catch (error) {
+            setIsLoading(false);
             console.error("Registration failed:", error.message);
             setError(error.message); // Set error message for display
             // Handle error (e.g., display error message)
@@ -169,8 +171,8 @@ const RegisterForm = () => {
                                                 </select>
                                             </div>
                                             <div className="col-lg-12 button">
-                                                <button className="btn" type="submit">
-                                                    Register
+                                                <button className="btn" type="submit" disabled={isLoading}>
+                                                    {isLoading ? "Loading..." : "Register"}
                                                 </button>
                                             </div>
                                         </div>

@@ -3,9 +3,10 @@ import {Link, NavLink} from "react-router-dom";
 import styles from "./JobsCategory.module.css";
 import {useLocation} from "react-router-dom";
 import {useState, useEffect} from "react";
+import Loading from "../loading/Loading";
 
 export default function JobsCategory({category, handleInputChange}) {
-    const {data: categories, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}jobs/categories/`, []);
+    const {data: categories, error, loading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}jobs/categories/`, []);
 
     const [allJobs, setAllJobs] = useState(0);
 
@@ -25,22 +26,26 @@ export default function JobsCategory({category, handleInputChange}) {
             <h5 className="widget-title">
                 <span>Categories</span>
             </h5>
-            <ul className="ti">
-                <li key={category.id}>
-                    <NavLink className={({isActive}) => (isActive && !currentCategory ? styles.clicked : "")} to={`/jobs/`}>
-                        All Jobs
-                        <span>{allJobs}</span>
-                    </NavLink>
-                </li>
-                {categories.map((category) => (
+            {loading ? (
+                <Loading />
+            ) : (
+                <ul className="ti">
                     <li key={category.id}>
-                        <NavLink className={({isActive}) => (isActive && currentCategory == category.id ? styles.clicked : "")} to={`/jobs/?category=${category.id}`}>
-                            {category.name}
-                            <span>{category.job_count}</span>
+                        <NavLink className={({isActive}) => (isActive && !currentCategory ? styles.clicked : "")} to={`/jobs/`}>
+                            All Jobs
+                            <span>{allJobs}</span>
                         </NavLink>
                     </li>
-                ))}
-            </ul>
+                    {categories.map((category) => (
+                        <li key={category.id}>
+                            <NavLink className={({isActive}) => (isActive && currentCategory == category.id ? styles.clicked : "")} to={`/jobs/?category=${category.id}`}>
+                                {category.name}
+                                <span>{category.job_count}</span>
+                            </NavLink>
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 }
