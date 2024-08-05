@@ -1,6 +1,6 @@
-# JobsPy - Test Demo https://jobspy2-1.onrender.com/    LIVE DEMO Soon
+# JobsPy - Test Demo [LIVE DEMO](https://www.jobspy.eu/)    LIVE DEMO Soon
 
-[![Live Demo]](https://jobspy2-1.onrender.com/)
+[[Live Demo]](https://jobspy2-1.onrender.com/)
 
 
 ![JobsPy](https://github.com/user-attachments/assets/55392e2d-1fb3-43e6-a1c8-2c772c84a830)
