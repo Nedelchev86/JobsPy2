@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 export default function Footer() {
     return (
         <footer className="footer">
@@ -7,9 +9,9 @@ export default function Footer() {
                         <div className="col-lg-4 col-md-6 col-12">
                             <div className="f-about single-footer">
                                 <div className="logo">
-                                    <a href="index.html">
+                                    <Link to="/">
                                         <img src="/images/logo/logo.jpg" alt="Logo" />
-                                    </a>
+                                    </Link>
                                 </div>
                                 <p>#1 project in SoftUni React - August 2024</p>
                                 <ul className="contact-address">

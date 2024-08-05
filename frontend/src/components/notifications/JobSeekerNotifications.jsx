@@ -3,17 +3,18 @@ import {useAuth} from "../../contexts/authContexts";
 import {Link} from "react-router-dom";
 import {formatDate} from "../../utils/formatDate";
 import NotificationJobSeekersComponent from "./NotificationsJobSeekersComponent";
+import Loading from "../loading/Loading";
 export default function JobSeekerNotifications() {
     const [notifications, setNotifications] = useState([]);
     const {auth, user} = useAuth();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchNotifications();
     }, []);
 
-    console.log(user);
-
     const fetchNotifications = async () => {
+        setLoading(true);
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}notificationjobseekers/`, {
                 headers: {
@@ -24,12 +25,10 @@ export default function JobSeekerNotifications() {
             setNotifications(data);
         } catch (error) {
             console.error("Error fetching notifications:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
-    return (
-        <div className="col-lg-12 col-12">
-            <div className="job-items">{notifications && notifications.length > 0 && notifications.map((notification) => <NotificationJobSeekersComponent key={notification.id} notification={notification} />)}</div>
-        </div>
-    );
+    return <div className="col-lg-12 col-12">{loading ? <Loading /> : <div className="job-items">{notifications && notifications.length > 0 && notifications.map((notification) => <NotificationJobSeekersComponent key={notification.id} notification={notification} />)}</div>}</div>;
 }
