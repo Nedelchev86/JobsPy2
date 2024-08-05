@@ -34,7 +34,7 @@ export default function JobSeekerMenu() {
     // Function to handle the confirmation of the delete action
     const handleConfirmDelete = async () => {
         try {
-            const response = await fetch(`${API_URL}prifile/delete/`, {
+            const response = await fetch(`${API_URL}jobseekers/prifile/delete/`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
