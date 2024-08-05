@@ -143,8 +143,7 @@ const JobSeekerDashboard = () => {
 
                                                     <h4>
                                                         <a className="name" href="#">
-                                                            {user.user.first_name && user.user.first_name}
-                                                            {user.user.last_name && user.user.last_name}
+                                                            {user.user.first_name && user.user.first_name}" "{user.user.last_name && user.user.last_name}
                                                         </a>
                                                     </h4>
                                                     <p>
