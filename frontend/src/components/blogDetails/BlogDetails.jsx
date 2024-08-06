@@ -91,7 +91,6 @@ export default function BlogDetails() {
                                                 </div>
 
                                                 <span>{blog.blockquote}</span>
-                                                <img className="shape" src="assets/images/testimonial/patern1.png" alt="#" />
                                             </blockquote>
 
                                             <div className="post-tags-media">
