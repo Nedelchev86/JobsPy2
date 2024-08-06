@@ -1,0 +1,46 @@
+.small-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1;
+    position: relative;
+    padding-left: 18px;
+    font-weight: 600;
+    line-height: 28px;
+    text-transform: capitalize;
+}
+
+.title::before {
+    position: absolute;
+    left: 0;
+    top: 1px;
+    height: 100%;
+    width: 3px;
+    background-color: #2042e3;
+    content: "";
+}
+
+.details-btn {
+    display: inline-block;
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 10px;
+    background-color: #2042e3;
+    color: #fff;
+    border: none;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    border-radius: 4px;
+}
+
+.details-btn:hover {
+    background-color: #fff;
+}

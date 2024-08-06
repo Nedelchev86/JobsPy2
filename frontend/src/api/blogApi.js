@@ -14,3 +14,7 @@ export function getBlog(id) {
 export function getLastFiveBlogs() {
     return useFetch(`${API_BASE_URL}latest-blog-posts/`, []);
 }
+
+export function getCommentForBlog(id) {
+    return useFetch(`${API_BASE_URL}${id}/comments/`, []);
+}

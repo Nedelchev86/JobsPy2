@@ -10,11 +10,18 @@ import useFetch from "../../hooks/useFetch";
 import useFetchWithToken from "../../hooks/useFetchWithToken";
 import usePut from "../../hooks/usePut";
 import {getAllSkills} from "../../api/commonApi";
+import {getJobseekerForEdit, putJobseekerUpdate} from "../../api/JobSeekerApi";
 
 export default function EditJobseeker() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const [loading, setLoading] = useState(true);
+
+    // const {data, loading: profileLoading, profileError} = useFetchWithToken(`${import.meta.env.VITE_API_URL}jobseekers/update/`);
+    // const {data: skills, error, refetch} = useFetch(`${import.meta.env.VITE_API_URL}skills/`, []);
+    const {data: skills, error, refetch} = getAllSkills();
+    const {data, loading: profileLoading, profileError} = getJobseekerForEdit();
+    const {put, putError, putLoading} = putJobseekerUpdate();
 
     const profile = {
         first_name: "",
@@ -36,9 +43,6 @@ export default function EditJobseeker() {
         user: "",
     };
 
-    // const {data: skills, error, refetch} = useFetch(`${import.meta.env.VITE_API_URL}skills/`, []);
-    const {data: skills, error, refetch} = getAllSkills();
-
     const {
         register,
         handleSubmit,
@@ -49,9 +53,6 @@ export default function EditJobseeker() {
         profile,
         mode: "onBlur",
     });
-
-    const {data, loading: profileLoading, profileError} = useFetchWithToken(`${import.meta.env.VITE_API_URL}jobseekers/update/`);
-    const {put, putLoading} = usePut(`${import.meta.env.VITE_API_URL}jobseekers/update/`);
 
     useEffect(() => {
         if (data) {
@@ -92,6 +93,9 @@ export default function EditJobseeker() {
                 }
             });
             const data = await put(formDataObj);
+            if (putError) {
+                toast.error(error);
+            }
 
             toast.success("Profile updated successfully");
             console.log("Profile updated successfully:", data);

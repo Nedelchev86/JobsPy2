@@ -6,6 +6,7 @@ import EducationList from "../changeStatus/EducationList";
 import {getJobseekerByID} from "../../api/JobSeekerApi";
 import Loading from "../loading/Loading";
 import SkillsModule from "../skills/Skills";
+import {CLOUDINARY_URL} from "../../config";
 
 export default function JobSeekerDetails() {
     // const [jobseeker, setJobseeker] = useState([]);
@@ -49,7 +50,7 @@ export default function JobSeekerDetails() {
                                                                 <div className="name-head">
                                                                     {jobseeker.profile_picture ? (
                                                                         <a className="mb-2" href="#">
-                                                                            <img className="circle-54" src={`https://res.cloudinary.com/drjgddl0y/${jobseeker.profile_picture}`} alt="" />
+                                                                            <img className="circle-54" src={`${CLOUDINARY_URL}${jobseeker.profile_picture}`} alt="" />
                                                                         </a>
                                                                     ) : (
                                                                         <a className="mb-2" href="#">

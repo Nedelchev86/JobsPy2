@@ -7,18 +7,7 @@ import ApplicantListCard from "./ApplicantListCard";
 
 export default function ApplicantsList() {
     const {auth} = useAuth();
-    // const [applicants, setApplicants] = useState([]);
 
-    // useEffect(() => {
-    //     fetch(`${import.meta.env.VITE_API_URL}company/applicants/`, {
-    //         method: "GET",
-    //         headers: {
-    //             Authorization: `Bearer ${auth}`,
-    //         },
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data) => setApplicants(data));
-    // }, []);
     const {data: applicants, loading, error} = getApplicantsList();
 
     return (

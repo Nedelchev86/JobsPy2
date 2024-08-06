@@ -7,52 +7,15 @@ import {Link} from "react-router-dom";
 import GoogleMapComponent from "../googleMap/GoogleMapComponent";
 import styles from "./CompanyDetails.module.css";
 import {getCompanyById} from "../../api/companyApi";
+import {CLOUDINARY_URL} from "../../config";
+import CompanyOpenPositions from "./CompanyOpenPositions";
 
 export default function CompanyDetails() {
-    // const [company, setCompany] = useState();
     const {id} = useParams();
     const defaultLocation = "Burgas";
     const defaultAddress = "Bul. San Stefano";
 
     const {data: company, error, loading, refetch} = getCompanyById(id);
-
-    // useEffect(() => {
-    //     fetch(`${import.meta.env.VITE_API_URL}companies/${id}/`)
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             setCompany(data);
-    //         })
-    //         .catch((error) => console.error("Error fetching jobseeker:", error));
-    // }, [id]);
-
-    // if (!company) {
-    //     // Render loading state or redirect to login page
-    //     console.log("loading");
-    //     return <div>Loading...</div>;
-    // }
-
-    // if (!company) {
-    //     return (
-    //         <>
-    //             <Breadcrumbs pageTitle="Companies" pageInfo="Take a look at the top IT companies ..." />
-    //             <section className="section blog-single">
-    //                 <div className="container">
-    //                     <div className="row">
-    //                         <div className="resume ">
-    //                             <div className="container">
-    //                                 <div className="resume-inner">
-    //                                     <Loading />
-    //                                 </div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </div>
-    //             </section>
-    //             ;
-    //             <Loading />;
-    //         </>
-    //     );
-    // }
 
     return (
         <>
@@ -73,14 +36,14 @@ export default function CompanyDetails() {
                                                         <div className="row">
                                                             <div className="col-lg-5 col-md-5 col-12">
                                                                 <div className="name-head">
-                                                                    <a className="mb-2" href="#">
-                                                                        {company.image ? <img className="circle-54" src={`https://res.cloudinary.com/drjgddl0y/${company.image}`} alt="" /> : <img className="circle-54" src="/images/default/company.jpg" alt="" />}
-                                                                    </a>
+                                                                    <Link className="mb-2" to="#">
+                                                                        {company.image ? <img className="circle-54" src={`${CLOUDINARY_URL}${company.image}`} alt="" /> : <img className="circle-54" src="/images/default/company.jpg" alt="" />}
+                                                                    </Link>
 
                                                                     <h4>
-                                                                        <a className="name" href="#">
+                                                                        <Link className="name" to="#">
                                                                             {company.name}
-                                                                        </a>
+                                                                        </Link>
                                                                     </h4>
 
                                                                     <ul className="social">
@@ -91,9 +54,9 @@ export default function CompanyDetails() {
                                                                         </li>
 
                                                                         <li>
-                                                                            <a target="_blank" href={company?.linkedin_url}>
+                                                                            <Link target="_blank" to={company?.linkedin_url}>
                                                                                 <i className="lni lni-linkedin-original"></i>
-                                                                            </a>
+                                                                            </Link>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -131,9 +94,9 @@ export default function CompanyDetails() {
                                                                     <div className="single-list">
                                                                         <h5 className="title">Website Linked</h5>
                                                                         <p>
-                                                                            <a target="_blank" href={company?.website_url}>
+                                                                            <Link target="_blank" to={company?.website_url}>
                                                                                 Link
-                                                                            </a>
+                                                                            </Link>
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -185,37 +148,7 @@ export default function CompanyDetails() {
                                                             </div>
 
                                                             {company?.jobs?.map((job) => (
-                                                                <div key={job.id} className="manage-content">
-                                                                    <div className="row align-items-center justify-content-center">
-                                                                        <div className="col-lg-4 col-md-4 col-12">
-                                                                            <h3>{job.title}</h3>
-                                                                        </div>
-                                                                        <div className="col-lg-2 col-md-4 col-12">
-                                                                            <p>
-                                                                                <span className="time">{job.location}</span>
-                                                                            </p>
-                                                                        </div>
-                                                                        <div className="col-lg-2 col-md-4 col-12">
-                                                                            <div className="col-lg-3 col-md-3 col-12">
-                                                                                <p>
-                                                                                    <span className="time">{job.salary}</span>
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="col-lg-2 col-md-4 col-12">
-                                                                            <p>
-                                                                                <span className="time">{job.seniority}</span>
-                                                                            </p>
-                                                                        </div>
-                                                                        <div className="col-lg-2 col-md-4 col-12">
-                                                                            <p>
-                                                                                <Link className={styles["details-btn"]} to={`/jobs/${job.id}`}>
-                                                                                    Details
-                                                                                </Link>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                <CompanyOpenPositions key={job.id} job={job} />
                                                             ))}
                                                         </div>
                                                     </div>
@@ -226,11 +159,7 @@ export default function CompanyDetails() {
                                                     <div className="sidebar-widget">
                                                         <div className="inner">
                                                             <div className="row m-n2 button">
-                                                                <div className=" col-lg-12  ">
-                                                                    <form method="post" action="{% url 'subscribe_to_company' object.pk %}">
-                                                                        {/* <button style="width: 100%" className="d-block btn" type="submit">{% if not is_subscribed %}Subscribe for company{% else %} Unsubscribe for company{% endif %}</button> */}
-                                                                    </form>
-                                                                </div>
+                                                                <div className=" col-lg-12  "></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -239,14 +168,6 @@ export default function CompanyDetails() {
                                                             <h6 className={styles.title}>Job Location</h6>
                                                             <div className="mapouter">
                                                                 <div className="gmap_canvas">
-                                                                    {/* <iframe width="100%" height={300} id="gmap_canvas" src={`https://maps.google.com/maps?q=${company?.location}&t=&z=13&ie=UTF8&iwloc=&output=embed`} frameBorder={0} scrolling="no" marginHeight={0} marginWidth={0} />
-
-                                                                <style
-                                                                    dangerouslySetInnerHTML={{
-                                                                        __html: ".mapouter{position:relative;text-align:right;height:300px;width:100%;}.gmap_canvas {overflow:hidden;background:none!important;height:300px;width:100%;}",
-                                                                    }}
-                                                                />
-                                                                <a href="https://maps-google.github.io/embed-google-map/">embed google map</a> */}
                                                                     <GoogleMapComponent city={company?.location} address={company?.address} />
                                                                 </div>
                                                             </div>

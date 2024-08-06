@@ -45,25 +45,6 @@ export default function ChangePasswordForm() {
         }
     };
 
-    // const submitForm = async () => {
-    //     if (newPassword1 !== newPassword2) {
-    //         setError("New passwords do not match");
-    //         return;
-    //     }
-
-    //     try {
-    //         await put({
-    //             old_password: oldPassword,
-    //             new_password: newPassword1,
-    //         });
-
-    //         toast.success("Your password has been successfully changed.");
-    //         navigate("/dashboard");
-    //     } catch (error) {
-    //         setError(putError || "Password is incorrect");
-    //         toast.error(`Error changing password: ${putError || error.message}`);
-    //     }
-    // };
     return (
         <div className="change-password section">
             <div className="container">

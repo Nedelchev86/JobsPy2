@@ -4,22 +4,13 @@ import {Link} from "react-router-dom";
 import {formatDate} from "../../utils/formatDate";
 import {getAllBlogs} from "../../api/blogApi.js";
 import Loading from "../loading/Loading.jsx";
+import BlogCard from "./BlogCard.jsx";
 
 const Blog = () => {
     // const [blogs, setBlogs] = useState([]);
 
     const {data: blogs, loading, error} = getAllBlogs();
 
-    // useEffect(() => {
-    //     // Fetch blogs from your API
-    //     fetch(`${import.meta.env.VITE_API_URL}blogs/`)
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             setBlogs(data);
-    //             console.log(data);
-    //         })
-    //         .catch((error) => console.error("Error fetching blogs:", error));
-    // }, []);
 
     return (
         <>
@@ -34,94 +25,14 @@ const Blog = () => {
                             <div className="col-lg-8 col-md-7 col-12">
                                 <div id="blog-list" className="row">
                                     {blogs.map((blog) => (
-                                        <div className="col-lg-6 col-12" key={blog.id}>
-                                            <div className="single-news wow">
-                                                <div className="image">
-                                                    <img className="thumb" src={blog.image_url_1} alt="#" />
-                                                </div>
-                                                <div className="content-body">
-                                                    <h4 className="title">
-                                                        <Link to={`/blogs/${blog.id}/`}>{blog.title}</Link>
-                                                    </h4>
-                                                    <div className="meta-details">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i className="lni lni-tag"></i> {blog.author.first_name} {blog.author.last_name}
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i className="lni lni-calendar"></i> {formatDate(blog.created_at)}
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i className="lni lni-eye"></i>
-                                                                    {blog.views}
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div className="truncate-overflow">
-                                                        <p>{blog.description}</p>
-                                                    </div>
-                                                    <div className="button">
-                                                        <Link to={`/blogs/${blog.id}/`} className="btn">
-                                                            Read More
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            `;
-                                        </div>
+                                        <BlogCard blog={blog} key={blog.id} />
                                     ))}
                                 </div>
-
-                                {/* <div className="pagination center">
-                                <ul className="pagination-list">
-                                    <li>
-                                        <a href="#">
-                                            <i className="lni lni-chevron-left"></i>
-                                        </a>
-                                    </li>
-                                    <li className="active">
-                                        <a href="#">1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">3</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">4</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i className="lni lni-chevron-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div> */}
                             </div>
                         )}
 
                         <aside className="col-lg-4 col-md-5 col-12">
                             <div className="sidebar">
-                                {/*                     
-                                  {% if 'blog.add_blogpost' in perms %}
-                                <div className="sidebar-widget">
-                                <div className="inner">
-                            <div className="row m-n2 button">
-                                        <div className=" col-lg-12  ">
-                                            <a href="{% url 'blog-create' %}" className="d-block btn"><i className="fa fa-heart-o mr-1"></i> Add Blog Post</a>
-                                        </div>
-                                     </div>
-                                </div>
-                            </div>
-
-                    {% endif %} */}
                                 <div className="widget search-widget">
                                     <h5 className="widget-title">
                                         <span>Search ...</span>

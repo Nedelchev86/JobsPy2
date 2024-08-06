@@ -15,16 +15,6 @@ export default function BlogDetails() {
 
     const {data: blog, loading, error} = getBlog(id);
 
-    // useEffect(() => {
-    //     fetch(`${import.meta.env.VITE_API_URL}blogs/${id}`)
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             setBlog(data);
-    //             console.log(data);
-    //         })
-    //         .catch((error) => console.error("Error fetching blogs:", error));
-    // }, []);
-
     return (
         <>
             <Breadcrumbs pageTitle="News and blogs / Django Rest Framework" pageInfo="First steps in Django Rest Framework" />
@@ -92,37 +82,6 @@ export default function BlogDetails() {
 
                                                 <span>{blog.blockquote}</span>
                                             </blockquote>
-
-                                            <div className="post-tags-media">
-                                                {/* <div className="post-tags popular-tag-widget mb-xl-40">
-                    <h5 className="tag-title">Related Tags</h5>
-                    <div className="tags">
-                        <a href="#">Announcement</a>
-                        <a href="#">Experiences</a>
-                        <a href="#">Market News</a>
-                    </div>
-                </div> */}
-                                                <div className="post-social-media">
-                                                    <h5 className="share-title">Social Share</h5>
-                                                    <ul className="custom-flex">
-                                                        <li>
-                                                            <a href="#">
-                                                                <i className="lni lni-twitter-original"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-                                                                <i className="lni lni-facebook-original"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-                                                                <i className="lni lni-instagram"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <div className="comment-form">
@@ -130,39 +89,6 @@ export default function BlogDetails() {
                                                 <span>Leave a comment</span>
                                             </h3>
                                             <CommentList blogId={id} commentsNumber={blog.comments_count} />
-
-                                            {/* <AddCommentForm blogId={id} /> */}
-                                            {/* <form action="#" method="POST">
-                <div className="row">
-                    <div className="col-lg-6 col-12">
-                        <div className="form-box form-group">
-                            <input type="text" name="#" className="form-control form-control-custom" placeholder="Your Name" />
-                        </div>
-                    </div>
-                    <div className="col-lg-6 col-12">
-                        <div className="form-box form-group">
-                            <input type="email" name="#" className="form-control form-control-custom" placeholder="Your Email" />
-                        </div>
-                    </div>
-                    <div className="col-12">
-                        <div className="form-box form-group">
-                            <input type="email" name="#" className="form-control form-control-custom" placeholder="Your Subject" />
-                        </div>
-                    </div>
-                    <div className="col-12">
-                        <div className="form-box form-group">
-                            <textarea name="#" rows="6" className="form-control form-control-custom" placeholder="Your Comments"></textarea>
-                        </div>
-                    </div>
-                    <div className="col-12">
-                        <div className="button">
-                            <button type="submit" className="btn mouse-dir white-bg">
-                                Post Comment <span className="dir-part"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </form> */}
                                         </div>
                                     </div>
                                 </div>

@@ -3,6 +3,8 @@ import GoogleMapsBig from "./GoogleMapBIgComponent";
 import {useForm} from "react-hook-form";
 import {useState} from "react";
 import {API_URL} from "../../config";
+import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
+import {Link} from "react-router-dom";
 
 export default function ContactUs() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,24 +42,7 @@ export default function ContactUs() {
 
     return (
         <>
-            <div className="breadcrumbs overlay">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <div className="breadcrumbs-content">
-                                <h1 className="page-title">Contact Us</h1>
-                                <p>What do you seek? Whether it’s a work-from-home role or a bigger salary, we’ll help you find the right job. There’s no secret – just better job matches than ever before. Seek and you shall find.</p>
-                            </div>
-                            <ul className="breadcrumb-nav">
-                                <li>
-                                    <a href="{% url 'index' %}">Home</a>
-                                </li>
-                                <li>Contact Us</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Breadcrumbs pageTitle="Contact Us" pageInfo="What do you seek? Whether it’s a work-from-home role or a bigger salary, we’ll help you find the right job. There’s no secret – just better job matches than ever before. Seek and you shall find." />
 
             <section id="contact-us" className="contact-us section">
                 <div className="container">
@@ -185,7 +170,7 @@ export default function ContactUs() {
                                         <i className="lni lni-envelope"></i>
                                         <ul>
                                             <li>
-                                                <a href="mailto:t******.n******@gmail.com">t******.n******@gmail.com</a>
+                                                <Link href="mailto:t******.n******@gmail.com">t******.n******@gmail.com</Link>
                                             </li>
                                         </ul>
                                     </div>
@@ -199,19 +184,19 @@ export default function ContactUs() {
                                         <h5>Follow Us on</h5>
                                         <ul>
                                             <li>
-                                                <a target="_blank" href="https://facebook.com/tihmir.nedelchev">
+                                                <Link target="_blank" href="https://facebook.com/tihmir.nedelchev">
                                                     <i className="lni lni-facebook-original"></i>
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li>
-                                                <a target="_blank" href="https://www.linkedin.com/in/tihomir-nedelchev/">
+                                                <Link target="_blank" href="https://www.linkedin.com/in/tihomir-nedelchev/">
                                                     <i className="lni lni-linkedin-original"></i>
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li>
-                                                <a target="_blank" href="https://github.com/Nedelchev86">
+                                                <Link target="_blank" href="https://github.com/Nedelchev86">
                                                     <i className="lni lni-github-original"></i>
-                                                </a>
+                                                </Link>
                                             </li>
                                         </ul>
                                     </div>

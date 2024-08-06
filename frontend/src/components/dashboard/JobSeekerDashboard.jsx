@@ -6,9 +6,10 @@ import AddEducationModal from "../educations/AddEducation";
 import {Link} from "react-router-dom";
 import DeleteEducationModal from "../educations/DeleteEducationModal";
 import EditEducationModal from "../educations/EditEducationModal";
-import {getJobseekersEducations} from "../../api/JobSeekerApi";
+import {deleteEducation, getJobseekersEducations} from "../../api/JobSeekerApi";
 import SkillsModule from "../skills/Skills";
 import {CLOUDINARY_URL} from "../../config";
+
 const JobSeekerDashboard = () => {
     const {user, isAuthenticated, fetchUserData, auth} = useAuth();
     const navigate = useNavigate();
@@ -16,6 +17,9 @@ const JobSeekerDashboard = () => {
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
     const [educationToDelete, setEducationToDelete] = useState(null);
     const [educationToEdit, setEducationToEdit] = useState(null);
+
+    const {data: educations, error, loading, refetch} = getJobseekersEducations(user.user.user);
+    const {data, deleteLoading, deleteError, deleteRequest} = deleteEducation(educationToDelete?.id);
 
     const handleOpenModal = () => {
         setModalOpen(true);
@@ -61,15 +65,16 @@ const JobSeekerDashboard = () => {
         if (!educationToDelete) return;
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}jobseekers/educations/delete/${educationToDelete.id}/`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${auth}`,
-                },
-                method: "DELETE",
-            });
+            deleteRequest();
+            // const response = await fetch(`${import.meta.env.VITE_API_URL}jobseekers/educations/delete/${educationToDelete.id}/`, {
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //         Authorization: `Bearer ${auth}`,
+            //     },
+            //     method: "DELETE",
+            // });
 
-            if (!response.ok) {
+            if (deleteError) {
                 throw new Error("Failed to delete education");
             }
 
@@ -79,8 +84,6 @@ const JobSeekerDashboard = () => {
             console.error("Error deleting education:", error);
         }
     };
-    // const {data: educations, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}jobseekers/educations/${user.user.user}/`, []);
-    const {data: educations, error, loading, refetch} = getJobseekersEducations(user.user.user);
 
     return (
         <div className="cat-head job-category">
@@ -107,11 +110,11 @@ const JobSeekerDashboard = () => {
                                                             {user.user.first_name && user.user.first_name} {user.user.last_name && user.user.last_name}
                                                         </p>
                                                     </h4>
-                                                    <p>
-                                                        <p className="deg" href="#">
-                                                            {user.user.occupation && user.user.occupation}
-                                                        </p>
+
+                                                    <p className="deg" href="#">
+                                                        {user.user.occupation && user.user.occupation}
                                                     </p>
+
                                                     <ul className="social">
                                                         <li>
                                                             <Link target="_blank" to={`${user.user.facebook && user.user.facebook} `}>
@@ -172,39 +175,8 @@ const JobSeekerDashboard = () => {
                                     <SkillsModule skills={user.user.skills} />
 
                                     <div className="single-section exprerience">
-                                        {/* <a style="float: right" className="education-link" href="{% url 'add-work-experience' user.jobseeker.pk %}">
-                                                                Add Work Experience{" "}
-                                                            </a> */}
                                         <h4>Work Experience</h4>
-                                        {/*
-                                {% for experience in user.jobseeker.experience.all %}
-
-                                <div className="single-exp mb-30">
-                                    <div className="d-flex align-items-center pr-11 mb-9 flex-wrap flex-sm-nowrap">
-                                        <div className="image">
-                                            {% if experience.image %}
-                                                <img src="{{ experience.image}}" alt="#" width="80" height="80">
-                                            {% else %}
-                                            <img  width="80" height="80" src="{% static '/images/resume/work.jpg' %}" alt="#">
-                                            {% endif %}
-                                        </div>
-                                        <div className="w-100 mt-n2">
-                                            <h3 className="mb-0">
-                                                <a href="#"> {{ experience.company }} </a>
-                                            </h3>
-
-                                            <p>{{ experience.description|safe }}</p>
-                                            <div className="d-flex align-items-center justify-content-md-between flex-wrap">
-                                                <p>{{ experience.start_date}} - {{ experience.end_date}}</p>
-                                                <div>
-                                                <a  href="{% url 'edit-work-experience' experience.pk %}" className="education-edit font-size-3">Edit</a>
-                                                 <a  style="color: red; margin-left: 20px" href="{% url 'delete work experience' experience.pk %}" className="education-edit font-size-3">Delete</a>
-                                                </div>
-                                                </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %} */}
+                                        <p>TO DO</p>
                                     </div>
 
                                     <div className="single-section education">
@@ -218,7 +190,7 @@ const JobSeekerDashboard = () => {
                                         {educations.map((education) => (
                                             <div key={education.id} className="single-edu mb-30">
                                                 <div className="d-flex align-items-center pr-11 mb-9 flex-wrap flex-sm-nowrap">
-                                                    <div className="image">{education.image ? <img src={`https://res.cloudinary.com/drjgddl0y/${education.image}`} alt="#" width="80" height="80" /> : <img src="/images/resume/education.jpg" alt="#" width="80" height="80" />}</div>
+                                                    <div className="image">{education.image ? <img src={`${CLOUDINARY_URL}${education.image}`} alt="#" width="80" height="80" /> : <img src="/images/resume/education.jpg" alt="#" width="80" height="80" />}</div>
                                                     <div className="w-100 mt-n2">
                                                         <h3 className="mb-0">
                                                             <a href="#">{education.institution} </a>

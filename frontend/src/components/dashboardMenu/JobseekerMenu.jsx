@@ -7,8 +7,6 @@ import DeleteConfirmationModal from "../deleteModal/DeleteConfirmationModal";
 import {API_URL} from "../../config";
 
 export default function JobSeekerMenu() {
-    // const [favrotites, setFavorites] = useState([]);
-    // const [applyed, setApplyed] = useState([]);
     const {user, auth} = useAuth();
     const {notifications} = useJobs();
 
@@ -18,36 +16,32 @@ export default function JobSeekerMenu() {
     const {data: applyed, loading: applyedLoading, applyedError} = getApplyedJobs();
 
     const [showModal, setShowModal] = useState(false);
-    const [profileId, setProfileId] = useState(null); // Assume you have a way to set this
-    const [authToken, setAuthToken] = useState(""); // Replace with actual authentication token logic
+    const [profileId, setProfileId] = useState(null);
+    const [authToken, setAuthToken] = useState("");
 
     const handleShowModal = (id) => {
         setProfileId(id);
         setShowModal(true);
     };
-    console.log(user);
-    // Function to close the modal
+
     const handleCloseModal = () => {
         setShowModal(false);
     };
 
-    // Function to handle the confirmation of the delete action
     const handleConfirmDelete = async () => {
         try {
             const response = await fetch(`${API_URL}jobseekers/prifile/delete/`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${auth}`, // Include token if needed
+                    Authorization: `Bearer ${auth}`,
                 },
             });
 
             if (response.ok) {
                 logout();
                 navigate("/");
-                // Handle successful deletion (e.g., refresh the list or redirect)
             } else {
-                // Handle error case
             }
         } catch (error) {
             console.error("Error deleting profile:", error);
@@ -55,30 +49,6 @@ export default function JobSeekerMenu() {
             handleCloseModal(); // Close the modal regardless of the outcome
         }
     };
-
-    // useEffect(() => {
-    //     fetch(`${import.meta.env.VITE_API_URL}user/jobseeker/favorites/`, {
-    //         method: "GET",
-    //         headers: {
-    //             Authorization: `Bearer ${auth}`,
-    //         },
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data) => setFavorites(data))
-    //         .catch((error) => console.error("Error fetching:", error));
-    // }, []);
-
-    // useEffect(() => {
-    //     fetch(`${import.meta.env.VITE_API_URL}jobseekers/applyed/jobs/`, {
-    //         method: "GET",
-    //         headers: {
-    //             Authorization: `Bearer ${auth}`,
-    //         },
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data) => setApplyed(data))
-    //         .catch((error) => console.error("Error fetching:", error));
-    // }, []);
 
     return (
         <div className="col-lg-4 col-12">

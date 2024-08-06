@@ -35,7 +35,7 @@ export default function CreatedJobs() {
             try {
                 await deleteRequest(jobToDelete);
                 toast.success("Job deleted successfully!");
-                refetch(); // Refresh job list after successful deletion
+                refetch();
                 handleCloseModal();
             } catch (error) {
                 toast.error("Failed to delete job. Please try again.");
@@ -57,12 +57,6 @@ export default function CreatedJobs() {
                                 </h3>
                             </div>
                         </div>
-                        {/* <div className="col-lg-1 col-md-1 col-12">
-                            <p className="location">
-                                <i className="lni lni-map-marker"></i>
-                                {job.location}
-                            </p>
-                        </div> */}
 
                         <div className="col-lg-1 col-md-1 col-12">
                             <div className="button">

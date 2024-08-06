@@ -1,13 +1,14 @@
-import useFetch from "../../hooks/useFetch";
+import {getEducationsOfJobseeker} from "../../api/JobSeekerApi";
+import {CLOUDINARY_URL} from "../../config";
 export default function EducationList({id}) {
-    const {data: educations, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}jobseekers/educations/${id}/`, []);
+    const {data: educations, error, isLoading, refetch} = getEducationsOfJobseeker(id);
 
     return (
         <>
             {educations.map((education) => (
                 <div key={education.id} className="single-edu mb-30">
                     <div className="d-flex align-items-center pr-11 mb-9 flex-wrap flex-sm-nowrap">
-                        <div className="image">{education.image ? <img src={`https://res.cloudinary.com/drjgddl0y/${education.image}`} alt="#" width="80" height="80" /> : <img src="/images/resume/education.jpg" alt="#" width="80" height="80" />}</div>
+                        <div className="image">{education.image ? <img src={`${CLOUDINARY_URL}${education.image}`} alt="#" width="80" height="80" /> : <img src="/images/resume/education.jpg" alt="#" width="80" height="80" />}</div>
                         <div className="w-100 mt-n2">
                             <div className="mb-0">
                                 <h5>{education.institution}</h5>

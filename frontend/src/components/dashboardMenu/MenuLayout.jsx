@@ -22,9 +22,9 @@ const MenuLayout = () => {
                         <div className={styles["alert-users"]} role="alert">
                             Please{" "}
                             <Link to="/dashboard/edit" className="alert-link">
-                                {" "}
+                            
                                 complete your profile
-                            </Link>{" "}
+                            </Link>
                             to get access to create and edit job offers .
                         </div>
                     )}

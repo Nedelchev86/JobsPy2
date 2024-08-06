@@ -27,7 +27,6 @@ const CompanyDashboard = () => {
         <div className="cat-head job-category">
             <div className="row">
                 <div className="col-md-6 col-12">
-                    
                     <a href="#" className="single-cat wow fadeInUp">
                         <div className="icon">
                             <i>0</i>
@@ -65,15 +64,15 @@ const CompanyDashboard = () => {
 
                                                     <ul className="social">
                                                         <li>
-                                                            <a href={user.user.facebook_url}>
+                                                            <Link target="_blank" to={user.user.facebook_url}>
                                                                 <i className="lni lni-facebook-original"></i>
-                                                            </a>
+                                                            </Link>
                                                         </li>
 
                                                         <li>
-                                                            <a target="_blank" href={user.user.linkedin_url}>
+                                                            <Link target="_blank" to={user.user.linkedin_url}>
                                                                 <i className="lni lni-linkedin-original"></i>
-                                                            </a>
+                                                            </Link>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -112,9 +111,9 @@ const CompanyDashboard = () => {
                                                         <h5 className="title">Website</h5>
 
                                                         <p>
-                                                            <a target="_blank" href={user.user.website_url}>
+                                                            <Link target="_blank" to={user.user.website_url}>
                                                                 Link
-                                                            </a>
+                                                            </Link>
                                                         </p>
                                                     </div>
                                                 </div>

@@ -4,9 +4,12 @@ import {useParams} from "react-router-dom";
 import {useAuth} from "../../contexts/authContexts";
 import {API_URL} from "../../config";
 import {toast} from "react-toastify";
+import {getCommentForBlog} from "../../api/blogApi";
+import {CLOUDINARY_URL} from "../../config";
+import SingleComment from "./SingleComment";
 
 export default function CommentList({blogId, commentsNumber}) {
-    const {data, loading, error, refetch} = useFetch(`${API_URL}blogs/${blogId}/comments/`, []);
+    const {data, loading, error, refetch} = getCommentForBlog(blogId);
 
     const [formError, setformError] = useState("");
     const [success, setSuccess] = useState("");
@@ -64,24 +67,7 @@ export default function CommentList({blogId, commentsNumber}) {
                 </h3>
                 <ul className="comments-list">
                     {data.map((comment) => (
-                        <li key={comment.id}>
-                            <div className="comment-img">
-                                {comment.author.profile_picture && <img src={`https://res.cloudinary.com/drjgddl0y/${comment.author.profile_picture}`} className="rounded-circle" alt="img" />}
-                                {comment.author.image && <img src={`https://res.cloudinary.com/drjgddl0y/${comment.author.image}`} className="rounded-circle" alt="img" />}
-                            </div>
-                            <div className="comment-desc">
-                                <div className="desc-top">
-                                    <h6>
-                                        {comment.author.first_name} {comment.author.last_name}
-                                    </h6>
-                                    <span className="date">{comment.created_at}</span>
-                                    <a href="#" className="reply-link">
-                                        <i className="lni lni-reply"></i>Reply
-                                    </a>
-                                </div>
-                                <p>{comment.content}</p>
-                            </div>
-                        </li>
+                        <SingleComment key={comment.id} comment={comment} />
                     ))}
                 </ul>
             </div>

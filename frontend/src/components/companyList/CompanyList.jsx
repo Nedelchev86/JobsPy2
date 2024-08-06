@@ -7,13 +7,6 @@ import {getAllCompanies} from "../../api/companyApi";
 import CompanyCards from "./CompanyCards";
 
 export default function CompanyList() {
-    // const [companies, setCompanies] = useState([]);
-    // useEffect(() => {
-    //     fetch("http://127.0.0.1:8000/api/companies/")
-    //         .then((response) => response.json())
-    //         .then((data) => setCompanies(data));
-    // }, []);
-
     const {data: companies, loading} = getAllCompanies();
 
     return (

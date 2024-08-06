@@ -1,14 +1,21 @@
 import useFetch from "../hooks/useFetch";
 import useFetchWithToken from "../hooks/useFetchWithToken";
 import usePost from "../hooks/usePost";
+import useDelete from "../hooks/useDelete";
+import usePut from "../hooks/usePut";
 
 const API_BASE_URL = `${import.meta.env.VITE_API_URL}jobseekers/`;
 
 export function getAllJobseekersk() {
-    let response = fetch(`${API_BASE_URL}`);
-    let result = response.json();
+    return useFetch(`${API_BASE_URL}jobs/`, []);
+}
 
-    return result;
+export function getJobseekerForEdit() {
+    return useFetchWithToken(`${API_BASE_URL}update/`, {});
+}
+
+export function putJobseekerUpdate(data) {
+    return usePut(`${API_BASE_URL}update/`);
 }
 
 export function getJobseekerByID(id) {
@@ -29,4 +36,12 @@ export function getFavoritesJobs() {
 
 export function postEducation(id, data) {
     return usePost(`${API_BASE_URL}educations/create/`, data);
+}
+
+export function getEducationsOfJobseeker(id) {
+    return useFetch(`${API_BASE_URL}educations/${id}/`, []);
+}
+
+export function deleteEducation(id) {
+    return useDelete(`${API_BASE_URL}educations/delete/${id}/`, {});
 }

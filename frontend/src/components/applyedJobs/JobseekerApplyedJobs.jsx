@@ -18,18 +18,6 @@ export default function JobsApplyed() {
     };
 
     const {data: applyedJobs, loading, error} = getApplyedJobs();
-    // useEffect(() => {
-    //     console.log(auth);
-    //     fetch(`${import.meta.env.VITE_API_URL}jobseekers/applyed/jobs/`, {
-    //         method: "GET",
-    //         headers: {
-    //             Authorization: `Bearer ${auth}`,
-    //         },
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data) => setapplyedJobs(data))
-    //         .catch((error) => console.error("Error fetching:", error));
-    // }, []);
 
     return (
         <>

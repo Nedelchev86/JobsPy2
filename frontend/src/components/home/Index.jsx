@@ -181,9 +181,9 @@ export default function Index() {
                                     <h2 className="wow fadeInUp">Don’t just find. Be found. Put your CV in front of great employers</h2>
                                     <p className="wow fadeInUp">It helps you to increase your chances of finding a suitable job and let recruiters contact you about jobs that are not needed to pay for advertising.</p>
                                     <div className="button">
-                                        <a href="#" className="btn">
+                                        <Link to="#" className="btn">
                                             <i className="lni lni-upload"></i> Make Your Resume
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
