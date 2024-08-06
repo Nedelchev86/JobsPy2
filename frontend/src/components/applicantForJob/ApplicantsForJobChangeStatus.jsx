@@ -1,78 +1,3 @@
-// import {useAuth} from "../contexts/Contexts";
-
-// import React, {useState} from "react";
-
-// export default function ChangeStatusModal({isOpen, onClose, applicant, onStatusChanged}) {
-//     const apiUrl = import.meta.env.VITE_API_URL;
-//     const [status, setStatus] = useState(applicant.status || "Panding");
-//     const [comment, setComment] = useState(applicant.comment || "");
-//     const [loading, setLoading] = useState(false);
-//     const [error, setError] = useState(null);
-//     const {auth} = useAuth();
-//     if (!isOpen) return null;
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         setLoading(true);
-//         setError(null);
-
-//         try {
-//             const response = await fetch(`${apiUrl}company/applicants/${applicant.id}/change-status/`, {
-//                 method: "PUT",
-//                 headers: {
-//                     "Content-Type": "application/json",
-//                     Authorization: `Bearer ${auth}`,
-//                 },
-//                 body: JSON.stringify({status, comment}),
-//             });
-
-//             if (!response.ok) {
-//                 throw new Error("Failed to update applicant status");
-//             }
-
-//             const updatedApplicant = await response.json();
-//             console.log(updatedApplicant);
-//             onStatusChanged(updatedApplicant); // Notify parent of status change
-//             onClose(); // Close the modal after successful update
-//         } catch (err) {
-//             setError(err.message);
-//         } finally {
-//             setLoading(false);
-//         }
-//     };
-
-//     return (
-//         <div className="modal-overlay">
-//             <div className="modal-content">
-//                 <button className="modal-close" onClick={onClose}>
-//                     &times;
-//                 </button>
-//                 <h2>Change Applicant Status</h2>
-//                 <form onSubmit={handleSubmit}>
-//                     <div>
-//                         <label htmlFor="status">Status:</label>
-//                         <select id="status" value={status} onChange={(e) => setStatus(e.target.value)}>
-//                             <option value="Pending">Pending</option>
-//                             <option value="Accepted">Accepted</option>
-//                             <option value="Rejected">Rejected</option>
-//                         </select>
-//                     </div>
-//                     <div>
-//                         <label htmlFor="comment">Comment:</label>
-//                         <textarea id="comment" value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Add your comment here" />
-//                     </div>
-//                     <button type="submit" disabled={loading}>
-//                         {loading ? "Updating..." : "Update Status"}
-//                     </button>
-//                 </form>
-//                 {error && <div className="error">{error}</div>}
-//             </div>
-//         </div>
-//     );
-// }
-
-// ChangeStatusModal.jsx
-
 import React, {useState} from "react";
 import {Modal, Button, Form, Spinner, Alert} from "react-bootstrap";
 import {useAuth} from "../../contexts/authContexts";
@@ -105,8 +30,8 @@ export default function ChangeStatusModal({isOpen, onClose, applicant, onStatusC
                 throw new Error("Failed to update applicant status");
             }
             toast.success("Applicant status updated successfully");
-            onStatusChanged(); // Notify parent of status change
-            onClose(); // Close the modal after successful update
+            onStatusChanged();
+            onClose();
         } catch (err) {
             toast.error("Failed to update applicant status");
             setError(err.message);
