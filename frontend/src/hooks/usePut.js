@@ -13,14 +13,16 @@ export default function usePut(url = "") {
         setError(null);
 
         try {
+            const isFormData = putData instanceof FormData;
             const response = await fetch(url, {
                 method: "PUT",
                 headers: {
+                    ...(isFormData
+                        ? {} // Do not set 'Content-Type' header for FormData
+                        : {"Content-Type": "application/json"}),
                     Authorization: `Bearer ${auth}`,
-                    ...options.headers, // Spread additional headers if needed
                 },
-                body: putData, // This can be FormData or JSON, depending on your use case
-                ...options, // Spread any other fetch options if necessary
+                body: putData,
             });
 
             if (!response.ok) {
@@ -40,3 +42,47 @@ export default function usePut(url = "") {
 
     return {data, loading, error, put};
 }
+
+// import {useState} from "react";
+// import {useAuth} from "../contexts/authContexts";
+
+// export default function usePut(url = "") {
+//     const [data, setData] = useState(null);
+//     const [loading, setLoading] = useState(false);
+//     const [error, setError] = useState(null);
+//     const {auth} = useAuth(); // Ensure auth context is set up correctly
+
+//     const put = async (putData, options = {}) => {
+//         setLoading(true);
+//         setError(null);
+
+//         try {
+//             const response = await fetch(url, {
+//                 method: "PUT",
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                     Authorization: `Bearer ${auth}`,
+//                 },
+//                 body: JSON.stringify(putData),
+//             });
+
+//             if (!response.ok) {
+//                 const errorData = await response.json();
+//                 const errorMessage = Object.values(errorData)[0]?.[0] || response.statusText;
+//                 setError(errorMessage);
+//                 throw new Error(errorMessage);
+//             }
+
+//             const result = await response.json();
+//             setData(result);
+//             return result;
+//         } catch (error) {
+//             setError(error.message);
+//             throw error;
+//         } finally {
+//             setLoading(false);
+//         }
+//     };
+
+//     return {data, loading, error, put};
+// }

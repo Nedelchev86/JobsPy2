@@ -18,14 +18,12 @@ export default function Index() {
                             <div className="col-lg-10 offset-lg-1 co-12">
                                 <div className="inner-content">
                                     <div className="hero-text">
-                                        <h1 className="wow fadeInUp">
+                                        <h1>
                                             Find a job you love,
                                             <br /> and you will never have to work a day in your life.
                                         </h1>
-                                        <p className="wow fadeInUp" data-wow-delay=".5s">
-                                            What do you seek? Whether it’s a work-from-home role or a bigger salary, we’ll help you find the right job. There’s no secret – just better job matches than ever before. Seek and you shall find.
-                                        </p>
-                                        <div className="button wow fadeInUp">
+                                        <p>What do you seek? Whether it’s a work-from-home role or a bigger salary, we’ll help you find the right job. There’s no secret – just better job matches than ever before. Seek and you shall find.</p>
+                                        <div className="button">
                                             {user?.user_type === "company" ? (
                                                 <Link to="/dashboard/create-job" className="btn">
                                                     Post a Job
@@ -68,10 +66,7 @@ export default function Index() {
                                                             <span className="flaticon-visitor"></span>
                                                         </div>
                                                         <div className="desc text-left">
-                                                            <Counter
-                                                                endValue={company.company_count}
-                                                                duration={5000} // Duration in milliseconds
-                                                            />
+                                                            <Counter endValue={company.company_count} duration={5000} />
                                                             <span>Companies</span>
                                                         </div>
                                                     </div>
@@ -108,7 +103,7 @@ export default function Index() {
                 <div className="container">
                     <div className="row align-items-center justify-content-center">
                         <div className="col-lg-6 col-md-10 col-12">
-                            <div className="content-left wow fadeInLeft">
+                            <div className="content-left">
                                 <div calss="row">
                                     <div calss="col-lg-6 col-12">
                                         <div className="row">
@@ -138,7 +133,7 @@ export default function Index() {
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-10 col-12">
-                            <div className="content-right wow fadeInRight">
+                            <div className="content-right">
                                 <h2>
                                     Help you to get the <br />
                                     best job that fits you
@@ -185,7 +180,7 @@ export default function Index() {
                                     <span className="wow fadeInDown">GETTING STARTED TO WORK</span>
                                     <h2 className="wow fadeInUp">Don’t just find. Be found. Put your CV in front of great employers</h2>
                                     <p className="wow fadeInUp">It helps you to increase your chances of finding a suitable job and let recruiters contact you about jobs that are not needed to pay for advertising.</p>
-                                    <div className="button wow fadeInUp">
+                                    <div className="button">
                                         <a href="#" className="btn">
                                             <i className="lni lni-upload"></i> Make Your Resume
                                         </a>
