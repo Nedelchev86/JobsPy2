@@ -6,6 +6,7 @@ import Loading from "../loading/Loading";
 import JobDetailsnAside from "./JobListAside";
 import PopularTags from "../popularTag/PopularTag";
 import styles from "./JobsList.module.css";
+import JobCard from "./JobCard";
 
 export default function JobsList() {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -76,47 +77,48 @@ export default function JobsList() {
                                 </div>
                                 <Slide direction="left" duration="1000" triggerOnce="true">
                                     {jobs.map((job) => (
-                                        <div key={job.id} className="single-job">
-                                            <div className="job-image-list">
-                                                <img src={`https://res.cloudinary.com/drjgddl0y/${job.job_image}`} alt="#" />
-                                            </div>
-                                            <div className="job-content">
-                                                <Link to={`/jobs/${job.id}`}>
-                                                    <h4 style={{paddingRight: "0px"}}>{job.title}</h4>
-                                                </Link>
-                                                <div className="truncate-overflow-jobs">
-                                                    <p>{job.description}</p>
-                                                </div>
-                                                <ul>
-                                                    <li>
-                                                        <i className="lni lni-euro"></i> {job.salary}
-                                                    </li>
-                                                    <li>
-                                                        <i className="lni lni-map-marker"></i> {job.location}
-                                                    </li>
-                                                    <li>
-                                                        <i className="lni lni-calendar"></i> {job.seniority}
-                                                    </li>
-                                                    <li>
-                                                        <i className="lni lni-timer"></i> {job.job_type}
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    {job &&
-                                                        job.needed_skills &&
-                                                        job.needed_skills.map((skill) => (
-                                                            <li key={skill}>
-                                                                <span>{skill}</span>
-                                                            </li>
-                                                        ))}
-                                                </ul>
-                                            </div>
-                                            <div className="job-button2">
-                                                <Link className="company-link" to={`/companies/${job.user}/`}>
-                                                    <span>Company : {job.company?.name}</span>
-                                                </Link>
-                                            </div>
-                                        </div>
+                                        <JobCard key={job.id} job={job} />
+                                        // <div key={job.id} className="single-job">
+                                        //     <div className="job-image-list">
+                                        //         <img src={`https://res.cloudinary.com/drjgddl0y/${job.job_image}`} alt="#" />
+                                        //     </div>
+                                        //     <div className="job-content">
+                                        //         <Link to={`/jobs/${job.id}`}>
+                                        //             <h4 style={{paddingRight: "0px"}}>{job.title}</h4>
+                                        //         </Link>
+                                        //         <div className="truncate-overflow-jobs">
+                                        //             <p>{job.description}</p>
+                                        //         </div>
+                                        //         <ul>
+                                        //             <li>
+                                        //                 <i className="lni lni-euro"></i> {job.salary}
+                                        //             </li>
+                                        //             <li>
+                                        //                 <i className="lni lni-map-marker"></i> {job.location}
+                                        //             </li>
+                                        //             <li>
+                                        //                 <i className="lni lni-calendar"></i> {job.seniority}
+                                        //             </li>
+                                        //             <li>
+                                        //                 <i className="lni lni-timer"></i> {job.job_type}
+                                        //             </li>
+                                        //         </ul>
+                                        //         <ul>
+                                        //             {job &&
+                                        //                 job.needed_skills &&
+                                        //                 job.needed_skills.map((skill) => (
+                                        //                     <li key={skill}>
+                                        //                         <span>{skill}</span>
+                                        //                     </li>
+                                        //                 ))}
+                                        //         </ul>
+                                        //     </div>
+                                        //     <div className="job-button2">
+                                        //         <Link className="company-link" to={`/companies/${job.user}/`}>
+                                        //             <span>Company : {job.company?.name}</span>
+                                        //         </Link>
+                                        //     </div>
+                                        // </div>
                                     ))}
                                 </Slide>
                             </div>

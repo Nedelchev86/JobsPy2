@@ -5,6 +5,7 @@ import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {getApplyedJobs} from "../../api/JobSeekerApi";
 import Loading from "../loading/Loading";
+import {CLOUDINARY_URL} from "../../config";
 
 export default function JobsApplyed() {
     // const [applyedJobs, setapplyedJobs] = useState([]);
@@ -42,7 +43,7 @@ export default function JobsApplyed() {
                                 <div className="col-lg-5 col-md-5 col-12">
                                     <div className="title-img">
                                         <div className="can-img">
-                                            <img src={`https://res.cloudinary.com/drjgddl0y/${obj.job.job_image}`} alt="#" />
+                                            {obj.job.job_image === null ? <img src="/images/default/default.jpg" alt="#" /> : <img src={`${CLOUDINARY_URL}${obj.job.job_image}`} alt="#" />}
 
                                             {/* <img src="{% static 'images/default/default.jpg' %}" alt="#"> */}
                                         </div>

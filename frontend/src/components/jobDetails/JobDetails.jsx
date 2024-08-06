@@ -10,6 +10,7 @@ import {toast} from "react-toastify";
 import {Button} from "react-bootstrap";
 import GoogleMapComponent from "../googleMap/GoogleMapComponent";
 import {getJobDetails, getApplicantsForJob} from "../../api/jobsApi";
+import {CLOUDINARY_URL} from "../../config";
 
 export default function JobDetails() {
     // const [job, setJob] = useState({});
@@ -157,10 +158,14 @@ export default function JobDetails() {
                                 <div className="job-details-inner">
                                     <div className="job-details-head row mx-0">
                                         <div className="company-logo col-auto">
-                                            {job.job_image && (
-                                                <a href="#" style={{borderRadius: "4px", overflow: "hidden"}}>
-                                                    <img className="company-logo-big" src={`https://res.cloudinary.com/drjgddl0y/${job.job_image}`} alt="Company Logo" />
-                                                </a>
+                                            {job.job_image === null ? (
+                                                <Link to="#" style={{borderRadius: "4px", overflow: "hidden"}}>
+                                                    <img className="company-logo-big" src="/images/default/default.jpg" alt="Company Logo" />
+                                                </Link>
+                                            ) : (
+                                                <Link to="#" style={{borderRadius: "4px", overflow: "hidden"}}>
+                                                    <img className="company-logo-big" src={`${CLOUDINARY_URL}${job.job_image}`} alt="Company Logo" />
+                                                </Link>
                                             )}
                                         </div>
 

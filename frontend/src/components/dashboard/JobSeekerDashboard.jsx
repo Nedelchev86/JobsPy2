@@ -2,14 +2,13 @@ import React from "react";
 import {useAuth} from "../../contexts/authContexts";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-// import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
-// import JobSeekerMenu from "../JobseekerMenu";
-import useFetch from "../../hooks/useFetch";
 import AddEducationModal from "../educations/AddEducation";
 import {Link} from "react-router-dom";
 import DeleteEducationModal from "../educations/DeleteEducationModal";
 import EditEducationModal from "../educations/EditEducationModal";
 import {getJobseekersEducations} from "../../api/JobSeekerApi";
+import SkillsModule from "../skills/Skills";
+import {CLOUDINARY_URL} from "../../config";
 const JobSeekerDashboard = () => {
     const {user, isAuthenticated, fetchUserData, auth} = useAuth();
     const navigate = useNavigate();
@@ -83,46 +82,8 @@ const JobSeekerDashboard = () => {
     // const {data: educations, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}jobseekers/educations/${user.user.user}/`, []);
     const {data: educations, error, loading, refetch} = getJobseekersEducations(user.user.user);
 
-    if (!isAuthenticated) {
-        return <div>Not authenticated...</div>;
-    }
-
-    if (!user) {
-        return <div>Loading...</div>;
-    }
-
     return (
         <div className="cat-head job-category">
-            <div className="row">
-                <div className="col-md-4 col-12">
-                    <a href="{% url 'jobs-apply' %}" className="single-cat wow fadeInUp">
-                        <div className="icon">{/* <i>{{all_jobs_accepted}}</i> */}</div>
-                        <h3>
-                            Approved <br /> applications
-                        </h3>
-                    </a>
-                </div>
-                <div className="col-md-4 col-12">
-                    <a href="{% url 'jobs-apply' %}" className="single-cat wow fadeInUp">
-                        <div className="icon">{/* <i>{{all_jobs_pending}}</i> */}</div>
-                        <h3>
-                            Pending
-                            <br /> applications
-                        </h3>
-                    </a>
-                </div>
-
-                <div className="col-md-4 col-12">
-                    <a href="{% url 'jobs-apply' %}" className="single-cat wow fadeInUp">
-                        <div className="icon">{/* <i>{{all_jobs_rejected}}</i> */}</div>
-                        <h3>
-                            Rejected
-                            <br /> applications
-                        </h3>
-                    </a>
-                </div>
-            </div>
-
             <div className="resume ">
                 <div className="container">
                     <div className="resume-inner">
@@ -135,39 +96,39 @@ const JobSeekerDashboard = () => {
                                                 <div className="name-head">
                                                     {user.user.profile_picture && (
                                                         <a className="mb-2" href="#">
-                                                            <img className="circle-54" src={`https://res.cloudinary.com/drjgddl0y/${user.user.profile_picture}`} alt="" />
+                                                            <img className="circle-54" src={`${CLOUDINARY_URL}${user.user.profile_picture}`} alt="" />
                                                         </a>
                                                     )}
 
                                                     {!user.user.profile_picture && <img className="circle-54" src="/images/clients/default_profile.png" alt="" />}
 
                                                     <h4>
-                                                        <a className="name" href="#">
-                                                            {user.user.first_name && user.user.first_name}" "{user.user.last_name && user.user.last_name}
-                                                        </a>
+                                                        <p className="name" href="#">
+                                                            {user.user.first_name && user.user.first_name} {user.user.last_name && user.user.last_name}
+                                                        </p>
                                                     </h4>
                                                     <p>
-                                                        <a className="deg" href="#">
+                                                        <p className="deg" href="#">
                                                             {user.user.occupation && user.user.occupation}
-                                                        </a>
+                                                        </p>
                                                     </p>
                                                     <ul className="social">
                                                         <li>
-                                                            <a target="_blank" href={`${user.user.facebook && user.user.facebook} `}>
+                                                            <Link target="_blank" to={`${user.user.facebook && user.user.facebook} `}>
                                                                 <i className="lni lni-facebook-original"></i>
-                                                            </a>
+                                                            </Link>
                                                         </li>
 
                                                         <li>
-                                                            <a target="_blank" href={`${user.user.linkedin && user.user.linkedin}`}>
+                                                            <Link target="_blank" to={`${user.user.linkedin && user.user.linkedin}`}>
                                                                 <i className="lni lni-linkedin-original"></i>
-                                                            </a>
+                                                            </Link>
                                                         </li>
 
                                                         <li>
-                                                            <a target="_blank" href={`${user.user.github && user.user.github}`}>
+                                                            <Link target="_blank" to={`${user.user.github && user.user.github}`}>
                                                                 <i className="lni lni-github"></i>
-                                                            </a>
+                                                            </Link>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -194,9 +155,9 @@ const JobSeekerDashboard = () => {
                                                     <div className="single-list">
                                                         <h5 className="title">Website</h5>
                                                         <p>
-                                                            <a target="_blank" href={user.user.website}>
+                                                            <Link target="_blank" to={user.user.website}>
                                                                 Link
-                                                            </a>
+                                                            </Link>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -208,17 +169,7 @@ const JobSeekerDashboard = () => {
                                         <h4>About</h4>
                                         <p className="font-size-4 mb-8">{user.user.about}</p>
                                     </div>
-
-                                    <div className="single-section skill">
-                                        <h4>Skills</h4>
-                                        <ul className="list-unstyled d-flex align-items-center flex-wrap">
-                                            {/* {%  for skill in request.user.jobseeker.skills.all %}
-                                      <li>
-                                        <a href="#">{{ skill}}</a>
-                                    </li>
-                                    {% endfor %} */}
-                                        </ul>
-                                    </div>
+                                    <SkillsModule skills={user.user.skills} />
 
                                     <div className="single-section exprerience">
                                         {/* <a style="float: right" className="education-link" href="{% url 'add-work-experience' user.jobseeker.pk %}">

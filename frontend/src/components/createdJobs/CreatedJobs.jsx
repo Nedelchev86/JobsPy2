@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import DeleteConfirmationModal from "../deleteModal/DeleteConfirmationModal";
 import {useJobs} from "../../contexts/JobContext";
 import {getJobsByCompany} from "../../api/companyApi";
+import {CLOUDINARY_URL} from "../../config";
 
 export default function CreatedJobs() {
     // const [jobs, setJobs] = useState([]);
@@ -64,7 +65,7 @@ export default function CreatedJobs() {
                         <div className="col-lg-7 col-md-7 col-12">
                             <div className="title-img">
                                 <div className="can-img">
-                                    <img src={`https://res.cloudinary.com/drjgddl0y/${job.job_image}`} alt="#" />
+                                    {job.job_image === null ? <img src="/images/default/default.jpg" alt="#" /> : <img src={`${CLOUDINARY_URL}${job.job_image}`} alt="#" />}
 
                                     {/* <img src="{{ user.company.image.url }}" alt="#" /> */}
                                 </div>

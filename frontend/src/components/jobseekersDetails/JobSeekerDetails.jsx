@@ -5,6 +5,7 @@ import {useParams} from "react-router-dom";
 import EducationList from "../changeStatus/EducationList";
 import {getJobseekerByID} from "../../api/JobSeekerApi";
 import Loading from "../loading/Loading";
+import SkillsModule from "../skills/Skills";
 
 export default function JobSeekerDetails() {
     // const [jobseeker, setJobseeker] = useState([]);
@@ -128,8 +129,8 @@ export default function JobSeekerDetails() {
                                                         <h4>About</h4>
                                                         <p className="font-size-4 mb-8">{jobseeker.about}</p>
                                                     </div>
-
-                                                    <div className="single-section skill">
+                                                    <SkillsModule skills={jobseeker.skills} />
+                                                    {/* <div className="single-section skill">
                                                         <h4>Skills</h4>
                                                         <ul className="list-unstyled d-flex align-items-center flex-wrap">
                                                             {jobseeker &&
@@ -140,7 +141,7 @@ export default function JobSeekerDetails() {
                                                                     </li>
                                                                 ))}
                                                         </ul>
-                                                    </div>
+                                                    </div> */}
 
                                                     <div className="single-section exprerience">
                                                         <h4>Work Experience</h4>

@@ -32,11 +32,7 @@ export default function JobsFavoriteList() {
                             <div className="row align-items-center justify-content-center">
                                 <div className="col-lg-5 col-md-5 col-12">
                                     <div className="title-img">
-                                        <div className="can-img">
-                                            <img src={`${CLOUDINARY_URL}${obj.job_details.job_image}`} alt="#" />
-
-                                            {/* <img src="{% static 'images/default/default.jpg' %}" alt="#"> */}
-                                        </div>
+                                        <div className="can-img">{obj.job_details.job_image === null ? <img src="/images/default/default.jpg" alt="#" /> : <img src={`${CLOUDINARY_URL}${obj.job_details.job_image}`} alt="#" />}</div>
                                         <h3>
                                             {obj.job.title}
                                             <span>{obj.job_details.title}</span>
