@@ -4,6 +4,7 @@ import {useJobs} from "../../contexts/JobContext";
 import {Link} from "react-router-dom";
 import {formatDate} from "../../utils/formatDate";
 import {toast} from "react-toastify";
+import {CLOUDINARY_URL} from "../../config";
 
 const NotificationJobSeekersComponent = ({notification}) => {
     const {fetchNotifications} = useJobs();
@@ -39,7 +40,7 @@ const NotificationJobSeekersComponent = ({notification}) => {
             <div className="row align-items-center justify-content-center">
                 <div className="col-lg-2 col-md-2 col-12">
                     <div className="title-img">
-                        <div className="can-img">{notification.job.job_image ? <img src={`https://res.cloudinary.com/drjgddl0y/${notification.job.job_image}`} alt="#" /> : <img src="/images/default/default.jpg" alt="#" />}</div>
+                        <div className="can-img">{notification.job.job_image ? <img src={`${CLOUDINARY_URL}${notification.job.job_image}`} alt="#" /> : <img src="/images/default/default.jpg" alt="#" />}</div>
                     </div>
                 </div>
                 <div className="col-lg-7 col-md-7 ">
