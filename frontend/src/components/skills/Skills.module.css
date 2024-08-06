@@ -1,0 +1,12 @@
+.skills {
+    background: #2042e314;
+    color: #081828;
+    padding: 8px 15px;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.skills:hover {
+    color: #fff;
+    background-color: #2042e3;
+}
