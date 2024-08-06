@@ -273,13 +273,13 @@ import {useJobs} from "../../contexts/JobContext";
 import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
 import Loading from "../loading/Loading";
-import {postJob} from "../../api/jobsApi";
-
+import {postJob, getAllCategories} from "../../api/jobsApi";
+import {getAllSeniorities, getAllSkills} from "../../api/commonApi";
 export default function CreateJob() {
     const navigate = useNavigate();
     const {auth, isAuthenticated} = useAuth();
 
-    const [skills, setSkills] = useState([]);
+    // const [skills, setSkills] = useState([]);
     const {fetchJobs} = useJobs();
     const [isLoading, setIsLoading] = useState(false);
     const {
@@ -308,16 +308,19 @@ export default function CreateJob() {
         mode: "onBlur",
     });
     const {data, loading, error, post} = postJob();
+    const {data: categories} = getAllCategories();
+    const {data: seniorities} = getAllSeniorities();
+    const {data: skills} = getAllSkills();
 
-    useEffect(() => {
-        if (!isAuthenticated) return;
+    // useEffect(() => {
+    //     if (!isAuthenticated) return;
 
-        // Fetch skills from the API
-        fetch(`${import.meta.env.VITE_API_URL}skills/`)
-            .then((response) => response.json())
-            .then((data) => setSkills(data))
-            .catch((error) => console.error("Error fetching skills:", error));
-    }, [isAuthenticated]);
+    //     // Fetch skills from the API
+    //     fetch(`${import.meta.env.VITE_API_URL}skills/`)
+    //         .then((response) => response.json())
+    //         .then((data) => setSkills(data))
+    //         .catch((error) => console.error("Error fetching skills:", error));
+    // }, [isAuthenticated]);
 
     const onSubmit = async (formData) => {
         setIsLoading(true);
@@ -345,12 +348,22 @@ export default function CreateJob() {
             }
         });
 
+        // try {
+        //     await post(formDataObj, true);
+        //     toast.success("Job posted successfully!");
+        //     console.log("Success");
+        //     fetchJobs();
+        //     navigate("/dashboard");
         try {
-            await post(formDataObj, true);
-            toast.success("Job posted successfully!");
-            console.log("Success");
-            fetchJobs();
-            navigate("/dashboard");
+            const response = await post(formDataObj, true);
+
+            if (error) {
+                toast.error(error);
+            } else {
+                toast.success("Job posted successfully!");
+                fetchJobs();
+                navigate("/dashboard");
+            }
         } catch (error) {
             console.error("Error posting job:", error);
             toast.error("Failed to post job. Please try again.");
@@ -400,13 +413,11 @@ export default function CreateJob() {
                                             </label>
                                             <select {...register("category", {required: "Category is required"})} className={`form-control ${errors.category ? "is-invalid" : ""}`} id="id_category">
                                                 <option value="">---------</option>
-                                                <option value="1">Data Science</option>
-                                                <option value="2">Mobile Development</option>
-                                                <option value="3">Quality Assurance</option>
-                                                <option value="4">Infrastructure</option>
-                                                <option value="5">Fullstack Development</option>
-                                                <option value="6">Frontend Development</option>
-                                                <option value="7">Backend Development</option>
+                                                {categories?.map((category) => (
+                                                    <option key={category.id} value={category.id}>
+                                                        {category.name}
+                                                    </option>
+                                                ))}
                                             </select>
                                             {errors.category && <div className="invalid-feedback">{errors.category.message}</div>}
                                         </div>
@@ -417,10 +428,12 @@ export default function CreateJob() {
                                             </label>
                                             <select {...register("seniority", {required: "Seniority is required"})} className={`form-control ${errors.seniority ? "is-invalid" : ""}`} id="id_seniority">
                                                 <option value="">---------</option>
-                                                <option value="Junior / Intern">Junior / Intern</option>
-                                                <option value="1-2 year's experience">1-2 year's experience</option>
-                                                <option value="2-5 year's experience">2-5 year's experience</option>
-                                                <option value="5+ year's experience">5+ year's experience</option>
+                                                <option value="">---------</option>
+                                                {seniorities?.map((seniority) => (
+                                                    <option key={seniority.id} value={seniority.name}>
+                                                        {seniority.name}
+                                                    </option>
+                                                ))}
                                             </select>
                                             {errors.seniority && <div className="invalid-feedback">{errors.seniority.message}</div>}
                                         </div>
@@ -527,13 +540,14 @@ export default function CreateJob() {
                                         </div>
 
                                         <div className="form-group">
-                                            <label htmlFor="id_needed_skills" className="required">
+                                            <label className="required">
+                                                {/* <label htmlFor="id_needed_skills" className="required"> */}
                                                 Needed skills:
                                             </label>
                                             <div className="form-check">
                                                 {skills.map((skill) => (
                                                     <div key={skill.id}>
-                                                        <input type="checkbox" value={skill.name} className="form-check" />
+                                                        <input type="checkbox" {...register("needed_skills")} value={skill.name} className="form-check" />
                                                         <label className="form-check-label">{skill.name}</label>
                                                     </div>
                                                 ))}

@@ -338,10 +338,10 @@ export default function EditCompany() {
                         formData[key].forEach((skill) => formDataObj.append("skills", skill));
                     } else if (key === "image") {
                         // Check if profile_picture is an object (File) or a string (URL)
-                        if (typeof formData.profile_picture === "string") {
+                        if (typeof formData.image === "string") {
                             // If it's a string, append it directly
                             formDataObj.append("image", formData.image);
-                        } else if (formData.profile_picture[0]) {
+                        } else if (formData.image[0]) {
                             // If it's a File object, append the file
                             console.log(formData.image[0]);
                             formDataObj.append("image", formData.image[0]);
@@ -392,7 +392,7 @@ export default function EditCompany() {
                                                                 message: "Name cannot exceed 40 characters",
                                                             },
                                                             pattern: {
-                                                                value: /^[A-Z][a-z0-9]*$/,
+                                                                value: /^[A-Z].*$/,
                                                                 message: "Name must start with an uppercase ",
                                                             },
                                                         })}

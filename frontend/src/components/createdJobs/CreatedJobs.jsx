@@ -5,26 +5,19 @@ import DeleteConfirmationModal from "../deleteModal/DeleteConfirmationModal";
 import {useJobs} from "../../contexts/JobContext";
 import {getJobsByCompany} from "../../api/companyApi";
 import {CLOUDINARY_URL} from "../../config";
+import useDelete from "../../hooks/useDelete";
+import {toast} from "react-toastify";
+import {deleteJob} from "../../api/jobsApi";
 
 export default function CreatedJobs() {
-    // const [jobs, setJobs] = useState([]);
-    // const {auth, user} = useAuth();
+    const {auth, user} = useAuth();
     const [showModal, setShowModal] = useState(false);
     const [jobToDelete, setJobToDelete] = useState(null);
     const {fetchJobs} = useJobs();
 
-    const {data: jobs, loading, error} = getJobsByCompany();
+    const {data: jobs, loading, error, refetch} = getJobsByCompany();
 
-    // useEffect(() => {
-    //     fetch(`${import.meta.env.VITE_API_URL}created-jobs/`, {
-    //         method: "GET",
-    //         headers: {
-    //             Authorization: `Bearer ${auth}`,
-    //         },
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data) => setJobs(data));
-    // }, []);
+    const {data: deleteData, loading: DeleteLoading, error: deleteError, deleteRequest} = deleteJob(jobToDelete);
 
     const handleOpenModal = (jobId) => {
         setJobToDelete(jobId);
@@ -36,24 +29,17 @@ export default function CreatedJobs() {
         setJobToDelete(null);
     };
 
-    const handleDeleteJob = () => {
+    const handleDeleteJob = async () => {
         if (jobToDelete) {
-            fetch(`${import.meta.env.VITE_API_URL}jobs/${jobToDelete}/delete/`, {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Bearer ${auth}`,
-                },
-            })
-                .then((response) => {
-                    if (response.ok) {
-                        setJobs(jobs.filter((job) => job.id !== jobToDelete));
-                        fetchJobs();
-                        handleCloseModal();
-                    } else {
-                        console.error("Error deleting job");
-                    }
-                })
-                .catch((error) => console.error("Error deleting job:", error));
+            console.log(jobToDelete);
+            try {
+                await deleteRequest(jobToDelete);
+                toast.success("Job deleted successfully!");
+                refetch(); // Refresh job list after successful deletion
+                handleCloseModal();
+            } catch (error) {
+                toast.error("Failed to delete job. Please try again.");
+            }
         }
     };
 
@@ -64,14 +50,10 @@ export default function CreatedJobs() {
                     <div className="row align-items-center justify-content-center">
                         <div className="col-lg-7 col-md-7 col-12">
                             <div className="title-img">
-                                <div className="can-img">
-                                    {job.job_image === null ? <img src="/images/default/default.jpg" alt="#" /> : <img src={`${CLOUDINARY_URL}${job.job_image}`} alt="#" />}
-
-                                    {/* <img src="{{ user.company.image.url }}" alt="#" /> */}
-                                </div>
+                                <div className="can-img">{job.job_image === null ? <img src="/images/default/default.jpg" alt="#" /> : <img src={`${CLOUDINARY_URL}${job.job_image}`} alt="#" />}</div>
                                 <h3>
                                     {job.title}
-                                    <span>{job.category}</span>
+                                    <span>{job.location}</span>
                                 </h3>
                             </div>
                         </div>
