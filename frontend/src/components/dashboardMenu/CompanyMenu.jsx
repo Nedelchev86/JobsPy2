@@ -5,12 +5,17 @@ import {useState, useEffect} from "react";
 import {useJobs} from "../../contexts/JobContext";
 import DeleteConfirmationModal from "../deleteModal/DeleteConfirmationModal";
 import {useNavigate} from "react-router-dom";
+import styles from "./CompanyMenu.module.css";
+import {toast} from "react-toastify";
 
 export default function CompanyMenu() {
     const navigate = useNavigate();
     const {user, auth, logout} = useAuth();
 
     const {fetchJobs, fetchApplicants, jobs, applicants, notifications, fetchNotifications} = useJobs();
+    console.log("user");
+    console.log(user);
+    console.log(user.user.activated);
 
     const [showModal, setShowModal] = useState(false);
     const [profileId, setProfileId] = useState(null); // Assume you have a way to set this
@@ -20,7 +25,7 @@ export default function CompanyMenu() {
         setProfileId(id);
         setShowModal(true);
     };
-    console.log(user);
+
     // Function to close the modal
     const handleCloseModal = () => {
         setShowModal(false);
@@ -101,9 +106,15 @@ export default function CompanyMenu() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink activeclassname="active" to={"create-job"}>
-                            <i className="lni lni-clipboard"></i> Create Job
-                        </NavLink>
+                        {user.user.activated ? (
+                            <NavLink activeclassname="active" to={"create-job"}>
+                                <i className="lni lni-clipboard"></i> Create Job
+                            </NavLink>
+                        ) : (
+                            <span onClick={() => toast.warning("Please complete your profile")} className={styles["disabled-span"]}>
+                                <i className={`${styles.icon} lni-clipboard`}></i>Create Job
+                            </span>
+                        )}
                     </li>
                     <li>
                         <NavLink activeclassname="active" to={"created-jobs"}>

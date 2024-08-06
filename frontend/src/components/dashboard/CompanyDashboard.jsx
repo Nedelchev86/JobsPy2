@@ -27,6 +27,7 @@ const CompanyDashboard = () => {
         <div className="cat-head job-category">
             <div className="row">
                 <div className="col-md-6 col-12">
+                    
                     <a href="#" className="single-cat wow fadeInUp">
                         <div className="icon">
                             <i>0</i>
