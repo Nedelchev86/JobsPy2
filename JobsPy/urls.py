@@ -90,5 +90,6 @@ urlpatterns = [
     path('api/blogs/latest-blog-posts/', LatestBlogPostsView.as_view(), name='latest-blog-posts'),
     path('api/contacts/', ContactCreateView.as_view(), name='contact-create'),
 
+
 ]
 

@@ -145,7 +145,7 @@ class JobCreateAPIView(generics.CreateAPIView):
 
 class JobUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = Job.objects.all()
-    serializer_class = JobSerializer
+    serializer_class = JobCreateSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
@@ -208,3 +208,4 @@ class JobCountView(APIView):
     def get(self, request, *args, **kwargs):
         job_count = Job.objects.count()
         return Response({"job_count": job_count}, status=status.HTTP_200_OK)
+
