@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 // import useFetch from "../../hooks/useFetch";
 import Loading from "../loading/Loading";
 import {getAllCompanies} from "../../api/companyApi";
+import CompanyCards from "./CompanyCards";
 
 export default function CompanyList() {
     // const [companies, setCompanies] = useState([]);
@@ -36,17 +37,7 @@ export default function CompanyList() {
                         ) : (
                             <div className="row">
                                 {companies.map((company) => (
-                                    <div key={company.user} className="col-lg-3 col-md-6 col-12">
-                                        <Link to={`/companies/${company.user}`} className="single-cat">
-                                            <div className="top-side">{company.image ? <img src={`https://res.cloudinary.com/drjgddl0y/${company.image}`} alt={company.name} /> : <img src="images/default/company.jpg" alt={company.name} />}</div>
-
-                                            <div className="bottom-side">
-                                                <span className="available-job2">Jobs</span>
-                                                <span className="available-job">{company.job_count}</span>
-                                                <h3>{company.name}</h3>
-                                            </div>
-                                        </Link>
-                                    </div>
+                                    <CompanyCards key={company.user} company={company} />
                                 ))}
                             </div>
                         )}
