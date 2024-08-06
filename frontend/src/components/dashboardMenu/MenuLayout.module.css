@@ -1,0 +1,10 @@
+.alert-users {
+    color: #000000;
+    background-color: #fff3cd;
+    border-color: #c09000;
+    position: relative;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid transparent;
+    border-radius: 0.25rem;
+}
