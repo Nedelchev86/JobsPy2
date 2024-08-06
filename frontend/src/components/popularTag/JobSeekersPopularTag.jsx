@@ -6,6 +6,7 @@ import {getAllSkills} from "../../api/commonApi";
 
 export default function JobSeekersPopularTags() {
     const {data: skills, error, isLoading, refetch} = getAllSkills();
+    const {search} = useLocation();
     const currentSkill = new URLSearchParams(search).get("skill");
 
     return (
