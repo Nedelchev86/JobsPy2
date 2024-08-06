@@ -3,6 +3,8 @@ import {useNavigate} from "react-router-dom";
 import {useAuth} from "../../contexts/authContexts";
 import {useForm} from "react-hook-form";
 import {ToastContainer, toast} from "react-toastify";
+import usePut from "../../hooks/usePut";
+import {changePassword} from "../../api/commonApi";
 
 export default function ChangePasswordForm() {
     const [oldPassword, setOldPassword] = useState("");
@@ -11,6 +13,8 @@ export default function ChangePasswordForm() {
     const [error, setError] = useState(null);
     const {auth, isAuthenticated} = useAuth();
     const navigate = useNavigate();
+
+    const {data, loading, error: putError, put} = changePassword();
 
     const {
         register,
@@ -25,28 +29,41 @@ export default function ChangePasswordForm() {
             return;
         }
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL}user/change-password/`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${auth}`,
-            },
-            body: JSON.stringify({
-                old_password: oldPassword,
-                new_password: newPassword1,
-            }),
-        });
+        try {
+            await put(
+                JSON.stringify({
+                    old_password: oldPassword,
+                    new_password: newPassword1,
+                })
+            );
 
-        if (response.ok) {
             toast.success("Your password has been successfully changed.");
-            navigate("/dashboard"); // Redirect to dashboard or any other page
-        } else {
-            const data = await response.json();
-            console.log(Object.values(data));
-            setError(Object.values(data)[0] || "Error changing password");
-            toast.error(`Error changing password`);
+            navigate("/dashboard");
+        } catch (error) {
+            setError(putError || "Password is incorrect");
+            toast.error(`Error changing password: ${putError || error.message}`);
         }
     };
+
+    // const submitForm = async () => {
+    //     if (newPassword1 !== newPassword2) {
+    //         setError("New passwords do not match");
+    //         return;
+    //     }
+
+    //     try {
+    //         await put({
+    //             old_password: oldPassword,
+    //             new_password: newPassword1,
+    //         });
+
+    //         toast.success("Your password has been successfully changed.");
+    //         navigate("/dashboard");
+    //     } catch (error) {
+    //         setError(putError || "Password is incorrect");
+    //         toast.error(`Error changing password: ${putError || error.message}`);
+    //     }
+    // };
     return (
         <div className="change-password section">
             <div className="container">
