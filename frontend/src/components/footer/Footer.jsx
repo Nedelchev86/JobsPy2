@@ -28,24 +28,24 @@ export default function Footer() {
                                 <div className="footer-social">
                                     <ul>
                                         <li>
-                                            <a href="https://bg-bg.facebook.com/tihomir.nedelchev" target="_blank">
+                                            <Link to="https://bg-bg.facebook.com/tihomir.nedelchev" target="_blank">
                                                 <i className="lni lni-facebook-original"></i>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <Link to="#">
                                                 <i className="lni lni-twitter-original"></i>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="https://www.linkedin.com/in/tihomir-nedelchev/" target="_blank">
+                                            <Link to="https://www.linkedin.com/in/tihomir-nedelchev/" target="_blank">
                                                 <i className="lni lni-linkedin-original"></i>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="https://github.com/Nedelchev86" target="_blank">
+                                            <Link to="https://github.com/Nedelchev86" target="_blank">
                                                 <i className="lni lni-github-original"></i>
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -58,19 +58,13 @@ export default function Footer() {
                                         <h3>For Job Seekers</h3>
                                         <ul>
                                             <li>
-                                                <a href="login_redirect_dashboard">User Dashboard</a>
+                                                <Link to="/companies">Companies</Link>
                                             </li>
                                             <li>
-                                                <a href="#">Edit Profile</a>
+                                                <Link to="/jobs">Jobs</Link>
                                             </li>
                                             <li>
-                                                <a href="all_company">Companies</a>
-                                            </li>
-                                            <li>
-                                                <a href="all-jobs">Jobs</a>
-                                            </li>
-                                            <li>
-                                                <a href="favourite_jobs">Saved Jobs</a>
+                                                <Link to="/blogs">Blog</Link>
                                             </li>
                                         </ul>
                                     </div>
@@ -80,19 +74,10 @@ export default function Footer() {
                                         <h3>For Companies</h3>
                                         <ul>
                                             <li>
-                                                <a href="login_redirect_dashboard">Company Dashboard</a>
+                                                <Link to="/jobseekers">Job Seekers List</Link>
                                             </li>
                                             <li>
-                                                <a href="create_job">Add Job Offer</a>
-                                            </li>
-                                            <li>
-                                                <a href="all-employees">Job Seekers List</a>
-                                            </li>
-                                            <li>
-                                                <a href="created-jobs">Created Jobs</a>
-                                            </li>
-                                            <li>
-                                                <a href="jobs-applicants">Applicants</a>
+                                                <Link to="/blogs">Blog</Link>
                                             </li>
                                         </ul>
                                     </div>
@@ -101,7 +86,7 @@ export default function Footer() {
                                     <div className="single-footer newsletter">
                                         <h3>Join Our Newsletter</h3>
                                         <p>Subscribe to get the latest news</p>
-                                        {/* {% include 'core/subscription_form.html */}
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -118,9 +103,9 @@ export default function Footer() {
                                 <div className="left">
                                     <p>
                                         React Project by
-                                        <a href="#" rel="nofollow">
+                                        <Link to="#" rel="nofollow">
                                             Tihomir Nedelchev
-                                        </a>
+                                        </Link>
                                     </p>
                                 </div>
                             </div>
@@ -128,16 +113,16 @@ export default function Footer() {
                                 <div className="right">
                                     <ul>
                                         <li>
-                                            <a href="#">Terms of use</a>
+                                            <Link to="#">Terms of use</Link>
                                         </li>
                                         <li>
-                                            <a href="#"> Privacy Policy</a>
+                                            <Link to="#"> Privacy Policy</Link>
                                         </li>
                                         <li>
-                                            <a href="#">Faq</a>
+                                            <Link to="#">Faq</Link>
                                         </li>
                                         <li>
-                                            <a href="contact">Contact</a>
+                                            <Link to="contact">Contact</Link>
                                         </li>
                                     </ul>
                                 </div>
