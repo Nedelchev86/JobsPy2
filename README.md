@@ -40,8 +40,8 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 
 
 
-- **React-toastify"**: React-toastify for messages
-- 
+- **React-toastify"**: React-toastify for messages (Success or Error )
+  
 ![toasty](https://github.com/user-attachments/assets/ba87d8f9-fa79-4f2e-817a-e3b03980744e)
 
 
