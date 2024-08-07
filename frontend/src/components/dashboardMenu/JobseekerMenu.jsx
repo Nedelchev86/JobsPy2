@@ -5,11 +5,12 @@ import {useJobs} from "../../contexts/JobContext";
 import {getApplyedJobs, getFavoritesJobs} from "../../api/JobSeekerApi";
 import DeleteConfirmationModal from "../deleteModal/DeleteConfirmationModal";
 import {API_URL} from "../../config";
+import {useNavigate} from "react-router-dom";
 
 export default function JobSeekerMenu() {
     const {user, auth} = useAuth();
     const {notifications} = useJobs();
-
+    const navigate = useNavigate();
     const {logout} = useAuth();
 
     const {data: favotites, loading, error} = getFavoritesJobs();
