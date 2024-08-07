@@ -12,16 +12,6 @@ export default function JobSeekerDetails() {
     // const [jobseeker, setJobseeker] = useState([]);
     const {id} = useParams();
 
-    // useEffect(() => {
-    //     console.log("Start useEffect with ID:", id);
-    //     fetch(`${import.meta.env.VITE_API_URL}jobseekers/${id}/`)
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             setJobseeker(data);
-    //         })
-    //         .catch((error) => console.error("Error fetching jobseeker:", error));
-    // }, [id]);
-
     const {data: jobseeker, loading, error} = getJobseekerByID(id);
 
     return (
@@ -131,75 +121,15 @@ export default function JobSeekerDetails() {
                                                         <p className="font-size-4 mb-8">{jobseeker.about}</p>
                                                     </div>
                                                     <SkillsModule skills={jobseeker.skills} />
-                                                    {/* <div className="single-section skill">
-                                                        <h4>Skills</h4>
-                                                        <ul className="list-unstyled d-flex align-items-center flex-wrap">
-                                                            {jobseeker &&
-                                                                jobseeker.skills &&
-                                                                jobseeker.skills.map((skill) => (
-                                                                    <li key={skill}>
-                                                                        <a href="#">{skill}</a>
-                                                                    </li>
-                                                                ))}
-                                                        </ul>
-                                                    </div> */}
 
                                                     <div className="single-section exprerience">
                                                         <h4>Work Experience</h4>
-                                                        {/* {% for experience in jobseeker.experience.all %}
-                                            <div className="single-exp mb-30">
-                                                <div className="d-flex align-items-center pr-11 mb-9 flex-wrap flex-sm-nowrap">
-                                                    <div className="image">
-                                                        {% if experience.image %}
-                                                            <img width="80" height="80"  src="{{ experience.image }}"  alt="#">
-                                                        {% else %}
-                                                         <img width="80" height="80"  src="{% static 'images/resume/work.jpg' %}"  alt="#">
-                                                        {% endif %}
-                                                    </div>
-                                                    <div className="w-100 mt-n2">
-                                                        <h3 className="mb-0">
-                                                            <h5>{{ experience.company}}</h5>
-                                                        </h3>
-                                                        <p>{{ experience.description|safe }}</p>
-                                                        <div className="d-flex align-items-center justify-content-md-between flex-wrap">
-                                                            <p>{{ experience.start_date}} - {{ experience.end_date}}</p>
-            {#                                                <a href="#" className="font-size-3 text-gray">#}
-            {#                                                    <span className="mr-2" style="margin-top: -2px"><i#}
-            {#                                                            className="lni lni-map-marker"></i></span>New York, USA</a>#}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {% endfor %} */}
                                                     </div>
 
                                                     <div className="single-section education">
                                                         <h4>Education</h4>
 
                                                         <EducationList id={id} />
-                                                        {/* {% for education in jobseeker.educations.all %}
-                                            <div className="single-edu mb-30">
-                                                <div className="d-flex align-items-center pr-11 mb-9 flex-wrap flex-sm-nowrap">
-                                                    <div className="image">
-                                                        {% if education.image %}
-                                                             <img width="80" height="80"  src="{{ education.image }}"  alt="#">
-                                                        {% else %}
-                                                        <img width="80" height="80" src="{% static '/images/resume/education.jpg' %}" alt="#">
-                                                        {% endif %}
-                                                    </div>
-                                                    <div className="w-100 mt-n2">
-                                                        <h3 className="mb-0">
-                                                            <h5>{{ education.institution}}</h5>
-                                                        </h3>
-                                                        <p>{{  education.description|safe }}</p>
-                                                        <div className="d-flex align-items-center justify-content-md-between flex-wrap">
-                                                            <p>{{ education.start_date}} - {{  education.end_date}}</p>
-                                                           
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {% endfor %} */}
                                                     </div>
                                                 </div>
                                             )}

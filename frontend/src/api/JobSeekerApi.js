@@ -3,8 +3,9 @@ import useFetchWithToken from "../hooks/useFetchWithToken";
 import usePost from "../hooks/usePost";
 import useDelete from "../hooks/useDelete";
 import usePut from "../hooks/usePut";
+import {API_URL} from "../config";
 
-const API_BASE_URL = `${import.meta.env.VITE_API_URL}jobseekers/`;
+const API_BASE_URL = `${API_URL}jobseekers/`;
 
 export function getAllJobseekersk() {
     return useFetch(`${API_BASE_URL}jobs/`, []);
