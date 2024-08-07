@@ -8,7 +8,7 @@
 # My first project with React 
 
 DEMO USERS:
-JobSeekers
+JobSeekers\
 email: jobseeker@abv.bg   pass: demo\
 email: jobseeker1@abv.bg  pass: demo\
 email: jobseeker2@abv.bg  pass: demo\
@@ -16,7 +16,7 @@ email: jobseeker3@abv.bg  pass: demo\
 email: jobseeker4@abv.bg  pass: demo\
 email: jobseeker5@abv.bg  pass: demo\
 
-Company:
+Company:\
 email: company@abv.bg pass: demo\
 email: company1@abv.bg pass: demo\
 email: company2@abv.bg pass: demo\
