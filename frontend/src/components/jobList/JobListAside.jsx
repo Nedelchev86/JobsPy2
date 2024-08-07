@@ -6,9 +6,10 @@ import LastFiveBlogs from "../lastFiveBlogs/LastFiveBlogs";
 import JobsCategory from "./JobsCategory";
 import PopularTags from "../popularTag/PopularTag";
 import Loading from "../loading/Loading";
+import {API_URL} from "../../config";
 
 export default function JobListAside({title, seniority, location, category, skill, handleInputChange, handleSubmit}) {
-    const {data: seniorityList, error, loading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}seniorities/`, []);
+    const {data: seniorityList, error, loading, refetch} = useFetch(`${API_URL}seniorities/`, []);
 
     return (
         <aside className="col-lg-4 col-md-12 col-12">

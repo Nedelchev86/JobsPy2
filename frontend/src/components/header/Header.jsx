@@ -4,6 +4,7 @@ import LoginModal from "../loginModal/LoginModal";
 import {Link, NavLink} from "react-router-dom";
 import {useJobs} from "../../contexts/JobContext";
 import styles from "./Header.module.css";
+import {CLOUDINARY_URL} from "../../config";
 
 import {ToastContainer, toast} from "react-toastify";
 
@@ -94,7 +95,7 @@ const Header = () => {
                                     <div className="button">
                                         <div className="user-profile-container">
                                             <NavLink to="dashboard">
-                                                <img className={styles["user-profile-small"]} src={`https://res.cloudinary.com/drjgddl0y/${user.user.image}`} alt="Logo" /> <span className="notification-badge"> {notifications.length} </span>
+                                                <img className={styles["user-profile-small"]} src={`${CLOUDINARY_URL}${user.user.image}`} alt="Logo" /> <span className="notification-badge"> {notifications.length} </span>
                                             </NavLink>
                                         </div>
 
@@ -108,7 +109,7 @@ const Header = () => {
                                     <div className="button">
                                         <div className="user-profile-container">
                                             <NavLink to="dashboard">
-                                                <img className={styles["user-profile-small"]} src={`https://res.cloudinary.com/drjgddl0y/${user.user.profile_picture}`} alt="Logo" /> <span className="notification-badge"> {notifications.length} </span>
+                                                <img className={styles["user-profile-small"]} src={`${CLOUDINARY_URL}${user.user.profile_picture}`} alt="Logo" /> <span className="notification-badge"> {notifications.length} </span>
                                             </NavLink>
                                         </div>
                                         <button onClick={logout} className="btn">

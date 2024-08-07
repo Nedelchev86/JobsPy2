@@ -11,6 +11,7 @@ import {Button} from "react-bootstrap";
 import GoogleMapComponent from "../googleMap/GoogleMapComponent";
 import {getJobDetails, getApplicantsForJob} from "../../api/jobsApi";
 import {CLOUDINARY_URL} from "../../config";
+import {API_URL} from "../../config";
 
 export default function JobDetails() {
     // const [job, setJob] = useState({});
@@ -54,7 +55,7 @@ export default function JobDetails() {
         if (!user) {
             return;
         }
-        fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/applicants/`, {
+        fetch(`${API_URL}jobs/${id}/applicants/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${auth}`,
@@ -71,7 +72,7 @@ export default function JobDetails() {
         if (!isAuthenticated) {
             return;
         }
-        fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/favorite/check/`, {
+        fetch(`${API_URL}jobs/${id}/favorite/check/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${auth}`,
@@ -85,7 +86,7 @@ export default function JobDetails() {
     const handleToggleFavorite = () => {
         try {
             if (isFavorite.is_favorite) {
-                fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/favorite/remove/`, {
+                fetch(`${API_URL}jobs/${id}/favorite/remove/`, {
                     method: "POST",
                     headers: {
                         Authorization: `Bearer ${auth}`,
@@ -105,7 +106,7 @@ export default function JobDetails() {
                 })
                     .then((response) => response.json())
                     .then((data) => data);
-                console.log("Added");
+               
                 toast.success("Successfully added to favorites");
 
                 setIsFavorite({is_favorite: true});
@@ -125,7 +126,7 @@ export default function JobDetails() {
             return;
         }
         try {
-            await fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/apply/`, {
+            await fetch(`${API_URL}jobs/${id}/apply/`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${auth}`,
@@ -143,7 +144,7 @@ export default function JobDetails() {
     if (user) {
         isJobOwner = isAuthenticated && job.user === user.user.user;
     }
-    console.log(user);
+
     return (
         <>
             <Breadcrumbs pageTitle="Job Details" pageInfo="Job Details" />

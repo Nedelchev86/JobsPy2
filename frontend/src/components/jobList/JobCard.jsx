@@ -1,9 +1,10 @@
 import {Link} from "react-router-dom";
+import { CLOUDINARY_URL } from "../../config";
 
 export default function JobCard({job}) {
     return (
         <div className="single-job">
-            <div className="job-image-list">{job.job_image === null ? <img src="/images/default/default.jpg" alt="#" /> : <img src={`https://res.cloudinary.com/drjgddl0y/${job.job_image}`} alt="#" />}</div>
+            <div className="job-image-list">{job.job_image === null ? <img src="/images/default/default.jpg" alt="#" /> : <img src={`${CLOUDINARY_URL}${job.job_image}`} alt="#" />}</div>
             <div className="job-content">
                 <Link to={`/jobs/${job.id}`}>
                     <h4 style={{paddingRight: "0px"}}>{job.title}</h4>

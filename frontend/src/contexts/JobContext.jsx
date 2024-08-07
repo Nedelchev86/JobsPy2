@@ -1,5 +1,6 @@
 import React, {createContext, useState, useContext, useEffect} from "react";
 import {useAuth} from "./authContexts";
+import {API_URL} from "../config";
 
 const JobContext = createContext();
 
@@ -12,17 +13,15 @@ export const JobProvider = ({children}) => {
 
     const fetchNotifications = async () => {
         if (!auth) {
-            console.log("fetch return");
             return;
         }
 
         if (!user) {
-            console.log("fetch return");
             return;
         }
         if (user.user_type === "company") {
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL}notifications/`, {
+                const response = await fetch(`${API_URL}notifications/`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${auth}`,
@@ -36,7 +35,7 @@ export const JobProvider = ({children}) => {
         }
         if (user.user_type === "jobseeker") {
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL}notificationjobseekers/`, {
+                const response = await fetch(`${API_URL}notificationjobseekers/`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${auth}`,
@@ -50,27 +49,12 @@ export const JobProvider = ({children}) => {
         }
     };
 
-    // const fetchJobs = () => {
-    //     console.log("fetch job" + auth);
-    //     if (!auth) {
-    //         return;
-    //     }
-    //     fetch("http://127.0.0.1:8000/api/created-jobs/", {
-    //         method: "GET",
-    //         headers: {
-    //             Authorization: `Bearer ${auth}`,
-    //         },
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data) => data.length);
-    // };
-
     const fetchJobs = async () => {
         if (!auth) {
             return;
         }
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}company/created-jobs/`, {
+            const response = await fetch(`${API_URL}company/created-jobs/`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${auth}`,
@@ -88,7 +72,7 @@ export const JobProvider = ({children}) => {
             return;
         }
 
-        fetch(`${import.meta.env.VITE_API_URL}company/applicants/`, {
+        fetch(`${API_URL}company/applicants/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${auth}`,
@@ -99,18 +83,6 @@ export const JobProvider = ({children}) => {
                 setApplicants(data);
             });
     };
-
-    // useEffect(() => {
-    //     fetchApplicants();
-    // }, [user]);
-
-    // useEffect(() => {
-    //     fetchJobs();
-    // }, [user]);
-
-    // useEffect(() => {
-    //     fetchNotifications();
-    // }, [user]);
 
     useEffect(() => {
         if (auth) {
