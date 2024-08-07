@@ -3,7 +3,6 @@ import {Navigate} from "react-router-dom";
 import {useAuth} from "../contexts/authContexts";
 
 const AuthGuard = ({children}) => {
-    console.log("test");
     const {auth} = useAuth();
 
     if (!auth) {
