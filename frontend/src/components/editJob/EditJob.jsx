@@ -172,7 +172,7 @@ export default function EditJob() {
                                                 {...register("description", {
                                                     required: "Description is required",
                                                     maxLength: {
-                                                        value: 1000,
+                                                        value: 2000,
                                                         message: "Description cannot exceed 1000 characters",
                                                     },
                                                 })}
@@ -192,7 +192,7 @@ export default function EditJob() {
                                                 {...register("responsibilities", {
                                                     required: "Responsibilities are required",
                                                     maxLength: {
-                                                        value: 1000,
+                                                        value: 2000,
                                                         message: "Responsibilities cannot exceed 1000 characters",
                                                     },
                                                 })}
