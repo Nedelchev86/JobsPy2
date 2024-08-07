@@ -5,23 +5,23 @@
 
 ![JobsPy](https://github.com/user-attachments/assets/55392e2d-1fb3-43e6-a1c8-2c772c84a830)
 
-# My first project with React 
+# My first project with React  - jobspy.eu
 
 DEMO USERS:
-JobSeekers
-email: jobseeker@abv.bg   pass: demo
-email: jobseeker1@abv.bg  pass: demo
-email: jobseeker2@abv.bg  pass: demo
-email: jobseeker3@abv.bg  pass: demo
-email: jobseeker4@abv.bg  pass: demo
+JobSeekers\
+email: jobseeker@abv.bg   pass: demo\
+email: jobseeker1@abv.bg  pass: demo\
+email: jobseeker2@abv.bg  pass: demo\
+email: jobseeker3@abv.bg  pass: demo\
+email: jobseeker4@abv.bg  pass: demo\
 email: jobseeker5@abv.bg  pass: demo
 
-Company:
-email: company@abv.bg pass: demo
-email: company1@abv.bg pass: demo
-email: company2@abv.bg pass: demo
-email: company3@abv.bg pass: demo
-email: company4@abv.bg pass: demo
+Company:\
+email: company@abv.bg pass: demo\
+email: company1@abv.bg pass: demo\
+email: company2@abv.bg pass: demo\
+email: company3@abv.bg pass: demo\
+email: company4@abv.bg pass: demo\
 email: company5@abv.bg pass: demo
 
 
@@ -40,8 +40,8 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 
 
 
-- **React-toastify"**: React-toastify for messages
-- 
+- **React-toastify"**: React-toastify for messages (Success or Error )
+  
 ![toasty](https://github.com/user-attachments/assets/ba87d8f9-fa79-4f2e-817a-e3b03980744e)
 
 
@@ -167,16 +167,16 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 
 To run JobsPy locally, follow these steps:
 
-1. Clone this repository: `[git clone https://github.com/Nedelchev86/jobsPy.git](https://github.com/Nedelchev86/JobsPy2.git)](https://github.com/Nedelchev86/JobsPy2.git)`
+1. Clone this repository: git clone https://github.com/Nedelchev86/jobsPy.git
 2. cd frontend
 3. npm install
-4. make .env (See envSampe.txt) file with:
-VITE_API_URL=https://jobspy2server-b8e7h5dhazhvdnd4.italynorth-01.azurewebsites.net/api/
+4. make .env (See envExamlpe.txt) file with: \
+VITE_API_URL=https://jobspy2server-b8e7h5dhazhvdnd4.italynorth-01.azurewebsites.net/api/ \
 VITE_API_GOOGLE=YOUR API
 5. npm run dev
 
 ## Installation - The Hard Way
-1.  Clone this repository: `[git clone https://github.com/Nedelchev86/jobsPy.git](https://github.com/Nedelchev86/JobsPy2.git)](https://github.com/Nedelchev86/JobsPy2.git)`
+1.  Clone this repository: `git clone https://github.com/Nedelchev86/jobsPy.git`
 2.  python -m venv venv
 3.  venv\Scripts\activate
 4. Install dependencies: `pip install -r requirements.txt`
