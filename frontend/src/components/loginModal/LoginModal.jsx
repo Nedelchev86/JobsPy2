@@ -29,7 +29,7 @@ const LoginModal = ({show, handleClose}) => {
             await login(data);
 
             handleClose();
-            setError("");
+            // setError("");
 
             reset();
 
@@ -37,8 +37,8 @@ const LoginModal = ({show, handleClose}) => {
 
             toast.success("Login successful!");
         } catch (error) {
-            console.error("Login failed:", error.message);
-            setError("Invalid email or password");
+            // console.error("Login failed:", error.message);
+            // setError("Invalid email or password");
             toast.error(`Login failed. Invalid email or password`);
         } finally {
             setLoading(false);
