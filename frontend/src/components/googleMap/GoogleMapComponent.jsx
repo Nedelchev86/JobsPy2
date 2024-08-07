@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from "react";
 import {GoogleMap, useJsApiLoader} from "@react-google-maps/api";
-
+import {GOOGLE_API} from "../../config";
 const containerStyle = {
     width: "100%",
     height: "300px",
@@ -21,7 +21,7 @@ function MyComponent({city, address}) {
 
             const geocodeCity = async () => {
                 try {
-                    const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationQuery)}&key=${import.meta.env.VITE_API_GOOGLE}`);
+                    const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(locationQuery)}&key=${GOOGLE_API}`);
                     const data = await response.json();
                     if (data.status === "OK" && data.results.length > 0) {
                         const location = data.results[0].geometry.location;
