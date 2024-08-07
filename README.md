@@ -5,7 +5,7 @@
 
 ![JobsPy](https://github.com/user-attachments/assets/55392e2d-1fb3-43e6-a1c8-2c772c84a830)
 
-# My first project with React  - jobspy.eu
+# My first project with React  - This Is Just The Beginning - jobspy.eu 
 
 DEMO USERS:
 JobSeekers\
