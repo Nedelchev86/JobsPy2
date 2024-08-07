@@ -61,7 +61,7 @@ export default function CreateJob() {
                         formDataObj.append("job_image", formData.job_image);
                     } else if (formData.job_image[0]) {
                         // If it's a File object, append the file
-                        console.log(formData.job_image[0]);
+
                         formDataObj.append("job_image", formData.job_image[0]);
                     }
                 } else {

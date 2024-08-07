@@ -3,17 +3,16 @@ import {useForm} from "react-hook-form";
 import {Modal, Button, Form, Spinner} from "react-bootstrap";
 import {useAuth} from "../../contexts/authContexts";
 import {toast} from "react-toastify";
+import {API_URL} from "../../config";
 const EditEducationModal = ({show, handleClose, educationId, initialData}) => {
     const {auth} = useAuth();
-    console.log("initial data" + initialData);
 
-    // Initialize useForm with react-hook-form
     const {
         register,
         handleSubmit,
         formState: {errors, isSubmitting},
         reset,
-        setValue, // use setValue to pre-fill form data
+        setValue,
     } = useForm();
 
     useEffect(() => {
@@ -38,7 +37,7 @@ const EditEducationModal = ({show, handleClose, educationId, initialData}) => {
                 formDataToSend.append("image", data.image[0]);
             }
 
-            const response = await fetch(`${import.meta.env.VITE_API_URL}jobseekers/educations/edit/${initialData.id}/`, {
+            const response = await fetch(`${API_URL}jobseekers/educations/edit/${initialData.id}/`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${auth}`, // Add authorization header
