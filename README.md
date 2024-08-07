@@ -167,7 +167,7 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 
 To run JobsPy locally, follow these steps:
 
-1. Clone this repository: `[git clone https://github.com/Nedelchev86/jobsPy.git](https://github.com/Nedelchev86/JobsPy2.git)](https://github.com/Nedelchev86/JobsPy2.git)`
+1. Clone this repository: git clone https://github.com/Nedelchev86/jobsPy.git
 2. cd frontend
 3. npm install
 4. make .env (See envSampe.txt) file with:
