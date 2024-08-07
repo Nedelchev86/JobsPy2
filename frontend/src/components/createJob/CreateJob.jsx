@@ -4,6 +4,7 @@ import {useAuth} from "../../contexts/authContexts";
 import {useJobs} from "../../contexts/JobContext";
 import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
+
 import Loading from "../loading/Loading";
 import {postJob, getAllCategories} from "../../api/jobsApi";
 import {getAllSeniorities, getAllSkills} from "../../api/commonApi";
@@ -168,8 +169,8 @@ export default function CreateJob() {
                                                 {...register("description", {
                                                     required: "Description is required",
                                                     maxLength: {
-                                                        value: 1000,
-                                                        message: "Description cannot exceed 1000 characters",
+                                                        value: 2000,
+                                                        message: "Description cannot exceed 2000 characters",
                                                     },
                                                 })}
                                                 cols="40"
@@ -188,8 +189,8 @@ export default function CreateJob() {
                                                 {...register("responsibilities", {
                                                     required: "Responsibilities are required",
                                                     maxLength: {
-                                                        value: 1000,
-                                                        message: "Responsibilities cannot exceed 1000 characters",
+                                                        value: 2000,
+                                                        message: "Responsibilities cannot exceed 2000 characters",
                                                     },
                                                 })}
                                                 cols="40"
@@ -252,7 +253,21 @@ export default function CreateJob() {
                                             <label htmlFor="id_deadline" className="required">
                                                 Deadline:
                                             </label>
-                                            <input type="date" {...register("deadline", {required: "Deadline is required"})} className={`form-control ${errors.deadline ? "is-invalid" : ""}`} id="id_deadline" />
+                                            <input
+                                                type="date"
+                                                {...register("deadline", {
+                                                    required: "Deadline is required",
+                                                    validate: {
+                                                        isAfterToday: (value) => {
+                                                            const today = new Date().toISOString().split("T")[0];
+
+                                                            return value > today || "Deadline must be after today.";
+                                                        },
+                                                    },
+                                                })}
+                                                className={`form-control ${errors.deadline ? "is-invalid" : ""}`}
+                                                id="id_deadline"
+                                            />
                                             {errors.deadline && <div className="invalid-feedback">{errors.deadline.message}</div>}
                                         </div>
 

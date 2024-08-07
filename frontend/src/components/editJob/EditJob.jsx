@@ -99,10 +99,6 @@ export default function EditJob() {
         return <div>Not authenticated...</div>;
     }
 
-    if (isLoading || !job) {
-        return <Loading />;
-    }
-
     return (
         <>
             <div className="change-password section">
@@ -173,7 +169,7 @@ export default function EditJob() {
                                                     required: "Description is required",
                                                     maxLength: {
                                                         value: 2000,
-                                                        message: "Description cannot exceed 1000 characters",
+                                                        message: "Description cannot exceed 2000 characters",
                                                     },
                                                 })}
                                                 cols="40"
@@ -193,7 +189,7 @@ export default function EditJob() {
                                                     required: "Responsibilities are required",
                                                     maxLength: {
                                                         value: 2000,
-                                                        message: "Responsibilities cannot exceed 1000 characters",
+                                                        message: "Responsibilities cannot exceed 2000 characters",
                                                     },
                                                 })}
                                                 cols="40"
@@ -256,7 +252,21 @@ export default function EditJob() {
                                             <label htmlFor="id_deadline" className="required">
                                                 Deadline:
                                             </label>
-                                            <input type="date" {...register("deadline", {required: "Deadline is required"})} className={`form-control ${errors.deadline ? "is-invalid" : ""}`} id="id_deadline" />
+                                            <input
+                                                type="date"
+                                                {...register("deadline", {
+                                                    required: "Deadline is required",
+                                                    validate: {
+                                                        isAfterToday: (value) => {
+                                                            const today = new Date().toISOString().split("T")[0];
+
+                                                            return value > today || "Deadline must be after today.";
+                                                        },
+                                                    },
+                                                })}
+                                                className={`form-control ${errors.deadline ? "is-invalid" : ""}`}
+                                                id="id_deadline"
+                                            />
                                             {errors.deadline && <div className="invalid-feedback">{errors.deadline.message}</div>}
                                         </div>
 
@@ -279,7 +289,7 @@ export default function EditJob() {
 
                                         <div className="col-lg-12">
                                             <div className="button">
-                                                <button type="submit" className="btn">
+                                                <button type="submit" className="btn" disabled={isLoading}>
                                                     {isLoading ? "Saving..." : "Save"}
                                                 </button>
                                             </div>
