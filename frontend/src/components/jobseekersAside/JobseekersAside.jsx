@@ -12,7 +12,6 @@ export default function JobSeekersAside({seniority, city, skill, handleInputChan
         <aside className="col-lg-4 col-md-12 col-12">
             <Slide direction="right" duration="1000" triggerOnce="true">
                 <div className="sidebar">
-                    {/* <div className="widget search-widget"> */}
                     <Card className="p-3 shadow-sm">
                         <Card.Body>
                             <Form onSubmit={handleSubmit}>
@@ -42,7 +41,7 @@ export default function JobSeekersAside({seniority, city, skill, handleInputChan
                             </Form>
                         </Card.Body>
                     </Card>
-                    {/* </div> */}
+
                     <JobSeekersPopularTags />
 
                     <LastFiveBlogs />
