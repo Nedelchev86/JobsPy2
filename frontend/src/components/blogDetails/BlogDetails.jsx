@@ -33,27 +33,27 @@ export default function BlogDetails() {
                                     <div className="post-details">
                                         <div className="detail-inner">
                                             <h2 className="post-title">
-                                                <Link to="blog-single.html">{blog.title}</Link>
+                                                <Link to="#">{blog.title}</Link>
                                             </h2>
 
                                             <ul className="custom-flex post-meta">
                                                 <li>
-                                                    <a href="#">
+                                                    <Link to="#">
                                                         <i className="lni lni-calendar"></i>
                                                         {formatDate(blog.created_at)}
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li>
-                                                    <a href="#">
+                                                    <Link to="#">
                                                         <i className="lni lni-comments"></i>
                                                         {blog.comments_count} Comments
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li>
-                                                    <a href="#">
+                                                    <Link to="#">
                                                         <i className="lni lni-eye"></i>
                                                         {blog.views} View
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             </ul>
                                             <p>{blog.description}</p>
@@ -61,14 +61,14 @@ export default function BlogDetails() {
                                             <div className="post-image">
                                                 <div className="row">
                                                     <div className="col-lg-6 col-md-6 col-12">
-                                                        <a href="#" className="mb-4">
+                                                        <Link to="#" className="mb-4">
                                                             <img src={blog.image_url_2} alt="#" />
-                                                        </a>
+                                                        </Link>
                                                     </div>
                                                     <div className="col-lg-6 col-md-6 col-12">
-                                                        <a href="#">
+                                                        <Link to="#">
                                                             <img src={blog.image_url_3} alt="#" />
-                                                        </a>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </div>

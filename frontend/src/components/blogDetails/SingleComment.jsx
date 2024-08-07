@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import {CLOUDINARY_URL} from "../../config";
 
 export default function SingleComment({comment}) {
@@ -13,9 +14,9 @@ export default function SingleComment({comment}) {
                         {comment.author.first_name} {comment.author.last_name}
                     </h6>
                     <span className="date">{comment.created_at}</span>
-                    <a href="#" className="reply-link">
-                        <i className="lni lni-reply"></i>Reply
-                    </a>
+                    <Link to="#" className="reply-link">
+                        <i className="lni lni-reply"></i>Reply "ToDo"
+                    </Link>
                 </div>
                 <p>{comment.content}</p>
             </div>

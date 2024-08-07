@@ -14,20 +14,20 @@ export default function BlogCard({blog}) {
                     <div className="meta-details">
                         <ul>
                             <li>
-                                <a href="#">
+                                <Link to="#">
                                     <i className="lni lni-tag"></i> {blog.author.first_name} {blog.author.last_name}
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#">
+                                <Link to="#">
                                     <i className="lni lni-calendar"></i> {formatDate(blog.created_at)}
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#">
+                                <Link to="#">
                                     <i className="lni lni-eye"></i>
                                     {blog.views}
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
