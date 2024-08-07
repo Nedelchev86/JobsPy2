@@ -16,7 +16,7 @@ export function getApplicantsForJob(id) {
 }
 
 export function postJob() {
-    return usePost(`${API_BASE_URL}create/`, {});
+    return usePost(`${API_BASE_URL}create/`);
 }
 
 export function getAllCategories() {
