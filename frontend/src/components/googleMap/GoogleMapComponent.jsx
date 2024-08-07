@@ -52,7 +52,6 @@ function MyComponent({city, address}) {
             if (center) {
                 map.setCenter(center);
                 map.setZoom(15); // Your desired zoom level
-                console.log("Zoom level set to:", map.getZoom());
             }
 
             setMap(map);

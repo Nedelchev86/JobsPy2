@@ -18,7 +18,6 @@ function GoogleMapsBig({city, address}) {
     useEffect(() => {
         if (isLoaded && city) {
             const locationQuery = `${address}, ${city}`;
-            console.log(locationQuery);
 
             const geocodeCity = async () => {
                 try {
@@ -53,7 +52,6 @@ function GoogleMapsBig({city, address}) {
             if (center) {
                 map.setCenter(center);
                 map.setZoom(15); // Your desired zoom level
-                console.log("Zoom level set to:", map.getZoom());
             }
 
             setMap(map);

@@ -9,6 +9,6 @@ export default function EditProfile() {
     if (!user) {
         return <div>Loading...</div>;
     }
-    console.log(user.user_type);
+
     return <div>{user.user_type === "company" ? <EditCompany /> : <EditJobseeker />}</div>;
 }

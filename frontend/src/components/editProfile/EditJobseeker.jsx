@@ -59,8 +59,7 @@ export default function EditJobseeker() {
             // Update form fields with the fetched data
             Object.keys(data).forEach((key) => {
                 setValue(key, data[key]);
-                console.log(key);
-                console.log(data[key]);
+      
             });
         }
     }, [data, setValue]);
@@ -84,7 +83,7 @@ export default function EditJobseeker() {
                             formDataObj.append("profile_picture", formData.profile_picture);
                         } else if (formData.profile_picture[0]) {
                             // If it's a File object, append the file
-                            console.log(formData.profile_picture[0]);
+                      
                             formDataObj.append("profile_picture", formData.profile_picture[0]);
                         }
                     } else {
