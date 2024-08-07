@@ -59,9 +59,7 @@ export default function CommentList({blogId, commentsNumber}) {
     return (
         <>
             <div className="post-comments">
-                <h3 className="comment-title">
-                    <span>{commentsNumber} comments on this post</span>
-                </h3>
+                <h3 className="comment-title">{/* <span>{commentsNumber} comments on this post</span> */}</h3>
                 <ul className="comments-list">
                     {data.map((comment) => (
                         <SingleComment key={comment.id} comment={comment} />
