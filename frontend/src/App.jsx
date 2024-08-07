@@ -52,7 +52,7 @@ function App() {
                         <Route path="jobseekers" element={<JobseekersList />} />
                         <Route path="jobseekers/:id" element={<JobSeekerDetails />} />
                         <Route path="jobs" element={<JobsList />} />
-                        {/* <Route path="jobs/category/:id" element={<JobsByCategory />} /> */}
+
                         <Route
                             path="signup"
                             element={
@@ -61,10 +61,8 @@ function App() {
                                 </GuestsGuard>
                             }
                         />
-                        <Route path="login" element={<LoginModal />} />
-                        {/* <Route path="dashboard" element={<Dashboard />} /> */}
-                        {/* <Route path="/bookmarked" element={<JobsFavoriteList />} /> */}
-                        {/* <Route path="/profile/edit" element={<EditProfile />} /> */}
+                        {/* <Route path="login" element={<LoginModal />} /> */}
+
                         <Route path="jobs/:id" element={<JobDetails />} />
                         <Route
                             path="dashboard"
