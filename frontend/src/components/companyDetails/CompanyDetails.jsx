@@ -47,17 +47,20 @@ export default function CompanyDetails() {
                                                                     </h4>
 
                                                                     <ul className="social">
-                                                                        <li>
-                                                                            <Link to={company.facebook_url}>
-                                                                                <i className="lni lni-facebook-original"> </i>
-                                                                            </Link>
-                                                                        </li>
-
-                                                                        <li>
-                                                                            <Link target="_blank" to={company?.linkedin_url}>
-                                                                                <i className="lni lni-linkedin-original"></i>
-                                                                            </Link>
-                                                                        </li>
+                                                                        {company.facebook_url && (
+                                                                            <li>
+                                                                                <Link to={company.facebook_url}>
+                                                                                    <i className="lni lni-facebook-original"> </i>
+                                                                                </Link>
+                                                                            </li>
+                                                                        )}
+                                                                        {company.linkedin_url && (
+                                                                            <li>
+                                                                                <Link target="_blank" to={company?.linkedin_url}>
+                                                                                    <i className="lni lni-linkedin-original"></i>
+                                                                                </Link>
+                                                                            </li>
+                                                                        )}
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -94,9 +97,11 @@ export default function CompanyDetails() {
                                                                     <div className="single-list">
                                                                         <h5 className="title">Website Linked</h5>
                                                                         <p>
-                                                                            <Link target="_blank" to={company?.website_url}>
-                                                                                Link
-                                                                            </Link>
+                                                                            {company.website_url && (
+                                                                                <Link target="_blank" to={company?.website_url}>
+                                                                                    Link
+                                                                                </Link>
+                                                                            )}
                                                                         </p>
                                                                     </div>
                                                                 </div>
