@@ -15,24 +15,21 @@ const useFetch = (url, initialData = null) => {
 
             try {
                 const response = await fetch(url, {signal});
-                console.log("Response received");
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
 
                 const result = await response.json();
                 setData(result);
-                console.log("Data set");
             } catch (err) {
                 if (err.name === "AbortError") {
-                    console.log("Fetch aborted");
                 } else {
                     setError(err.message);
                     console.error("Fetch error:", err.message);
                 }
             } finally {
                 setLoading(false);
-                console.log("Fetch complete");
             }
         };
 

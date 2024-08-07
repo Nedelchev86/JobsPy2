@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {getApplicantsList} from "../../api/companyApi";
 import {CLOUDINARY_URL} from "../../config";
 import ApplicantListCard from "./ApplicantListCard";
+import Loading from "../loading/Loading";
 
 export default function ApplicantsList() {
     const {auth} = useAuth();
@@ -12,11 +13,15 @@ export default function ApplicantsList() {
 
     return (
         <>
-            <div className="job-items">
-                {applicants.map((jobs) => (
-                    <ApplicantListCard key={jobs.id} jobs={jobs} />
-                ))}
-            </div>
+            {loading ? (
+                <Loading />
+            ) : (
+                <div className="job-items">
+                    {applicants.map((jobs) => (
+                        <ApplicantListCard key={jobs.id} jobs={jobs} />
+                    ))}
+                </div>
+            )}
         </>
     );
 }

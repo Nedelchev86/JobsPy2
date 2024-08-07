@@ -58,7 +58,6 @@ export default function EditJob() {
     }, [job, setValue]);
 
     const onSubmit = async (formData) => {
-        console.log("test");
         setIsLoading(true);
         const formDataObj = new FormData();
 
