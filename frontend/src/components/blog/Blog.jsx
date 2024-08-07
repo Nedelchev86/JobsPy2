@@ -11,7 +11,6 @@ const Blog = () => {
 
     const {data: blogs, loading, error} = getAllBlogs();
 
-
     return (
         <>
             <Breadcrumbs pageTitle="News and blogs / Django Rest Framework" pageInfo="First steps in Django Rest Framework" />
@@ -33,7 +32,7 @@ const Blog = () => {
 
                         <aside className="col-lg-4 col-md-5 col-12">
                             <div className="sidebar">
-                                <div className="widget search-widget">
+                                {/* <div className="widget search-widget">
                                     <h5 className="widget-title">
                                         <span>Search ...</span>
                                     </h5>
@@ -43,7 +42,7 @@ const Blog = () => {
                                             <i className="lni lni-search-alt"></i>
                                         </button>
                                     </form>
-                                </div>
+                                </div> */}
                                 <div className="widget popular-feeds">
                                     <h5 className="widget-title">
                                         <span>Popular Feeds</span>

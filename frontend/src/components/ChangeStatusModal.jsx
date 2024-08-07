@@ -4,7 +4,6 @@ import {Modal, Button, Form} from "react-bootstrap";
 function ChangeStatusModal({show, handleClose, applicant, updateApplicant}) {
     const [status, setStatus] = useState(applicant?.status);
     const [comment, setComment] = useState(applicant?.comment || "");
-    console.log(applicant);
 
     const handleSubmit = (e) => {
         e.preventDefault();

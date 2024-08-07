@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import {useAuth} from "../../contexts/authContexts";
 import {useNavigate, Link} from "react-router-dom";
 import {useJobs} from "../../contexts/JobContext";
+import {CLOUDINARY_URL} from "../../config";
 
 const CompanyDashboard = () => {
     const {user, isAuthenticated, fetchUserData} = useAuth();
@@ -27,7 +28,7 @@ const CompanyDashboard = () => {
         <div className="cat-head job-category">
             <div className="row">
                 <div className="col-md-6 col-12">
-                    <a href="#" className="single-cat wow fadeInUp">
+                    <a href="#" className="single-cat">
                         <div className="icon">
                             <i>0</i>
                         </div>
@@ -39,7 +40,7 @@ const CompanyDashboard = () => {
                 </div>
 
                 <div className="col-md-6 col-12">
-                    <Link to="applicants" className="single-cat wow fadeInUp">
+                    <Link to="applicants" className="single-cat">
                         <div className="icon">{<i>{applicants.length}</i>}</div>
                         <h3>
                             All Jobs <br /> Candidates
@@ -59,7 +60,7 @@ const CompanyDashboard = () => {
                                                 <div className="name-head">
                                                     <Link className="mb-2" to="#">
                                                         {user.user.image == null && <img className="circle-54" src="/images/default/company.jpg" alt="" />}
-                                                        {user.user?.image ? <img className="circle-54" src={`https://res.cloudinary.com/drjgddl0y/${user.user.image}`} alt="" /> : ""}
+                                                        {user.user?.image ? <img className="circle-54" src={`${CLOUDINARY_URL}${user.user.image}`} alt="" /> : ""}
                                                     </Link>
 
                                                     <ul className="social">
