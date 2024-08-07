@@ -170,7 +170,7 @@ To run JobsPy locally, follow these steps:
 1. Clone this repository: git clone https://github.com/Nedelchev86/jobsPy.git
 2. cd frontend
 3. npm install
-4. make .env (See envSampe.txt) file with:
+4. make .env (See envExamlpe.txt) file with:
 VITE_API_URL=https://jobspy2server-b8e7h5dhazhvdnd4.italynorth-01.azurewebsites.net/api/
 VITE_API_GOOGLE=YOUR API
 5. npm run dev
