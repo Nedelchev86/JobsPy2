@@ -86,7 +86,6 @@ export default function Footer() {
                                     <div className="single-footer newsletter">
                                         <h3>Join Our Newsletter</h3>
                                         <p>Subscribe to get the latest news</p>
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +121,7 @@ export default function Footer() {
                                             <Link to="#">Faq</Link>
                                         </li>
                                         <li>
-                                            <Link to="contact">Contact</Link>
+                                            <Link to="contact-us">Contact</Link>
                                         </li>
                                     </ul>
                                 </div>
