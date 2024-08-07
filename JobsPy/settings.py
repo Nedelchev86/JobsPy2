@@ -81,15 +81,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'JobsPy.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # DATABASES = {
 #     'default': dj_database_url.config(
@@ -99,18 +98,17 @@ WSGI_APPLICATION = 'JobsPy.wsgi.application'
 #     )
 # }
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", None),
-        "USER": os.getenv("DB_USER", None),
-        "PASSWORD": os.getenv("DB_PASSWORD", None),
-        "HOST": os.getenv("DB_HOST", None),
-        "PORT": os.getenv("DB_PORT", None),
-        'ATOMIC_REQUESTS': True
-    }
-}
-
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.getenv("DB_NAME", None),
+#         "USER": os.getenv("DB_USER", None),
+#         "PASSWORD": os.getenv("DB_PASSWORD", None),
+#         "HOST": os.getenv("DB_HOST", None),
+#         "PORT": os.getenv("DB_PORT", None),
+#         'ATOMIC_REQUESTS': True
+#     }
+# }
 
 
 
@@ -129,6 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -139,7 +138,6 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
-
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
