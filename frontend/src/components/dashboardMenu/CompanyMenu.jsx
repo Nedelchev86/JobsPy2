@@ -7,6 +7,7 @@ import DeleteConfirmationModal from "../deleteModal/DeleteConfirmationModal";
 import {useNavigate} from "react-router-dom";
 import styles from "./CompanyMenu.module.css";
 import {toast} from "react-toastify";
+import {API_URL} from "../../config";
 
 export default function CompanyMenu() {
     const navigate = useNavigate();
@@ -29,21 +30,19 @@ export default function CompanyMenu() {
 
     const handleConfirmDelete = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/company/${user.user.user}/delete/`, {
+            const response = await fetch(`${API_URL}company/${user.user.user}/delete/`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${auth}`, 
+                    Authorization: `Bearer ${auth}`,
                 },
             });
 
             if (response.ok) {
                 logout();
                 navigate("/");
-               
             } else {
                 alert("Failed to delete profile.");
-           
             }
         } catch (error) {
             console.error("Error deleting profile:", error);
