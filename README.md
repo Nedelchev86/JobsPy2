@@ -5,12 +5,25 @@
 
 ![JobsPy](https://github.com/user-attachments/assets/55392e2d-1fb3-43e6-a1c8-2c772c84a830)
 
+# My first project with React 
 
+DEMO USERS:
+JobSeekers
+email: jobseeker@abv.bg   pass: demo
+email: jobseeker1@abv.bg  pass: demo
+email: jobseeker2@abv.bg  pass: demo
+email: jobseeker3@abv.bg  pass: demo
+email: jobseeker4@abv.bg  pass: demo
+email: jobseeker5@abv.bg  pass: demo
 
+Company:
+email: company@abv.bg pass: demo
+email: company1@abv.bg pass: demo
+email: company2@abv.bg pass: demo
+email: company3@abv.bg pass: demo
+email: company4@abv.bg pass: demo
+email: company5@abv.bg pass: demo
 
-Coming soon: Desription of all endpoits and live demo server 
-
-My first project with React 
 
 JobsPy is a job portal designed to connect job seekers with companies. It provides a platform for job seekers to showcase their skills and for companies to advertise job openings and manage applications.
 
@@ -138,7 +151,7 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 - Django Rest Framework to make API enpoints
 - React/HTML/CSS/JavaScript: Frontend technologies for user interface and interactivity.
 
-  [b]React  libraries[/b]
+##  React  libraries 
 - React Bootstrap 
 - React Hook Form
 - React-Toastify 
@@ -162,14 +175,18 @@ VITE_API_URL=https://jobspy2server-b8e7h5dhazhvdnd4.italynorth-01.azurewebsites.
 VITE_API_GOOGLE=YOUR API
 5. npm run dev
 
-
-6. Install dependencies: `pip install -r requirements.txt`
+## Installation - The Hard Way
+1.  Clone this repository: `[git clone https://github.com/Nedelchev86/jobsPy.git](https://github.com/Nedelchev86/JobsPy2.git)](https://github.com/Nedelchev86/JobsPy2.git)`
+2.  python -m venv venv
+3.  venv\Scripts\activate
+4. Install dependencies: `pip install -r requirements.txt`
+5. cd JobsPy
+6. make .env file (see envExample) Default DB is SQLite
 7. Run migrations: `python manage.py migrate`
 8. Create a superuser: `python manage.py createsuperuser`
 9. Start the development server: `python manage.py runserver`
 10. Access the application at `http://localhost:8000`
-11. Opent frontend folder
-12. Run with npm run dev
+
 
    
 
