@@ -9,20 +9,20 @@
 
 DEMO USERS:
 JobSeekers
-email: jobseeker@abv.bg   pass: demo
-email: jobseeker1@abv.bg  pass: demo
-email: jobseeker2@abv.bg  pass: demo
-email: jobseeker3@abv.bg  pass: demo
-email: jobseeker4@abv.bg  pass: demo
-email: jobseeker5@abv.bg  pass: demo
+email: jobseeker@abv.bg   pass: demo\
+email: jobseeker1@abv.bg  pass: demo\
+email: jobseeker2@abv.bg  pass: demo\
+email: jobseeker3@abv.bg  pass: demo\
+email: jobseeker4@abv.bg  pass: demo\
+email: jobseeker5@abv.bg  pass: demo\
 
 Company:
-email: company@abv.bg pass: demo
-email: company1@abv.bg pass: demo
-email: company2@abv.bg pass: demo
-email: company3@abv.bg pass: demo
-email: company4@abv.bg pass: demo
-email: company5@abv.bg pass: demo
+email: company@abv.bg pass: demo\
+email: company1@abv.bg pass: demo\
+email: company2@abv.bg pass: demo\
+email: company3@abv.bg pass: demo\
+email: company4@abv.bg pass: demo\
+email: company5@abv.bg pass: demo\
 
 
 JobsPy is a job portal designed to connect job seekers with companies. It provides a platform for job seekers to showcase their skills and for companies to advertise job openings and manage applications.
