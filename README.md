@@ -177,7 +177,7 @@ VITE_API_GOOGLE=YOUR API
 
 ## Installation - The Hard Way
 1.  Clone this repository: `git [chttps://github.com/Nedelchev86/JobsPy2.git)](https://github.com/Nedelchev86/JobsPy2.git)`
-2. ``` python -m venv venv```
+2.##  python -m venv venv
 3.  venv\Scripts\activate
 4. Install dependencies: `pip install -r requirements.txt`
 5. cd JobsPy
