@@ -142,18 +142,27 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 
 
 
-## Installation
+## Installation - The Easy Way ... With my public API
+
 
 To run JobsPy locally, follow these steps:
 
-1. Clone this repository: `git clone https://github.com/Nedelchev86/jobsPy.git`
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run migrations: `python manage.py migrate`
-4. Create a superuser: `python manage.py createsuperuser`
-5. Start the development server: `python manage.py runserver`
-6. Access the application at `http://localhost:8000`
-7. Opent frontend folder
-8. Run with npm run dev
+1. Clone this repository: `[git clone https://github.com/Nedelchev86/jobsPy.git](https://github.com/Nedelchev86/JobsPy2.git)](https://github.com/Nedelchev86/JobsPy2.git)`
+2. cd frontend
+3. npm install
+4. make .env (See envSampe.txt) file with:
+VITE_API_URL=https://jobspy2server-b8e7h5dhazhvdnd4.italynorth-01.azurewebsites.net/api/
+VITE_API_GOOGLE=YOUR API
+5. npm run dev
+
+
+6. Install dependencies: `pip install -r requirements.txt`
+7. Run migrations: `python manage.py migrate`
+8. Create a superuser: `python manage.py createsuperuser`
+9. Start the development server: `python manage.py runserver`
+10. Access the application at `http://localhost:8000`
+11. Opent frontend folder
+12. Run with npm run dev
 
    
 
