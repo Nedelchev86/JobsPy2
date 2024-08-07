@@ -138,7 +138,7 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 - Django Rest Framework to make API enpoints
 - React/HTML/CSS/JavaScript: Frontend technologies for user interface and interactivity.
 
-  [b]React  libraries[/b]
+##  React  libraries 
 - React Bootstrap 
 - React Hook Form
 - React-Toastify 
@@ -162,14 +162,18 @@ VITE_API_URL=https://jobspy2server-b8e7h5dhazhvdnd4.italynorth-01.azurewebsites.
 VITE_API_GOOGLE=YOUR API
 5. npm run dev
 
-
-6. Install dependencies: `pip install -r requirements.txt`
+## Installation - The Hard Way
+1.  Clone this repository: `[git clone https://github.com/Nedelchev86/jobsPy.git](https://github.com/Nedelchev86/JobsPy2.git)](https://github.com/Nedelchev86/JobsPy2.git)`
+2.  python -m venv venv
+3.  venv\Scripts\activate
+4. Install dependencies: `pip install -r requirements.txt`
+5. cd JobsPy
+6. make .env file (see envExample) Default DB is SQLite
 7. Run migrations: `python manage.py migrate`
 8. Create a superuser: `python manage.py createsuperuser`
 9. Start the development server: `python manage.py runserver`
 10. Access the application at `http://localhost:8000`
-11. Opent frontend folder
-12. Run with npm run dev
+
 
    
 
