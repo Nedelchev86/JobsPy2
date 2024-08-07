@@ -136,8 +136,15 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 - Django: Backend framework for building the web application
 - Python: Programming language used for backend development.
 - Django Rest Framework to make API enpoints
-- 
 - React/HTML/CSS/JavaScript: Frontend technologies for user interface and interactivity.
+
+  [b]React  libraries[/b]
+- React Bootstrap 
+- React Hook Form
+- React-Toastify 
+- @react-google-maps/api
+- React Awesome Reveal
+
 
 
 
