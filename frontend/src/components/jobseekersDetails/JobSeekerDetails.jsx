@@ -7,6 +7,7 @@ import {getJobseekerByID} from "../../api/JobSeekerApi";
 import Loading from "../loading/Loading";
 import SkillsModule from "../skills/Skills";
 import {CLOUDINARY_URL} from "../../config";
+import {Link} from "react-router-dom";
 
 export default function JobSeekerDetails() {
     // const [jobseeker, setJobseeker] = useState([]);
@@ -53,23 +54,27 @@ export default function JobSeekerDetails() {
                                                                     </h4>
                                                                     <p>{jobseeker.occupation}</p>
                                                                     <ul className="social">
-                                                                        <li>
-                                                                            <a target="_blank" href={jobseeker.facebook}>
-                                                                                <i className="lni lni-facebook-original"></i>
-                                                                            </a>
-                                                                        </li>
-
-                                                                        <li>
-                                                                            <a target="_blank" href={jobseeker.linkedin}>
-                                                                                <i className="lni lni-linkedin-original"></i>
-                                                                            </a>
-                                                                        </li>
-
-                                                                        <li>
-                                                                            <a target="_blank" href={jobseeker.github}>
-                                                                                <i className="lni lni-github"></i>
-                                                                            </a>
-                                                                        </li>
+                                                                        {jobseeker.facebook && (
+                                                                            <li>
+                                                                                <Link target="_blank" to={jobseeker.facebook}>
+                                                                                    <i className="lni lni-facebook-original"></i>
+                                                                                </Link>
+                                                                            </li>
+                                                                        )}
+                                                                        {jobseeker.linkedin && (
+                                                                            <li>
+                                                                                <Link target="_blank" to={jobseeker.linkedin}>
+                                                                                    <i className="lni lni-linkedin-original"></i>
+                                                                                </Link>
+                                                                            </li>
+                                                                        )}
+                                                                        {jobseeker.github && (
+                                                                            <li>
+                                                                                <Link target="_blank" to={jobseeker.github}>
+                                                                                    <i className="lni lni-github"></i>
+                                                                                </Link>
+                                                                            </li>
+                                                                        )}
                                                                     </ul>
                                                                 </div>
                                                             </div>
