@@ -115,23 +115,28 @@ const JobSeekerDashboard = () => {
                                                     </p>
 
                                                     <ul className="social">
-                                                        <li>
-                                                            <Link target="_blank" to={`${user.user.facebook && user.user.facebook} `}>
-                                                                <i className="lni lni-facebook-original"></i>
-                                                            </Link>
-                                                        </li>
+                                                        {user.user.facebook && user.user.facebook && (
+                                                            <li>
+                                                                <Link target="_blank" to={user.user.facebook}>
+                                                                    <i className="lni lni-facebook-original"></i>
+                                                                </Link>
+                                                            </li>
+                                                        )}
 
-                                                        <li>
-                                                            <Link target="_blank" to={`${user.user.linkedin && user.user.linkedin}`}>
-                                                                <i className="lni lni-linkedin-original"></i>
-                                                            </Link>
-                                                        </li>
-
-                                                        <li>
-                                                            <Link target="_blank" to={`${user.user.github && user.user.github}`}>
-                                                                <i className="lni lni-github"></i>
-                                                            </Link>
-                                                        </li>
+                                                        {user.user.linkedin && (
+                                                            <li>
+                                                                <Link target="_blank" to={user.user.linkedin}>
+                                                                    <i className="lni lni-linkedin-original"></i>
+                                                                </Link>
+                                                            </li>
+                                                        )}
+                                                        {user.user.github && (
+                                                            <li>
+                                                                <Link target="_blank" to={`${user.user.github && user.user.github}`}>
+                                                                    <i className="lni lni-github"></i>
+                                                                </Link>
+                                                            </li>
+                                                        )}
                                                     </ul>
                                                 </div>
                                             </div>
@@ -157,9 +162,11 @@ const JobSeekerDashboard = () => {
                                                     <div className="single-list">
                                                         <h5 className="title">Website</h5>
                                                         <p>
-                                                            <Link target="_blank" to={user.user.website}>
-                                                                Link
-                                                            </Link>
+                                                            {user.user.website && (
+                                                                <Link target="_blank" to={user.user.website}>
+                                                                    Link
+                                                                </Link>
+                                                            )}
                                                         </p>
                                                     </div>
                                                 </div>

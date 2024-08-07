@@ -64,17 +64,20 @@ const CompanyDashboard = () => {
                                                     </Link>
 
                                                     <ul className="social">
-                                                        <li>
-                                                            <Link target="_blank" to={user.user.facebook_url}>
-                                                                <i className="lni lni-facebook-original"></i>
-                                                            </Link>
-                                                        </li>
-
-                                                        <li>
-                                                            <Link target="_blank" to={user.user.linkedin_url}>
-                                                                <i className="lni lni-linkedin-original"></i>
-                                                            </Link>
-                                                        </li>
+                                                        {user.user.facebook_url && (
+                                                            <li>
+                                                                <Link target="_blank" to={user.user.facebook_url}>
+                                                                    <i className="lni lni-facebook-original"></i>
+                                                                </Link>
+                                                            </li>
+                                                        )}
+                                                        {user.user.user.linkedin_url && (
+                                                            <li>
+                                                                <Link target="_blank" to={user.user.linkedin_url}>
+                                                                    <i className="lni lni-linkedin-original"></i>
+                                                                </Link>
+                                                            </li>
+                                                        )}
                                                     </ul>
                                                 </div>
                                             </div>
@@ -112,9 +115,11 @@ const CompanyDashboard = () => {
                                                         <h5 className="title">Website</h5>
 
                                                         <p>
-                                                            <Link target="_blank" to={user.user.website_url}>
-                                                                Link
-                                                            </Link>
+                                                            {user.user.website_url && (
+                                                                <Link target="_blank" to={user.user.website_url}>
+                                                                    Link
+                                                                </Link>
+                                                            )}
                                                         </p>
                                                     </div>
                                                 </div>
