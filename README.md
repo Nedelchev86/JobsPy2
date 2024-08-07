@@ -167,25 +167,25 @@ JobsPy is a job portal designed to connect job seekers with companies. It provid
 
 To run JobsPy locally, follow these steps:
 
-1. Clone this repository: git clone https://github.com/Nedelchev86/jobsPy.git
-2. cd frontend
-3. npm install
+1. Clone this repository: git clone https://github.com/Nedelchev86/jobsPy2.git
+2. ```cd frontend```
+3.``` npm install```
 4. make .env (See envExamlpe.txt) file with: \
 VITE_API_URL=https://jobspy2server-b8e7h5dhazhvdnd4.italynorth-01.azurewebsites.net/api/ \
 VITE_API_GOOGLE=YOUR API
-5. npm run dev
+5. ```npm run dev```
 
 ## Installation - The Hard Way
-1.  Clone this repository: `git [chttps://github.com/Nedelchev86/JobsPy2.git)](https://github.com/Nedelchev86/JobsPy2.git)`
-2.##  python -m venv venv
-3.  venv\Scripts\activate
-4. Install dependencies: `pip install -r requirements.txt`
-5. cd JobsPy
+1.  Clone this repository: ```git clone https://github.com/Nedelchev86/jobsPy2.git```
+2.  ```python -m venv venv```
+3.  ```venv\Scripts\activate```
+4. Install dependencies: ```pip install -r requirements.txt```
+5. ```cd JobsPy```
 6. make .env file (see envExample) Default DB is SQLite
-7. Run migrations: `python manage.py migrate`
-8. Create a superuser: `python manage.py createsuperuser`
-9. Start the development server: `python manage.py runserver`
-10. Access the application at `http://localhost:8000`
+7. Run migrations: ```python manage.py migrate```
+8. Create a superuser: ```python manage.py createsuperuser```
+9. Start the development server: ```python manage.py runserver```
+10. Access the application at ```http://localhost:8000```
 
 
    
