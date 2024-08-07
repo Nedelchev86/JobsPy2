@@ -141,7 +141,7 @@ export default function EditCompany() {
                                                         {...register("description", {
                                                             required: "Description is required",
                                                             maxLength: {
-                                                                value: 500,
+                                                                value: 3000,
                                                                 message: "Description cannot exceed 500 characters",
                                                             },
                                                         })}
