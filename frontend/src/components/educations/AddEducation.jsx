@@ -69,59 +69,35 @@ const AddEducationModal = ({show, handleClose}) => {
                 <Form onSubmit={handleSubmit(submitEducation)}>
                     <Form.Group controlId="institution">
                         <Form.Label>Institution</Form.Label>
-                        <Form.Control
-                            type="text"
-                            {...register("institution", {required: "Institution is required."})} // Register input with validation and custom message
-                            isInvalid={!!errors.institution} // Apply error style
-                        />
+                        <Form.Control type="text" {...register("institution", {required: "Institution is required."})} isInvalid={!!errors.institution} />
                         <Form.Control.Feedback type="invalid">{errors.institution?.message}</Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group controlId="description">
                         <Form.Label>Description</Form.Label>
-                        <Form.Control
-                            as="textarea"
-                            {...register("description", {required: "Description is required."})} // Register input with validation and custom message
-                            isInvalid={!!errors.description} // Apply error style
-                        />
+                        <Form.Control as="textarea" {...register("description", {required: "Description is required."})} isInvalid={!!errors.description} />
                         <Form.Control.Feedback type="invalid">{errors.description?.message}</Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group controlId="start_date">
                         <Form.Label>Start Date</Form.Label>
-                        <Form.Control
-                            type="date"
-                            {...register("start_date", {required: "Start date is required."})} // Register input with validation and custom message
-                            isInvalid={!!errors.start_date} // Apply error style
-                        />
+                        <Form.Control type="date" {...register("start_date", {required: "Start date is required."})} isInvalid={!!errors.start_date} />
                         <Form.Control.Feedback type="invalid">{errors.start_date?.message}</Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group controlId="end_date">
                         <Form.Label>End Date</Form.Label>
-                        <Form.Control
-                            type="date"
-                            {...register("end_date", {required: "End date is required."})} // Register input with validation and custom message
-                            isInvalid={!!errors.end_date} // Apply error style
-                        />
+                        <Form.Control type="date" {...register("end_date", {required: "End date is required."})} isInvalid={!!errors.end_date} />
                         <Form.Control.Feedback type="invalid">{errors.end_date?.message}</Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group controlId="image">
                         <Form.Label>Image</Form.Label>
-                        <Form.Control
-                            type="file"
-                            {...register("image")} // Register input without validation for optional file
-                        />
+                        <Form.Control type="file" {...register("image")} />
                     </Form.Group>
 
-                    <Button
-                        type="submit"
-                        variant="primary"
-                        className="mt-3"
-                        disabled={isSubmitting} // Disable button during submission
-                    >
-                        {isSubmitting ? ( // Display loading indicator while submitting
+                    <Button type="submit" variant="primary" className="mt-3" disabled={isSubmitting}>
+                        {isSubmitting ? (
                             <>
                                 <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
                                 {" Adding..."}

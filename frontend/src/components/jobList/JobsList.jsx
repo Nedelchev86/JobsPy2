@@ -7,9 +7,10 @@ import JobDetailsnAside from "./JobListAside";
 import PopularTags from "../popularTag/PopularTag";
 import styles from "./JobsList.module.css";
 import JobCard from "./JobCard";
+import { API_URL } from "../../config";
 
 export default function JobsList() {
-    const apiUrl = import.meta.env.VITE_API_URL;
+ 
     const [title, setTitle] = useState(""); // For job title search
     const [seniority, setSeniority] = useState(""); // For seniority filter
     const [location, setLocation] = useState("");
@@ -45,7 +46,7 @@ export default function JobsList() {
         const categoryParam = searchParams.get("category");
         const skillPArams = searchParams.get("skill");
         fetch(
-            `${apiUrl}jobs/?${new URLSearchParams({
+            `${API_URL}jobs/?${new URLSearchParams({
                 title,
                 seniority,
                 location,

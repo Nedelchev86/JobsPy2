@@ -1,6 +1,3 @@
-import {useAuth} from "../../contexts/authContexts";
-// import Breadcrumbs from "./breadcrumbs/Breadcrumbs";
-// import JobSeekerMenu from "./JobseekerMenu";
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {getApplyedJobs} from "../../api/JobSeekerApi";
@@ -8,9 +5,6 @@ import Loading from "../loading/Loading";
 import {CLOUDINARY_URL} from "../../config";
 
 export default function JobsApplyed() {
-    // const [applyedJobs, setapplyedJobs] = useState([]);
-    // const {user, auth} = useAuth();
-
     const statusClass = {
         Pending: "pending",
         Accepted: "apply",

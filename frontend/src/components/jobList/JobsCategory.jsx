@@ -4,9 +4,10 @@ import styles from "./JobsCategory.module.css";
 import {useLocation} from "react-router-dom";
 import {useState, useEffect} from "react";
 import Loading from "../loading/Loading";
+import {API_URL} from "../../config";
 
 export default function JobsCategory({category, handleInputChange}) {
-    const {data: categories, error, loading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}jobs/categories/`, []);
+    const {data: categories, error, loading, refetch} = useFetch(`${API_URL}jobs/categories/`, []);
 
     const [allJobs, setAllJobs] = useState(0);
 

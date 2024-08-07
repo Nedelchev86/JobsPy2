@@ -9,7 +9,7 @@ import Spinner from "react-bootstrap/Spinner";
 
 const LoginModal = ({show, handleClose}) => {
     const {notifications, fetchNotifications, auth} = useJobs();
-    const [loading, setLoading] = useState(false); // Manage loading state
+    const [loading, setLoading] = useState(false);
 
     const {
         register,
@@ -19,35 +19,18 @@ const LoginModal = ({show, handleClose}) => {
         formState: {errors, isDirty, isValid},
     } = useForm({mode: "onChange", delayError: 1000});
 
-    // const [formData, setFormData] = useState({
-    //     email: "",
-    //     password: "",
-    // });
-
-    // const resetForm = () => {
-    //     setFormData({
-    //         email: "",
-    //         password: "",
-    //     });
-    // };
-
     const [error, setError] = useState("");
     const {login} = useAuth();
 
-    // const handleChange = (e) => {
-    //     setFormData({...formData, [e.target.name]: e.target.value});
-    // };
-
     const submitForm = async (data) => {
-        // e.preventDefault();
         setLoading(true);
 
         try {
-            await login(data); // Call login method from AuthContext
+            await login(data);
 
-            handleClose(); // Close modal after successful login
+            handleClose();
             setError("");
-            // resetForm();
+
             reset();
 
             fetchNotifications();
@@ -58,7 +41,7 @@ const LoginModal = ({show, handleClose}) => {
             setError("Invalid email or password");
             toast.error(`Login failed. Invalid email or password`);
         } finally {
-            setLoading(false); // Set loading to false after submission completes
+            setLoading(false);
         }
     };
 

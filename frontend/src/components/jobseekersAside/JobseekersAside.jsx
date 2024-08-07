@@ -4,9 +4,10 @@ import {Form, Button, InputGroup, FormControl, Card} from "react-bootstrap";
 import useFetch from "../../hooks/useFetch";
 import LastFiveBlogs from "../lastFiveBlogs/LastFiveBlogs";
 import JobSeekersPopularTags from "../popularTag/JobSeekersPopularTag";
+import {API_URL} from "../../config";
 
 export default function JobSeekersAside({seniority, city, skill, handleInputChange, handleSubmit}) {
-    const {data: seniorityList, error, isLoading, refetch} = useFetch(`${import.meta.env.VITE_API_URL}seniorities/`, []);
+    const {data: seniorityList, error, isLoading, refetch} = useFetch(`${API_URL}seniorities/`, []);
     return (
         <aside className="col-lg-4 col-md-12 col-12">
             <Slide direction="right" duration="1000" triggerOnce="true">
@@ -15,13 +16,6 @@ export default function JobSeekersAside({seniority, city, skill, handleInputChan
                     <Card className="p-3 shadow-sm">
                         <Card.Body>
                             <Form onSubmit={handleSubmit}>
-                                {/* <Form.Group controlId="formTitle" className="mb-3">
-                                    <Form.Label>Search by Title</Form.Label>
-                                    <InputGroup>
-                                        <FormControl type="text" name="title" placeholder="Search by job title" value={title} onChange={handleInputChange} className="form-control" aria-label="Job Title" />
-                                    </InputGroup>
-                                </Form.Group> */}
-
                                 <Form.Group controlId="formSeniority" className="mb-3">
                                     <Form.Label>Filter by Seniority</Form.Label>
                                     <InputGroup>
@@ -41,29 +35,7 @@ export default function JobSeekersAside({seniority, city, skill, handleInputChan
                                         <FormControl type="text" name="city" placeholder="Enter city" value={city} onChange={handleInputChange} className="form-control" aria-label="City" />
                                     </InputGroup>
                                 </Form.Group>
-                                {/* 
-                                <Form.Group controlId="formJobCategory" className="mb-3">
-                                    <Form.Label>Filter by Job Category</Form.Label>
-                                    <InputGroup>
-                                        <Form.Select name="category" value={category} onChange={handleInputChange} className="form-control">
-                                            <option value="">All Categories</option>
-                                            <option value="1">Software</option>
-                                            <option value="2">Design</option>
-                                            <option value="3">Marketing</option>
-                                            <option value="4">Finance</option>
-                                          
-                                        </Form.Select>
-                                    </InputGroup>
-                                </Form.Group> */}
 
-                                {/* <Form.Group controlId="formSkills" className="mb-3">
-                                <Form.Label>Filter by Skills</Form.Label>
-                                <div>
-                                    {skills.map((skill) => (
-                                        <Form.Check key={skill.id} type="checkbox" label={skill.name} value={skill.name} checked={selectedSkills.includes(skill.id)} onChange={handleSkillChange} />
-                                    ))}
-                                </div>
-                            </Form.Group> */}
                                 <Button variant="primary" type="button" onClick={handleSubmit}>
                                     Clear
                                 </Button>
