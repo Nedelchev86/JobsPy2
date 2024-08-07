@@ -8,6 +8,7 @@ import {Slide} from "react-awesome-reveal";
 import styles from "./Jobseekers.module.css";
 import {CLOUDINARY_URL} from "../../config";
 import JobSeekersCard from "./JobSeekersCard";
+import {API_URL} from "../../config";
 
 export default function JobseekersList() {
     // const [jobseekers, setJobseekers] = useState([]);
@@ -22,7 +23,7 @@ export default function JobseekersList() {
         setLoading(true);
         const skillPArams = searchParams.get("skill");
         fetch(
-            `${import.meta.env.VITE_API_URL}jobseekers/?${new URLSearchParams({
+            `${API_URL}jobseekers/?${new URLSearchParams({
                 seniority,
                 city,
                 skill: skillPArams || skill,
@@ -66,7 +67,7 @@ export default function JobseekersList() {
 
     // const {data: jobseekers, loading} = useFetch(`${import.meta.env.VITE_API_URL}jobseekers/?city=${city}`, []);
 
-    console.log(jobseekers);
+   
 
     return (
         <>

@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {formatDate} from "../../utils/formatDate";
 import NotificationJobSeekersComponent from "./NotificationsJobSeekersComponent";
 import Loading from "../loading/Loading";
+import {API_URL} from "../../config";
 export default function JobSeekerNotifications() {
     const [notifications, setNotifications] = useState([]);
     const {auth, user} = useAuth();
@@ -16,7 +17,7 @@ export default function JobSeekerNotifications() {
     const fetchNotifications = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}notificationjobseekers/`, {
+            const response = await fetch(`${API_URL}notificationjobseekers/`, {
                 headers: {
                     Authorization: `Bearer ${auth}`,
                 },

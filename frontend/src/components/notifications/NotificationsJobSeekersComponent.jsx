@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {formatDate} from "../../utils/formatDate";
 import {toast} from "react-toastify";
 import {CLOUDINARY_URL} from "../../config";
+import {API_URL} from "../../config";
 
 const NotificationJobSeekersComponent = ({notification}) => {
     const {fetchNotifications} = useJobs();
@@ -13,7 +14,7 @@ const NotificationJobSeekersComponent = ({notification}) => {
 
     const toggleReadStatus = async (id) => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}notificationjobseekers/${id}/toggle_read/`, {
+            const response = await fetch(`${API_URL}notificationjobseekers/${id}/toggle_read/`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${auth}`,
