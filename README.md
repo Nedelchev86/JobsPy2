@@ -5,12 +5,25 @@
 
 ![JobsPy](https://github.com/user-attachments/assets/55392e2d-1fb3-43e6-a1c8-2c772c84a830)
 
+# My first project with React 
 
+DEMO USERS:
+JobSeekers
+email: jobseeker@abv.bg   pass: demo
+email: jobseeker1@abv.bg  pass: demo
+email: jobseeker2@abv.bg  pass: demo
+email: jobseeker3@abv.bg  pass: demo
+email: jobseeker4@abv.bg  pass: demo
+email: jobseeker5@abv.bg  pass: demo
 
+Company:
+email: company@abv.bg pass: demo
+email: company1@abv.bg pass: demo
+email: company2@abv.bg pass: demo
+email: company3@abv.bg pass: demo
+email: company4@abv.bg pass: demo
+email: company5@abv.bg pass: demo
 
-Coming soon: Desription of all endpoits and live demo server 
-
-My first project with React 
 
 JobsPy is a job portal designed to connect job seekers with companies. It provides a platform for job seekers to showcase their skills and for companies to advertise job openings and manage applications.
 
