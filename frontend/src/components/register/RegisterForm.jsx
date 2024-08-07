@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import {Slide} from "react-awesome-reveal";
 import {useForm} from "react-hook-form";
+import {API_URL} from "../../config";
 
 const RegisterForm = () => {
     const {
@@ -31,13 +32,13 @@ const RegisterForm = () => {
     const submitForm = async (e) => {
         // e.preventDefault();
         setIsLoading(true);
-        console.log(e);
+
         try {
             if (formData.password !== formData.password2) {
                 throw new Error("Passwords do not match");
             }
 
-            const response = await fetch(`${import.meta.env.VITE_API_URL}register/`, {
+            const response = await fetch(`${API_URL}register/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useAuth} from "../../contexts/authContexts";
-// import useFetch from "../hooks/useFetch";
+import {API_URL} from "../../config";
 import {toast} from "react-toastify";
 
 function AddCommentForm({blogId}) {
@@ -27,7 +27,7 @@ function AddCommentForm({blogId}) {
         setError("");
         setSuccess("");
 
-        fetch("http://127.0.0.1:8000/api/blogs/comments/", {
+        fetch(`${API_URL}blogs/comments/`, {
             method: "POST",
             body: JSON.stringify(formData),
             headers: {
