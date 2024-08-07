@@ -1,11 +1,8 @@
 import React, {useState} from "react";
-import useFetch from "../../hooks/useFetch";
-import {useParams} from "react-router-dom";
 import {useAuth} from "../../contexts/authContexts";
 import {API_URL} from "../../config";
 import {toast} from "react-toastify";
 import {getCommentForBlog} from "../../api/blogApi";
-import {CLOUDINARY_URL} from "../../config";
 import SingleComment from "./SingleComment";
 
 export default function CommentList({blogId, commentsNumber}) {

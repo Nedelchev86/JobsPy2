@@ -1,14 +1,9 @@
 import React, {useState, useEffect} from "react";
-// import JobSeekerMenu from "./JobseekerMenu";
-// import Breadcrumbs from "./breadcrumbs/Breadcrumbs";
 import {useAuth} from "../../contexts/authContexts";
 import {useNavigate} from "react-router-dom";
 import Loading from "../loading/Loading";
 import {toast} from "react-toastify";
 import {useForm, Controller} from "react-hook-form";
-import useFetch from "../../hooks/useFetch";
-import useFetchWithToken from "../../hooks/useFetchWithToken";
-import usePut from "../../hooks/usePut";
 import {getAllSkills} from "../../api/commonApi";
 import {getJobseekerForEdit, putJobseekerUpdate} from "../../api/JobSeekerApi";
 
@@ -59,7 +54,6 @@ export default function EditJobseeker() {
             // Update form fields with the fetched data
             Object.keys(data).forEach((key) => {
                 setValue(key, data[key]);
-      
             });
         }
     }, [data, setValue]);
@@ -83,7 +77,7 @@ export default function EditJobseeker() {
                             formDataObj.append("profile_picture", formData.profile_picture);
                         } else if (formData.profile_picture[0]) {
                             // If it's a File object, append the file
-                      
+
                             formDataObj.append("profile_picture", formData.profile_picture[0]);
                         }
                     } else {

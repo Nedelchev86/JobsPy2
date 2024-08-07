@@ -2,13 +2,13 @@ import React, {useEffect, useState} from "react";
 import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import JobSeekersAside from "../jobseekersAside/JobseekersAside";
 import {Link, useSearchParams} from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
 import Loading from "../loading/Loading";
 import {Slide} from "react-awesome-reveal";
 import styles from "./Jobseekers.module.css";
 import {CLOUDINARY_URL} from "../../config";
 import JobSeekersCard from "./JobSeekersCard";
 import {API_URL} from "../../config";
+import useFetch from "../../hooks/useFetch";
 
 export default function JobseekersList() {
     // const [jobseekers, setJobseekers] = useState([]);
@@ -66,8 +66,6 @@ export default function JobseekersList() {
     // }, [city]);
 
     // const {data: jobseekers, loading} = useFetch(`${import.meta.env.VITE_API_URL}jobseekers/?city=${city}`, []);
-
-   
 
     return (
         <>

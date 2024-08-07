@@ -4,9 +4,6 @@ import {useNavigate} from "react-router-dom";
 import Loading from "../loading/Loading";
 import {toast} from "react-toastify";
 import {useForm, Controller} from "react-hook-form";
-import useFetch from "../../hooks/useFetch";
-import useFetchWithToken from "../../hooks/useFetchWithToken";
-import usePut from "../../hooks/usePut";
 import {getAllSkills} from "../../api/commonApi";
 import {getCompanyForEdit, putCompanyUpdate} from "../../api/companyApi";
 

@@ -1,10 +1,8 @@
 import {Slide} from "react-awesome-reveal";
-import {useState} from "react";
 import {Form, Button, InputGroup, FormControl, Card} from "react-bootstrap";
 import useFetch from "../../hooks/useFetch";
 import LastFiveBlogs from "../lastFiveBlogs/LastFiveBlogs";
 import JobsCategory from "./JobsCategory";
-import PopularTags from "../popularTag/PopularTag";
 import Loading from "../loading/Loading";
 import {API_URL} from "../../config";
 

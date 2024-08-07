@@ -12,7 +12,6 @@ export function getAllSkills() {
     return useFetch(`${API_BASE_URL}skills/`, []);
 }
 
-
 export function getAllSeniorities() {
     return useFetch(`${API_BASE_URL}seniorities/`, []);
 }
